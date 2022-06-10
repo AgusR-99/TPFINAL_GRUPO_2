@@ -175,7 +175,7 @@ input.form-control {
 }
 
 .galeria-wrapper {
-    background: radial-gradient(transparent, #000032,black), url("Imagenes/seamless.png" );
+    background: radial-gradient(transparent,black), url("Imagenes/seamless.png" );
 }
 
 .section-wrapper {
