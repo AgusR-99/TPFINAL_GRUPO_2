@@ -28,8 +28,12 @@ main {
     color: #f728fe;
     font-size: 3.5em;
     text-shadow: 0 0 1vw var(--clr-neon), 0 0 3vw var(--clr-neon), 0 0 10vw var(--clr-neon), 0 0 10vw var(--clr-neon), 0 0 .4vw #fe8bf8, .5vw .5vw .1vw #80147e;
+    -ms-transition: text-shadow 250ms, color 250ms ease-in-out;
+    -o-transition: text-shadow 250ms, color 250ms ease-in-out;
+    -webkit-transition: text-shadow 250ms, color 250ms ease-in-out;
     transition: text-shadow 250ms, color 250ms ease-in-out;
 }
+
 .neon {
     font-family: neon;
     color: #FB4264;
@@ -154,7 +158,14 @@ input.form-control {
     width: 80%;
     margin: 0 auto;
     display: flex;
+    -moz-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    -o-flex-wrap: nowrap;
+    -webkit-flex-wrap: nowrap;
     flex-wrap: nowrap;
+    -ms-align-items: center;
+    -o-align-items: center;
+    -webkit-align-items: center;
     align-items: center;
 }
 
@@ -186,6 +197,9 @@ input.form-control {
 .section-wrapper:hover .neon-sign {
     color: #fb8aff;
     text-shadow: 0 0 2vw var(--clr-neon), 0 0 6vw var(--clr-neon), 0 0 20vw var(--clr-neon), 0 0 20vw var(--clr-neon), 0 0 .8vw #fe8bf8, .5vw .5vw .1vw #80147e;
+    -ms-transition: text-shadow 500ms, color 500ms ease-in-out;
+    -o-transition: text-shadow 500ms, color 500ms ease-in-out;
+    -webkit-transition: text-shadow 500ms, color 500ms ease-in-out;
     transition: text-shadow 500ms, color 500ms ease-in-out;
 }
 
@@ -270,6 +284,7 @@ input.form-control {
 }
 
 .producto-unit .producto-portada {
+    -ms-opacity: 1;
     opacity: 1;
     width: 200px;
     -ms-transition: opacity 250ms ease-in;
