@@ -19,6 +19,9 @@
     --clr-neon-red: hsl(0, 100%, 54%);
     --clr-neon-red-l: hsl(0, 100%, 74%);
     --clr-neon-red-d: hsl(0, 100%, 24%);
+    --clr-neon-green: hsl(180, 100%, 54%);
+    --clr-neon-green-l: hsl(180, 100%, 74%);
+    --clr-neon-green-d: hsl(180, 100%, 24%);
     --clr-home-page-bg: #07040E;
 }
 
@@ -123,6 +126,33 @@ main {
 .glow-red {
     background-color: #ff2134;
     box-shadow: 0 0 50px #ff2134;
+    -ms-transition: all 250ms ease-in-out;
+    -o-transition: all 250ms ease-in-out;
+    -webkit-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+}
+
+.glow-cyan {
+    background-color: var(--clr-neon-cyan);
+    box-shadow: 0 0 50px var(--clr-neon-cyan);
+    -ms-transition: all 250ms ease-in-out;
+    -o-transition: all 250ms ease-in-out;
+    -webkit-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+}
+
+.glow-green {
+    background-color: var(--clr-neon-green);
+    box-shadow: 0 0 50px var(--clr-neon-green);
+    -ms-transition: all 250ms ease-in-out;
+    -o-transition: all 250ms ease-in-out;
+    -webkit-transition: all 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
+}
+
+.glow-green-d {
+    background-color: var(--clr-neon-green-d);
+    box-shadow: 0 0 50px var(--clr-neon-green-d);
     -ms-transition: all 250ms ease-in-out;
     -o-transition: all 250ms ease-in-out;
     -webkit-transition: all 250ms ease-in-out;
@@ -336,7 +366,7 @@ main {
     left: 0;
     width: 0;
     height: 100%;
-    background: #ECE8E1;
+    background: #ffffff;
     -ms-transition: all .35s;
     -o-transition: all .35s;
     -webkit-transition: all .35s;
@@ -700,7 +730,7 @@ main {
         font-size: 1.5rem;
         font-weight: 900;
         text-shadow: 1px 1px black;
-        background-color: #ff2134;
+        background-color: var(--bs-teal);
         padding: 15px;
         clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
     }
@@ -911,6 +941,106 @@ main {
     padding: 10px;
 }
 
+.articulo-main-wrapper {
+    margin: 0 auto;
+    padding: 0 40px;
+    max-width: 992px;
+}
+
+.articulo-main {
+    margin-bottom: 40px;
+}
+
+.articulo-top > h2 {
+    font-family: "Electrolize", sans-serif;
+}
+
+.articulo-content-wrapper {
+    display: flex;
+    -o-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between;
+}
+
+.articulo-data > p{
+    margin: 0;
+}
+
+.articulo-content-wrapper > .articulo-portada > img {
+    -webkit-object-fit: cover;
+    object-fit: cover;
+    width: 100px;
+}
+
+.articulo-score {
+    display: flex;
+}
+
+.articulo-score-left > h1 {
+        padding: 10px;
+        border: 1px solid var(--bs-teal);
+        border-radius: 10px;
+        margin: 0;
+    }
+
+.articulo-score-right {
+    margin-left: 10px;
+}
+
+.articulo-score-right > p{
+    margin: 0;
+}
+
+.articulo-summary {
+    margin-top: 20px;
+}
+
+.review-prompt-textarea {
+    display: flex;
+}
+
+.review-prompt-textarea > .form-group {
+    margin-left: 20px;
+    -webkit-flex: 1;
+    -ms-flex: 1;
+    -o-flex: 1;
+    flex: 1;
+}
+
+.review-prompt-textarea .fa-user {
+    border: 1px solid white;
+}
+
+.review-prompt-textarea .dashboard-element {
+    margin: 0;
+}
+
+.review-prompt-textarea textarea {
+    min-height: 142px;
+}
+
+.review-bottom {
+    margin-top: 20px;
+    display: flex;
+    -o-justify-content: space-between;
+    -webkit-justify-content: space-between;
+    justify-content: space-between
+}
+
+    .review-bottom > .btn-wrapper > button {
+        border-radius: 0.5rem;
+        padding: 11px;
+        font-weight: bold;
+        border: 1px solid #ced4da;
+    }
+
+.review-bottom > .btn-wrapper > button:hover {
+    background-color: var(--clr-neon-cyan-l);
+}
+
+.review-bottom .form-control{
+    max-width: 60px;
+}
 
 @media only screen and (min-width: 992px) {
     .dashboard-panel-wrapper {
@@ -950,5 +1080,9 @@ main {
 
     .user-analytics-description > p{
         padding-left: 5px;
+    }
+
+    .articulo-content-wrapper > .articulo-portada > img {
+        width: 200px;
     }
 }
