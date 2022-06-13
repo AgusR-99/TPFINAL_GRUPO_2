@@ -11,7 +11,7 @@ namespace Vistas
 {
 
 
-    public partial class Home
+    public partial class SignUp
     {
     }
 }

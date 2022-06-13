@@ -1,0 +1,106 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="NestedUserDashboard.master.cs" Inherits="Vistas.NestedUserDashboard" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
+    <main class="main bg-dark-carbon">
+        <div class="user-dashboard-main">
+            <aside class="user-dashboard-wrapper">
+            <h1>Dashboard usuario</h1>
+            <div class="dashboard-element dashboard-username">
+                <i class="fa-regular fa-user big"></i>
+                <p>@Nombre de usuario</p>
+                <p>jsmith@example.com</p>
+            </div>
+            <div class="dashboard-element">
+                <h3>Sobre mi:</h3>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="dashboard-element">
+                <div class="user-analytics-main">
+                    <div class="analytics-box">
+                        <aside class="user-analytics-icon">
+                            <i class="fa-solid fa-gamepad medium text-pink text-glow-pink"></i>
+                        </aside>
+                        <div class="analytics-description user-analytics-description">
+                            <p class="analytics-name user-analytic-name">Juegos</p>
+                            <p class="analytics-number user-analytic-number">9999</p>
+                        </div>
+                    </div>
+                    <div class="analytics-box">
+                        <aside class="user-analytics-icon">
+                            <i class="fa-regular fa-star medium text-orange text-glow-orange"></i>
+                        </aside>
+                        <div class="analytics-description user-analytics-description">
+                            <p class="analytics-name user-analytic-name">Reviews</p>
+                            <p class="analytics-number user-analytic-number">9999</p>
+                        </div>
+                    </div>
+                    <div class="analytics-box">
+                        <aside class="user-analytics-icon">
+                            <i class="fa-solid fa-star-half-stroke medium text-cyan text"></i>
+                        </aside>
+                        <div class="analytics-description user-analytics-description">
+                            <p class="analytics-name user-analytic-name">Puntuacion media</p>
+                            <p class="analytics-number user-analytic-number">9.5</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <div class="dashboard-panel-wrapper">
+            <div class="dashboard-panel-top-wrapper bg-dark-carbon">
+                <div class="dashboard-panel-top-element">
+                    <a class="btn text-light" href="UserDashboardWatchlist.aspx">
+                        <i class="fa-regular fa-eye"></i> <span>Mi watchlist</span> 
+                    </a>
+                </div>
+                <div class="dashboard-panel-top-element">
+                    <a class="btn text-light" href="UserDashboardReviews.aspx">
+                        <i class="fa-regular fa-star"></i> <span>Mis reviews</span>
+                    </a>
+                </div>
+                <div class="dashboard-panel-top-element">
+                    <a class="btn text-light" href="UserDashboardOptions.aspx">
+                        <i class="fa-solid fa-gear"></i> <span>Opciones</span>
+                    </a>
+                </div>
+            </div>
+            <div class="dashboard-panel-content-wrapper">
+                <asp:ContentPlaceHolder ID="panelContent" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </div>
+        </div>
+    </main>
+    <script>
+        $(document).ready(function () {
+            // Inicializar tomando el offset superior de la navegacion
+            var stickyNavTop = $('.dashboard-panel-top-wrapper').offset().top;
+            $(window).resize(function () {
+                // Tomar offset cada vez que se cambie de tamanio el viewport
+                stickyNavTop = $('.dashboard-panel-top-wrapper').offset().top;
+            });
+            console.log(stickyNavTop);
+            // Funcion decide si la barra se mantiene fija o no
+            var stickyNav = function () {
+                var scrollTop = $(window).scrollTop(); // Obtener posicion vertical desde el margen superior
+                scrollTop += 56;
+                if (scrollTop > stickyNavTop) {
+                    $('.dashboard-panel-top-wrapper').addClass('fixed w-100');
+                    $('.dashboard-panel-content-wrapper').addClass('top-margin'); // Evitar transicion brusca al hacer la barra fija
+                } else {
+                    $('.dashboard-panel-top-wrapper').removeClass('fixed w-100');
+                    $('.dashboard-panel-content-wrapper').removeClass('top-margin');
+                }
+            };
+
+            stickyNav();
+            // and run it again every time you scroll
+            $(window).scroll(function () {
+                stickyNav();
+            });
+        });
+    </script>
+</asp:Content>
+
+
+
