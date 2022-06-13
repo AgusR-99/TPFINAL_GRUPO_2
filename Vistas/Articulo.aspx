@@ -71,61 +71,27 @@
                 <p><small>Variadas: </small><strong>0</strong></p>
                 <p><small>Negativas: </small><strong>0</strong></p>
             </div>
-            <article class="articulos-unit articulo-review">
-                <div class="articulo-under articulo-rating-wrapper">
-                    <p class="articulo-rating">9.5</p>
-                </div>
-                <div class="articulo-body">
-                    <strong class="articulo-puntuacion-media">someUserName</strong>
-                    <p class="articulo-descripcion"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
-                </div>
-            </article>
-            <article class="articulos-unit articulo-review">
-                <div class="articulo-under articulo-rating-wrapper">
-                    <p class="articulo-rating">9.5</p>
-                </div>
-                <div class="articulo-body">
-                    <strong class="articulo-puntuacion-media">someUserName</strong>
-                    <p class="articulo-descripcion"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
-                </div>
-            </article>
-            <article class="articulos-unit articulo-review">
-                <div class="articulo-under articulo-rating-wrapper">
-                    <p class="articulo-rating">9.5</p>
-                </div>
-                <div class="articulo-body">
-                    <strong class="articulo-puntuacion-media">someUserName</strong>
-                    <p class="articulo-descripcion"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
-                </div>
-            </article>
-            <article class="articulos-unit articulo-review">
-                <div class="articulo-under articulo-rating-wrapper">
-                    <p class="articulo-rating">9.5</p>
-                </div>
-                <div class="articulo-body">
-                    <strong class="articulo-puntuacion-media">someUserName</strong>
-                    <p class="articulo-descripcion"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
-                </div>
-            </article>
-            <article class="articulos-unit articulo-review">
-                <div class="articulo-under articulo-rating-wrapper">
-                    <p class="articulo-rating">9.5</p>
-                </div>
-                <div class="articulo-body">
-                    <strong class="articulo-puntuacion-media">someUserName</strong>
-                    <p class="articulo-descripcion"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
-                </div>
-            </article>
-            <article class="articulos-unit articulo-review">
-                <div class="articulo-under articulo-rating-wrapper">
-                    <p class="articulo-rating">9.5</p>
-                </div>
-                <div class="articulo-body">
-                    <strong class="articulo-puntuacion-media">someUserName</strong>
-                    <p class="articulo-descripcion"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
-                </div>
-            </article>
+            <div class="review-wrapper">
+            </div>
         </div>
     </div>
     </main>
+    <script>
+        /*Poner numero de articulos a generar*/
+        $(function() {
+            for (var i = 0; i < 15; i++) {
+                $('.review-wrapper').append(
+                    `<article class="articulos-unit articulo-review">
+                    <div class= "articulo-under articulo-rating-wrapper" >
+                    <p class="articulo-rating">9.5</p>
+                    </div >
+                    <div class="articulo-body">
+                    <strong class="articulo-puntuacion-media">someUserName</strong>
+                    <p class="articulo-descripcion"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
+                    </div>
+                    </article >`
+                );
+            }
+        })
+    </script>
 </asp:Content>

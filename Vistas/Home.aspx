@@ -55,136 +55,24 @@
 				<section class="galeria">
 					<h1 class="neon-sign">Populares</h1>
 					<div class="producto-wrapper glass">
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
 					</div>
 				</section>
 			</div><%--Populares--%> <div class="section-wrapper">
 				<section class="galeria">
 					<h1 class="neon-sign">Proximos</h1>
 					<div class="producto-wrapper glass">
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
 					</div>
 				</section>
 			</div><%--En rebaja--%> <div class="section-wrapper">
 				<section class="galeria">
 					<h1 class="neon-sign">En rebaja</h1>
 					<div class="producto-wrapper glass">
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
 					</div>
 				</section>
 			</div><%--Baratos--%> <div class="section-wrapper">
 				<section class="galeria">
 					<h1 class="neon-sign">Baratos</h1>
 					<div class="producto-wrapper glass">
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
-						<article class="producto-unit neon-backlight backlight-cyan">
-							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-							<div class="producto-descripcion inset-glow-cyan">
-								<p class="producto-rating text-glow-cyan">Rating</p>
-								<p class="producto-precio text-glow-cyan">$1234</p>
-							</div>
-						</article>
 					</div>
 				</section>
 			</div>
@@ -197,4 +85,21 @@
             $('.data-slide p').removeClass('glow-red').eq(slideTo).addClass('glow-red');
         })
 	</script>
+   
+    <script>
+        /*Poner numero de articulos a generar*/
+        $(function () {
+            for (var i = 0; i < 8; i++) {
+                $('.producto-wrapper').append(
+                    `<article class="producto-unit neon-backlight backlight-cyan">
+							<img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
+							<div class="producto-descripcion inset-glow-cyan">
+								<p class="producto-rating text-glow-cyan">Rating</p>
+								<p class="producto-precio text-glow-cyan">$1234</p>
+							</div>
+						</article>`
+                );
+            }
+        })
+    </script>
 </asp:Content>
