@@ -113,27 +113,16 @@
             }
         }
     </script>
-    
+     
     <asp:SqlDataSource
         id="SqlDataSourceGame"
         runat="server"
-        DataSourceMode="DataSet"
-        ConnectionString="Data Source=localhost\sqlexpress;Initial Catalog=TIF2022_DRAFT;Integrated Security=True"
-        SelectCommand="SELECT [NombreDesarrollador]
-      ,[NombreJuego]
-      ,[Descripcion]
-      ,[Activo]
-  FROM [TIF2022_DRAFT].[dbo].[Juegos]">
+        >
     </asp:SqlDataSource>
     <asp:SqlDataSource
         id="SqlDataSourceUser"
         runat="server"
         DataSourceMode="DataSet"
-        ConnectionString="Data Source=localhost\sqlexpress;Initial Catalog=TIF2022_DRAFT;Integrated Security=True"
-        SelectCommand="SELECT [Username]
-      ,[Contrasena]
-      ,[Administrador]
-      ,[Activo]
-  FROM [TIF2022_DRAFT].[dbo].[Usuarios]">
+        >
     </asp:SqlDataSource>
 </asp:Content>
