@@ -32,7 +32,7 @@ namespace DAO
         {
             return new List<SqlParameter>()
             {
-                new SqlParameter("username", usuario.getUsername()),
+                new SqlParameter("email", usuario.getEmail()),
                 new SqlParameter("contrasena", usuario.getContraseña())
             };
         }

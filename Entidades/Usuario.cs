@@ -15,6 +15,10 @@ namespace Entidades
         private bool Administrador;
         private bool Activo;
 
+        public Usuario(string email, string contraseña) { 
+            Email = email;
+            Contraseña = contraseña;
+        }
         public Usuario(string username, string email, bool administrador, string descripcion)
         {
             Username = username;

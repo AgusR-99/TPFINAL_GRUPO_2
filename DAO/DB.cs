@@ -8,7 +8,7 @@ namespace DAO
 {
     static class DB
     {
-        private static string connString = "Data Source=localhost\\sqlexpress; Initial Catalog=TIF2022_PROG_DRAFT; Integrated Security=True";
+        private static string connString = "Data Source=localhost\\sqlexpress; Initial Catalog=TIF2022_PROG; Integrated Security=True";
         
         public static SqlConnection GetConnection()
         {

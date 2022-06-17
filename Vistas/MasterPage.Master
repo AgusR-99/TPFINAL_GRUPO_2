@@ -16,7 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 		<asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
 	</head>
-	<body>
+	<body class="bg-home-page">
 		<form id="form1" runat="server">
 			<div class="root">
 				<header class="header"><%--Props navbar--%> <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -26,7 +26,8 @@
 							<div class="collapse navbar-collapse" id="navbarSupportedContent">
 								<ul class="navbar-nav me-auto mb-2 mb-lg-0"><%--Inicio--%> <li class="nav-item">
 										<a class="nav-link active" aria-current="page" href="Home.aspx">Inicio</a>
-									</li><%--Ingresar--%> <li class="nav-item">
+									</li><%if (!LoggedIn)
+                                             { %><%--Ingresar--%>  <li class="nav-item">
 										<a class="nav-link" aria-current="page" href="SignIn.aspx">Ingresar</a>
 									</li><%--Registrarse--%> <li class="nav-item">
 										<div class="btn-wrapper">
@@ -34,7 +35,7 @@
 												<span>Registrarme</span>
 											</a>
 										</div>
-									</li><%--Dropdown categorias--%> <li class="nav-item dropdown">
+									</li><%} %> <%--Dropdown categorias--%> <li class="nav-item dropdown">
 										<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Categorias </a><%--Menu dropdown--%> <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 											<li>
 												<a class="dropdown-item" href="Listado.aspx">Accion</a>
@@ -49,9 +50,11 @@
 												<a class="dropdown-item" href="Listado.aspx">Deportes</a>
 											</li>
 										</ul>
-									</li><%--Perfil--%> <li class="nav-item disabled">
-										<a class="nav-link disabled">Perfil</a>
-									</li>
+									</li><%--Perfil--%> <li class="nav-item  <%if (!LoggedIn){%>disabled<%} %>">
+										<a href="UserDashboardWatchlist.aspx" class="nav-link <%if (!LoggedIn){%>disabled<%} %>">Perfil</a>
+									</li> <%if (LoggedIn){%> <%--Logout--%> <li class="nav-item">
+										<a class="nav-link" aria-current="page" href="Logout.aspx">Cerrar sesión</a>
+									</li><%} %>
 								</ul><%--Searchbar--%> <div class="searchbar">
 									<form class="d-flex" role="search">
 										<input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">

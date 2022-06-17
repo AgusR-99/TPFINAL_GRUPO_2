@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using Negocio;
 
 namespace Vistas
 {
@@ -11,7 +8,27 @@ namespace Vistas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblErrorMsg.Visible = false;
+        }
 
+        protected void Login(object sender, EventArgs e)
+        {
+            int resultadoLogin = NegocioUsuario.Login(Session, floatingInput.Text, floatingPassword.Text);
+            switch (resultadoLogin)
+            {
+                case -1:
+                    ShowError("Ocurrió un error al intentar ingresar"); break;
+                case 0:
+                    ShowError("Usuario o contraseña erróneos"); break;
+                case 1:
+                    Server.Transfer("Home.aspx"); break;
+            }
+        }
+
+        protected void ShowError(string msg)
+        {
+            lblErrorMsg.Text = msg;
+            lblErrorMsg.Visible = true;
         }
     }
 }

@@ -1,30 +1,45 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.SessionState;
+using Entidades;
 using DAO;
 
 namespace Negocio
 {
     public static class NegocioUsuario
     {
-        public static int Login(string username, string contraseña)
+        public static int Login(in HttpSessionState Session, string email, string contraseña)
         {
             //Devuelve:
             //  1   - Si se pudo loguear satisfactoriamente
             //  0   - Si no se encontró un usuario con ese nombre de usuario y contraseña
             //  -1  - Si ocurrió un error inesperado en el camino
-            throw new NotImplementedException();
+            var usuario = new Usuario(email,contraseña);
+            int resultadoLogin = DAOUsuario.Login(ref usuario);
+
+            if (resultadoLogin==1)
+                Session["LoggedUser"] = usuario;
+
+            return resultadoLogin;
         }
 
-        public static bool IsLoggedIn()
+        public static bool IsLoggedIn(in HttpSessionState Session)
         {
             //Devuelve verdadero si el usuario se encuentra logueado
-            throw new NotImplementedException();
+            object loggedUser = Session["LoggedUser"];
+            return loggedUser != null && loggedUser.GetType() == typeof(Usuario);
+
         }
 
-        public static bool IsLoggedInAsAdmin()
+        public static bool IsLoggedInAsAdmin(in HttpSessionState Session)
         {
             //Devuelve verdadero si el usuario se encuentra logueado y tiene perfil de administrador
-            throw new NotImplementedException();
+            return IsLoggedIn(Session) && ((Usuario)Session["LoggedUser"]).getAdiministrador() == true;
+        }
+
+        public static void Logout(in HttpSessionState Session)
+        {
+            Session["LoggedUser"] = null;
         }
     }
 }
