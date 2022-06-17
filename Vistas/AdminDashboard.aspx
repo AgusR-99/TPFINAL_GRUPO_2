@@ -60,8 +60,22 @@
                     <input type="text" onkeyup="filter2(this, '<%=GridViewUsers.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchUser" placeholder="Buscar usuario">
                     <label for="floatingSearchUser" class="text-light">Buscar datos de usuario</label>
                 </div>
-                <asp:GridView ID="GridViewGames" DataSourceID="SqlDataSourceGame" CssClass="grd-games w-100 bg-dark-carbon ctrl-game" runat="server"></asp:GridView>
-                <asp:GridView ID="GridViewUsers" DataSourceID="SqlDataSourceUser" CssClass="grd-user w-100 bg-dark-carbon ctrl-user" runat="server"></asp:GridView>
+                <asp:GridView ID="GridViewGames" DataSourceID="SqlDataSourceGame" CssClass="grd-games w-100 bg-dark-carbon ctrl-game" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="NombreDesarrollador,NombreJuego">
+                    <Columns>
+                        <asp:BoundField DataField="NombreDesarrollador" HeaderText="NombreDesarrollador" ReadOnly="True" SortExpression="NombreDesarrollador" />
+                        <asp:BoundField DataField="NombreJuego" HeaderText="NombreJuego" ReadOnly="True" SortExpression="NombreJuego" />
+                        <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
+                        <asp:CheckBoxField DataField="Activo" HeaderText="Activo" SortExpression="Activo" />
+                    </Columns>
+                </asp:GridView>
+                <asp:GridView ID="GridViewUsers" DataSourceID="SqlDataSourceUser" CssClass="grd-user w-100 bg-dark-carbon ctrl-user" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="Username">
+                    <Columns>
+                        <asp:BoundField DataField="Username" HeaderText="Username" ReadOnly="True" SortExpression="Username" />
+                        <asp:BoundField DataField="Contrasena" HeaderText="Contrasena" SortExpression="Contrasena" />
+                        <asp:CheckBoxField DataField="Administrador" HeaderText="Administrador" SortExpression="Administrador" />
+                        <asp:CheckBoxField DataField="Activo" HeaderText="Activo" SortExpression="Activo" />
+                    </Columns>
+                </asp:GridView>
             </div>
         </div>
     </main>
@@ -116,13 +130,12 @@
      
     <asp:SqlDataSource
         id="SqlDataSourceGame"
-        runat="server"
+        runat="server" ConnectionString="<%$ ConnectionStrings:TIF2022_DRAFTConnectionString %>" SelectCommand="SELECT * FROM [Juegos]"
         >
     </asp:SqlDataSource>
     <asp:SqlDataSource
         id="SqlDataSourceUser"
-        runat="server"
-        DataSourceMode="DataSet"
+        runat="server" ConnectionString="<%$ ConnectionStrings:TIF2022_DRAFTConnectionString %>" SelectCommand="SELECT * FROM [Usuarios]"
         >
     </asp:SqlDataSource>
 </asp:Content>
