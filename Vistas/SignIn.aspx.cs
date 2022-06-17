@@ -21,7 +21,7 @@ namespace Vistas
                 case 0:
                     ShowError("Usuario o contraseña erróneos"); break;
                 case 1:
-                    Server.Transfer("Home.aspx"); break;
+                    Response.Redirect("Home.aspx"); break;
             }
         }
 

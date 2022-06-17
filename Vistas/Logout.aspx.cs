@@ -8,7 +8,7 @@ namespace Vistas
         protected void Page_Load(object sender, EventArgs e)
         {
             NegocioUsuario.Logout(Session);
-            Response.Redirect(Request.UrlReferrer?.LocalPath ?? "Home.aspx");
+            Response.Redirect("Home.aspx");
         }
     }
 }
