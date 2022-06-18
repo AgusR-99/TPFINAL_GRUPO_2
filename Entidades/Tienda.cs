@@ -6,13 +6,22 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    class Tienda
+    public class Tienda
     {
         private int ID_Tienda;
         private string Nombre;
         private string URL_img;
         private string URL_web;
         private bool Activo;
+        
+        public Tienda(int id_Tienda, string nombre, string url_img, string url_web, bool activo)
+        {
+            ID_Tienda = id_Tienda;
+            Nombre = nombre;
+            URL_img = url_img;
+            URL_web = url_web;
+            Activo = activo;
+        }
 
         public int getID_Tienda() { return ID_Tienda; }
         public string getNombre() { return Nombre; }

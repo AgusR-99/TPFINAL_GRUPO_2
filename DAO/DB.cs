@@ -77,11 +77,11 @@ namespace DAO
         /// <param name="query">Consulta a la base de datos</param>
         /// <param name="parameters">Valores de los parámetros</param>
         /// <returns>Cantidad de filas afectadas o null si falla la operación</returns>
-        public static int? NonQuery(string query, List<SqlParameter> parameters)
+        public static int? NonQuery(string query, List<SqlParameter> parameters = null, bool isSP = false)
         {
             try
             {
-                var cmd = GetCommand(query, parameters);
+                var cmd = GetCommand(query, parameters, isSP);
                 cmd.Connection.Open();
                 int affected = cmd.ExecuteNonQuery();
                 cmd.Connection.Close();

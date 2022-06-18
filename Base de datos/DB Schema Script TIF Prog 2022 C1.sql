@@ -142,14 +142,39 @@ CREATE TABLE JuegosXTiendas
 GO
 
  --------------- PROCEDIMIENTOS ALMACENADOS ---------------
- CREATE PROC SP_Login
- @Email varchar(30),
- @Contrasena varchar(50)
- AS
- BEGIN
+CREATE PROC SP_Login
+@Email varchar(30),
+@Contrasena varchar(50)
+AS
+BEGIN
 	SELECT Username, Email, Descripcion, Administrador
 	FROM Usuarios
 	WHERE Email = @Email AND Contrasena = @Contrasena AND Activo=1
- END
- GO
+END
+GO
  
+CREATE PROC SP_Tiendas_Obtener
+AS
+BEGIN
+	SELECT IdTienda as [ID], Nombre as [Tienda], RutaImagen as Imagen, SitioWeb as [Sitio Web], Activo
+	FROM Tiendas
+END
+GO
+
+CREATE PROC SP_Tiendas_Actualizar
+@IdTienda int,
+@Nombre varchar(30),
+@RutaImagen varchar(50),
+@Sitioweb varchar(100),
+@Activo bit
+AS
+BEGIN
+	UPDATE Tiendas
+	SET
+		Nombre = @Nombre,
+		RutaImagen = @RutaImagen,
+		SitioWeb = @Sitioweb,
+		Activo = @Activo
+	WHERE
+		IdTienda = @IdTienda
+END

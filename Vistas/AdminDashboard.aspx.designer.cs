@@ -15,6 +15,15 @@ namespace Vistas
     {
 
         /// <summary>
+        /// Control lblMsg.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMsg;
+
+        /// <summary>
         /// Control GridViewGames.
         /// </summary>
         /// <remarks>
@@ -33,21 +42,12 @@ namespace Vistas
         protected global::System.Web.UI.WebControls.GridView GridViewUsers;
 
         /// <summary>
-        /// Control SqlDataSourceGame.
+        /// Control GridViewStores.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceGame;
-
-        /// <summary>
-        /// Control SqlDataSourceUser.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource SqlDataSourceUser;
+        protected global::System.Web.UI.WebControls.GridView GridViewStores;
     }
 }

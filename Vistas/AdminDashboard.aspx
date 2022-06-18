@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Admin Dashboard" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="AdminDashboard.aspx.cs" Inherits="Vistas.AdminDashboard" %>
+﻿<%@ Page Title="Admin Dashboard" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="AdminDashboard.aspx.cs" Inherits="Vistas.AdminDashboard"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
@@ -51,61 +51,117 @@
                             <p>Usuarios</p>
                         </button>
                     </div>
+                    <div class="search-selection">
+                        <button type="button" class="btn-store">
+                            <i class="fa-solid fa-cart-arrow-down big icon-jquery-store"></i>
+                            <p>Tiendas</p>
+                        </button>
+                    </div>
                 </div>
+                <asp:Label ID="lblMsg" runat="server"></asp:Label>
                 <div class="form-floating ctrl-game">
-                    <input type="text" onkeyup="filter2(this, '<%=GridViewGames.ClientID %>')"  class="form-control bg-dark text-light no-borders" id="txtSearchGame" placeholder="Buscar juego">
+                    <input type="text" onchange="filter2(this, '<%=GridViewGames.ClientID %>')"  class="form-control bg-dark text-light no-borders" id="txtSearchGame" placeholder="Buscar juego">
                     <label for="floatingSearchGame" class="text-light">Buscar datos de juego</label>
                 </div>
                 <div class="form-floating ctrl-user">
-                    <input type="text" onkeyup="filter2(this, '<%=GridViewUsers.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchUser" placeholder="Buscar usuario">
+                    <input type="text" onchange="filter2(this, '<%=GridViewUsers.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchUser" placeholder="Buscar usuario">
                     <label for="floatingSearchUser" class="text-light">Buscar datos de usuario</label>
                 </div>
-                <asp:GridView ID="GridViewGames" DataSourceID="SqlDataSourceGame" CssClass="grd-games w-100 bg-dark-carbon ctrl-game" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="NombreDesarrollador,NombreJuego">
-                    <Columns>
+                <div class="form-floating ctrl-store">
+                    <input type="text" onkeyup="filter2(this, '<%=GridViewStores.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchStore" placeholder="Buscar tienda">
+                    <label for="floatingSearchStore" class="text-light">Buscar datos de tienda</label>
+                </div>
+                <asp:GridView ID="GridViewGames" CssClass="grd-games w-100 bg-dark-carbon ctrl-game" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="NombreDesarrollador,NombreJuego">
+                    <%--<Columns>
                         <asp:BoundField DataField="NombreDesarrollador" HeaderText="NombreDesarrollador" ReadOnly="True" SortExpression="NombreDesarrollador" />
                         <asp:BoundField DataField="NombreJuego" HeaderText="NombreJuego" ReadOnly="True" SortExpression="NombreJuego" />
                         <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
                         <asp:CheckBoxField DataField="Activo" HeaderText="Activo" SortExpression="Activo" />
-                    </Columns>
+                    </Columns>--%>
                 </asp:GridView>
-                <asp:GridView ID="GridViewUsers" DataSourceID="SqlDataSourceUser" CssClass="grd-user w-100 bg-dark-carbon ctrl-user" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="Username">
-                    <Columns>
+                <asp:GridView ID="GridViewUsers" CssClass="grd-user w-100 bg-dark-carbon ctrl-user" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="Username">
+                    <%--<Columns>
                         <asp:BoundField DataField="Username" HeaderText="Username" ReadOnly="True" SortExpression="Username" />
                         <asp:BoundField DataField="Contrasena" HeaderText="Contrasena" SortExpression="Contrasena" />
                         <asp:CheckBoxField DataField="Administrador" HeaderText="Administrador" SortExpression="Administrador" />
                         <asp:CheckBoxField DataField="Activo" HeaderText="Activo" SortExpression="Activo" />
+                    </Columns>--%>
+                </asp:GridView>
+                <asp:GridView ID="GridViewStores" CssClass="grd-user w-100 bg-dark-carbon ctrl-store" runat="server" AutoGenerateEditButton="True" DataKeyNames="Id" AutoGenerateColumns="False" OnRowEditing="TiendaEdit" OnRowCancelingEdit="TiendaCancelEdit" OnRowUpdating="TiendaUpdate">
+                    <Columns>
+                        <asp:TemplateField HeaderText="ID">
+                            <EditItemTemplate>
+                                <asp:Label ID="lblGVStoresID" runat="server" Text='<%# Eval("ID") %>'></asp:Label>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVStoresID" runat="server" Text='<%# Eval("ID") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Tienda">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtGVStoresTienda" runat="server" Text='<%# Eval("Tienda") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVStoresTienda" runat="server" Text='<%# Eval("Tienda") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Imagen">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtGVStoresImagen" runat="server" Text='<%# Eval("Imagen") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVStoresImagen" runat="server" Text='<%# Eval("Imagen") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Sitio Web">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtGVStoresSitioWeb" runat="server" Text='<%# Eval("Sitio Web") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVStoresSitioWeb" runat="server" Text='<%# Eval("Sitio Web") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Activo">
+                            <EditItemTemplate>
+                                <asp:CheckBox ID="chkGVStoresActivo" runat="server" Checked='<%# Eval("Activo") %>' />
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkGVStoresActivo" runat="server" Checked='<%# Eval("Activo") %>' Enabled="False" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
             </div>
         </div>
     </main>
     <script>
+        var options = ["user", "game", "store"];
+        var active;
         <%--Ocultar searchbars dependiendo que opcion se eliga--%>
         $(document).ready(function () {
-            $(".ctrl-user").hide();
-            $(".ctrl-game").hide();
-            var active = false;
-            $(".btn-game").click(function () {
-                $(".ctrl-user").hide();
-                if (!active) { // Reproducir animacion en primer click
-                    active = true;
-                    $(".ctrl-game").slideDown();
-                }
-                else $(".ctrl-game").show();
-                $(".icon-jquery-game").addClass('sign-red text-light');
-                $(".icon-jquery-user").removeClass('sign-red text-light');
-            });
-            $(".btn-user").click(function () {
-                $(".ctrl-game").hide();
-                if (!active) { // Reproducir animacion en primer click
-                    active = true;
-                    $(".ctrl-user").slideDown();
-                }
-                else $(".ctrl-user").show();
-                $(".icon-jquery-user").addClass('sign-red text-light');
-                $(".icon-jquery-game").removeClass('sign-red text-light');
-            });
+            active = "<%=Active%>";
+            for (let option of options) {
+                $(`.ctrl-${option}`).hide();
+            }
+            $(`.btn-user`).click(() => { btnClick("user") });
+            $(`.btn-game`).click(() => { btnClick("game") });
+            $(`.btn-store`).click(() => { btnClick("store") });
+
+            if (active != "")
+                btnClick(active);
         });
+
+        function btnClick(clicked) {
+            let others = options.filter((val) => { return val != clicked; });
+            for (let other of others) $(`.ctrl-${other}`).hide();
+            if (active=="") { // Reproducir animacion en primer click
+                active = clicked;
+                $(`.ctrl-${clicked}`).slideDown();
+            }
+            else $(`.ctrl-${clicked}`).show();
+            $(`.icon-jquery-${clicked}`).addClass('sign-red text-light');
+            for (let other of others) $(`.icon-jquery-${other}`).removeClass('sign-red text-light');
+        }
     </script>
     <script>
         function filter2(phrase, id) {
@@ -127,15 +183,5 @@
             }
         }
     </script>
-     
-    <asp:SqlDataSource
-        id="SqlDataSourceGame"
-        runat="server" ConnectionString="<%$ ConnectionStrings:TIF2022_DRAFTConnectionString %>" SelectCommand="SELECT * FROM [Juegos]"
-        >
-    </asp:SqlDataSource>
-    <asp:SqlDataSource
-        id="SqlDataSourceUser"
-        runat="server" ConnectionString="<%$ ConnectionStrings:TIF2022_DRAFTConnectionString %>" SelectCommand="SELECT * FROM [Usuarios]"
-        >
-    </asp:SqlDataSource>
+
 </asp:Content>
