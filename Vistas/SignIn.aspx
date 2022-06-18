@@ -8,15 +8,16 @@
             <h1 class="h3 mb-3 fw-normal neon-sign sign-orange">Ingrese sus credenciales</h1>
             <div class="form-floating">
                 <asp:TextBox TextMode="Email" class="form-control bg-dark text-light no-borders" ID="floatingInput" placeholder="name@example.com" runat="server"/>
-                <label for="floatingInput" class="text-light">Email</label>
+                <label for="floatingInput" class="text-light">Email<asp:RequiredFieldValidator ID="vldRequiredEmail" ControlToValidate="floatingInput" runat="server" ErrorMessage="Debe ingresar su email" Text="*" ValidationGroup="Login" EnableClientScript="False" Display="Dynamic" /><asp:RegularExpressionValidator ID="vldEmailFormat" ControlToValidate="floatingInput" runat="server" ErrorMessage="El email no tiene un formato válido" Text="*" ValidationGroup="Login" EnableClientScript="False" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" /></label>
             </div>
             <div class="form-floating">
                 <asp:Textbox TextMode="password" class="form-control bg-dark text-light no-borders" ID="floatingPassword" placeholder="Password" runat="server"/>
-                <label for="floatingPassword" class="text-light">Password</label>
+                <label for="floatingPassword" class="text-light">Password<asp:RequiredFieldValidator ID="vldRequiredPwd" ControlToValidate="floatingPassword" runat="server" ErrorMessage="Debe ingresar una contraseña" Text="*" ValidationGroup="Login" EnableClientScript="False" Display="Dynamic" /></label>
             </div>
 
             <div>
                 <asp:Label ID="lblErrorMsg" Visible="false" runat="server"></asp:Label>
+                <asp:ValidationSummary ID="vldSummary" runat="server" DisplayMode="List" ValidationGroup="Login" EnableClientScript="False" />
             </div>
 
             <%--<div class="checkbox mb-3">
@@ -24,8 +25,10 @@
                             <input type="checkbox" value="remember-me"> Remember me
                         </label>
                     </div>--%>
-            <asp:Button ID="btnIngresar" class="neon-button neon-orange" runat="server" Text="Ingresar" OnClick="Login"></asp:Button>
+            <asp:Button ID="btnIngresar" class="neon-button neon-orange" runat="server" Text="Ingresar" OnClick="Login" CausesValidation="true" ValidationGroup="Login"></asp:Button>
         </div>
+
+        
 
     </main>
     <%--Override background--%>

@@ -13,15 +13,18 @@ namespace Vistas
 
         protected void Login(object sender, EventArgs e)
         {
-            int resultadoLogin = NegocioUsuario.Login(Session, floatingInput.Text, floatingPassword.Text);
-            switch (resultadoLogin)
+            if (Page.IsValid)
             {
-                case -1:
-                    ShowError("Ocurrió un error al intentar ingresar"); break;
-                case 0:
-                    ShowError("Usuario o contraseña erróneos"); break;
-                case 1:
-                    Response.Redirect("Home.aspx"); break;
+                int resultadoLogin = NegocioUsuario.Login(Session, floatingInput.Text, floatingPassword.Text);
+                switch (resultadoLogin)
+                {
+                    case -1:
+                        ShowError("Ocurrió un error al intentar ingresar"); break;
+                    case 0:
+                        ShowError("Usuario o contraseña erróneos"); break;
+                    case 1:
+                        Response.Redirect("Home.aspx"); break;
+                }
             }
         }
 
@@ -30,5 +33,6 @@ namespace Vistas
             lblErrorMsg.Text = msg;
             lblErrorMsg.Visible = true;
         }
+
     }
 }
