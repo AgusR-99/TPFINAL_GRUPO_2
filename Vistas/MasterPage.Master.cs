@@ -10,10 +10,12 @@ namespace Vistas
 {
     public partial class MasterPage : System.Web.UI.MasterPage
     {
-        protected bool LoggedIn;
+        public bool LoggedIn { get; private set; }
+        public bool LoggedInAsAdmin { get; private set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             LoggedIn = NegocioUsuario.IsLoggedIn(Session);
+            LoggedInAsAdmin = NegocioUsuario.IsLoggedInAsAdmin(Session);
         }
 
     }

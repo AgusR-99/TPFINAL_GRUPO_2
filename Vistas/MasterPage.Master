@@ -50,7 +50,9 @@
 												<a class="dropdown-item" href="Listado.aspx">Deportes</a>
 											</li>
 										</ul>
-									</li><%--Perfil--%> <li class="nav-item  <%if (!LoggedIn){%>disabled<%} %>">
+									</li> <%if (LoggedInAsAdmin){%> <%--AdminDashboard--%> <li class="nav-item">
+										<a class="nav-link" aria-current="page" href="AdminDashboard.aspx">Admin Dashboard</a>
+									</li><%} %> <%--Perfil--%> <li class="nav-item  <%if (!LoggedIn){%>disabled<%} %>">
 										<a href="UserDashboardWatchlist.aspx" class="nav-link <%if (!LoggedIn){%>disabled<%} %>">Perfil</a>
 									</li> <%if (LoggedIn){%> <%--Logout--%> <li class="nav-item">
 										<a class="nav-link" aria-current="page" href="Logout.aspx">Cerrar sesión</a>
