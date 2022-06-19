@@ -178,3 +178,33 @@ BEGIN
 	WHERE
 		IdTienda = @IdTienda
 END
+go
+
+CREATE PROC SP_Usuarios_Obtener
+AS
+BEGIN
+	SELECT Username , Contrasena as [Password], Descripcion, Email, Administrador, Activo
+	FROM Usuarios
+END
+GO
+
+CREATE PROC SP_Usuarios_Actualizar
+@Username varchar(30),
+@Contrasena varchar(50),
+@Descripcion Varchar(MAX),
+@Email varchar(50),
+@Administrador bit,
+@Activo bit
+AS
+BEGIN
+	UPDATE Usuarios
+	SET
+		Contrasena = @Contrasena,
+		Descripcion = @Descripcion,
+		Email = @Email,
+		Administrador = @Administrador,
+		Activo = @Activo
+	WHERE
+		Username = @Username
+END
+go

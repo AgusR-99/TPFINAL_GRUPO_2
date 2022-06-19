@@ -45,5 +45,28 @@ namespace DAO
                 (bool)row["Administrador"],
                 row["Descripcion"] == DBNull.Value ? null : (string)row["Descripcion"]);
         }
+
+        public static DataTable ListarUsuarios()
+        {
+            return DB.ObtenerTabla("Usuarios", "[SP_Usuarios_Obtener]", isSP: true);
+        }
+
+        public static int? ActualizarUsuario(Usuario usuario)
+        {
+            return DB.NonQuery("[SP_Usuarios_Actualizar]", getParametrosUsuario(usuario), true);
+        }
+
+        public static List<SqlParameter> getParametrosUsuario(in Usuario usuario)
+        {
+            return new List<SqlParameter>()
+            {
+                new SqlParameter("Username", usuario.getUsername()),
+                new SqlParameter("Contrasena", usuario.getContraseña()),
+                new SqlParameter("Email", usuario.getEmail()),
+                new SqlParameter("Descripcion", usuario.getDescripcion()),
+                new SqlParameter("Administrador", usuario.getAdministrador()),
+                new SqlParameter("Activo", usuario.getActivo()),
+            };
+        }
     }
 }

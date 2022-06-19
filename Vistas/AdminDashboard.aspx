@@ -71,21 +71,51 @@
                     <input type="text" onkeyup="filter2(this, '<%=GridViewStores.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchStore" placeholder="Buscar tienda">
                     <label for="floatingSearchStore" class="text-light">Buscar datos de tienda</label>
                 </div>
-                <asp:GridView ID="GridViewGames" CssClass="grd-games w-100 bg-dark-carbon ctrl-game" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="NombreDesarrollador,NombreJuego">
-                    <%--<Columns>
-                        <asp:BoundField DataField="NombreDesarrollador" HeaderText="NombreDesarrollador" ReadOnly="True" SortExpression="NombreDesarrollador" />
-                        <asp:BoundField DataField="NombreJuego" HeaderText="NombreJuego" ReadOnly="True" SortExpression="NombreJuego" />
-                        <asp:BoundField DataField="Descripcion" HeaderText="Descripcion" SortExpression="Descripcion" />
-                        <asp:CheckBoxField DataField="Activo" HeaderText="Activo" SortExpression="Activo" />
-                    </Columns>--%>
+                <asp:GridView ID="GridViewGames" runat="server" AutoGenerateEditButton="True" CssClass="grd-games w-100 bg-dark-carbon ctrl-game">
                 </asp:GridView>
-                <asp:GridView ID="GridViewUsers" CssClass="grd-user w-100 bg-dark-carbon ctrl-user" runat="server" AutoGenerateColumns="False" AutoGenerateEditButton="True" DataKeyNames="Username">
-                    <%--<Columns>
-                        <asp:BoundField DataField="Username" HeaderText="Username" ReadOnly="True" SortExpression="Username" />
-                        <asp:BoundField DataField="Contrasena" HeaderText="Contrasena" SortExpression="Contrasena" />
-                        <asp:CheckBoxField DataField="Administrador" HeaderText="Administrador" SortExpression="Administrador" />
-                        <asp:CheckBoxField DataField="Activo" HeaderText="Activo" SortExpression="Activo" />
-                    </Columns>--%>
+                <asp:GridView ID="GridViewUsers" runat="server" AutoGenerateEditButton="True" CssClass="grd-user w-100 bg-dark-carbon ctrl-user" AutoGenerateColumns="False" OnRowCancelingEdit="GridViewUsers_RowCancelingEdit" OnRowEditing="GridViewUsers_RowEditing" OnRowUpdating="GridViewUsers_RowUpdating">
+                    <Columns>
+                        <asp:TemplateField HeaderText="Usuario">
+                            <EditItemTemplate>
+                                <asp:Label ID="lblGVUsersUsername" runat="server" Text='<%# Bind("Username") %>' ></asp:Label>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVUsersUsuario" runat="server" Text='<%# Bind("Username") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Descripcion">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtGVUsersDescripcion" runat="server" Text='<%# Bind("Descripcion") %>' ></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVUsersDescripcion" runat="server" Text='<%# Bind("Descripcion") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Email">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtGVUsersEmail" runat="server" T Text='<%# Bind("Email") %>'></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVUsersEmail" runat="server" Text='<%# Bind("Email") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Administrador">
+                            <EditItemTemplate>
+                                <asp:CheckBox ID="chkGVUsersAdministrador" runat="server" Checked='<%# Bind("Administrador") %>'  />
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkGVUsersAdministrador" runat="server" Checked='<%# Bind("Administrador") %>' Enabled="False" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Activo">
+                            <EditItemTemplate>
+                                <asp:CheckBox ID="chkGVUsersActivo" runat="server" Checked='<%# Bind("Activo") %>'  />
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkGVUsersActivo" runat="server" Checked='<%# Bind("Activo") %>' Enabled="False" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
                 </asp:GridView>
                 <asp:GridView ID="GridViewStores" CssClass="grd-user w-100 bg-dark-carbon ctrl-store" runat="server" AutoGenerateEditButton="True" DataKeyNames="Id" AutoGenerateColumns="False" OnRowEditing="TiendaEdit" OnRowCancelingEdit="TiendaCancelEdit" OnRowUpdating="TiendaUpdate">
                     <Columns>

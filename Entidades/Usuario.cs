@@ -27,11 +27,22 @@ namespace Entidades
             Descripcion = descripcion;
             Activo = true;
         }
+
+        public Usuario(string username, string contraseña,string email, string descripcion, bool administrador, bool activo=true)
+        {
+            Username = username;
+            Contraseña = contraseña;
+            Email = email;
+            Administrador = administrador;
+            Descripcion = descripcion;
+            Activo = activo;
+        }
+
         public string getUsername() { return Username; }
         public string getContraseña() { return Contraseña; }
         public string getEmail() { return Email; }
         public string getDescripcion() { return Descripcion; }
-        public bool getAdiministrador() { return Administrador; }
+        public bool getAdministrador() { return Administrador; }
         public bool getActivo() { return Activo; }
 
 

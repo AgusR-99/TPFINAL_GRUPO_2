@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Web.SessionState;
 using Entidades;
 using DAO;
+using System.Data;
 
 namespace Negocio
 {
@@ -34,12 +35,22 @@ namespace Negocio
         public static bool IsLoggedInAsAdmin(in HttpSessionState Session)
         {
             //Devuelve verdadero si el usuario se encuentra logueado y tiene perfil de administrador
-            return IsLoggedIn(Session) && ((Usuario)Session["LoggedUser"]).getAdiministrador() == true;
+            return IsLoggedIn(Session) && ((Usuario)Session["LoggedUser"]).getAdministrador() == true;
         }
 
         public static void Logout(in HttpSessionState Session)
         {
             Session["LoggedUser"] = null;
+        }
+
+        public static DataTable ListarUsuarios()
+        {
+            return DAOUsuario.ListarUsuarios();
+        }
+
+        public static void ActualizarUsuario(Usuario usuario)
+        {
+            DAOUsuario.ActualizarUsuario(usuario);
         }
     }
 }

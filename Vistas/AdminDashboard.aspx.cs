@@ -22,6 +22,7 @@ namespace Vistas
             {
                 Active = "";
                 CargarTiendas();
+                CargarUsuarios();
             }
         }
 
@@ -31,6 +32,14 @@ namespace Vistas
             var tablaTiendas = NegocioTienda.ListarTiendas();
             GridViewStores.DataSource = tablaTiendas;
             GridViewStores.DataBind();
+        }
+
+        protected void CargarUsuarios()
+        {
+
+            var tablaUsuarios = NegocioUsuario.ListarUsuarios();
+            GridViewUsers.DataSource = tablaUsuarios;
+            GridViewUsers.DataBind();
         }
 
         protected void AgregarImagenes(ref DataTable tabla, string colURL)
@@ -75,6 +84,37 @@ namespace Vistas
             GridViewStores.EditIndex = -1;
             CargarTiendas();
             Active = "store";
+        }
+
+        protected void GridViewUsers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridViewUsers.EditIndex = -1;
+            CargarUsuarios();
+            Active = "user";
+        }
+
+        protected void GridViewUsers_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridViewUsers.EditIndex = e.NewEditIndex;
+            CargarUsuarios();
+            Active = "user";
+        }
+
+        protected void GridViewUsers_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            var editedRow = GridViewUsers.Rows[e.RowIndex];
+            Usuario usuario = new Usuario(
+                    ((((Label)editedRow.FindControl("lblGVUsersUsername")).Text)),
+                    ((TextBox)editedRow.FindControl("txtGVUsersPassword")).Text,
+                    ((TextBox)editedRow.FindControl("txtGVUsersDescripcion")).Text,
+                    ((TextBox)editedRow.FindControl("txtGVUsersEmail")).Text,
+                    ((CheckBox)editedRow.FindControl("chkGVUsersAdministrador")).Checked,
+                    ((CheckBox)editedRow.FindControl("chkGVUsersActivo")).Checked
+                );
+            NegocioUsuario.ActualizarUsuario(usuario);
+            GridViewUsers.EditIndex = -1;
+            CargarUsuarios();
+            Active = "user";
         }
     }
 }
