@@ -190,7 +190,6 @@ GO
 
 CREATE PROC SP_Usuarios_Actualizar
 @Username varchar(30),
-@Contrasena varchar(50),
 @Descripcion Varchar(MAX),
 @Email varchar(50),
 @Administrador bit,
@@ -199,7 +198,7 @@ AS
 BEGIN
 	UPDATE Usuarios
 	SET
-		Contrasena = @Contrasena,
+		Username = @Username,
 		Descripcion = @Descripcion,
 		Email = @Email,
 		Administrador = @Administrador,
@@ -207,4 +206,3 @@ BEGIN
 	WHERE
 		Username = @Username
 END
-go

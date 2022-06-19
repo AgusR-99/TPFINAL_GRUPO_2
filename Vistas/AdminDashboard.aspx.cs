@@ -105,10 +105,9 @@ namespace Vistas
             var editedRow = GridViewUsers.Rows[e.RowIndex];
             Usuario usuario = new Usuario(
                     ((((Label)editedRow.FindControl("lblGVUsersUsername")).Text)),
-                    ((TextBox)editedRow.FindControl("txtGVUsersPassword")).Text,
-                    ((TextBox)editedRow.FindControl("txtGVUsersDescripcion")).Text,
                     ((TextBox)editedRow.FindControl("txtGVUsersEmail")).Text,
                     ((CheckBox)editedRow.FindControl("chkGVUsersAdministrador")).Checked,
+                    ((TextBox)editedRow.FindControl("txtGVUsersDescripcion")).Text,
                     ((CheckBox)editedRow.FindControl("chkGVUsersActivo")).Checked
                 );
             NegocioUsuario.ActualizarUsuario(usuario);

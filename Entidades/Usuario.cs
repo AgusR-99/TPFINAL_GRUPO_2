@@ -19,19 +19,9 @@ namespace Entidades
             Email = email;
             Contraseña = contraseña;
         }
-        public Usuario(string username, string email, bool administrador, string descripcion)
+        public Usuario(string username, string email, bool administrador, string descripcion, bool activo = true)
         {
             Username = username;
-            Email = email;
-            Administrador = administrador;
-            Descripcion = descripcion;
-            Activo = true;
-        }
-
-        public Usuario(string username, string contraseña,string email, string descripcion, bool administrador, bool activo=true)
-        {
-            Username = username;
-            Contraseña = contraseña;
             Email = email;
             Administrador = administrador;
             Descripcion = descripcion;

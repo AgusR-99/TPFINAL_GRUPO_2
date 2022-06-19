@@ -61,11 +61,10 @@ namespace DAO
             return new List<SqlParameter>()
             {
                 new SqlParameter("Username", usuario.getUsername()),
-                new SqlParameter("Contrasena", usuario.getContraseña()),
-                new SqlParameter("Email", usuario.getEmail()),
                 new SqlParameter("Descripcion", usuario.getDescripcion()),
+                new SqlParameter("Email", usuario.getEmail()),
                 new SqlParameter("Administrador", usuario.getAdministrador()),
-                new SqlParameter("Activo", usuario.getActivo()),
+                new SqlParameter("Activo", usuario.getActivo())
             };
         }
     }
