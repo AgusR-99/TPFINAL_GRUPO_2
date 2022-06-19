@@ -15,19 +15,25 @@ namespace DAO
 
         public static int? ActualizarTienda(Tienda tienda)
         {
-            return DB.NonQuery("[SP_Tiendas_Actualizar]", getParametrosTienda(tienda), true);
+            return DB.NonQuery("[SP_Tiendas_Actualizar]", getParametrosTienda(tienda, true), true);
         }
 
-        public static List<SqlParameter> getParametrosTienda(in Tienda tienda)
+        public static int? AgregarTienda(Tienda tienda)
         {
-            return new List<SqlParameter>()
+            return DB.NonQuery("[SP_Tiendas_Agregar]", getParametrosTienda(tienda, false), true);
+        }
+
+        public static List<SqlParameter> getParametrosTienda(in Tienda tienda, bool includeID)
+        {
+            var parametros = new List<SqlParameter>()
             {
-                new SqlParameter("IdTienda", tienda.getID_Tienda()),
                 new SqlParameter("Nombre", tienda.getNombre()),
                 new SqlParameter("RutaImagen", tienda.getURL_img()),
                 new SqlParameter("SitioWeb", tienda.getURL_web()),
                 new SqlParameter("Activo", tienda.getActivo())
             };
+            if (includeID) parametros.Add(new SqlParameter("IdTienda", tienda.getID_Tienda()));
+            return parametros;
         }
     }
 }

@@ -180,6 +180,18 @@ BEGIN
 END
 go
 
+CREATE PROC SP_Tiendas_Agregar
+@Nombre varchar(30),
+@RutaImagen varchar(50),
+@Sitioweb varchar(100),
+@Activo bit
+AS
+BEGIN
+	INSERT INTO Tiendas (Nombre, RutaImagen, SitioWeb, Activo)
+	VALUES (@Nombre, @RutaImagen, @Sitioweb, @Activo)
+END
+GO
+
 CREATE PROC SP_Usuarios_Obtener
 AS
 BEGIN
@@ -206,3 +218,4 @@ BEGIN
 	WHERE
 		Username = @Username
 END
+GO
