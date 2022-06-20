@@ -44,9 +44,18 @@ CREATE TABLE Categorias
 (
 	IdCategoria int IDENTITY(1,1) NOT NULL,
 	Nombre varchar(30) NOT NULL,
+	Activo bit NOT NULL
 	CONSTRAINT PK_Categorias PRIMARY KEY (IdCategoria)
 )
+GO
 
+INSERT INTO Categorias (Nombre, Activo)
+VALUES 
+	('Accion', 1),
+	('Aventura', 1),
+	('RPG', 1),
+	('Deportes', 1)
+GO
 
 CREATE TABLE Tiendas
 (
@@ -200,6 +209,14 @@ BEGIN
 END
 GO
 
+CREATE PROC SP_Juegos_Obtener
+AS
+BEGIN
+	SELECT Juegos.IdJuego, IdDesarrollador, Nombre, Descripcion, Juegos.Activo, NombreArchivo as [imagen] 
+	FROM Juegos inner join JuegosImagenes on Juegos.IdJuego = JuegosImagenes.IdJuego
+END
+GO
+
 CREATE PROC SP_Usuarios_Actualizar
 @Username varchar(30),
 @Descripcion Varchar(MAX),
@@ -217,5 +234,38 @@ BEGIN
 		Activo = @Activo
 	WHERE
 		Username = @Username
+END
+GO
+
+CREATE PROC SP_Categorias_Actualizar
+	@IdCategoria int,
+	@Nombre varchar(30),
+	@Activo bit
+AS
+BEGIN
+	UPDATE Categorias
+	SET
+		Nombre = @Nombre,
+		Activo = @Activo
+	WHERE
+		IdCategoria = @IdCategoria
+END
+GO
+
+CREATE PROC SP_Categorias_Agregar
+	@Nombre varchar(30),
+	@Activo bit
+AS
+BEGIN
+	INSERT INTO Categorias(Nombre, Activo)
+	VALUES (@Nombre, @Activo)
+END
+GO
+
+CREATE PROCEDURE SP_Categorias_Obtener
+AS
+BEGIN
+	SELECT IdCategoria, Nombre, Activo
+	FROM Categorias
 END
 GO
