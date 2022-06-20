@@ -81,8 +81,6 @@
                     <input type="text" onkeyup="filter2(this, '<%=GridViewCategories.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchCategory" placeholder="Buscar categoria">
                     <label for="floatingSearchCategory" class="text-light">Buscar datos de categoria</label>
                 </div>
-                <asp:GridView ID="GridViewGames" runat="server" AutoGenerateEditButton="True" CssClass="grd-games w-100 bg-dark-carbon ctrl-game">
-                </asp:GridView>
                 <asp:GridView ID="GridViewUsers" runat="server" AutoGenerateEditButton="True" CssClass="grd-user w-100 bg-dark-carbon ctrl-user" AutoGenerateColumns="False" OnRowCancelingEdit="GridViewUsers_RowCancelingEdit" OnRowEditing="GridViewUsers_RowEditing" OnRowUpdating="GridViewUsers_RowUpdating">
                     <Columns>
                         <asp:TemplateField HeaderText="Usuario">
