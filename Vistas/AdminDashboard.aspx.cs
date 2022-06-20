@@ -23,6 +23,7 @@ namespace Vistas
                 Active = "";
                 CargarTiendas();
                 CargarUsuarios();
+                CargarJuegos();
             }
         }
 
@@ -40,6 +41,14 @@ namespace Vistas
             var tablaUsuarios = NegocioUsuario.ListarUsuarios();
             GridViewUsers.DataSource = tablaUsuarios;
             GridViewUsers.DataBind();
+        }
+
+        protected void CargarJuegos()
+        {
+
+            var tablaJuegos = NegocioJuego.ListarJuegos();
+            GridViewGames.DataSource = tablaJuegos;
+            GridViewGames.DataBind();
         }
 
         protected void AgregarImagenes(ref DataTable tabla, string colURL)
@@ -110,9 +119,18 @@ namespace Vistas
                     ((TextBox)editedRow.FindControl("txtGVUsersDescripcion")).Text,
                     ((CheckBox)editedRow.FindControl("chkGVUsersActivo")).Checked
                 );
-            NegocioUsuario.ActualizarUsuario(usuario);
-            GridViewUsers.EditIndex = -1;
-            CargarUsuarios();
+            var erroresActualizar = NegocioUsuario.ActualizarUsuario(usuario);
+            if (erroresActualizar.Any())
+            {
+                foreach (string msg in erroresActualizar)
+                    lblMsg.Text += msg + "<br>";
+                lblMsg.Visible = true;
+            }
+            else
+            {
+                GridViewUsers.EditIndex = -1;
+                CargarUsuarios();
+            }
             Active = "user";
         }
     }

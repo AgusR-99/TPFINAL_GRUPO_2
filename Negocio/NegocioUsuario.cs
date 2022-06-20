@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.SessionState;
+using System.Linq;
 using Entidades;
 using DAO;
 using System.Data;
@@ -48,9 +49,24 @@ namespace Negocio
             return DAOUsuario.ListarUsuarios();
         }
 
-        public static void ActualizarUsuario(Usuario usuario)
+        public static List<string> ActualizarUsuario(Usuario usuario)
         {
+            var errorReasons = ActualizarValidarUsuario(usuario);
             DAOUsuario.ActualizarUsuario(usuario);
+            if (errorReasons.Any()) return errorReasons;
+            int? resultadoActualizar = DAOUsuario.ActualizarUsuario(usuario);
+            if (resultadoActualizar == null) errorReasons.Add("Ocurrió un error al actualizar la base de datos");
+            if (resultadoActualizar == 0) errorReasons.Add("No se encontró el registro a actualizar");
+
+            return errorReasons;
+        }
+
+        public static List<string> ActualizarValidarUsuario(in Usuario usuario)
+        {
+            var errorReasons = new List<string>();
+            if (String.IsNullOrWhiteSpace(usuario.getUsername())) errorReasons.Add("El campo Username no puede estar vacío");
+            if (String.IsNullOrWhiteSpace(usuario.getEmail())) errorReasons.Add("El campo Email no puede estar vacío");
+            return errorReasons;
         }
     }
 }

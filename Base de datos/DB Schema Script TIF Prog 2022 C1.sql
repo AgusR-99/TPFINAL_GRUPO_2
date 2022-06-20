@@ -200,6 +200,14 @@ BEGIN
 END
 GO
 
+CREATE PROC SP_Juegos_Obtener
+AS
+BEGIN
+	SELECT Juegos.IdJuego, IdDesarrollador, Nombre, Descripcion, Juegos.Activo, NombreArchivo as [imagen] 
+	FROM Juegos inner join JuegosImagenes on Juegos.IdJuego = JuegosImagenes.IdJuego
+END
+GO
+
 CREATE PROC SP_Usuarios_Actualizar
 @Username varchar(30),
 @Descripcion Varchar(MAX),
