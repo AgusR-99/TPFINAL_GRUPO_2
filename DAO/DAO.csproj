@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAOCategoria.cs" />
+    <Compile Include="DAODesarrollador.cs" />
     <Compile Include="DAOJuego.cs" />
     <Compile Include="DAOPlataforma.cs" />
     <Compile Include="DAOTienda.cs" />

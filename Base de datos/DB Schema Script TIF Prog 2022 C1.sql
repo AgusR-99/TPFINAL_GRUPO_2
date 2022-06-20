@@ -217,6 +217,21 @@ BEGIN
 END
 GO
 
+
+CREATE PROCEDURE SP_Juegos_Actualizar
+@IdJuego int,
+@IdDesarrollador int,
+@Nombre varchar(50),
+@Descripcion varchar(MAX),
+@Activo bit
+AS
+BEGIN
+UPDATE Juegos
+SET IdDesarrollador = @IdDesarrollador, Nombre = @Nombre, Descripcion = @Descripcion, Activo = @Activo
+WHERE IdJuego=@IdJuego
+END
+GO
+
 CREATE PROC SP_Usuarios_Actualizar
 @Username varchar(30),
 @Descripcion Varchar(MAX),
@@ -300,5 +315,12 @@ CREATE PROCEDURE SP_Plataformas_Obtener
 AS
 BEGIN
 SELECT IdPlataforma AS [ID], Nombre AS [Plataforma], NombreImagen AS [Imagen] FROM Plataformas
+END
+GO
+
+CREATE PROCEDURE SP_Desarrolladores_Obtener
+AS
+BEGIN
+SELECT IdDesarrollador, NombreDesarrollador, SitioWeb, UbicacionSede, Historia FROM Desarrolladores
 END
 GO
