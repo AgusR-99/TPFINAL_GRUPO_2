@@ -173,6 +173,7 @@ namespace Vistas
             }
             else
             {
+                txtSearchCategory.Text = "";
                 GridViewCategories.EditIndex = -1;
                 CargarCategorias();
             }
