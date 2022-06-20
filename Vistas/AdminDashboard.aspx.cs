@@ -111,7 +111,7 @@ namespace Vistas
         protected void GridViewUsers_RowEditing(object sender, GridViewEditEventArgs e)
         {
             GridViewUsers.EditIndex = e.NewEditIndex;
-            CargarUsuarios();
+            CargarCategorias();
             Active = "user";
         }
 
@@ -142,6 +142,7 @@ namespace Vistas
 
         protected void Category_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            txtSearchCategory.Text = "";
             GridViewCategories.EditIndex = e.NewEditIndex;
             CargarCategorias();
             Active = "category";
@@ -149,6 +150,7 @@ namespace Vistas
 
         protected void Category_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
+            txtSearchCategory.Text = "";
             GridViewCategories.EditIndex = -1;
             CargarCategorias();
             Active = "category";
@@ -162,9 +164,18 @@ namespace Vistas
                     ((TextBox)editedRow.FindControl("txtGVCategoriesName")).Text,
                     ((CheckBox)editedRow.FindControl("chkGVCategoriesActivo")).Checked
                 );
-            NegocioCategorias.ActualizarCategoria(categoria);
-            GridViewCategories.EditIndex = -1;
-            CargarCategorias();
+            var erroresActualizar = NegocioCategorias.ActualizarCategoria(categoria);
+            if (erroresActualizar.Any())
+            {
+                foreach (string msg in erroresActualizar)
+                    lblMsg.Text += msg + "<div>";
+                lblMsg.Visible = true;
+            }
+            else
+            {
+                GridViewCategories.EditIndex = -1;
+                CargarCategorias();
+            }
             Active = "category";
         }
     }
