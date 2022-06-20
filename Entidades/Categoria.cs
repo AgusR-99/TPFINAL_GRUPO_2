@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    class Categoria
+    public class Categoria
     {
-        private int ID_Categoria;
-        private string Nombre;
+        public Categoria(int id_Categoria, string nombre, bool activo)
+        {
+            Id_Categoria = id_Categoria;
+            Nombre = nombre;
+            Activo = activo;
+        }
 
-
-        public int getID_Categoria() { return ID_Categoria; }
-        public string getNombre() { return Nombre; }
-
-
-        public void setID_Categoria(int id_categoria) { ID_Categoria = id_categoria; }
-        public void setID_Juego(string nombre) { Nombre = nombre; }
+        public int Id_Categoria { get; set; }
+        public string Nombre { get; set; }
+        public bool Activo { get; set; }
     }
 }
