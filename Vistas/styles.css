@@ -839,6 +839,7 @@ main {
 .search-selection-wrapper > .search-selection {
     margin: 0 50px;
     text-align: center;
+    z-index:3;
 }
 
 .search-selection > button {
@@ -847,20 +848,19 @@ main {
     color: white;
 }
 
-.icon-jquery-game, .icon-jquery-user {
-    -ms-transition: all 250ms ease-in;
-    -o-transition: all 250ms ease-in;
-    -webkit-transition: all 250ms ease-in;
-    transition: all 250ms ease-in;
+/*Fade out*/
+.search-selection > button > i {
+    transition: text-shadow 250ms ease-in-out;
 }
 
 .search-selection > button:hover > i {
     text-shadow: 0 0 50px #ff2134;
-    -ms-transition: all 250ms ease-in-out;
-    -o-transition: all 250ms ease-in-out;
-    -webkit-transition: all 250ms ease-in-out;
-    transition: all 250ms ease-in-out;
+    -ms-transition: text-shadow 250ms ease-in-out;
+    -o-transition: text-shadow 250ms ease-in-out;
+    -webkit-transition: text-shadow 250ms ease-in-out;
+    transition: text-shadow 250ms ease-in-out;
 }
+
 
 /*------Props UserDashboard------*/
 
