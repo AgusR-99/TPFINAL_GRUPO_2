@@ -81,6 +81,40 @@
                     <input type="text" onkeyup="filter2(this, '<%=GridViewCategories.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchCategory" placeholder="Buscar categoria">
                     <label for="floatingSearchCategory" class="text-light">Buscar datos de categoria</label>
                 </div>
+                <asp:GridView ID="GridViewGames" runat="server" AutoGenerateEditButton="True" CssClass="grd-games w-100 bg-dark-carbon ctrl-game" AutoGenerateColumns="False">
+                    <Columns>
+                        <asp:TemplateField HeaderText="IDJuego">
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVGamesIDJuego" runat="server" Text='<%# Bind("IdJuego") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="IDDesarrollador">
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVGamesIDDesarrollador" runat="server" Text='<%# Bind("IdDesarrollador") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Nombre">
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVGamesNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Descripcion">
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVGamesDescripcion" runat="server" Text='<%# Bind("Descripcion") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Activo">
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkGVGamesImagen" runat="server" Checked='<%# Bind("Activo") %>' Enabled="False" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Imagen">
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVGamesImagen" runat="server" Text='<%# Bind("imagen") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
                 <asp:GridView ID="GridViewUsers" runat="server" AutoGenerateEditButton="True" CssClass="grd-user w-100 bg-dark-carbon ctrl-user" AutoGenerateColumns="False" OnRowCancelingEdit="GridViewUsers_RowCancelingEdit" OnRowEditing="GridViewUsers_RowEditing" OnRowUpdating="GridViewUsers_RowUpdating">
                     <Columns>
                         <asp:TemplateField HeaderText="Usuario">
