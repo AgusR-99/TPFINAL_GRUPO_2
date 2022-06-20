@@ -64,33 +64,34 @@
                         </button>
                     </div>
                 </div>
-                <asp:Label ID="lblMsg" runat="server"></asp:Label>
-                <div class="form-floating ctrl-game">
-                    <input type="text" onchange="filter2(this, '<%=GridViewGames.ClientID %>')"
-                        class="form-control bg-dark text-light no-borders" id="txtSearchGame" placeholder="Buscar juego">
-                    <label for="floatingSearchGame" class="text-light">Buscar datos de juego</label>
-                </div>
-                <div class="form-floating ctrl-user">
-                    <input type="text" onchange="filter2(this, '<%=GridViewUsers.ClientID %>')"
-                        class="form-control bg-dark text-light no-borders" id="txtSearchUser" placeholder="Buscar usuario">
-                    <label for="floatingSearchUser" class="text-light">Buscar datos de usuario</label>
-                </div>
-                <div class="form-floating ctrl-store">
-                    <input type="text" onkeyup="filter2(this, '<%=GridViewStores.ClientID %>')"
-                        class="form-control bg-dark text-light no-borders" id="txtSearchStore" placeholder="Buscar tienda">
-                    <label for="floatingSearchStore" class="text-light">Buscar datos de tienda</label>
-                </div>
-                <div class="form-floating ctrl-category">
-                    <input type="text" onkeyup="filter2(this, '<%=GridViewCategories.ClientID %>')"
-                        class="form-control bg-dark text-light no-borders" id="txtSearchCategory" placeholder="Buscar categoria">
-                    <label for="floatingSearchCategory" class="text-light">Buscar datos de categoria</label>
-                </div>
                 <asp:ScriptManager ID="script1" runat="server"></asp:ScriptManager>
                 <asp:UpdatePanel ID="GridViewPanel" runat="server">
                     <ContentTemplate>
-                      <asp:GridView ID="GridViewGames" runat="server" AutoGenerateEditButton="True"
+                        <asp:Label ID="lblMsg" runat="server"></asp:Label>
+                        <div class="form-floating ctrl-game">
+                            <input type="text" onchange="filter2(this, '<%=GridViewGames.ClientID %>')"
+                                class="form-control bg-dark text-light no-borders" id="txtSearchGame" placeholder="Buscar juego">
+                            <label for="floatingSearchGame" class="text-light">Buscar datos de juego</label>
+                        </div>
+                        <div class="form-floating ctrl-user">
+                            <input type="text" onchange="filter2(this, '<%=GridViewUsers.ClientID %>')"
+                                class="form-control bg-dark text-light no-borders" id="txtSearchUser" placeholder="Buscar usuario">
+                            <label for="floatingSearchUser" class="text-light">Buscar datos de usuario</label>
+                        </div>
+                        <div class="form-floating ctrl-store">
+                            <input type="text" onkeyup="filter2(this, '<%=GridViewStores.ClientID %>')"
+                                class="form-control bg-dark text-light no-borders" id="txtSearchStore" placeholder="Buscar tienda">
+                            <label for="floatingSearchStore" class="text-light">Buscar datos de tienda</label>
+                        </div>
+                        <div class="form-floating ctrl-category">
+                            <asp:TextBox runat="server"
+                                class="form-control bg-dark text-light no-borders" id="txtSearchCategory" placeholder="Buscar categoria" >
+                            </asp:TextBox>
+                            <label for="floatingSearchCategory" class="text-light">Buscar datos de categoria</label>
+                        </div>
+                        <asp:GridView ID="GridViewGames" runat="server" AutoGenerateEditButton="True"
                           CssClass="grd-games w-100 bg-dark-carbon ctrl-game" AutoGenerateColumns="False">
-                        <Columns>
+                            <Columns>
                           <asp:TemplateField HeaderText="IDJuego">
                             <ItemTemplate>
                               <asp:Label ID="lblGVGamesIDJuego" runat="server" Text='<%# Bind("IdJuego") %>'>
@@ -128,7 +129,7 @@
                           </asp:TemplateField>
                         </Columns>
                       </asp:GridView>
-                      <asp:GridView ID="GridViewUsers"
+                        <asp:GridView ID="GridViewUsers"
                           runat="server"
                           AutoGenerateEditButton="True"
                           CssClass="grd-user w-100 bg-dark-carbon ctrl-user"
@@ -136,7 +137,7 @@
                           OnRowCancelingEdit="GridViewUsers_RowCancelingEdit"
                           OnRowEditing="GridViewUsers_RowEditing"
                           OnRowUpdating="GridViewUsers_RowUpdating">
-                        <Columns>
+                            <Columns>
                           <asp:TemplateField HeaderText="Usuario">
                             <EditItemTemplate>
                               <asp:Label ID="lblGVUsersUsername" runat="server" Text='<%# Bind("Username") %>'>
@@ -185,7 +186,7 @@
                           </asp:TemplateField>
                         </Columns>
                       </asp:GridView>
-                      <asp:GridView ID="GridViewStores"
+                        <asp:GridView ID="GridViewStores"
                           runat="server"
                           CssClass="grd-user w-100 bg-dark-carbon ctrl-store"
                           AutoGenerateEditButton="True"
@@ -194,7 +195,7 @@
                           OnRowEditing="TiendaEdit"
                           OnRowCancelingEdit="TiendaCancelEdit"
                           OnRowUpdating="TiendaUpdate">
-                        <Columns>
+                            <Columns>
                           <asp:TemplateField HeaderText="ID">
                             <EditItemTemplate>
                               <asp:Label ID="lblGVStoresID" runat="server" Text='<%# Eval("ID") %>'>
@@ -245,14 +246,14 @@
                           </asp:TemplateField>
                         </Columns>
                       </asp:GridView>
-                      <asp:GridView ID="GridViewCategories"
+                        <asp:GridView ID="GridViewCategories"
                           runat="server" AutoGenerateEditButton="True"
                           CssClass="grd-category w-100 bg-dark-carbon ctrl-category"
                           AutoGenerateColumns="False"
                           OnRowCancelingEdit="Category_RowCancelingEdit"
                           OnRowEditing="Category_RowEditing"
                           OnRowUpdating="Category_RowUpdating">
-                        <Columns>
+                            <Columns>
                           <asp:TemplateField HeaderText="ID">
                             <EditItemTemplate>
                               <asp:Label ID="lblGVCategoriesID" runat="server" Text='<%# Eval("IdCategoria") %>'>
@@ -291,21 +292,31 @@
     <script>
         var options = ["user", "game", "store", "category"];
         var active;
+        function foo(active) {
+            $(`.btn-user`).click(() => { btnClick("user") });
+            $(`.btn-game`).click(() => { btnClick("game") });
+            $(`.btn-store`).click(() => { btnClick("store") });
+            $(`.btn-category`).click(() => { btnClick("category") });
+
+            if (active != "")
+                btnClick(active);
+        }
+
         <%--Ocultar searchbars dependiendo que opcion se eliga--%>
         $(document).ready(function () {
             active = "<%=Active%>";
             for (let option of options) {
                 $(`.ctrl-${option}`).hide();
             }
-            $(`.btn-user`).click(() => { btnClick("user") });
-            $(`.btn-game`).click(() => { btnClick("game") });
-            $(`.btn-store`).click(() => { btnClick("store") });
-            $(`.btn-category`).click(() => { btnClick("category") });
-
-
-            if (active != "")
-                btnClick(active);
+            foo(active);
         });
+
+        // Re-bind para callbacks 
+        var prm = Sys.WebForms.PageRequestManager.getInstance();
+        // Sin esto se actualiza el panel-update de los gridviews sin que se ejecute el jquery correspondiente, provocando que no se oculten
+        prm.add_endRequest(function () {
+            foo(active);
+        });  
 
         function btnClick(clicked) {
             let others = options.filter((val) => { return val != clicked; });
@@ -320,6 +331,12 @@
         }
     </script>
     <script>
+        $(function () {
+            $("#<%=txtSearchCategory.ClientID %>").on("input", function () {
+                filter2(this, '<%=GridViewCategories.ClientID %>');
+                console.log("call");
+            });
+        });
         function filter2(phrase, id) {
             var words = phrase.value.toLowerCase().split(" ");
             var table = document.getElementById(id);
