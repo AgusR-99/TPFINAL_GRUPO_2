@@ -269,3 +269,33 @@ BEGIN
 	FROM Categorias
 END
 GO
+
+CREATE PROCEDURE SP_Plataforma_Agregar
+@Nombre varchar(30),
+@NombreImagen varchar(50)
+AS
+BEGIN
+INSERT INTO Plataformas
+(
+Nombre,
+NombreImagen
+)
+VALUES(@Nombre, @NombreImagen)
+END
+
+CREATE PROCEDURE SP_Plataformas_Actualizar
+@IdPlataforma int,
+@Nombre varchar(30),
+@NombreImagen varchar(50)
+AS
+BEGIN
+UPDATE Plataformas
+SET Nombre=@Nombre, NombreImagen=@NombreImagen
+WHERE IdPlataforma=@IdPlataforma
+END
+
+CREATE PROCEDURE SP_Plataformas_Obtener
+AS
+BEGIN
+SELECT IdPlataforma AS [ID], Nombre AS [Plataforma], NombreImagen AS [Imagen] FROM Plataformas
+END
