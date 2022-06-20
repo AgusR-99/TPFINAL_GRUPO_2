@@ -23,6 +23,7 @@ namespace Vistas
                 Active = "";
                 CargarTiendas();
                 CargarUsuarios();
+                CargarCategorias();
             }
         }
 
@@ -40,6 +41,13 @@ namespace Vistas
             var tablaUsuarios = NegocioUsuario.ListarUsuarios();
             GridViewUsers.DataSource = tablaUsuarios;
             GridViewUsers.DataBind();
+        }
+
+        protected void CargarCategorias()
+        {
+            var tablaCategorias = NegocioCategorias.ListarCategorias();
+            GridViewCategories.DataSource = tablaCategorias;
+            GridViewCategories.DataBind();
         }
 
         protected void AgregarImagenes(ref DataTable tabla, string colURL)
@@ -114,6 +122,34 @@ namespace Vistas
             GridViewUsers.EditIndex = -1;
             CargarUsuarios();
             Active = "user";
+        }
+
+        protected void Category_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            GridViewCategories.EditIndex = e.NewEditIndex;
+            CargarCategorias();
+            Active = "category";
+        }
+
+        protected void Category_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            GridViewCategories.EditIndex = -1;
+            CargarCategorias();
+            Active = "category";
+        }
+
+        protected void Category_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            var editedRow = GridViewCategories.Rows[e.RowIndex];
+            Categoria categoria = new Categoria(
+                    Convert.ToInt32(((Label)editedRow.FindControl("lblGVCategoriesID")).Text),
+                    ((TextBox)editedRow.FindControl("txtGVCategoriesName")).Text,
+                    ((CheckBox)editedRow.FindControl("chkGVCategoriesActivo")).Checked
+                );
+            NegocioCategorias.ActualizarCategoria(categoria);
+            GridViewCategories.EditIndex = -1;
+            CargarCategorias();
+            Active = "category";
         }
     }
 }

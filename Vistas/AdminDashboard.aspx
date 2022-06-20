@@ -57,6 +57,12 @@
                             <p>Tiendas</p>
                         </button>
                     </div>
+                    <div class="search-selection">
+                        <button type="button" class="btn-category">
+                            <i class="fa-solid fa-list big icon-jquery-category"></i>
+                            <p>Categorias</p>
+                        </button>
+                    </div>
                 </div>
                 <asp:Label ID="lblMsg" runat="server"></asp:Label>
                 <div class="form-floating ctrl-game">
@@ -70,6 +76,10 @@
                 <div class="form-floating ctrl-store">
                     <input type="text" onkeyup="filter2(this, '<%=GridViewStores.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchStore" placeholder="Buscar tienda">
                     <label for="floatingSearchStore" class="text-light">Buscar datos de tienda</label>
+                </div>
+                <div class="form-floating ctrl-category">
+                    <input type="text" onkeyup="filter2(this, '<%=GridViewCategories.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchCategory" placeholder="Buscar categoria">
+                    <label for="floatingSearchCategory" class="text-light">Buscar datos de categoria</label>
                 </div>
                 <asp:GridView ID="GridViewGames" runat="server" AutoGenerateEditButton="True" CssClass="grd-games w-100 bg-dark-carbon ctrl-game">
                 </asp:GridView>
@@ -161,11 +171,39 @@
                         </asp:TemplateField>
                     </Columns>
                 </asp:GridView>
+                <asp:GridView ID="GridViewCategories" runat="server" AutoGenerateEditButton="True" CssClass="grd-category w-100 bg-dark-carbon ctrl-category" AutoGenerateColumns="False" OnRowCancelingEdit="Category_RowCancelingEdit" OnRowEditing="Category_RowEditing" OnRowUpdating="Category_RowUpdating">
+                    <Columns>
+                        <asp:TemplateField HeaderText="ID">
+                            <EditItemTemplate>
+                                <asp:Label ID="lblGVCategoriesID" runat="server" Text='<%# Eval("IdCategoria") %>'></asp:Label>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVCategoriesID" runat="server" Text='<%# Eval("IdCategoria") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Categoria">
+                            <EditItemTemplate>
+                                <asp:TextBox ID="txtGVCategoriesName" runat="server" Text='<%# Eval("Nombre") %>' ></asp:TextBox>
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:Label ID="lblGVCategoriesName" runat="server" Text='<%# Eval("Nombre") %>'></asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField HeaderText="Activo">
+                            <EditItemTemplate>
+                                <asp:CheckBox ID="chkGVCategoriesActivo" runat="server" Checked='<%# Eval("Activo") %>'  />
+                            </EditItemTemplate>
+                            <ItemTemplate>
+                                <asp:CheckBox ID="chkGVCategoriesActivo" runat="server" Checked='<%# Eval("Activo") %>' Enabled="False" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
             </div>
         </div>
     </main>
     <script>
-        var options = ["user", "game", "store"];
+        var options = ["user", "game", "store", "category"];
         var active;
         <%--Ocultar searchbars dependiendo que opcion se eliga--%>
         $(document).ready(function () {
@@ -176,6 +214,8 @@
             $(`.btn-user`).click(() => { btnClick("user") });
             $(`.btn-game`).click(() => { btnClick("game") });
             $(`.btn-store`).click(() => { btnClick("store") });
+            $(`.btn-category`).click(() => { btnClick("category") });
+
 
             if (active != "")
                 btnClick(active);
