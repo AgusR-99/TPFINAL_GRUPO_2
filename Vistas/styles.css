@@ -387,12 +387,6 @@ main {
     --bs-btn-border-color: #fa4454;
 }
 
-/*Cambio de color del boton*/
-.btn-outline-success {
-    --bs-btn-hover-bg: #fa4454;
-    --bs-btn-hover-border-color: white;
-}
-
 /*Props searchbar*/
 .searchbar {
     display: flex;
@@ -861,6 +855,9 @@ main {
     transition: text-shadow 250ms ease-in-out;
 }
 
+.input-cat{
+    justify-content: center;
+}
 
 /*------Props UserDashboard------*/
 
@@ -1028,12 +1025,14 @@ main {
     justify-content: space-between
 }
 
-    .review-bottom > .btn-wrapper > button {
-        border-radius: 0.5rem;
-        padding: 11px;
-        font-weight: bold;
-        border: 1px solid #ced4da;
-    }
+
+
+.review-bottom > .btn-wrapper > button {
+    border-radius: 0.5rem;
+    padding: 11px;
+    font-weight: bold;
+    border: 1px solid #ced4da;
+}
 
 .review-bottom > .btn-wrapper > button:hover {
     background-color: var(--clr-neon-cyan-l);
@@ -1042,7 +1041,6 @@ main {
 .review-bottom .form-control{
     max-width: 60px;
 }
-
 
 @media only screen and (max-width: 768px) {
     .analytics-main{
