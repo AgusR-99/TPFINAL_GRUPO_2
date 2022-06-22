@@ -210,19 +210,11 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Usuarios_Obtener
-AS
-BEGIN
-	SELECT Username , Contrasena as [Password], Descripcion, Email, Administrador, Activo
-	FROM Usuarios
-END
-GO
-
 CREATE PROC SP_Juegos_Obtener
 AS
 BEGIN
 	SELECT Juegos.IdJuego, IdDesarrollador, Nombre, Descripcion, Juegos.Activo, NombreArchivo as [imagen] 
-	FROM Juegos left join JuegosImagenes on Juegos.IdJuego = JuegosImagenes.IdJuego
+	FROM Juegos
 END
 GO
 
@@ -238,6 +230,26 @@ BEGIN
 UPDATE Juegos
 SET IdDesarrollador = @IdDesarrollador, Nombre = @Nombre, Descripcion = @Descripcion, Activo = @Activo
 WHERE IdJuego=@IdJuego
+END
+GO
+
+CREATE PROC SP_Juegos_Agregar
+@IdDesarrollador int,
+@Nombre varchar(50),
+@Descripcion varchar(MAX),
+@Activo bit
+AS
+BEGIN
+INSERT INTO Juegos(IdDesarrollador,Nombre,Descripcion,Activo)
+SELECT @IdDesarrollador,@Nombre,@Descripcion,@Activo
+END
+GO
+
+CREATE PROC SP_Usuarios_Obtener
+AS
+BEGIN
+	SELECT Username , Contrasena as [Password], Descripcion, Email, Administrador, Activo
+	FROM Usuarios
 END
 GO
 
