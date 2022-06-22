@@ -77,8 +77,7 @@
 					<input type="text" onkeyup="filter2(this, '<%=GridViewStores.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchStore" placeholder="Buscar tienda">
 					<label for="floatingSearchStore" class="text-light">Buscar datos de tienda</label>
 				</div>
-				<asp:GridView 
-					ID="grd GridViewGames"
+				<asp:GridView ID="GridViewGames"
 					runat="server"
 					AutoGenerateEditButton="True"
                     CssClass="grd-games w-100 bg-dark-carbon ctrl-game"
@@ -145,7 +144,7 @@
                         </Columns>
                       </asp:GridView>
 				<asp:GridView
-					ID="grd GridViewUsers"
+					ID="GridViewUsers"
 					runat="server"
 					AutoGenerateEditButton="True"
 					CssClass="grd grd-user w-100 bg-dark-carbon ctrl-user"
