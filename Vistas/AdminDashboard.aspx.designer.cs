@@ -24,15 +24,6 @@ namespace Vistas
         protected global::System.Web.UI.ScriptManager script1;
 
         /// <summary>
-        /// GridViewPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel GridViewPanel;
-
-        /// <summary>
         /// lblMsg control.
         /// </summary>
         /// <remarks>
@@ -40,15 +31,6 @@ namespace Vistas
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMsg;
-
-        /// <summary>
-        /// txtSearchCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchCategory;
 
         /// <summary>
         /// GridViewGames control.
@@ -76,6 +58,24 @@ namespace Vistas
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView GridViewStores;
+
+        /// <summary>
+        /// Panel1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel Panel1;
+
+        /// <summary>
+        /// txtSearchCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearchCategory;
 
         /// <summary>
         /// GridViewCategories control.

@@ -14,6 +14,17 @@ namespace DAO
             return DB.ObtenerTabla("Categorias", "[SP_Categorias_Obtener]", isSP: true);
         }
 
+        public static DataSet ObtenerCategoriaSiguienteID()
+        {
+            var foo = DB.Query("[SP_Categorias_Obtener_Siguiente_Id]", isSP: true);
+            return foo;
+        }
+
+        public static DataTable ListarCategoriasPorNombre(string nombre)
+        {
+            return DB.ObtenerTabla("Categorias", $"[SP_Categorias_Obtener_Por_Nombre] N'{nombre}'");
+        }
+
         public static int? ActualizarCategoria(Categoria categoria)
         {
             return DB.NonQuery("[SP_Categorias_Actualizar]", getParametrosCategoria(categoria, true), true);

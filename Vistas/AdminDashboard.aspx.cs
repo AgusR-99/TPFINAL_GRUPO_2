@@ -35,7 +35,6 @@ namespace Vistas
             GridViewStores.DataSource = tablaTiendas;
             GridViewStores.DataBind();
         }
-
         protected void CargarUsuarios()
         {
 
@@ -50,7 +49,6 @@ namespace Vistas
             GridViewGames.DataSource = tablaJuegos;
             GridViewGames.DataBind();
         }
-
         protected void CargarCategorias()
         {
             var tablaCategorias = NegocioCategorias.ListarCategorias();
@@ -140,6 +138,42 @@ namespace Vistas
             Active = "user";
         }
 
+        protected void BtnInsert_Click(Object sender, EventArgs e)
+        {
+            Categoria categoria = new Categoria(
+                Convert.ToInt32(((Label)GridViewCategories.FooterRow.FindControl("lblGVCategoriesID")).Text),
+                ((TextBox)GridViewCategories.FooterRow.FindControl("txtGVCategoriesName")).Text,
+                ((CheckBox)GridViewCategories.FooterRow.FindControl("chkGVCategoriesActivo")).Checked
+                );
+
+            var erroresAgregar = NegocioCategorias.AgregarCategoria(categoria);
+            if (erroresAgregar.Any())
+            {
+                foreach (string msg in erroresAgregar)
+                    lblMsg.Text += msg + "<div>";
+                lblMsg.Visible = true;
+            }
+            else
+            {
+                txtSearchCategory.Text = "";
+                GridViewCategories.EditIndex = -1;
+                CargarCategorias();
+            }
+            Active = "category";
+        }
+
+        protected void grdCategoriesData_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewCategories.PageIndex = e.NewPageIndex;
+            CargarCategorias();
+        }
+        protected string ObtenerId()
+        {
+            var ds = NegocioCategorias.ObtenerCategoriaSiguienteID();
+            var test = ds.Tables[0].Rows[0][0].ToString();
+            return test;
+        }
+
         protected void Category_RowEditing(object sender, GridViewEditEventArgs e)
         {
             txtSearchCategory.Text = "";
@@ -177,6 +211,14 @@ namespace Vistas
                 GridViewCategories.EditIndex = -1;
                 CargarCategorias();
             }
+            Active = "category";
+        }
+
+        protected void BtnSearch_Click(object sender, EventArgs e)
+        {
+            var dt = NegocioCategorias.ListarCategoriasPorNombre(txtSearchCategory.Text);
+            GridViewCategories.DataSource = dt;
+            GridViewCategories.DataBind();
             Active = "category";
         }
     }

@@ -11,8 +11,17 @@ namespace Negocio
     {
         public static DataTable ListarCategorias()
         {
-            
             return DAOCategoria.ListarCategorias();
+        }
+
+        public static DataTable ListarCategoriasPorNombre(string Nombre)
+        {
+            return DAOCategoria.ListarCategoriasPorNombre(Nombre);
+        }
+
+        public static DataSet ObtenerCategoriaSiguienteID()
+        {
+            return DAOCategoria.ObtenerCategoriaSiguienteID();
         }
 
         public static List<string> ActualizarCategoria(Categoria categoria)
