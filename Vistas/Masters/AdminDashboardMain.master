@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Masters/Navbar.Master" AutoEventWireup="true" CodeBehind="AdminDashboardMain.master.cs" Inherits="Vistas.AdminDashboardMain" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="main" runat="server">
+    <main class="main bg-dark-carbon">
+		<div class="dashboard-wrapper">
+			<div class="analytics-main-wrapper">
+				<h1>Dashboard administrador</h1>
+				<div class="analytics-main bg-dark-carbon">
+					<div class="analytics-box">
+						<aside class="analytics-icon">
+							<i class="fa-solid fa-user big text-glow-pink"></i>
+						</aside>
+						<div class="analytics-description">
+							<p class="analytics-name">Usuarios</p>
+							<p class="analytics-number"><asp:Label runat="server" ID="lblUsuariosStat"></asp:Label></p>
+						</div>
+					</div>
+					<div class="analytics-box">
+						<aside class="analytics-icon">
+							<i class="fa-solid fa-gamepad big text-glow-orange"></i>
+						</aside>
+						<div class="analytics-description">
+							<p class="analytics-name">Juegos</p>
+							<p class="analytics-number"><asp:Label runat="server" ID="lblJuegosStat"></asp:Label></p>
+						</div>
+					</div>
+					<div class="analytics-box">
+						<aside class="analytics-icon">
+							<i class="fa-solid fa-star-half-stroke big text-glow-cyan"></i>
+						</aside>
+						<div class="analytics-description">
+							<p class="analytics-name">Reviews</p>
+							<p class="analytics-number"><asp:Label runat="server" ID="lblOpinionesStat"></asp:Label></p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="selection bg-dark-carbon">
+				<h1 class="selection-heading">Administrar</h1>
+				<div class="search-selection-wrapper">
+					<div class="search-selection">
+						<a class="btn-game" href="../AdminDashboard/JuegosDashboard.aspx">
+							<i class="fa-solid fa-gamepad big"></i>
+							<p>Juegos</p>
+						</a>
+					</div>
+					<div class="search-selection">
+						<a class="btn-user" href="../AdminDashboard/UsuariosDashboard.aspx">
+							<i class="fa-solid fa-user big"></i>
+							<p>Usuarios</p>
+						</a>
+					</div>
+					<div class="search-selection">
+						<a class="btn-store" href="../AdminDashboard/TiendasDashboard.aspx">
+							<i class="fa-solid fa-cart-arrow-down big"></i>
+							<p>Tiendas</p>
+						</a>
+					</div>
+					<div class="search-selection">
+						<a class="btn-category" href="../AdminDashboard/CategoriasDashboard.aspx">
+							<i class="fa-solid fa-list big"></i>
+							<p>Categorias</p>
+						</a>
+					</div>
+				</div>
+				<asp:ScriptManager ID="ScriptManager" runat="server" />
+				<asp:UpdatePanel ID="updatepanel" runat="server">
+					<ContentTemplate>
+						<asp:ContentPlaceHolder ID="adminDashboardContent" runat="server"></asp:ContentPlaceHolder>
+					</ContentTemplate>
+				</asp:UpdatePanel>
+            </div>
+		</div>
+	</main>
+</asp:Content>

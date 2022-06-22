@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NestedUserDashboard.master" AutoEventWireup="true" CodeBehind="UserDashboardReviews.aspx.cs" Inherits="Vistas.UserDashboardReviews" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/NestedUserDashboard.master" AutoEventWireup="true" CodeBehind="UserDashboardReviews.aspx.cs" Inherits="Vistas.UserDashboardReviews" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="panelContent" runat="server">
     <script>
         /*Poner numero de articulos a generar*/

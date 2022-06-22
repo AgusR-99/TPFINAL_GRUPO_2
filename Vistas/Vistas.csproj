@@ -65,7 +65,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AdminDashboard.aspx" />
+    <Content Include="AdminDashboard\CategoriasDashboard.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="Imagenes\nuevos.jpg" />
     <Content Include="Imagenes\placeholder-image.jpg" />
@@ -73,25 +73,35 @@
     <Content Include="Imagenes\proximos.png" />
     <Content Include="Imagenes\seamless.png" />
     <Content Include="Imagenes\welcome.png" />
+    <Content Include="AdminDashboard\JuegosDashboard.aspx" />
     <Content Include="Listado.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="normalize.css" />
     <Content Include="SignUp.aspx" />
     <Content Include="SignIn.aspx" />
     <Content Include="styles.css" />
+    <Content Include="AdminDashboard\TiendasDashboard.aspx" />
     <Content Include="UserDashboardOptions.aspx" />
     <Content Include="UserDashboardReviews.aspx" />
     <Content Include="UserDashboardWatchlist.aspx" />
+    <Content Include="AdminDashboard\UsuariosDashboard.aspx" />
     <Content Include="Web.config" />
     <Content Include="Articulo.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdminDashboard.aspx.cs">
-      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+    <Compile Include="Masters\AdminDashboardMain.master.cs">
+      <DependentUpon>AdminDashboardMain.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminDashboard.aspx.designer.cs">
-      <DependentUpon>AdminDashboard.aspx</DependentUpon>
+    <Compile Include="Masters\AdminDashboardMain.master.designer.cs">
+      <DependentUpon>AdminDashboardMain.master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\CategoriasDashboard.aspx.cs">
+      <DependentUpon>CategoriasDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\CategoriasDashboard.aspx.designer.cs">
+      <DependentUpon>CategoriasDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
@@ -99,6 +109,13 @@
     </Compile>
     <Compile Include="Home.aspx.designer.cs">
       <DependentUpon>Home.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\JuegosDashboard.aspx.cs">
+      <DependentUpon>JuegosDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\JuegosDashboard.aspx.designer.cs">
+      <DependentUpon>JuegosDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Listado.aspx.cs">
       <DependentUpon>Listado.aspx</DependentUpon>
@@ -114,18 +131,18 @@
     <Compile Include="Logout.aspx.designer.cs">
       <DependentUpon>Logout.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MasterPage.Master.cs">
-      <DependentUpon>MasterPage.Master</DependentUpon>
+    <Compile Include="Masters\Navbar.Master.cs">
+      <DependentUpon>Navbar.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="MasterPage.Master.designer.cs">
-      <DependentUpon>MasterPage.Master</DependentUpon>
+    <Compile Include="Masters\Navbar.Master.designer.cs">
+      <DependentUpon>Navbar.Master</DependentUpon>
     </Compile>
-    <Compile Include="NestedUserDashboard.master.cs">
+    <Compile Include="Masters\NestedUserDashboard.master.cs">
       <DependentUpon>NestedUserDashboard.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="NestedUserDashboard.master.designer.cs">
+    <Compile Include="Masters\NestedUserDashboard.master.designer.cs">
       <DependentUpon>NestedUserDashboard.master</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,6 +159,13 @@
     </Compile>
     <Compile Include="SignIn.aspx.designer.cs">
       <DependentUpon>SignIn.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\TiendasDashboard.aspx.cs">
+      <DependentUpon>TiendasDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\TiendasDashboard.aspx.designer.cs">
+      <DependentUpon>TiendasDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="UserDashboardOptions.aspx.cs">
       <DependentUpon>UserDashboardOptions.aspx</DependentUpon>
@@ -171,10 +195,18 @@
     <Compile Include="Articulo.aspx.designer.cs">
       <DependentUpon>Articulo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminDashboard\UsuariosDashboard.aspx.cs">
+      <DependentUpon>UsuariosDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\UsuariosDashboard.aspx.designer.cs">
+      <DependentUpon>UsuariosDashboard.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MasterPage.Master" />
-    <Content Include="NestedUserDashboard.master" />
+    <Content Include="Masters\Navbar.Master" />
+    <Content Include="Masters\NestedUserDashboard.master" />
+    <Content Include="Masters\AdminDashboardMain.master" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -36,5 +36,10 @@ namespace Negocio
             if (String.IsNullOrWhiteSpace(juego.getDescripcion())) errorReasons.Add("El campo Descripcion no puede estar vacío");
             return errorReasons;
         }
+
+        public static DataSet ObtenerCantidadJuegos()
+        {
+            return DAOJuego.ObtenerCantidadJuegos();
+        }
     }
 }

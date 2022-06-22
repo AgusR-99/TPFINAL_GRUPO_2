@@ -169,6 +169,10 @@ main {
     transition: text-shadow 250ms, color 250ms ease-in-out;
 }
 
+.invisibility {
+    visibility: hidden;
+}
+
 .neon {
     font-family: neon;
     color: #FB4264;
@@ -836,8 +840,9 @@ main {
     z-index:3;
 }
 
-.search-selection > button {
+.search-selection-wrapper a {
     background-color: transparent;
+    text-decoration: none;
     border: none;
     color: white;
 }
@@ -1040,6 +1045,31 @@ main {
 
 .review-bottom .form-control{
     max-width: 60px;
+}
+
+.grd{
+    outline: none;
+    border: none;
+}
+
+.grd td, th {
+    padding: 10px;
+}
+
+.grd-footer {
+    background-color: var(--clr-dark-carbon-l);
+}
+
+
+.grd-pager a {
+    background-color: Transparent;
+    padding: 5px 5px 5px 5px;
+    text-decoration: none;
+}
+
+.grd-pager a:hover {
+    background-color: #000;
+    color: #fff;
 }
 
 @media only screen and (max-width: 768px) {

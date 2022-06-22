@@ -11,88 +11,61 @@ namespace Vistas
 {
 
 
-    public partial class AdminDashboard
+    public partial class AdminDashboardMain
     {
 
         /// <summary>
-        /// lblNumberStat control.
+        /// lblUsuariosStat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNumberStat;
+        protected global::System.Web.UI.WebControls.Label lblUsuariosStat;
 
         /// <summary>
-        /// script1 control.
+        /// lblJuegosStat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager script1;
+        protected global::System.Web.UI.WebControls.Label lblJuegosStat;
 
         /// <summary>
-        /// Panel1 control.
+        /// lblOpinionesStat control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel Panel1;
+        protected global::System.Web.UI.WebControls.Label lblOpinionesStat;
 
         /// <summary>
-        /// lblMsg control.
+        /// ScriptManager control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMsg;
+        protected global::System.Web.UI.ScriptManager ScriptManager;
 
         /// <summary>
-        /// GridViewGames control.
+        /// updatepanel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewGames;
+        protected global::System.Web.UI.UpdatePanel updatepanel;
 
         /// <summary>
-        /// GridViewUsers control.
+        /// adminDashboardContent control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewUsers;
-
-        /// <summary>
-        /// GridViewStores control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewStores;
-
-        /// <summary>
-        /// txtSearchCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSearchCategory;
-
-        /// <summary>
-        /// GridViewCategories control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewCategories;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder adminDashboardContent;
     }
 }

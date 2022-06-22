@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Sign In" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Vistas.Home" %> <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
+﻿<%@ Page Title="Sign In" Language="C#" MasterPageFile="~/Masters/Navbar.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Vistas.Home" %> <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 	<main class="main bg-dark-carbon">
 		<div class="box-flex">

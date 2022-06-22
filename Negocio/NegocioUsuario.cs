@@ -68,5 +68,10 @@ namespace Negocio
             if (String.IsNullOrWhiteSpace(usuario.getEmail())) errorReasons.Add("El campo Email no puede estar vacío");
             return errorReasons;
         }
+
+        public static DataSet ObtenerCantidadUsuarios()
+        {
+            return DAOUsuario.ObtenerCantidadUsuarios();
+        }
     }
 }

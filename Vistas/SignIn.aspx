@@ -1,4 +1,4 @@
-﻿<%@ Page Title="Sign In" Language="C#" MasterPageFile="~/MasterPage.Master" AutoEventWireup="true" CodeBehind="SignIn.aspx.cs" Inherits="Vistas.SignIn" EnableEventValidation="false" %>
+﻿<%@ Page Title="Sign In" Language="C#" MasterPageFile="~/Masters/Navbar.Master" AutoEventWireup="true" CodeBehind="SignIn.aspx.cs" Inherits="Vistas.SignIn" EnableEventValidation="false" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">

@@ -67,5 +67,9 @@ namespace DAO
                 new SqlParameter("Activo", usuario.getActivo())
             };
         }
+        public static DataSet ObtenerCantidadUsuarios()
+        {
+            return DB.Query("[SP_Obtener_Cantidad_Usuarios]", isSP: true);
+        }
     }
 }

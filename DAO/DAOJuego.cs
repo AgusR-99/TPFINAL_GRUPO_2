@@ -33,5 +33,9 @@ namespace DAO
             };
         }
 
+        public static DataSet ObtenerCantidadJuegos()
+        {
+            return DB.Query("[SP_Obtener_Cantidad_Juegos]", isSP: true);
+        }
     }
 }

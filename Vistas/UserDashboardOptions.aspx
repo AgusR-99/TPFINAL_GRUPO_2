@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/NestedUserDashboard.master" AutoEventWireup="true" CodeBehind="UserDashboardOptions.aspx.cs" Inherits="Vistas.UserDashboardOptions" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/NestedUserDashboard.master" AutoEventWireup="true" CodeBehind="UserDashboardOptions.aspx.cs" Inherits="Vistas.UserDashboardOptions" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="panelContent" runat="server">
     <div class="panel-content-options">
         <section class="options-section">

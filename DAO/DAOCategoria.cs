@@ -16,8 +16,7 @@ namespace DAO
 
         public static DataSet ObtenerCategoriaSiguienteID()
         {
-            var foo = DB.Query("[SP_Categorias_Obtener_Siguiente_Id]", isSP: true);
-            return foo;
+            return DB.Query("[SP_Categorias_Obtener_Siguiente_Id]", isSP: true);
         }
 
         public static DataTable ListarCategoriasPorNombre(string nombre)
