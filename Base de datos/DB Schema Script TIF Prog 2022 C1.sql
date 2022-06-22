@@ -262,6 +262,28 @@ BEGIN
 END
 GO
 
+CREATE PROC SP_Categorias_Obtener_Por_Nombre
+	@Nombre varchar(30)
+AS
+BEGIN
+	SELECT * FROM Categorias
+	WHERE Nombre like '%' + @Nombre + '%'
+END
+GO
+
+CREATE PROC SP_Categorias_Obtener_Siguiente_Id
+AS
+BEGIN
+	SELECT
+  CASE
+    WHEN (SELECT
+        COUNT(1)
+      FROM Categorias) = 0 THEN 1
+    ELSE IDENT_CURRENT('Categorias') + 1
+  END AS Current_Identity;
+END
+GO
+
 CREATE PROCEDURE SP_Categorias_Obtener
 AS
 BEGIN
