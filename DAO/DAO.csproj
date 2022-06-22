@@ -45,6 +45,7 @@
     <Compile Include="DAODesarrollador.cs" />
     <Compile Include="DAOImagen.cs" />
     <Compile Include="DAOJuego.cs" />
+    <Compile Include="DAOJuegoXTienda.cs" />
     <Compile Include="DAOPlataforma.cs" />
     <Compile Include="DAOTienda.cs" />
     <Compile Include="DAOUsuario.cs" />

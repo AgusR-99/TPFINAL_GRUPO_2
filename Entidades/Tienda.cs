@@ -14,6 +14,10 @@ namespace Entidades
         private string URL_web;
         private bool Activo;
         
+        public Tienda(int id_Tienda)
+        {
+            ID_Tienda = id_Tienda;
+        }
         public Tienda(int id_Tienda, string nombre, string url_img, string url_web, bool activo)
         {
             ID_Tienda = id_Tienda;

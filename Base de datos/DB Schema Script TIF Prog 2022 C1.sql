@@ -222,7 +222,7 @@ CREATE PROC SP_Juegos_Obtener
 AS
 BEGIN
 	SELECT Juegos.IdJuego, IdDesarrollador, Nombre, Descripcion, Juegos.Activo, NombreArchivo as [imagen] 
-	FROM Juegos inner join JuegosImagenes on Juegos.IdJuego = JuegosImagenes.IdJuego
+	FROM Juegos left join JuegosImagenes on Juegos.IdJuego = JuegosImagenes.IdJuego
 END
 GO
 
@@ -387,6 +387,29 @@ BEGIN
 END
 GO
 
+CREATE PROC SP_JuegosXTiendas_Eliminar
+@IdJuego int,
+@IdTienda int
+AS
+BEGIN
+	DELETE FROM JuegosXTiendas
+	WHERE IdJuego=@IdJuego AND IdTienda=@IdTienda
+END
+GO
+
+CREATE PROC SP_JuegosXTiendas_Agregar
+@IdJuego int,
+@IdTienda int,
+@SitioWeb varchar(100),
+@Precio float,
+@PrecioRebajado float,
+@Activo bit
+AS
+BEGIN
+	INSERT INTO  JuegosXTiendas  (IdJuego, IdTienda, SitioWeb, Precio, PrecioRebajado, Activo)
+	VALUES (@IdJuego, @IdTienda, @SitioWeb, @Precio, @PrecioRebajado, @Activo)
+END
+GO
 
 CREATE PROC SP_Desarolladores_Actualizar
 	@IdDesarrollador int,
