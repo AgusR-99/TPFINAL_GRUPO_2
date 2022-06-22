@@ -30,9 +30,9 @@ namespace Negocio
             if (errorReasons.Any()) return errorReasons;
 
             int? resultadoActualizar = DAOCategoria.ActualizarCategoria(categoria);
-            if (resultadoActualizar == null) errorReasons.Add("Ocurrió un error al actualizar la base de datos");
-            if (resultadoActualizar == 0) errorReasons.Add("No se encontró el registro a actualizar");
-
+            if (resultadoActualizar == null) errorReasons.Add("Error al actualizar categoria: ocurrió un error al actualizar la base de datos");
+            if (resultadoActualizar == 0) errorReasons.Add("Error al actualizar categoria: no se encontró el registro a actualizar");
+            if (resultadoActualizar == -1) errorReasons.Add("Error al actualizar categoria: la categoria ya existe");
             return errorReasons;
         }
 
@@ -42,8 +42,9 @@ namespace Negocio
             if (errorReasons.Any()) return errorReasons;
 
             int? resultadoActualizar = DAOCategoria.AgregarCategoria(categoria);
-            if (resultadoActualizar == null) errorReasons.Add("Ocurrió un error al actualizar la base de datos");
-            if (resultadoActualizar == 0) errorReasons.Add("No se encontró el registro a actualizar");
+            if (resultadoActualizar == null) errorReasons.Add("Error al agregar categoria: ocurrió un error al actualizar la base de datos");
+            if (resultadoActualizar == 0) errorReasons.Add("Error al agregar categoria: no se encontró el registro a actualizar");
+            if (resultadoActualizar == -1) errorReasons.Add("Error al agregar categoria: la categoria ya existe");
 
             return errorReasons;
         }
@@ -51,7 +52,7 @@ namespace Negocio
         public static List<string> Validar(Categoria categoria)
         {
             var errorReasons = new List<string>();
-            if (String.IsNullOrWhiteSpace(categoria.Nombre)) errorReasons.Add("El campo Nombre no puede estar vacío");
+            if (String.IsNullOrWhiteSpace(categoria.Nombre)) errorReasons.Add("Error: el campo Nombre no puede estar vacío");
             return errorReasons;
         }
     }
