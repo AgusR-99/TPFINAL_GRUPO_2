@@ -25,6 +25,7 @@ namespace DAO
         {
             return new List<SqlParameter>()
             {
+                new SqlParameter("IDJuego", juego.getID()),
                 new SqlParameter("IDDesarrollador", juego.getIDDesarrollador()),
                 new SqlParameter("Nombre", juego.getNombre()),
                 new SqlParameter("Descripcion", juego.getDescripcion()),

@@ -201,6 +201,15 @@ BEGIN
 END
 GO
 
+
+CREATE PROC SP_Tiendas_Eliminar
+@IdTienda int
+AS
+BEGIN
+	DELETE FROM Tiendas WHERE IdTienda = @IdTienda
+END
+GO
+
 CREATE PROC SP_Usuarios_Obtener
 AS
 BEGIN
@@ -214,6 +223,21 @@ AS
 BEGIN
 	SELECT Juegos.IdJuego, IdDesarrollador, Nombre, Descripcion, Juegos.Activo, NombreArchivo as [imagen] 
 	FROM Juegos inner join JuegosImagenes on Juegos.IdJuego = JuegosImagenes.IdJuego
+END
+GO
+
+
+CREATE PROCEDURE SP_Juegos_Actualizar
+@IdJuego int,
+@IdDesarrollador int,
+@Nombre varchar(50),
+@Descripcion varchar(MAX),
+@Activo bit
+AS
+BEGIN
+UPDATE Juegos
+SET IdDesarrollador = @IdDesarrollador, Nombre = @Nombre, Descripcion = @Descripcion, Activo = @Activo
+WHERE IdJuego=@IdJuego
 END
 GO
 
@@ -291,3 +315,152 @@ BEGIN
 	FROM Categorias
 END
 GO
+
+CREATE PROCEDURE SP_Plataforma_Agregar
+@Nombre varchar(30),
+@NombreImagen varchar(50)
+AS
+BEGIN
+INSERT INTO Plataformas
+(
+Nombre,
+NombreImagen
+)
+VALUES(@Nombre, @NombreImagen)
+END
+GO
+
+CREATE PROCEDURE SP_Plataformas_Actualizar
+@IdPlataforma int,
+@Nombre varchar(30),
+@NombreImagen varchar(50)
+AS
+BEGIN
+UPDATE Plataformas
+SET Nombre=@Nombre, NombreImagen=@NombreImagen
+WHERE IdPlataforma=@IdPlataforma
+END
+GO
+
+CREATE PROCEDURE SP_Plataformas_Obtener
+AS
+BEGIN
+SELECT IdPlataforma AS [ID], Nombre AS [Plataforma], NombreImagen AS [Imagen] FROM Plataformas
+END
+GO
+
+CREATE PROCEDURE SP_Desarrolladores_Obtener
+AS
+BEGIN
+SELECT IdDesarrollador, NombreDesarrollador, SitioWeb, UbicacionSede, Historia FROM Desarrolladores
+END
+GO
+
+
+ALTER PROCEDURE SP_JuegosXTiendas_Obtener
+AS
+BEGIN
+	SELECT Juegos.Nombre AS Juego, Tiendas.Nombre AS Tienda, Juegos.IdJuego, Tiendas.IdTienda,
+	JuegosXTiendas.SitioWeb [URL], Precio, PrecioRebajado [Precio rebajado], JuegosXTiendas.Activo
+	FROM JuegosXTiendas
+	INNER JOIN Juegos ON JuegosXTiendas.IdJuego=Juegos.IdJuego
+	INNER JOIN Tiendas ON JuegosXTiendas.IdTienda=Tiendas.IdTienda
+END
+GO
+
+CREATE PROCEDURE SP_JuegosXTiendas_Actualizar
+@IdJuego int,
+@IdTienda int,
+@SitioWeb varchar(100),
+@Precio float,
+@PrecioRebajado float,
+@Activo bit
+AS
+BEGIN
+	UPDATE JuegosXTiendas
+	SET
+		SitioWeb=@SitioWeb,
+		Precio=@Precio,
+		PrecioRebajado=@PrecioRebajado,
+		Activo = @Activo
+	WHERE IdJuego=@IdJuego AND IdTienda=@IdTienda
+END
+GO
+
+
+CREATE PROC SP_Desarolladores_Actualizar
+	@IdDesarrollador int,
+	@Nombre varchar(50),
+	@SitioWeb varchar(100),
+	@UbicacionSede varchar(100),
+	@Historia varchar(100)
+AS
+BEGIN
+	UPDATE Desarrolladores
+	SET
+		NombreDesarrollador = @Nombre,
+		SitioWeb = @SitioWeb,
+		UbicacionSede = @UbicacionSede,
+		Historia = @Historia
+
+	WHERE
+		IdDesarrollador = @IdDesarrollador
+END
+GO
+
+CREATE PROC SP_Desarolladores_Agregar
+	@Nombre varchar(50),
+	@SitioWeb varchar(100),
+	@UbicacionSede varchar(100),
+	@Historia varchar(100)
+AS
+BEGIN
+	INSERT INTO Desarrolladores(NombreDesarrollador, SitioWeb, UbicacionSede, Historia)
+	VALUES (@Nombre, @SitioWeb, @UbicacionSede, @Historia)
+END
+GO
+
+CREATE PROCEDURE SP_Desarolladores_Obtener
+AS
+BEGIN
+	SELECT IdDesarrollador, NombreDesarrollador,  SitioWeb, UbicacionSede, Historia
+	FROM Desarrolladores
+END
+GO
+
+CREATE PROC SP_Imagenes_Actualizar
+	@IdJuego int,
+	@NombreArchivo varchar(50),
+	@Orden int,
+	@activo bit
+AS
+BEGIN
+	UPDATE JuegosImagenes
+	SET
+		nombreArchivo = @NombreArchivo,
+		Orden = @Orden,
+		activo = @activo
+
+	WHERE
+		IdJuego = @IdJuego
+END
+GO
+
+CREATE PROC SP_Imagenes_Agregar
+	@Nombre varchar(50),
+	@SitioWeb varchar(100),
+	@UbicacionSede varchar(100),
+	@Historia varchar(100)
+AS
+BEGIN
+	INSERT INTO Desarrolladores(NombreDesarrollador, SitioWeb, UbicacionSede, Historia)
+	VALUES (@Nombre, @SitioWeb, @UbicacionSede, @Historia)
+END
+GO
+
+CREATE PROCEDURE SP_Imagenes_Obtener
+AS
+BEGIN
+	SELECT IdJuego, NombreArchivo,  Orden, activo
+	FROM JuegosImagenes
+END

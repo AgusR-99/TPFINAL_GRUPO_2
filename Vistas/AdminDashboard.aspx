@@ -77,51 +77,75 @@
 					<input type="text" onkeyup="filter2(this, '<%=GridViewStores.ClientID %>')" class="form-control bg-dark text-light no-borders" id="txtSearchStore" placeholder="Buscar tienda">
 					<label for="floatingSearchStore" class="text-light">Buscar datos de tienda</label>
 				</div>
-				<asp:GridView ID="GridViewGames"
+				<asp:GridView 
+					ID="grd GridViewGames"
 					runat="server"
 					AutoGenerateEditButton="True"
-					CssClass="grd grd-games w-100 bg-dark-carbon ctrl-game"
-					AutoGenerateColumns="False">
-					<Columns>
-						<asp:TemplateField HeaderText="IDJuego">
-							<ItemTemplate>
-								<asp:Label ID="lblGVGamesIDJuego" runat="server" Text='<%# Bind("IdJuego") %>'>
-								</asp:Label>
-							</ItemTemplate>
-						</asp:TemplateField>
-						<asp:TemplateField HeaderText="IDDesarrollador">
-							<ItemTemplate>
-								<asp:Label ID="lblGVGamesIDDesarrollador" runat="server" Text='<%# Bind("IdDesarrollador") %>'>
-								</asp:Label>
-							</ItemTemplate>
-						</asp:TemplateField>
-						<asp:TemplateField HeaderText="Nombre">
-							<ItemTemplate>
-								<asp:Label ID="lblGVGamesNombre" runat="server" Text='<%# Bind("Nombre") %>'>
-								</asp:Label>
-							</ItemTemplate>
-						</asp:TemplateField>
-						<asp:TemplateField HeaderText="Descripcion">
-							<ItemTemplate>
-								<asp:Label ID="lblGVGamesDescripcion" runat="server" Text='<%# Bind("Descripcion") %>'>
-								</asp:Label>
-							</ItemTemplate>
-						</asp:TemplateField>
-						<asp:TemplateField HeaderText="Activo">
-							<ItemTemplate>
-								<asp:CheckBox ID="chkGVGamesImagen" runat="server" Checked='
-												<%# Bind("Activo") %>' Enabled="False" />
-							</ItemTemplate>
-						</asp:TemplateField>
-						<asp:TemplateField HeaderText="Imagen">
-							<ItemTemplate>
-								<asp:Label ID="lblGVGamesImagen" runat="server" Text='<%# Bind("imagen") %>'>
-								</asp:Label>
-							</ItemTemplate>
-						</asp:TemplateField>
-					</Columns>
-				</asp:GridView>
-				<asp:GridView ID="GridViewUsers"
+                    CssClass="grd-games w-100 bg-dark-carbon ctrl-game"
+					AutoGenerateColumns="False"
+					OnRowDataBound="GridViewGames_RowDataBound"
+					OnRowCancelingEdit="GridViewGames_RowCancelingEdit"
+					OnRowEditing="GridViewGames_RowEditing"
+					OnRowUpdating="GridViewGames_RowUpdating">
+                            <Columns>
+                          <asp:TemplateField HeaderText="IDJuego">
+                              <EditItemTemplate>
+                                  <asp:Label ID="lblGVGamesIDJuego" runat="server" Text='<%# Bind("IdJuego")%>'></asp:Label>
+                              </EditItemTemplate>
+                            <ItemTemplate>
+                              <asp:Label ID="lblGVGamesIDJuego" runat="server" Text='<%# Bind("IdJuego") %>'>
+                              </asp:Label>
+                            </ItemTemplate>
+                          </asp:TemplateField>
+                          <asp:TemplateField HeaderText="IDDesarrollador">
+                              <EditItemTemplate>
+                                  <asp:DropDownList ID="ddlGVGamesIDDesarrollador" runat="server">
+                                  </asp:DropDownList>
+                              </EditItemTemplate>
+                            <ItemTemplate>
+                              <asp:Label ID="lblGVGamesIDDesarrollador" runat="server" Text='<%# Bind("IdDesarrollador") %>'>
+                              </asp:Label>
+                            </ItemTemplate>
+                          </asp:TemplateField>
+                          <asp:TemplateField HeaderText="Nombre">
+                              <EditItemTemplate>
+                                  <asp:TextBox ID="txtGVGamesNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:TextBox>
+                              </EditItemTemplate>
+                            <ItemTemplate>
+                              <asp:Label ID="lblGVGamesNombre" runat="server" Text='<%# Bind("Nombre") %>'>
+                              </asp:Label>
+                            </ItemTemplate>
+                          </asp:TemplateField>
+                          <asp:TemplateField HeaderText="Descripcion">
+                              <EditItemTemplate>
+                                  <asp:TextBox ID="txtGVGamesDescripcion" runat="server" Text='<%# Bind("Descripcion") %>'></asp:TextBox>
+                              </EditItemTemplate>
+                            <ItemTemplate>
+                              <asp:Label ID="lblGVGamesDescripcion" runat="server" Text='<%# Bind("Descripcion") %>'>
+                              </asp:Label>
+                            </ItemTemplate>
+                          </asp:TemplateField>
+                          <asp:TemplateField HeaderText="Activo">
+                              <EditItemTemplate>
+                                  <asp:CheckBox ID="chkGVGamesActivo" runat="server" Checked='<%# Bind("Activo") %>' />
+                              </EditItemTemplate>
+                            <ItemTemplate>
+                              <asp:CheckBox ID="chkGVGamesImagen" runat="server" Checked='<%# Bind("Activo") %>' Enabled="False" />
+                            </ItemTemplate>
+                          </asp:TemplateField>
+                          <asp:TemplateField HeaderText="NombresImg">
+                              <EditItemTemplate>
+                                  <asp:TextBox ID="txtGVGamesImagen" runat="server" Text='<%# Bind("imagen") %>'></asp:TextBox>
+                              </EditItemTemplate>
+                            <ItemTemplate>
+                              <asp:Label ID="lblGVGamesImagen" runat="server" Text='<%# Bind("imagen") %>'>
+                              </asp:Label>
+                            </ItemTemplate>
+                          </asp:TemplateField>
+                        </Columns>
+                      </asp:GridView>
+				<asp:GridView
+					ID="grd GridViewUsers"
 					runat="server"
 					AutoGenerateEditButton="True"
 					CssClass="grd grd-user w-100 bg-dark-carbon ctrl-user"
@@ -178,7 +202,8 @@
 						</asp:TemplateField>
 					</Columns>
 				</asp:GridView>
-				<asp:GridView ID="GridViewStores"
+				<asp:GridView
+					ID="GridViewStores"
 					runat="server"
 					CssClass="grd grd-user w-100 bg-dark-carbon ctrl-store"
 					AutoGenerateEditButton="True"
@@ -248,7 +273,8 @@
 							</div>
 							<asp:Button runat="server" CssClass="btn btn-primary" text="Buscar" OnClick="BtnSearch_Click"></asp:Button>
 						</div>
-						<asp:GridView ID="GridViewCategories"
+						<asp:GridView
+							ID="GridViewCategories"
 							runat="server"
 							CssClass="grd grd-category w-100 bg-dark-carbon ctrl-category"
 							AutoGenerateColumns="False"
@@ -258,44 +284,72 @@
 							OnPageIndexChanging="grdCategoriesData_PageIndexChanging"
 							ShowFooter="true"
 							AllowPaging="true">
-							<Columns><%--1ra col - botones--%> <asp:TemplateField><%--Cosas del footer--%> <FooterTemplate>
+							<Columns>
+								<%--1ra col - botones--%>
+								<asp:TemplateField>
+									<%--Cosas del footer--%>
+									<FooterTemplate>
 										<asp:linkbutton id="btnInsert" CssClass="btn btn-primary" runat="server" commandname="Insert" text="Agregar" onclick="BtnInsert_Click" />
-									</FooterTemplate><%--Cosas del edit--%> <EditItemTemplate>
+									</FooterTemplate>
+									<%--Cosas del edit--%>
+									<EditItemTemplate>
 										<asp:linkbutton id="btnUpdate" CssClass="btn btn-outline-success" runat="server" commandname="Update" text="Update" />
 										<asp:linkbutton id="btnCancel" CssClass="btn btn-outline-warning" runat="server" commandname="Cancel" text="Cancel" />
-									</EditItemTemplate><%--Cosas de vista inicial--%> <ItemTemplate>
+									</EditItemTemplate>
+									<%--Cosas de vista inicial--%>
+									<ItemTemplate>
 										<asp:linkbutton id="btnEdit" CssClass="btn btn-outline-primary" runat="server" commandname="Edit" text="Edit" />
 									</ItemTemplate>
-								</asp:TemplateField><%--2da col - ID --%> <asp:TemplateField HeaderText="ID"><%--Cosas del edit--%> <EditItemTemplate>
+								</asp:TemplateField>
+								<%--2da col - ID --%>
+								<asp:TemplateField HeaderText="ID">
+									<%--Cosas del edit--%>
+									<EditItemTemplate>
+										<asp:Label ID="lblGVCategoriesID" runat="server" Text='<%# Eval("IdCategoria") %>'></asp:Label>
+									</EditItemTemplate>
+									<%--Cosas de vista inicial--%>
+									<ItemTemplate>
 										<asp:Label ID="lblGVCategoriesID" runat="server" Text='<%# Eval("IdCategoria") %>'>
 										</asp:Label>
-									</EditItemTemplate><%--Cosas de vista inicial--%> <ItemTemplate>
-										<asp:Label ID="lblGVCategoriesID" runat="server" Text='<%# Eval("IdCategoria") %>'>
-										</asp:Label>
-									</ItemTemplate><%--Cosas del footer--%> <FooterTemplate>
-										<asp:Label ID="lblGVCategoriesID" runat="server" Text='<%# ObtenerId() %>'>
-										</asp:Label>
+									</ItemTemplate>
+									<%--Cosas del footer--%>
+									<FooterTemplate>
+										<asp:Label ID="lblGVCategoriesID" runat="server" Text='<%# ObtenerId() %>'></asp:Label>
 									</FooterTemplate>
-								</asp:TemplateField><%--3ra col - Nombre categoria --%> <asp:TemplateField HeaderText="Categoria"><%--Cosas del edit--%> <EditItemTemplate>
+								</asp:TemplateField>
+								<%--3ra col - Nombre categoria --%>
+								<asp:TemplateField HeaderText="Categoria">
+									<%--Cosas del edit--%>
+									<EditItemTemplate>
 										<asp:TextBox ID="txtGVCategoriesName" runat="server" Text='<%# Eval("Nombre") %>'>
 										</asp:TextBox>
-									</EditItemTemplate><%--Cosas de vista inicial--%> <ItemTemplate>
-										<asp:Label ID="lblGVCategoriesName" runat="server" Text='<%# Eval("Nombre") %>'>
-										</asp:Label>
-									</ItemTemplate><%--Cosas del footer--%> <FooterTemplate>
-										<asp:TextBox ID="txtGVCategoriesName" runat="server" Text='<%# Eval("Nombre") %>'>
-										</asp:TextBox>
+									</EditItemTemplate>
+									<%--Cosas de vista inicial--%>
+									<ItemTemplate>
+										<asp:Label ID="lblGVCategoriesName" runat="server" Text='<%# Eval("Nombre") %>'></asp:Label>
+									</ItemTemplate>
+									<%--Cosas del footer--%>
+									<FooterTemplate>
+										<asp:TextBox ID="txtGVCategoriesName" runat="server" Text='<%# Eval("Nombre") %>'></asp:TextBox>
 									</FooterTemplate>
-								</asp:TemplateField><%--4ta col - Check si activo--%> <asp:TemplateField HeaderText="Activo"><%--Cosas del edit--%> <EditItemTemplate>
-										<asp:CheckBox ID="chkGVCategoriesActivo" runat="server" Checked='
-																					<%# Eval("Activo") %>' />
-									</EditItemTemplate><%--Cosas de vista inicial--%> <ItemTemplate>
-										<asp:CheckBox ID="chkGVCategoriesActivo" runat="server" Checked='
-																						<%# Eval("Activo") %>' Enabled="False" />
-									</ItemTemplate><%--Cosas del footer--%> <FooterTemplate>
+								</asp:TemplateField>
+								<%--4ta col - Check si activo--%>
+								<asp:TemplateField HeaderText="Activo">
+									<%--Cosas del edit--%>
+									<EditItemTemplate>
+										<asp:CheckBox ID="chkGVCategoriesActivo" runat="server" Checked='<%# Eval("Activo") %>' />
+									</EditItemTemplate>
+									<%--Cosas de vista inicial--%>
+									<ItemTemplate>
+										<asp:CheckBox ID="chkGVCategoriesActivo" runat="server" Checked='<%# Eval("Activo") %>' Enabled="False" />
+									</ItemTemplate>
+									<%--Cosas del footer--%>
+									<FooterTemplate>
 										<asp:CheckBox ID="chkGVCategoriesActivo" runat="server" />
 									</FooterTemplate>
-								</asp:TemplateField><%--5ta col - Boton delete--%> <asp:TemplateField>
+								</asp:TemplateField>
+								<%--5ta col - Boton delete--%>
+								<asp:TemplateField>
 									<EditItemTemplate>
 										<asp:linkbutton id="btnDelete" CssClass="btn btn-outline-danger" runat="server" commandname="Delete" text="Delete" />
 									</EditItemTemplate>
@@ -336,6 +390,7 @@
 			foo(active);
 		});
 		// Re-bind para callbacks 
+		// Necesita mas pruebas 
 		var prm = Sys.WebForms.PageRequestManager.getInstance();
 		// Sin esto se actualiza el panel-update de los gridviews sin que se ejecute el jquery correspondiente, provocando que no se oculten
 		prm.add_endRequest(function() {
@@ -355,4 +410,31 @@
 			for (let other of others) $(`.icon-jquery-${other}`).removeClass('sign-red text-light');
 		}
 	</script>
+	<script>
+		// Deprecado, usar searchbar o crear un datatable/gridview con jquery
+        $(function () {
+            $("#<%=txtSearchCategory.ClientID %>").on("input", function () {
+                filter2(this, '<%=GridViewCategories.ClientID %>');
+                console.log("call");
+            });
+        });
+        function filter2(phrase, id) {
+            var words = phrase.value.toLowerCase().split(" ");
+            var table = document.getElementById(id);
+            var ele;
+            for (var r = 1; r < table.rows.length; r++) {
+                ele = table.rows[r].innerHTML.replace(/<[^>]+>/g, "");
+                var displayStyle = 'none';
+                for (var i = 0; i < words.length; i++) {
+                    if (ele.toLowerCase().indexOf(words[i]) >= 0)
+                        displayStyle = '';
+                    else {
+                        displayStyle = 'none';
+                        break;
+                    }
+                }
+                table.rows[r].style.display = displayStyle;
+            }
+        }
+    </script>
 </asp:Content>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    class Plataforma
+    public class Plataforma
     {
         private int ID_Plataforma;
         private string Nombre;
