@@ -137,7 +137,7 @@
                               <asp:CheckBox ID="chkGVGamesImagen" runat="server" Checked='<%# Bind("Activo") %>' Enabled="False" />
                             </ItemTemplate>
                           </asp:TemplateField>
-                          <asp:TemplateField HeaderText="Imagen">
+                          <asp:TemplateField HeaderText="NombresImg">
                               <EditItemTemplate>
                                   <asp:TextBox ID="txtGVGamesImagen" runat="server" Text='<%# Bind("imagen") %>'></asp:TextBox>
                               </EditItemTemplate>

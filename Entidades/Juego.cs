@@ -14,7 +14,7 @@ namespace Entidades
         private string Descripcion;
         private bool Activo;
 
-        public Juego(int idjuego, int iddesarrollador, string nombre, string descripcion, bool activo = true) 
+        public Juego(int idjuego, int iddesarrollador, string nombre, string descripcion, bool activo) 
         {
             ID = idjuego;
             ID_Desarrollador = iddesarrollador;

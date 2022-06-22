@@ -122,39 +122,39 @@ namespace Vistas
         {
             GridViewGames.EditIndex = e.NewEditIndex;
             CargarJuegos();
-            Active = "games";
+            Active = "game";
         }
 
         protected void GridViewGames_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             GridViewGames.EditIndex = -1;
             CargarJuegos();
-            Active = "games";
+            Active = "game";
         }
 
         protected void GridViewGames_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             var editedRow = GridViewGames.Rows[e.RowIndex];
             Juego juego = new Juego(
-                    Convert.ToInt32((((Label)editedRow.FindControl("lblGVgamesIDJuego")).Text)),
-                    Convert.ToInt32((((DropDownList)editedRow.FindControl("ddlGVgamesIDDesarollador")).SelectedValue)),
-                    ((TextBox)editedRow.FindControl("txtGVgamesNombre")).Text,
-                    ((TextBox)editedRow.FindControl("lblGVgamesDescripcion")).Text,
-                    ((CheckBox)editedRow.FindControl("chkGVgamesActivo")).Checked
-                );
+                    Convert.ToInt32((((Label)editedRow.FindControl("lblGVGamesIDJuego")).Text)),
+                    Convert.ToInt32((((DropDownList)editedRow.FindControl("ddlGVGamesIDDesarrollador")).SelectedValue)),
+                    ((TextBox)editedRow.FindControl("txtGVGamesNombre")).Text,
+                    ((TextBox)editedRow.FindControl("txtGVGamesDescripcion")).Text,
+                    ((CheckBox)editedRow.FindControl("chkGVGamesActivo")).Checked
+                   );
             var erroresActualizar = NegocioJuego.ActualizarJuego(juego);
             if (erroresActualizar.Any())
             {
                 foreach (string msg in erroresActualizar)
                     lblMsg.Text += msg + "<br>";
-                lblMsg.Visible = true;
+                    lblMsg.Visible = true;
             }
             else
             {
                 GridViewGames.EditIndex = -1;
                 CargarJuegos();
             }
-            Active = "games";
+            Active = "game";
         }
 
         protected void GridViewUsers_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
