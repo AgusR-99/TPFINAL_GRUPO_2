@@ -36,9 +36,25 @@ CREATE TABLE Plataformas
 (
 	IdPlataforma int IDENTITY(1,1) NOT NULL,
 	Nombre varchar(30) NOT NULL,
-	NombreImagen varchar(50) NULL,
+	Activo bit NOT NULL
 	CONSTRAINT PK_Plataformas PRIMARY KEY (IdPlataforma)
 )
+
+INSERT INTO Plataformas
+(
+Nombre,
+Activo
+)
+VALUES('Play Station',1)
+GO
+
+INSERT INTO Plataformas
+(
+Nombre,
+Activo
+)
+VALUES('XBOX',1)
+GO
 
 CREATE TABLE Categorias
 (
@@ -347,38 +363,72 @@ BEGIN
 END
 GO
 
+
 CREATE PROCEDURE SP_Plataforma_Agregar
 @Nombre varchar(30),
-@NombreImagen varchar(50)
+@Activo bit
 AS
+BEGIN
+IF NOT EXISTS(SELECT * FROM Plataformas WHERE @Nombre like nombre)
 BEGIN
 INSERT INTO Plataformas
 (
 Nombre,
-NombreImagen
+Activo
 )
-VALUES(@Nombre, @NombreImagen)
+VALUES(@Nombre, @Activo)
+END
+ELSE RETURN -1
 END
 GO
 
 CREATE PROCEDURE SP_Plataformas_Actualizar
 @IdPlataforma int,
 @Nombre varchar(30),
-@NombreImagen varchar(50)
+@Activo bit
 AS
 BEGIN
+IF NOT EXISTS (SELECT * FROM PLATAFORMAS WHERE @Nombre LIKE Nombre) OR @Activo NOT LIKE (SELECT Activo FROM Plataformas WHERE IdPlataforma LIKE @IdPlataforma)
+BEGIN
 UPDATE Plataformas
-SET Nombre=@Nombre, NombreImagen=@NombreImagen
+SET Nombre=@Nombre, Activo=@Activo
 WHERE IdPlataforma=@IdPlataforma
+RETURN @@ROWCOUNT;
+END
+ELSE RETURN -1
 END
 GO
 
 CREATE PROCEDURE SP_Plataformas_Obtener
 AS
 BEGIN
-SELECT IdPlataforma AS [ID], Nombre AS [Plataforma], NombreImagen AS [Imagen] FROM Plataformas
+SELECT IdPlataforma, Nombre, Activo
+FROM Plataformas
 END
 GO
+
+CREATE PROCEDURE SP_Plataformas_Obtener_Por_Nombre
+	@Nombre varchar(30)
+AS
+BEGIN
+	SELECT * FROM Plataformas
+	WHERE Nombre like '%' + @Nombre + '%'
+END
+GO
+
+CREATE PROCEDURE SP_Plataformas_Obtener_Siguiente_Id
+AS
+BEGIN
+	SELECT
+  CASE
+    WHEN (SELECT
+        COUNT(1)
+      FROM Plataformas) = 0 THEN 1
+    ELSE IDENT_CURRENT('Plataformas') + 1
+  END AS Current_Identity;
+END
+GO
+
 
 CREATE PROCEDURE SP_Desarrolladores_Obtener
 AS
