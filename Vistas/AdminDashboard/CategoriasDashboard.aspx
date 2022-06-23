@@ -10,7 +10,7 @@
         <asp:Button runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="BtnSearch_Click"></asp:Button>
     </div>
     <asp:GridView
-        ID="GridViewCategories"
+        ID="GVCategories"
         runat="server"
         CssClass="grd grd-category w-100 bg-dark-carbon ctrl-category"
         PagerStyle-CssClass="grd-pager"
@@ -25,10 +25,6 @@
         <Columns>
             <%--1ra col - botones--%>
             <asp:TemplateField>
-                <%--Cosas del footer--%>
-                <FooterTemplate>
-                    <asp:LinkButton ID="btnInsert" CssClass="btn btn-primary" runat="server" CommandName="Insert" Text="Agregar" OnClick="BtnInsert_Click" />
-                </FooterTemplate>
                 <%--Cosas del edit--%>
                 <EditItemTemplate>
                     <asp:LinkButton ID="btnUpdate" CssClass="btn btn-outline-success" runat="server" CommandName="Update" Text="Actualizar" OnClientClick="return confirm('¿Esta seguro que desea actualizar la fila?')" />
@@ -50,10 +46,6 @@
                     <asp:Label ID="lblGVCategoriesID" runat="server" Text='<%# Eval("IdCategoria") %>'>
                     </asp:Label>
                 </ItemTemplate>
-                <%--Cosas del footer--%>
-                <FooterTemplate>
-                    <asp:Label ID="lblGVCategoriesID" runat="server" Text='<%# ObtenerId()%>'></asp:Label>
-                </FooterTemplate>
             </asp:TemplateField>
             <%--3ra col - Nombre categoria --%>
             <asp:TemplateField HeaderText="Categoria">
@@ -66,10 +58,6 @@
                 <ItemTemplate>
                     <asp:Label ID="lblGVCategoriesName" runat="server" Text='<%# Eval("Nombre") %>'></asp:Label>
                 </ItemTemplate>
-                <%--Cosas del footer--%>
-                <FooterTemplate>
-                    <asp:TextBox ID="txtGVCategoriesName" runat="server" Text='<%# Eval("Nombre") %>'></asp:TextBox>
-                </FooterTemplate>
             </asp:TemplateField>
             <%--4ta col - Check si activo--%>
             <asp:TemplateField HeaderText="Activo">
@@ -81,11 +69,24 @@
                 <ItemTemplate>
                     <asp:CheckBox ID="chkGVCategoriesActivo" runat="server" Checked='<%# Eval("Activo") %>' Enabled="False" />
                 </ItemTemplate>
-                <%--Cosas del footer--%>
-                <FooterTemplate>
-                    <asp:CheckBox ID="chkGVCategoriesActivo" runat="server" />
-                </FooterTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <div class="grd-control-wrapper d-flex justify-content-evenly">
+        <div class="grd-control">
+            <asp:LinkButton ID="btnInsert" CssClass="btn btn-primary" runat="server" CommandName="Insert" Text="Agregar" OnClick="BtnInsert_Click" />
+        </div>
+        <div class="grd-control">
+            <span><strong>ID</strong></span>
+            <asp:Label ID="lblGVCategoriesID" runat="server" Text=''></asp:Label>
+        </div>
+        <div class="grd-control">
+            <span><strong>Categoria</strong></span>
+            <asp:TextBox ID="txtGVCategoriesName" runat="server" Text='<%# Eval("Nombre") %>'></asp:TextBox>
+        </div>
+        <div class="grd-control">
+            <span><strong>Activo</strong></span>
+            <asp:CheckBox ID="chkGVCategoriesActivo" runat="server" checked="true"/>
+        </div>
+    </div>
 </asp:Content>
