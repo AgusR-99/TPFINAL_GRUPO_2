@@ -19,8 +19,8 @@
         OnRowEditing="Plataform_RowEditing"
         OnRowUpdating="Plataform_RowUpdating"
         OnPageIndexChanging="grdPlataformsData_PageIndexChanging"
-        ShowFooter="true"
-        AllowPaging="true">
+        ShowFooter="True"
+        AllowPaging="True">
         <Columns>
             <%--1ra col - botones--%>
             <asp:TemplateField>
@@ -38,16 +38,15 @@
             <asp:TemplateField HeaderText="ID">
                 <%--Cosas del edit--%>
                 <EditItemTemplate>
-                    <asp:Label ID="lblGVPlataformID" runat="server" Text='<%# Eval("IdCategoria") %>'></asp:Label>
+                    <asp:Label ID="lblGVPlataformID" runat="server" Text='<%# Eval("IdPlataforma") %>'></asp:Label>
                 </EditItemTemplate>
                 <%--Cosas de vista inicial--%>
                 <ItemTemplate>
-                    <asp:Label ID="lblGVPlataformID" runat="server" Text='<%# Eval("IdCategoria") %>'>
-                    </asp:Label>
+                    <asp:Label ID="lblGVPlataformID" runat="server" Text='<%# Eval("IdPlataforma") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <%--3ra col - Nombre plataforma --%>
-            <asp:TemplateField HeaderText="Categoria">
+            <asp:TemplateField HeaderText="Plataforma">
                 <%--Cosas del edit--%>
                 <EditItemTemplate>
                     <asp:TextBox ID="txtGVPlataformName" runat="server" Text='<%# Eval("Nombre") %>'>
@@ -70,6 +69,10 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
+
+<FooterStyle CssClass="grd-footer"></FooterStyle>
+
+<PagerStyle CssClass="grd-pager"></PagerStyle>
     </asp:GridView>
     <div class="grd-control-wrapper d-flex justify-content-evenly">
         <div class="grd-control">

@@ -20,25 +20,28 @@ namespace Vistas
         }
         protected void CargarPlataformas()
         {
-            var dt = NegocioPlataformas.ListarPlataformas();
+            var dt = NegocioPlataforma.ListarPlataformas();
             GVPlataform.DataSource = dt;
             Session["PlataformasSession"] = dt;
             GVPlataform.DataBind();
-            ObtenerId();
+            ObtenerIdPlataforma();
         }
+
+        
+
         protected void BtnInsert_Click(Object sender, EventArgs e)
         {
             var foo = Convert.ToInt32(lblGVPlataformID.Text);
             var bar = txtGVPlataformName.Text;
             var fooo = chkGVPlataformActivo.Checked;
-            Categoria categoria = new Categoria(
+            Plataforma plataforma = new Plataforma(
                 foo,
                 bar,
                 fooo
                 );
 
-            var erroresAgregar = NegocioPlataformas.AgregarCategoria(categoria);
-            if (erroresAgregar != "") Msg(erroresAgregar);
+            var erroresAgregar = NegocioPlataforma.AgregarPlataforma(plataforma);
+            if (erroresAgregar.Any()) Msg(erroresAgregar);
             else
             {
                 lblMsg.Text = "Registro agregado con exito";
@@ -49,10 +52,17 @@ namespace Vistas
             }
         }
 
-        protected void grdPlataformData_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void grdPlataformsData_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GVPlataform.PageIndex = e.NewPageIndex;
             CargarPlataformas();
+        }
+
+        protected void ObtenerIdPlataforma()
+        {
+            var ds = NegocioPlataforma.ObtenerPlataformaSiguienteID();
+            lblGVPlataformID.Text = ds.Tables[0].Rows[0][0].ToString();
+             
         }
 
         protected void Plataform_RowEditing(object sender, GridViewEditEventArgs e)
@@ -74,16 +84,16 @@ namespace Vistas
         protected void Plataform_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             var editedRow = GVPlataform.Rows[e.RowIndex];
-            Categoria categoria = new Categoria(
+            Plataforma plataforma = new Plataforma(
                     Convert.ToInt32(((Label)editedRow.FindControl("lblGVPlataformID")).Text),
                     ((TextBox)editedRow.FindControl("txtGVPlataformName")).Text,
                     ((CheckBox)editedRow.FindControl("chkGVPlataformActivo")).Checked
                 );
-            var erroresActualizar = NegocioPlataformas.ActualizarCategoria(categoria);
-            if (erroresActualizar != "") Msg(erroresActualizar);
+            var erroresActualizar = NegocioPlataforma.ActualizarPlataforma(plataforma);
+            if (erroresActualizar.Any()) Msg(erroresActualizar);
             else
             {
-                Msg("Registro modificado exitosamente");
+                lblMsg.Text= "Registro modificado exitosamente";
                 txtSearchPlataform.Text = "";
                 GVPlataform.EditIndex = -1;
                 CargarPlataformas();
@@ -92,15 +102,15 @@ namespace Vistas
 
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
-            var dt = NegocioPlataformas.ListarPlataformasPorNombre(txtSearchPlataform.Text);
+            var dt = NegocioPlataforma.ListarPlataformasPorNombre(txtSearchPlataform.Text);
             GVPlataform.DataSource = dt;
             Session["PlataformasSession"] = dt;
             GVPlataform.DataBind();
         }
 
-        protected void Msg(string msg)
+        protected void Msg(List<string> msg)
         {
-            lblMsg.Text = msg;
+            lblMsg.Text = msg.ToString();
         }
     }
 }
