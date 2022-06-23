@@ -179,10 +179,16 @@ END
 GO
  
 CREATE PROC SP_Tiendas_Obtener
+@filtro varchar(100) = null
 AS
 BEGIN
-	SELECT IdTienda as [ID], Nombre as [Tienda], RutaImagen as Imagen, SitioWeb as [Sitio Web], Activo
-	FROM Tiendas
+	if @filtro is null
+		SELECT IdTienda as [ID], Nombre as [Tienda], RutaImagen as Imagen, SitioWeb as [Sitio Web], Activo
+		FROM Tiendas
+	else
+		SELECT IdTienda as [ID], Nombre as [Tienda], RutaImagen as Imagen, SitioWeb as [Sitio Web], Activo
+		FROM Tiendas
+		WHERE Nombre like '%'+@filtro+'%' or SitioWeb like '%'+@filtro+'%' 
 END
 GO
 
@@ -439,13 +445,25 @@ GO
 
 
 CREATE PROCEDURE SP_JuegosXTiendas_Obtener
+@filtro varchar(100) = null
 AS
 BEGIN
-	SELECT Juegos.Nombre AS Juego, Tiendas.Nombre AS Tienda, Juegos.IdJuego, Tiendas.IdTienda,
-	JuegosXTiendas.SitioWeb [URL], Precio, PrecioRebajado [Precio rebajado], JuegosXTiendas.Activo
-	FROM JuegosXTiendas
-	INNER JOIN Juegos ON JuegosXTiendas.IdJuego=Juegos.IdJuego
-	INNER JOIN Tiendas ON JuegosXTiendas.IdTienda=Tiendas.IdTienda
+	IF @filtro IS NULL
+		SELECT Juegos.Nombre AS Juego, Tiendas.Nombre AS Tienda, Juegos.IdJuego, Tiendas.IdTienda,
+		JuegosXTiendas.SitioWeb [URL], Precio, PrecioRebajado [Precio rebajado], JuegosXTiendas.Activo
+		FROM JuegosXTiendas
+		INNER JOIN Juegos ON JuegosXTiendas.IdJuego=Juegos.IdJuego
+		INNER JOIN Tiendas ON JuegosXTiendas.IdTienda=Tiendas.IdTienda
+	ELSE
+		SELECT Juegos.Nombre AS Juego, Tiendas.Nombre AS Tienda, Juegos.IdJuego, Tiendas.IdTienda,
+		JuegosXTiendas.SitioWeb [URL], Precio, PrecioRebajado [Precio rebajado], JuegosXTiendas.Activo
+		FROM JuegosXTiendas
+		INNER JOIN Juegos ON JuegosXTiendas.IdJuego=Juegos.IdJuego
+		INNER JOIN Tiendas ON JuegosXTiendas.IdTienda=Tiendas.IdTienda
+		WHERE 
+			Juegos.Nombre LIKE '%'+@filtro+'%' OR
+			Tiendas.Nombre LIKE '%'+@filtro+'%' OR
+			JuegosXTiendas.SitioWeb LIKE '%'+@filtro+'%'
 END
 GO
 

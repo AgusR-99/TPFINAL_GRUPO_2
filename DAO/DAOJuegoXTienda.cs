@@ -9,9 +9,12 @@ namespace DAO
 {
     public static class DAOJuegoXTienda
     {
-        public static DataTable ListarJuegosXTiendas()
+        public static DataTable ListarJuegosXTiendas(string filtro)
         {
-            return DB.ObtenerTabla("JuegosXTiendas", "[SP_JuegosXTiendas_Obtener]", isSP: true);
+            var parametros = new List<SqlParameter>();
+            if (filtro != null)
+                parametros.Add(new SqlParameter("filtro", filtro));
+            return DB.ObtenerTabla("JuegosXTiendas", "[SP_JuegosXTiendas_Obtener]", parametros, true);
         }
 
         public static int? ActualizarJuegoXTienda(Juego_x_Tienda jxt)

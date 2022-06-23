@@ -8,9 +8,13 @@ namespace DAO
 {
     public static class DAOTienda
     {
-        public static DataTable ListarTiendas()
+        public static DataTable ListarTiendas(string filtro)
         {
-            return DB.ObtenerTabla("Tiendas","[SP_Tiendas_Obtener]", isSP: true);
+            var parametros = new List<SqlParameter>();
+            if (filtro!=null)
+                parametros.Add(new SqlParameter("filtro", filtro));
+
+            return DB.ObtenerTabla("Tiendas","[SP_Tiendas_Obtener]", parametros, true);
         }
 
         public static int? ActualizarTienda(Tienda tienda)

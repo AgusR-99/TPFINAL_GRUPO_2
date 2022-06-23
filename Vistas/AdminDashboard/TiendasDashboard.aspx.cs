@@ -22,15 +22,34 @@ namespace Vistas
 
         protected void CargarTiendas()
         {
-
-            var tablaTiendas = NegocioTienda.ListarTiendas();
+            var tablaTiendas = NegocioTienda.ListarTiendas(txtSearchStores.Text);
             GridViewStores.DataSource = tablaTiendas;
+            GridViewStores.DataBind();
+        }
+
+        protected void SetEditingIndexById(string editingId)
+        {
+            var table = ((DataTable)GridViewStores.DataSource);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                string id = table.Rows[i]["ID"].ToString();
+                if (id == editingId)
+                {
+                    GridViewStores.PageIndex = i / GridViewStores.PageSize;
+                    GridViewStores.EditIndex = i % GridViewStores.PageSize;
+                    GridViewStores.DataBind();
+                    return;
+                }
+            }
+            GridViewStores.EditIndex = -1;
             GridViewStores.DataBind();
         }
 
         protected void TiendaEdit(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
-            GridViewStores.EditIndex = e.NewEditIndex;
+            var editingId = ((Label)GridViewStores.Rows[e.NewEditIndex].FindControl("lblGVStoresID")).Text;
+            BtnClearSearch_Click(null, null);
+            SetEditingIndexById(editingId);
             CargarTiendas();
         }
 
@@ -92,9 +111,21 @@ namespace Vistas
             ((Label)addingRow.FindControl("lblGVStoresID")).Text = "#";
         }
 
-        protected void BtnSearch_Click(Object sender, EventArgs e)
+        protected void BtnSearch_Click(object sender, EventArgs e)
         {
             // Logica para buscar
+            GridViewStores.EditIndex = -1;
+            GridViewStores.PageIndex = 0;
+            CargarTiendas();
+        }
+
+        protected void BtnClearSearch_Click(object sender, EventArgs e)
+        {
+            // Logica para buscar
+            GridViewStores.EditIndex = -1;
+            GridViewStores.PageIndex = 0;
+            txtSearchStores.Text = "";
+            CargarTiendas();
         }
 
         protected void btnStoreAgregar_Click(object sender, EventArgs e)
@@ -112,6 +143,13 @@ namespace Vistas
                 //Mensaje exitoso
                 CargarTiendas();
             }
+        }
+
+        protected void GridViewStores_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewStores.EditIndex = -1;
+            GridViewStores.PageIndex = e.NewPageIndex;
+            CargarTiendas();
         }
     }
 }

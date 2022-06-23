@@ -2,9 +2,12 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="adminDashboardContent" runat="server">
     <%-- Aca van mensajes --%>
     <asp:Label ID="lblMsg" runat="server"></asp:Label>
-    <div class="form-floating ctrl-store">
-        <input type="text" class="form-control bg-dark text-light no-borders" id="txtSearchStore" placeholder="Buscar tienda">
-        <label for="floatingSearchStore" class="text-light">Buscar datos de tienda</label>
+    <div class="input-group input-cat">
+        <div class="form-outline">
+            <asp:TextBox runat="server" class="form-control bg-dark text-light no-borders" ID="txtSearchStores" placeholder="Buscar Tiendas"></asp:TextBox>
+        </div>
+        <asp:Button runat="server" CssClass="btn btn-secondary" Text="Limpiar" OnClick="BtnClearSearch_Click"></asp:Button>
+        <asp:Button runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="BtnSearch_Click"></asp:Button>
     </div>
     <asp:GridView
         ID="GridViewStores"
@@ -13,9 +16,11 @@
         AutoGenerateEditButton="True"
         DataKeyNames="Id"
         AutoGenerateColumns="False"
+        AllowPaging="true"
         OnRowEditing="TiendaEdit"
         OnRowCancelingEdit="TiendaCancelEdit"
-        OnRowUpdating="TiendaUpdate">
+        OnRowUpdating="TiendaUpdate"
+        OnPageIndexChanging="GridViewStores_PageIndexChanging">
         <Columns>
             <asp:TemplateField HeaderText="ID">
                 <EditItemTemplate>

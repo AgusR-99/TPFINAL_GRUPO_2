@@ -11,9 +11,9 @@ namespace Negocio
 {
     public static class NegocioJuegoXTienda
     {
-        public static DataTable ListarJuegosXTiendas()
+        public static DataTable ListarJuegosXTiendas(string filtro=null)
         {
-            return DAOJuegoXTienda.ListarJuegosXTiendas();
+            return DAOJuegoXTienda.ListarJuegosXTiendas(filtro);
         }
 
         public static List<string> ActualizarJuegoXTienda(Juego_x_Tienda jxt)

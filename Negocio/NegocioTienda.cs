@@ -9,9 +9,9 @@ namespace Negocio
 {
     public static class NegocioTienda
     {
-        public static DataTable ListarTiendas()
+        public static DataTable ListarTiendas(string filtro = null)
         {
-            return DAOTienda.ListarTiendas();
+            return DAOTienda.ListarTiendas(filtro);
         }
 
         public static List<string> ActualizarTienda(Tienda tienda)
