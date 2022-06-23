@@ -78,6 +78,7 @@
     <Content Include="Listado.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="normalize.css" />
+    <Content Include="AdminDashboard\PlataformasDashboard.aspx" />
     <Content Include="SignUp.aspx" />
     <Content Include="SignIn.aspx" />
     <Content Include="styles.css" />
@@ -152,6 +153,13 @@
     </Compile>
     <Compile Include="Masters\NestedUserDashboard.master.designer.cs">
       <DependentUpon>NestedUserDashboard.master</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\PlataformasDashboard.aspx.cs">
+      <DependentUpon>PlataformasDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\PlataformasDashboard.aspx.designer.cs">
+      <DependentUpon>PlataformasDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignUp.aspx.cs">
