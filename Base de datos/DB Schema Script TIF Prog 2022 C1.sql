@@ -210,19 +210,11 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Usuarios_Obtener
-AS
-BEGIN
-	SELECT Username , Contrasena as [Password], Descripcion, Email, Administrador, Activo
-	FROM Usuarios
-END
-GO
-
 CREATE PROC SP_Juegos_Obtener
 AS
 BEGIN
 	SELECT Juegos.IdJuego, IdDesarrollador, Nombre, Descripcion, Juegos.Activo, NombreArchivo as [imagen] 
-	FROM Juegos inner join JuegosImagenes on Juegos.IdJuego = JuegosImagenes.IdJuego
+	FROM Juegos
 END
 GO
 
@@ -238,6 +230,26 @@ BEGIN
 UPDATE Juegos
 SET IdDesarrollador = @IdDesarrollador, Nombre = @Nombre, Descripcion = @Descripcion, Activo = @Activo
 WHERE IdJuego=@IdJuego
+END
+GO
+
+CREATE PROC SP_Juegos_Agregar
+@IdDesarrollador int,
+@Nombre varchar(50),
+@Descripcion varchar(MAX),
+@Activo bit
+AS
+BEGIN
+INSERT INTO Juegos(IdDesarrollador,Nombre,Descripcion,Activo)
+SELECT @IdDesarrollador,@Nombre,@Descripcion,@Activo
+END
+GO
+
+CREATE PROC SP_Usuarios_Obtener
+AS
+BEGIN
+	SELECT Username , Contrasena as [Password], Descripcion, Email, Administrador, Activo
+	FROM Usuarios
 END
 GO
 
@@ -387,6 +399,29 @@ BEGIN
 END
 GO
 
+CREATE PROC SP_JuegosXTiendas_Eliminar
+@IdJuego int,
+@IdTienda int
+AS
+BEGIN
+	DELETE FROM JuegosXTiendas
+	WHERE IdJuego=@IdJuego AND IdTienda=@IdTienda
+END
+GO
+
+CREATE PROC SP_JuegosXTiendas_Agregar
+@IdJuego int,
+@IdTienda int,
+@SitioWeb varchar(100),
+@Precio float,
+@PrecioRebajado float,
+@Activo bit
+AS
+BEGIN
+	INSERT INTO  JuegosXTiendas  (IdJuego, IdTienda, SitioWeb, Precio, PrecioRebajado, Activo)
+	VALUES (@IdJuego, @IdTienda, @SitioWeb, @Precio, @PrecioRebajado, @Activo)
+END
+GO
 
 CREATE PROC SP_Desarolladores_Actualizar
 	@IdDesarrollador int,

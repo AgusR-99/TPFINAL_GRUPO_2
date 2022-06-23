@@ -31,10 +31,19 @@ namespace Negocio
             var errorReasons = Validar(tienda);
             if (errorReasons.Any()) return errorReasons;
 
-            int? resultadoActualizar = DAOTienda.AgregarTienda(tienda);
-            if (resultadoActualizar == null) errorReasons.Add("Ocurrió un error al actualizar la base de datos");
-            if (resultadoActualizar == 0) errorReasons.Add("No se encontró el registro a actualizar");
+            int? resultadoAgregar = DAOTienda.AgregarTienda(tienda);
+            if (resultadoAgregar == null) errorReasons.Add("Ocurrió un error al agregar a la base de datos");
+            if (resultadoAgregar == 0) errorReasons.Add("No se agregaron registros");
 
+            return errorReasons;
+        }
+
+        public static List<string> EliminarTienda(Tienda tienda)
+        {
+            var errorReasons = new List<string>();
+            int? resultadoEliminar = DAOTienda.EliminarTienda(tienda);
+            if (resultadoEliminar == null) errorReasons.Add("Ocurrió un error al eliminar de la base de datos");
+            if (resultadoEliminar == 0) errorReasons.Add("No se encontró el registro a eliminar");
             return errorReasons;
         }
 

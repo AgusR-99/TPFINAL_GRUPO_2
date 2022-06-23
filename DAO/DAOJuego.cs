@@ -18,19 +18,25 @@ namespace DAO
 
         public static int? ActualizarJuego(Juego juego)
         {
-            return DB.NonQuery("[SP_Juegos_Actualizar]", getParametrosJuego(juego), true);
+            return DB.NonQuery("[SP_Juegos_Actualizar]", getParametrosJuego(juego,false), true);
         }
 
-        public static List<SqlParameter> getParametrosJuego(in Juego juego)
+        public static int? AgregarJuego(Juego juego)
         {
-            return new List<SqlParameter>()
-            {
-                new SqlParameter("IDJuego", juego.getID()),
-                new SqlParameter("IDDesarrollador", juego.getIDDesarrollador()),
-                new SqlParameter("Nombre", juego.getNombre()),
-                new SqlParameter("Descripcion", juego.getDescripcion()),
-                new SqlParameter("Activo", juego.getActivo())
-            };
+            return DB.NonQuery("[SP_Juegos_Agregar]", getParametrosJuego(juego, true), true);
+        }
+
+        public static List<SqlParameter> getParametrosJuego(in Juego juego, bool includeID)
+        {
+            var parametros = new List<SqlParameter>()
+    {
+        new SqlParameter("IDDesarrollador", juego.getIDDesarrollador()),
+        new SqlParameter("Nombre", juego.getNombre()),
+        new SqlParameter("Descripcion", juego.getDescripcion()),
+        new SqlParameter("Activo", juego.getActivo())
+    };
+            if (includeID) parametros.Add(new SqlParameter("IdJuego", juego.getID()));
+            return parametros;
         }
 
         public static DataSet ObtenerCantidadJuegos()

@@ -15,25 +15,35 @@ namespace DAO
 
         public static int? ActualizarTienda(Tienda tienda)
         {
-            return DB.NonQuery("[SP_Tiendas_Actualizar]", getParametrosTienda(tienda, true), true);
+            var parametros = getParametrosTiendaId(tienda);
+            parametros.AddRange(getParametrosTiendaContenido(tienda));
+            return DB.NonQuery("[SP_Tiendas_Actualizar]", parametros, true);
         }
 
         public static int? AgregarTienda(Tienda tienda)
         {
-            return DB.NonQuery("[SP_Tiendas_Agregar]", getParametrosTienda(tienda, false), true);
+            return DB.NonQuery("[SP_Tiendas_Agregar]", getParametrosTiendaContenido(tienda), true);
         }
 
-        public static List<SqlParameter> getParametrosTienda(in Tienda tienda, bool includeID)
+        public static int? EliminarTienda(Tienda tienda)
         {
-            var parametros = new List<SqlParameter>()
+            return DB.NonQuery("[SP_Tiendas_Eliminar]", getParametrosTiendaId(tienda), true);
+        }
+
+        private static List<SqlParameter> getParametrosTiendaId(in Tienda tienda)
+        {
+            return new List<SqlParameter>() { new SqlParameter("IdTienda", tienda.getID_Tienda()) };
+        }
+
+        private static List<SqlParameter> getParametrosTiendaContenido(in Tienda tienda)
+        {
+            return new List<SqlParameter>()
             {
                 new SqlParameter("Nombre", tienda.getNombre()),
                 new SqlParameter("RutaImagen", tienda.getURL_img()),
                 new SqlParameter("SitioWeb", tienda.getURL_web()),
                 new SqlParameter("Activo", tienda.getActivo())
             };
-            if (includeID) parametros.Add(new SqlParameter("IdTienda", tienda.getID_Tienda()));
-            return parametros;
         }
     }
 }

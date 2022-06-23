@@ -50,7 +50,7 @@
     <Compile Include="Juego.cs" />
     <Compile Include="Plataforma.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Juegos_x_Tiendas.cs" />
+    <Compile Include="Juego_x_Tienda.cs" />
     <Compile Include="Tienda.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
