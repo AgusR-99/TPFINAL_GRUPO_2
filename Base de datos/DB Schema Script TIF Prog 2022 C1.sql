@@ -508,3 +508,13 @@ BEGIN
 	SELECT IdJuego, NombreArchivo,  Orden, activo
 	FROM JuegosImagenes
 END
+GO
+
+CREATE PROC SP_JuegosXTiendas_Existe
+@IdJuego int,
+@IdTienda int
+AS
+BEGIN
+	SELECT COUNT(1) FROM JuegosXTiendas where IdJuego=@IdJuego and IdTienda=@IdTienda
+END
+GO

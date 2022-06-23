@@ -13,6 +13,7 @@ namespace Vistas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMsg.Text = "";
             if (!IsPostBack)
             {
                 CargarTiendas();
@@ -91,14 +92,26 @@ namespace Vistas
             ((Label)addingRow.FindControl("lblGVStoresID")).Text = "#";
         }
 
-        protected void BtnInsert_Click(Object sender, EventArgs e)
-        {
-            // Logica para agregar
-        }
-
         protected void BtnSearch_Click(Object sender, EventArgs e)
         {
             // Logica para buscar
+        }
+
+        protected void btnStoreAgregar_Click(object sender, EventArgs e)
+        {
+            var erroresAgregar = NegocioTienda.AgregarTienda(
+                                    new Tienda(txtNombre_new.Text, txtImagen_new.Text, txtURL_new.Text));
+            if (erroresAgregar.Any())
+            {
+                foreach (string msg in erroresAgregar)
+                    lblMsg.Text += msg + "<div>";
+                lblMsg.Visible = true;
+            }
+            else
+            {
+                //Mensaje exitoso
+                CargarTiendas();
+            }
         }
     }
 }

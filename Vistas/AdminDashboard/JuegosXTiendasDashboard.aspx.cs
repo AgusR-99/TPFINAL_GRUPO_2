@@ -13,9 +13,12 @@ namespace Vistas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            lblMsg.Text = "";
             if (!IsPostBack)
             {
                 CargarJuegosXTiendas();
+                CargarDDLJuegos(ddlJuego_new);
+                CargarDDLTiendas(ddlTienda_new);
             }
         }
 
@@ -24,8 +27,6 @@ namespace Vistas
             var tablaJuegosXTiendas = NegocioJuegoXTienda.ListarJuegosXTiendas();
             GridViewGamesXStores.DataSource = tablaJuegosXTiendas;
             GridViewGamesXStores.DataBind();
-            CargarDDLJuegos(GridViewGamesXStores.FooterRow.FindControl("ddlGVGamesXStoresJuego"));
-            CargarDDLTiendas(GridViewGamesXStores.FooterRow.FindControl("ddlGVGamesXStoresTienda"));
         }
 
         protected void GridViewGamesXStores_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -142,9 +143,7 @@ namespace Vistas
 
         protected void btnGVGamesXStoresAgregar_Click(object sender, EventArgs e)
         {
-            var footer = GridViewGamesXStores.FooterRow;
-            var txtPrecio = (TextBox)footer.FindControl("txtGVGamesXStoresPrecio");
-            if (!double.TryParse(txtPrecio.Text, out double precio))
+            if (!double.TryParse(txtPrecio_new.Text, out double precio))
             {
                 lblMsg.Text = "El valor del campo Precio debe ser numérico";
                 lblMsg.Visible = true;
@@ -152,18 +151,17 @@ namespace Vistas
             }
 
             var jxt = new Juego_x_Tienda(
-                    int.Parse(((DropDownList)footer.FindControl("ddlGVGamesXStoresJuego")).SelectedValue),
-                    int.Parse(((DropDownList)footer.FindControl("ddlGVGamesXStoresTienda")).SelectedValue),
-                    ((TextBox)footer.FindControl("txtGVGamesXStoresURL")).Text,
+                    int.Parse(ddlJuego_new.SelectedValue),
+                    int.Parse(ddlTienda_new.SelectedValue),
+                    txtURL_new.Text,
                     precio,
                     null,
                     true
                 );
 
-            var txtPrecioRebajado = (TextBox)footer.FindControl("txtGVGamesXStoresPrecioRebajado");
-            if (!String.IsNullOrEmpty(txtPrecioRebajado.Text))
+            if (!String.IsNullOrEmpty(txtPrecioRebajado_new.Text))
             {
-                if (double.TryParse(txtPrecioRebajado.Text, out double precioRebajado))
+                if (double.TryParse(txtPrecioRebajado_new.Text, out double precioRebajado))
                     jxt.setPrecioRebajado(precioRebajado);
                 else
                 {
@@ -183,7 +181,6 @@ namespace Vistas
             else
             {
                 txtSearchGamesxstores.Text = "";
-                GridViewGamesXStores.EditIndex = -1;
                 CargarJuegosXTiendas();
             }
 

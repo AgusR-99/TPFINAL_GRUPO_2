@@ -68,5 +68,33 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-
+    <div>
+        <h2>Agregar Juego-Tienda</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Tienda</th>
+                    <th>Imagen</th>
+                    <th>Sitio Web</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <asp:TextBox ID="txtNombre_new" runat="server"></asp:TextBox><br />
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtImagen_new" runat="server"></asp:TextBox><br />
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtURL_new" runat="server"></asp:TextBox><br />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnStoreAgregar"  CssClass="btn btn-outline-success"  runat="server" OnClick="btnStoreAgregar_Click" Text="Agregar" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </asp:Content>
