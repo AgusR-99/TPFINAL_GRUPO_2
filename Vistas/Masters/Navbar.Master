@@ -1,77 +1,103 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="/Masters/Navbar.Master.cs" Inherits="Vistas.MasterPage" %>
+
 <!DOCTYPE html>
 <html>
-	<head runat="server">
-		<link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Electrolize&family=Roboto&display=swap" rel="stylesheet">
-		<link rel="stylesheet" type="text/css" href="../normalize.css" />
-		<script src="https://kit.fontawesome.com/29a077070a.js" crossorigin="anonymous"></script>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-		<link rel="stylesheet" type="text/css" href="../styles.css" />
-		<asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
-	</head>
-	<body class="bg-home-page">
-		<form id="form1" runat="server">
-			<div class="root">
-				<header class="header"><%--Props navbar--%> <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-						<div class="container-fluid"><%--Texto inicial--%> <a class="navbar-brand neon" href="#">Bienvenido</a><%--Boton colapsar--%> <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-							</button>
-							<div class="collapse navbar-collapse" id="navbarSupportedContent">
-								<ul class="navbar-nav me-auto mb-2 mb-lg-0"><%--Inicio--%> <li class="nav-item">
-										<a class="nav-link active" aria-current="page" href="Home.aspx">Inicio</a>
-									</li><%if (!LoggedIn)
-                                             { %><%--Ingresar--%>  <li class="nav-item">
-										<a class="nav-link" aria-current="page" href="SignIn.aspx">Ingresar</a>
-									</li><%--Registrarse--%> <li class="nav-item">
-										<div class="btn-wrapper">
-											<a class="nav-link active hover-effect glow-red" href="SignUp.aspx">
-												<span>Registrarme</span>
-											</a>
-										</div>
-									</li><%} %> <%--Dropdown categorias--%> <li class="nav-item dropdown">
-										<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> Categorias </a><%--Menu dropdown--%> <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-											<li>
-												<a class="dropdown-item" href="Listado.aspx">Accion</a>
-											</li>
-											<li>
-												<a class="dropdown-item" href="Listado.aspx">Aventura</a>
-											</li>
-											<li>
-												<a class="dropdown-item" href="Listado.aspx">RPG</a>
-											</li>
-											<li>
-												<a class="dropdown-item" href="Listado.aspx">Deportes</a>
-											</li>
-										</ul>
-									</li> <%if (LoggedInAsAdmin){%> <%--AdminDashboard--%> <li class="nav-item">
-										<a class="nav-link" aria-current="page" href="AdminDashboard.aspx">Admin Dashboard</a>
-									</li><%} %> <%--Perfil--%> <li class="nav-item  <%if (!LoggedIn){%>disabled<%} %>">
-										<a href="UserDashboardWatchlist.aspx" class="nav-link <%if (!LoggedIn){%>disabled<%} %>">Perfil</a>
-									</li> <%if (LoggedIn){%> <%--Logout--%> <li class="nav-item">
-										<a class="nav-link" aria-current="page" href="Logout.aspx">Cerrar sesión</a>
-									</li><%} %>
-								</ul><%--Searchbar--%> <div class="searchbar">
-									<form class="d-flex" role="search">
-										<input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">
-										<button class="btn btn-outline-red btn-outline-success" type="submit">
-											<i class="fas fa-search"></i>
-										</button>
-									</form>
-								</div>
-							</div>
-						</div>
-					</nav>
-				</header>
-
-				<asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder>
-			</div>
-		</form>
-	</body>
+<head runat="server">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Electrolize&family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../normalize.css" />
+    <script src="https://kit.fontawesome.com/29a077070a.js" crossorigin="anonymous"></script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css" />
+    <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+</head>
+<body class="bg-home-page">
+    <form id="form1" runat="server">
+        <div class="root">
+            <header class="header">
+                <%--Props navbar--%>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+                    <div class="container-fluid">
+                        <%--Texto inicial--%> <a class="navbar-brand neon" href="#">Bienvenido</a><%--Boton colapsar--%>
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <%--Inicio--%>
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="../Home.aspx">Inicio</a>
+                                </li>
+                                <%if (!LoggedIn)
+                                    { %><%--Ingresar--%>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="../SignIn.aspx">Ingresar</a>
+                                </li>
+                                <%--Registrarse--%>
+                                <li class="nav-item">
+                                    <div class="btn-wrapper">
+                                        <a class="nav-link active hover-effect glow-red" href="../SignUp.aspx">
+                                            <span>Registrarme</span>
+                                        </a>
+                                    </div>
+                                </li>
+                                <%} %> <%--Dropdown categorias--%>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias </a><%--Menu dropdown--%>
+                                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <li>
+                                            <a class="dropdown-item" href="Listado.aspx">Accion</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="Listado.aspx">Aventura</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="Listado.aspx">RPG</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="Listado.aspx">Deportes</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <%if (LoggedInAsAdmin)
+                                {%> <%--AdminDashboard--%>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="AdminDashboard.aspx">Admin Dashboard</a>
+                                </li>
+                                <%} %> <%--Perfil--%>
+                                <li class="nav-item  <%if (!LoggedIn)
+                                    {%>disabled<%} %>">
+                                    <a href="UserDashboardWatchlist.aspx" class="nav-link <%if (!LoggedIn)
+                                        {%>disabled<%} %>">Perfil</a>
+                                </li>
+                                <%if (LoggedIn)
+                                {%> <%--Logout--%>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="Logout.aspx">Cerrar sesión</a>
+                                </li>
+                                <%} %>
+                            </ul>
+                            <%--Searchbar--%>
+                            <div class="searchbar">
+                                <form class="d-flex" role="search">
+                                    <input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">
+                                    <button class="btn btn-outline-red btn-outline-success" type="submit">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+            </header>
+            <asp:ContentPlaceHolder ID="main" runat="server"></asp:ContentPlaceHolder>
+        </div>
+    </form>
+</body>
 </html>
