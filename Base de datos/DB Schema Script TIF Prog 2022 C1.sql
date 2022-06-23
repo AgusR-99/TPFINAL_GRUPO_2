@@ -578,3 +578,16 @@ BEGIN
 	SELECT COUNT(1) FROM JuegosXTiendas where IdJuego=@IdJuego and IdTienda=@IdTienda
 END
 GO
+
+CREATE PROC SP_Obtener_Cantidad_Usuarios
+AS
+SELECT COUNT(*) FROM Usuarios WHERE Activo = 1
+go
+CREATE PROC SP_Obtener_Cantidad_Juegos
+AS
+SELECT COUNT(*) FROM Juegos WHERE Activo = 1
+GO
+CREATE PROC SP_Obtener_Cantidad_Opiniones
+AS
+SELECT COUNT(*) FROM Opiniones WHERE Activo = 1
+GO
