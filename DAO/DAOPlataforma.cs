@@ -16,6 +16,16 @@ namespace DAO
             return DB.ObtenerTabla("Plataformas", "[SP_Plataformas_Obtener]", isSP: true);
         }
 
+        public static DataSet ObtenerPlataformaSiguienteID()
+        {
+            var foo = DB.Query("[SP_Plataformas_Obtener_Siguiente_Id]", isSP: true);
+            return foo;
+        }
+
+        public static DataTable ListarPlataformasPorNombre(string nombre)
+        {
+            return DB.ObtenerTabla("Plataformas", $"[SP_Plataformas_Obtener_Por_Nombre] N'{nombre}'");
+        }
 
         public static int? ActualizarPlataforma(Plataforma plataforma)
         {
@@ -33,7 +43,7 @@ namespace DAO
             var parametros = new List<SqlParameter>()
             {
                 new SqlParameter("Nombre", plataforma.getNombre()),
-                new SqlParameter("NombreImagen", plataforma.getURL_img()),
+                new SqlParameter("Activo", plataforma.getActivo()),
             };
             if (includeID) parametros.Add(new SqlParameter("IdPlataforma", plataforma.getID_Plataforma()));
             return parametros;
