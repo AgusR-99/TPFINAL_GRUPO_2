@@ -20,86 +20,77 @@ namespace Vistas
         }
         protected void CargarCategorias()
         {
-
             var dt = NegocioCategorias.ListarCategorias();
-            GridViewCategories.DataSource = dt;
+            GVCategories.DataSource = dt;
             Session["CategoriasSession"] = dt;
-            GridViewCategories.DataBind();
+            GVCategories.DataBind();
+            ObtenerId();
         }
         protected void BtnInsert_Click(Object sender, EventArgs e)
         {
-
+            var foo = Convert.ToInt32(lblGVCategoriesID.Text);
+            var bar = txtGVCategoriesName.Text;
+            var fooo = chkGVCategoriesActivo.Checked;
             Categoria categoria = new Categoria(
-                Convert.ToInt32(((Label)GridViewCategories.FooterRow.FindControl("lblGVCategoriesID")).Text),
-                ((TextBox)GridViewCategories.FooterRow.FindControl("txtGVCategoriesName")).Text,
-                ((CheckBox)GridViewCategories.FooterRow.FindControl("chkGVCategoriesActivo")).Checked
+                foo,
+                bar,
+                fooo
                 );
 
             var erroresAgregar = NegocioCategorias.AgregarCategoria(categoria);
-            if (erroresAgregar.Any())
-            {
-                foreach (string msg in erroresAgregar)
-                    lblMsg.Text += msg + "<div>";
-                lblMsg.Visible = true;
-            }
+            if (erroresAgregar != "") Msg(erroresAgregar);
             else
             {
                 lblMsg.Text = "Registro agregado con exito";
-                lblMsg.Visible = true;
                 txtSearchCategory.Text = "";
-                GridViewCategories.EditIndex = -1;
+                txtGVCategoriesName.Text = "";
+                GVCategories.EditIndex = -1;
                 CargarCategorias();
             }
         }
 
         protected void grdCategoriesData_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            GridViewCategories.PageIndex = e.NewPageIndex;
+            GVCategories.PageIndex = e.NewPageIndex;
             CargarCategorias();
         }
-        protected string ObtenerId()
+        protected void ObtenerId()
         {
             var ds = NegocioCategorias.ObtenerCategoriaSiguienteID();
-            return ds.Tables[0].Rows[0][0].ToString();
+            lblGVCategoriesID.Text = ds.Tables[0].Rows[0][0].ToString();
         }
 
         protected void Category_RowEditing(object sender, GridViewEditEventArgs e)
         {
             txtSearchCategory.Text = "";
-            GridViewCategories.EditIndex = e.NewEditIndex;
-            GridViewCategories.DataSource = (DataTable)Session["CategoriasSession"];
-            GridViewCategories.DataBind();
+            GVCategories.EditIndex = e.NewEditIndex;
+            GVCategories.DataSource = (DataTable)Session["CategoriasSession"];
+            GVCategories.DataBind();
         }
 
         protected void Category_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             txtSearchCategory.Text = "";
-            GridViewCategories.EditIndex = -1;
-            GridViewCategories.DataSource = (DataTable)Session["CategoriasSession"];
-            GridViewCategories.DataBind();
+            GVCategories.EditIndex = -1;
+            GVCategories.DataSource = (DataTable)Session["CategoriasSession"];
+            GVCategories.DataBind();
         }
 
         protected void Category_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-            var editedRow = GridViewCategories.Rows[e.RowIndex];
+            var editedRow = GVCategories.Rows[e.RowIndex];
             Categoria categoria = new Categoria(
                     Convert.ToInt32(((Label)editedRow.FindControl("lblGVCategoriesID")).Text),
                     ((TextBox)editedRow.FindControl("txtGVCategoriesName")).Text,
                     ((CheckBox)editedRow.FindControl("chkGVCategoriesActivo")).Checked
                 );
             var erroresActualizar = NegocioCategorias.ActualizarCategoria(categoria);
-            if (erroresActualizar.Any())
-            {
-                foreach (string msg in erroresActualizar)
-                    lblMsg.Text += msg + "<div>";
-                lblMsg.Visible = true;
-            }
+            if (erroresActualizar != "") Msg(erroresActualizar);
             else
             {
-                lblMsg.Text = "Registro modificado con exito";
-                lblMsg.Visible = true;
+                Msg("Registro modificado exitosamente");
                 txtSearchCategory.Text = "";
-                GridViewCategories.EditIndex = -1;
+                GVCategories.EditIndex = -1;
                 CargarCategorias();
             }
         }
@@ -107,9 +98,14 @@ namespace Vistas
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
             var dt = NegocioCategorias.ListarCategoriasPorNombre(txtSearchCategory.Text);
-            GridViewCategories.DataSource = dt;
+            GVCategories.DataSource = dt;
             Session["CategoriasSession"] = dt;
-            GridViewCategories.DataBind();
+            GVCategories.DataBind();
+        }
+
+        protected void Msg(string msg)
+        {
+            lblMsg.Text = msg;
         }
     }
 }

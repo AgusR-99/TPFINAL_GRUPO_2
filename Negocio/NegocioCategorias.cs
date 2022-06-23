@@ -24,36 +24,35 @@ namespace Negocio
             return DAOCategoria.ObtenerCategoriaSiguienteID();
         }
 
-        public static List<string> ActualizarCategoria(Categoria categoria)
+        public static string ActualizarCategoria(Categoria categoria)
         {
-            var errorReasons = Validar(categoria);
-            if (errorReasons.Any()) return errorReasons;
+            var error = Validar(categoria);
+            if (error != "") return error;
 
             int? resultadoActualizar = DAOCategoria.ActualizarCategoria(categoria);
-            if (resultadoActualizar == null) errorReasons.Add("Error al actualizar categoria: ocurrió un error al actualizar la base de datos");
-            if (resultadoActualizar == 0) errorReasons.Add("Error al actualizar categoria: no se encontró el registro a actualizar");
-            if (resultadoActualizar == -1) errorReasons.Add("Error al actualizar categoria: la categoria ya existe");
-            return errorReasons;
+            if (resultadoActualizar == null) error = ("Error al actualizar categoria: ocurrió un error al actualizar la base de datos");
+            if (resultadoActualizar == 0) error = ("Error al actualizar categoria: no se encontró el registro a actualizar");
+            if (resultadoActualizar == -1) error = ("Error al actualizar categoria: la categoria ya existe");
+            return error;
         }
 
-        public static List<string> AgregarCategoria(Categoria categoria)
+        public static string AgregarCategoria(Categoria categoria)
         {
-            var errorReasons = Validar(categoria);
-            if (errorReasons.Any()) return errorReasons;
+            var error = Validar(categoria);
+            if (error != "") return error;
 
             int? resultadoActualizar = DAOCategoria.AgregarCategoria(categoria);
-            if (resultadoActualizar == null) errorReasons.Add("Error al agregar categoria: ocurrió un error al actualizar la base de datos");
-            if (resultadoActualizar == 0) errorReasons.Add("Error al agregar categoria: no se encontró el registro a actualizar");
-            if (resultadoActualizar == -1) errorReasons.Add("Error al agregar categoria: la categoria ya existe");
-
-            return errorReasons;
+            if (resultadoActualizar == null) error = ("Error al agregar categoria: ocurrió un error al actualizar la base de datos");
+            if (resultadoActualizar == 0) error = ("Error al agregar categoria: no se encontró el registro a actualizar");
+            if (resultadoActualizar == -1) error = ("Error al agregar categoria: la categoria ya existe");
+            return error;
         }
 
-        public static List<string> Validar(Categoria categoria)
+        public static string Validar(Categoria categoria)
         {
-            var errorReasons = new List<string>();
-            if (String.IsNullOrWhiteSpace(categoria.Nombre)) errorReasons.Add("Error: el campo Nombre no puede estar vacío");
-            return errorReasons;
+            string str = "";
+            if (String.IsNullOrWhiteSpace(categoria.Nombre)) str = ("Error: el campo Nombre no puede estar vacío");
+            return str;
         }
     }
 }
