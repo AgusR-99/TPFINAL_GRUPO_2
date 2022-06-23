@@ -1072,6 +1072,15 @@ main {
     color: #fff;
 }
 
+.grd-control-wrapper{
+    margin: 0 auto;
+    max-width: 70%;
+}
+
+.grd-control-wrapper span{
+    margin-right: 10px;
+}
+
 @media only screen and (max-width: 768px) {
     .analytics-main{
         flex-direction: column;
