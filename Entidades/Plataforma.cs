@@ -10,16 +10,27 @@ namespace Entidades
     {
         private int ID_Plataforma;
         private string Nombre;
-        private string URL_img;
+        private bool Activo;
 
+        
+         public Plataforma(int id_Plataforma, string nombre, bool activo)
+        {
+            ID_Plataforma = id_Plataforma;
+            Nombre = nombre;
+            Activo = activo;
+        }
+
+        public Plataforma(string nombre) { Nombre = nombre; }
+
+         
 
         public int getID_Plataforma() { return ID_Plataforma; }
         public string getNombre() { return Nombre; }
-        public string getURL_img() { return URL_img; }
+        public bool getActivo() { return Activo; }
 
 
         public void setID_Plataforma(int id_plataforma) { ID_Plataforma = id_plataforma; }
         public void setNombre(string nombre) { Nombre = nombre; }
-        public void setURL_img(string url_img) { URL_img = url_img; }
+        public void setActivo(bool activo) { Activo = activo; }
     }
 }
