@@ -41,6 +41,9 @@ namespace Negocio
         public static List<string> AgregarJuegoXTienda(Juego_x_Tienda jxt)
         {
             var errorReasons = Validar(jxt);
+            var existe = ExisteJuegoXTienda(jxt);
+            if (existe == null) errorReasons.Add("Ocurrió un error al realizar las validaciones necesarias");
+            if (existe == true) errorReasons.Add("Ya se ha registrado el juego la tienda indicada");
             if (errorReasons.Any()) return errorReasons;
 
             int? resultadoAgregar = DAOJuegoXTienda.AgregarJuegoXTienda(jxt);
@@ -50,6 +53,18 @@ namespace Negocio
             return errorReasons;
         }
 
+        public static bool? ExisteJuegoXTienda(Juego_x_Tienda jxt)
+        {
+            var tablaResultado = DAOJuegoXTienda.ExisteJuegoXTienda(jxt);
+            try
+            {
+                return ((int)tablaResultado.Rows[0][0]) > 0;
+            }
+            catch
+            {
+                return null;
+            }
+        }
         private static List<string> Validar(in Juego_x_Tienda jxt)
         {
             var errorReasons = new List<string>();
@@ -58,6 +73,7 @@ namespace Negocio
             if (String.IsNullOrEmpty(jxt.getURL())) errorReasons.Add("El campo URL no puede estar vacío");
             return errorReasons;
         }
+
 
         //public static List<Juego_x_Tienda> ListaJuegosXTiendas()
         //{
