@@ -29,11 +29,31 @@ namespace Negocio
             return errorReasons;
         }
 
+        public static List<string> AgregarJuego(Juego juego)
+        {
+            var errorReasons = Validar(juego);
+            if (errorReasons.Any()) return errorReasons;
+
+            int? resultadoActualizar = DAOJuego.AgregarJuego(juego);
+            if (resultadoActualizar == null) errorReasons.Add("Error al agregar Juego: ocurrió un error al actualizar la base de datos");
+            if (resultadoActualizar == -1) errorReasons.Add("Error al agregar Juego: el Juego ya existe");
+
+            return errorReasons;
+        }
+
         public static List<string> ActualizarValidarJuego(in Juego juego)
         {
             var errorReasons = new List<string>();
             if (String.IsNullOrWhiteSpace(juego.getNombre())) errorReasons.Add("El campo Nombre no puede estar vacío");
             if (String.IsNullOrWhiteSpace(juego.getDescripcion())) errorReasons.Add("El campo Descripcion no puede estar vacío");
+            return errorReasons;
+        }
+
+        public static List<string> Validar(Juego juego)
+        {
+            var errorReasons = new List<string>();
+            if (String.IsNullOrWhiteSpace(juego.getNombre())) errorReasons.Add("Error: el campo Nombre no puede estar vacío");
+            if (String.IsNullOrWhiteSpace(juego.getDescripcion())) errorReasons.Add("Error: el campo Descripcion no puede estar vacío");
             return errorReasons;
         }
 

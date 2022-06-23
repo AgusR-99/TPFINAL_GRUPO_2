@@ -245,6 +245,11 @@ SELECT @IdDesarrollador,@Nombre,@Descripcion,@Activo
 END
 GO
 
+CREATE PROC SP_Juegos_Eliminar
+@IdJuego int
+AS
+DELETE FROM Juegos WHERE IdJuego = @IdJuego
+
 CREATE PROC SP_Usuarios_Obtener
 AS
 BEGIN
@@ -272,6 +277,11 @@ BEGIN
 		Username = @Username
 END
 GO
+
+CREATE PROC SP_Usuarios_Eliminar
+@Username varchar(30)
+AS
+DELETE FROM Usuarios WHERE Username = @Username
 
 CREATE PROC SP_Categorias_Actualizar
 	@IdCategoria int,

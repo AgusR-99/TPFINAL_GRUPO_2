@@ -18,12 +18,12 @@ namespace DAO
 
         public static int? ActualizarJuego(Juego juego)
         {
-            return DB.NonQuery("[SP_Juegos_Actualizar]", getParametrosJuego(juego,false), true);
+            return DB.NonQuery("[SP_Juegos_Actualizar]", getParametrosJuego(juego,true), true);
         }
 
         public static int? AgregarJuego(Juego juego)
         {
-            return DB.NonQuery("[SP_Juegos_Agregar]", getParametrosJuego(juego, true), true);
+            return DB.NonQuery("[SP_Juegos_Agregar]", getParametrosJuego(juego, false), true);
         }
 
         public static List<SqlParameter> getParametrosJuego(in Juego juego, bool includeID)

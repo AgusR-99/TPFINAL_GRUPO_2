@@ -23,6 +23,14 @@ namespace Entidades
             Activo = activo;
         }
 
+        public Juego(int iddesarrollador, string nombre, string descripcion, bool activo)
+        {
+            ID_Desarrollador = iddesarrollador;
+            Nombre = nombre;
+            Descripcion = descripcion;
+            Activo = activo;
+        }
+
         public int getID() { return ID; }
         public string getNombre() { return Nombre; }
         public int getIDDesarrollador() { return ID_Desarrollador; }
