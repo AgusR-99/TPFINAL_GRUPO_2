@@ -62,15 +62,6 @@
                     <asp:CheckBox ID="chkGVGamesImagen" runat="server" Checked='<%# Bind("Activo") %>' Enabled="False" />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="NombresImg">
-                <EditItemTemplate>
-                    <asp:TextBox ID="txtGVGamesImagen" runat="server" Text='<%# Bind("imagen") %>'></asp:TextBox>
-                </EditItemTemplate>
-                <ItemTemplate>
-                    <asp:Label ID="lblGVGamesImagen" runat="server" Text='<%# Bind("imagen") %>'>
-                    </asp:Label>
-                </ItemTemplate>
-            </asp:TemplateField>
         </Columns>
     </asp:GridView>
 </asp:Content>
