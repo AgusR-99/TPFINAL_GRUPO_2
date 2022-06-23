@@ -94,14 +94,8 @@
                     <asp:CheckBox ID="chkGVGamesImagen" runat="server" Checked='<%# Bind("Activo") %>' Enabled="False" />
                 </ItemTemplate>
             </asp:TemplateField>
-<<<<<<< Updated upstream
-=======
-            
->>>>>>> Stashed changes
         </Columns>
-
-<FooterStyle CssClass="grd-footer"></FooterStyle>
-
-<PagerStyle CssClass="grd-pager"></PagerStyle>
+        <FooterStyle CssClass="grd-footer"></FooterStyle>
+        <PagerStyle CssClass="grd-pager"></PagerStyle>
     </asp:GridView>
 </asp:Content>
