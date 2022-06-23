@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Admin Dashboard" Language="C#" MasterPageFile="~/Masters/AdminDashboardMain.master" AutoEventWireup="true" EnableEventValidation="false" CodeBehind="CategoriasDashboard.aspx.cs" Inherits="Vistas.CategoriasDashboard" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="adminDashboardContent" runat="server">
     <%-- Aca van mensajes --%>
     <asp:Label ID="lblMsg" runat="server"></asp:Label>

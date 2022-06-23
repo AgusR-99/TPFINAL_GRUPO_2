@@ -61,5 +61,44 @@ namespace Vistas
             GridViewStores.EditIndex = -1;
             CargarTiendas();
         }
+
+        protected void TiendaDelete(object sender, GridViewDeleteEventArgs e)
+        {
+            Label lblIDTienda = (Label)GridViewStores.Rows[e.RowIndex].FindControl("lblGVStoresID");
+            int idTienda = Convert.ToInt32(lblIDTienda.Text);
+            var erroresEliminar = NegocioTienda.EliminarTienda(new Tienda(idTienda));
+            if (erroresEliminar.Any())
+            {
+                foreach (string msg in erroresEliminar)
+                    lblMsg.Text += msg + "<br>";
+            }
+            else
+            {
+                lblMsg.Text = $"Se eliminó la tienda {idTienda}";
+            }
+            lblMsg.Visible = true;
+            CargarTiendas();
+        }
+
+        protected void btnAddStore_Click(object sender, EventArgs e)
+        {
+            var tablaTiendas = NegocioTienda.ListarTiendas();
+            tablaTiendas.Rows.Add("0", "", "", "", false);
+            GridViewStores.DataSource = tablaTiendas;
+            //GridViewStores.EditIndex = tablaTiendas.Rows.Count-1;
+            GridViewStores.DataBind();
+            var addingRow = GridViewStores.Rows[tablaTiendas.Rows.Count - 1];
+            ((Label)addingRow.FindControl("lblGVStoresID")).Text = "#";
+        }
+
+        protected void BtnInsert_Click(Object sender, EventArgs e)
+        {
+            // Logica para agregar
+        }
+
+        protected void BtnSearch_Click(Object sender, EventArgs e)
+        {
+            // Logica para buscar
+        }
     }
 }

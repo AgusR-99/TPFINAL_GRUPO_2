@@ -17,7 +17,8 @@
         AutoGenerateColumns="False"
         OnRowCancelingEdit="GridViewUsers_RowCancelingEdit"
         OnRowEditing="GridViewUsers_RowEditing"
-        OnRowUpdating="GridViewUsers_RowUpdating">
+        OnRowUpdating="GridViewUsers_RowUpdating"
+        ShowFooter="true">
         <Columns>
             <asp:TemplateField>
                 <%--Cosas del footer--%>

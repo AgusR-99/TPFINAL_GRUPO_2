@@ -74,6 +74,7 @@
     <Content Include="Imagenes\seamless.png" />
     <Content Include="Imagenes\welcome.png" />
     <Content Include="AdminDashboard\JuegosDashboard.aspx" />
+    <Content Include="AdminDashboard\JuegosXTiendasDashboard.aspx" />
     <Content Include="Listado.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="normalize.css" />
@@ -89,6 +90,13 @@
     <Content Include="Articulo.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboard\JuegosXTiendasDashboard.aspx.cs">
+      <DependentUpon>JuegosXTiendasDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\JuegosXTiendasDashboard.aspx.designer.cs">
+      <DependentUpon>JuegosXTiendasDashboard.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Masters\AdminDashboardMain.master.cs">
       <DependentUpon>AdminDashboardMain.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
