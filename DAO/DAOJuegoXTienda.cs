@@ -33,6 +33,11 @@ namespace DAO
             return DB.NonQuery("[SP_JuegosXTiendas_Agregar]", parametros, true);
         }
 
+        public static DataTable ExisteJuegoXTienda(Juego_x_Tienda jxt)
+        {
+            return DB.ObtenerTabla("Existe","[SP_JuegosXTiendas_Existe]", getParametrosJuegoXTiendaClave(jxt), true);
+        }
+
         private static List<SqlParameter> getParametrosJuegoXTiendaClave(in Juego_x_Tienda jxt)
         {
             return new List<SqlParameter>()

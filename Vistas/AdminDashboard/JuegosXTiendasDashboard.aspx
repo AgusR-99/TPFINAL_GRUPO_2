@@ -32,9 +32,6 @@
                     </asp:Label>
                     <asp:HiddenField ID="hfGVGamesXStoresJuego" runat="server" Value='<%# Bind("IdJuego") %>' />
                 </ItemTemplate>
-                <FooterTemplate>
-                    <asp:DropDownList ID="ddlGVGamesXStoresJuego" runat="server"></asp:DropDownList>
-                </FooterTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Tienda">
                 <EditItemTemplate>
@@ -47,9 +44,6 @@
                     </asp:Label>
                     <asp:HiddenField ID="hfGVGamesXStoresTienda" runat="server" Value='<%# Bind("IdTienda") %>' />
                 </ItemTemplate>
-                <FooterTemplate>
-                    <asp:DropDownList ID="ddlGVGamesXStoresTienda" runat="server"></asp:DropDownList>
-                </FooterTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="URL">
                 <EditItemTemplate>
@@ -58,9 +52,6 @@
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesXStoresURL" runat="server" Text='<%# Eval("URL") %>'></asp:Label>
                 </ItemTemplate>
-                <FooterTemplate>
-                    <asp:TextBox ID="txtGVGamesXStoresURL" runat="server"></asp:TextBox>
-                </FooterTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Precio">
                 <EditItemTemplate>
@@ -69,9 +60,6 @@
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesXStoresPrecio" runat="server" Text='<%# Eval("Precio") %>'></asp:Label>
                 </ItemTemplate>
-                <FooterTemplate>
-                    <asp:TextBox ID="txtGVGamesXStoresPrecio" runat="server"></asp:TextBox>
-                </FooterTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="PrecioRebajado">
                 <EditItemTemplate>
@@ -80,9 +68,6 @@
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesXStoresPrecioRebajado" runat="server" Text='<%# Eval("Precio Rebajado") %>'></asp:Label>
                 </ItemTemplate>
-                <FooterTemplate>
-                    <asp:TextBox ID="txtGVGamesXStoresPrecioRebajado" runat="server"></asp:TextBox>
-                </FooterTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Activo">
                 <EditItemTemplate>
@@ -91,10 +76,44 @@
                 <ItemTemplate>
                     <asp:CheckBox ID="chkGVGamesXStoresActivo" runat="server" Checked='<%# Eval("Activo") %>' Enabled="False" />
                 </ItemTemplate>
-                <FooterTemplate>
-                    <asp:LinkButton ID="btnGVGamesXStoresAgregar" runat="server" OnClick="btnGVGamesXStoresAgregar_Click" Text="Agregar" />
-                </FooterTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <div>
+        <h2>Agregar Juego-Tienda</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Juego</th>
+                    <th>Tienda</th>
+                    <th>Sitio Web</th>
+                    <th>Tienda</th>
+                    <th>Tienda</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <asp:DropDownList ID="ddlJuego_new" runat="server"></asp:DropDownList><br />
+                    </td>
+                    <td>
+                        <asp:DropDownList ID="ddlTienda_new" runat="server"></asp:DropDownList><br />
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtURL_new" runat="server"></asp:TextBox><br />
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPrecio_new" runat="server"></asp:TextBox><br />
+                    </td>
+                    <td>
+                        <asp:TextBox ID="txtPrecioRebajado_new" runat="server"></asp:TextBox><br />
+                    </td>
+                    <td>
+                        <asp:Button ID="btnGamesXStoresAgregar"  CssClass="btn btn-outline-success"  runat="server" OnClick="btnGVGamesXStoresAgregar_Click" Text="Agregar" />
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </asp:Content>

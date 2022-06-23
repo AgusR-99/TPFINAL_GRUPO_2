@@ -11,12 +11,14 @@ namespace Vistas
 {
     public partial class JuegosDashboard : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 CargarJuegos();
             }
+
         }
         protected void CargarJuegos()
         {
@@ -24,6 +26,11 @@ namespace Vistas
             var tablaJuegos = NegocioJuego.ListarJuegos();
             GridViewGames.DataSource = tablaJuegos;
             GridViewGames.DataBind();
+            DropDownList ddl = (DropDownList)GridViewGames.FooterRow.FindControl("ddlGVGamesIDDesarrollador");
+            ddl.DataSource = NegocioDesarrollador.ListarDesarrolladores();
+            ddl.DataTextField = "NombreDesarrollador";
+            ddl.DataValueField = "IdDesarrollador";
+            ddl.DataBind();
         }
 
         protected void AgregarImagenes(ref DataTable tabla, string colURL)
@@ -46,7 +53,6 @@ namespace Vistas
             }
 
         }
-        /*aca*/
 
         protected void GridViewGames_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -62,6 +68,7 @@ namespace Vistas
 
         protected void GridViewGames_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
+
             var editedRow = GridViewGames.Rows[e.RowIndex];
             Juego juego = new Juego(
                     Convert.ToInt32((((Label)editedRow.FindControl("lblGVGamesIDJuego")).Text)),
@@ -82,6 +89,37 @@ namespace Vistas
                 GridViewGames.EditIndex = -1;
                 CargarJuegos();
             }
+        }
+
+        protected void BtnInsert_Click(Object sender, EventArgs e)
+        {
+            Juego juego = new Juego(
+                Convert.ToInt32(((DropDownList)GridViewGames.FooterRow.FindControl("ddlGVGamesIDDesarrollador")).Text),
+                ((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesNombre")).Text,
+                ((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesDescripcion")).Text,
+                ((CheckBox)GridViewGames.FooterRow.FindControl("chkGVGamesActivo")).Checked
+                );
+
+            var erroresAgregar = NegocioJuego.AgregarJuego(juego);
+            if (erroresAgregar.Any())
+            {
+                foreach (string msg in erroresAgregar)
+                    lblMsg.Text += msg + "<div>";
+                lblMsg.Visible = true;
+            }
+            else
+            {
+                lblMsg.Text = "Registro agregado con exito";
+                lblMsg.Visible = true;
+                /*txtSearchCategory.Text = "";*/
+                GridViewGames.EditIndex = -1;
+                CargarJuegos();
+            }
+        }
+
+        protected void BtnSearch_Click(Object sender, EventArgs e)
+        {
+            // Logica para buscar usuario
         }
     }
 }
