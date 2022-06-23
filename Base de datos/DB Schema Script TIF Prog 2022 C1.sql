@@ -213,7 +213,7 @@ GO
 CREATE PROC SP_Juegos_Obtener
 AS
 BEGIN
-	SELECT Juegos.IdJuego, IdDesarrollador, Nombre, Descripcion, Juegos.Activo, NombreArchivo as [imagen] 
+	SELECT Juegos.IdJuego, IdDesarrollador, Nombre, Descripcion, Juegos.Activo 
 	FROM Juegos
 END
 GO
@@ -279,12 +279,17 @@ CREATE PROC SP_Categorias_Actualizar
 	@Activo bit
 AS
 BEGIN
-	UPDATE Categorias
-	SET
-		Nombre = @Nombre,
-		Activo = @Activo
-	WHERE
-		IdCategoria = @IdCategoria
+	IF NOT EXISTS(select * from Categorias where @Nombre like nombre) or @Activo not like (select Activo from Categorias where IdCategoria like @IdCategoria)
+	BEGIN
+		UPDATE Categorias
+		SET
+			Nombre = @Nombre,
+			Activo = @Activo
+		WHERE
+			IdCategoria = @IdCategoria
+		RETURN @@ROWCOUNT;
+	END
+	ELSE RETURN -1
 END
 GO
 
@@ -293,8 +298,12 @@ CREATE PROC SP_Categorias_Agregar
 	@Activo bit
 AS
 BEGIN
-	INSERT INTO Categorias(Nombre, Activo)
-	VALUES (@Nombre, @Activo)
+	IF NOT EXISTS(select * from Categorias where @Nombre like nombre)
+	BEGIN
+		INSERT INTO Categorias(Nombre, Activo)
+		VALUES (@Nombre, @Activo)
+	END
+	ELSE RETURN -1
 END
 GO
 
@@ -369,7 +378,7 @@ END
 GO
 
 
-ALTER PROCEDURE SP_JuegosXTiendas_Obtener
+CREATE PROCEDURE SP_JuegosXTiendas_Obtener
 AS
 BEGIN
 	SELECT Juegos.Nombre AS Juego, Tiendas.Nombre AS Tienda, Juegos.IdJuego, Tiendas.IdTienda,
