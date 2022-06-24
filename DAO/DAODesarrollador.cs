@@ -20,7 +20,7 @@ namespace DAO
         public static Desarrollador ObtenerDesarrolladorPorId(int id)
         {
             var parametros = new List<SqlParameter>() { new SqlParameter("idDesarrollador", id) };
-            var datatable = DB.ObtenerTabla("Desarrollador", "[SP_Desarrollador_Obtener]", parametros, true);
+            var datatable = DB.ObtenerTabla("Desarrollador", "[SP_Desarrolladores_Obtener]", parametros, true);
             if (datatable == null) return null;
             return ArmarDesarrollador(datatable.Rows[0]);
         }
