@@ -7,11 +7,11 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace Vistas
+namespace Vistas.AdminDashboard
 {
 
 
-    public partial class JuegosDashboard
+    public partial class DesarrolladoresDashboard
     {
 
         /// <summary>
@@ -24,12 +24,12 @@ namespace Vistas
         protected global::System.Web.UI.WebControls.Label lblMsg;
 
         /// <summary>
-        /// Control GridViewGames.
+        /// Control GridViewDevs.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView GridViewGames;
+        protected global::System.Web.UI.WebControls.GridView GridViewDevs;
     }
 }
