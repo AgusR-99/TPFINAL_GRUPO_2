@@ -18,5 +18,16 @@ namespace Vistas
             LoggedInAsAdmin = NegocioUsuario.IsLoggedInAsAdmin(Session);
         }
 
+        protected void GoToAdminDashboard(object sender, EventArgs e)
+        {
+            Response.Redirect("~/AdminDashboard/JuegosDashboard.aspx");
+        }
+
+        protected void Logout(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Logout.aspx");
+        }
     }
+
+
 }

@@ -68,7 +68,7 @@
                                 <%if (LoggedInAsAdmin)
                                 {%> <%--AdminDashboard--%>
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="AdminDashboard.aspx">Admin Dashboard</a>
+                                    <asp:LinkButton runat="server" class="nav-link" aria-current="page" OnClick="GoToAdminDashboard">Admin Dashboard</asp:LinkButton>
                                 </li>
                                 <%} %> <%--Perfil--%>
                                 <li class="nav-item  <%if (!LoggedIn)
@@ -79,7 +79,7 @@
                                 <%if (LoggedIn)
                                 {%> <%--Logout--%>
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="Logout.aspx">Cerrar sesión</a>
+                                    <asp:LinkButton runat="server" class="nav-link" aria-current="page" OnClick="Logout">Cerrar sesión</asp:LinkButton>
                                 </li>
                                 <%} %>
                             </ul>
