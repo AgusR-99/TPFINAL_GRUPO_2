@@ -203,7 +203,9 @@ namespace Vistas
             }
             else
             {
+                lblMsg.Text = $"Se agregó correctamente el juego {ddlJuego_new.SelectedItem.Text} a la tienda {ddlTienda_new.SelectedItem.Text}";
                 txtSearchGamesxstores.Text = "";
+                LimpiarControlesAgregar();
                 CargarJuegosXTiendas();
             }
 
@@ -230,5 +232,15 @@ namespace Vistas
             GridViewGamesXStores.PageIndex = e.NewPageIndex;
             CargarJuegosXTiendas();
         }
+
+        protected void LimpiarControlesAgregar()
+        {
+            ddlJuego_new.SelectedIndex = 0;
+            ddlTienda_new.SelectedIndex = 0;
+            txtURL_new.Text = "";
+            txtPrecio_new.Text = "";
+            txtPrecioRebajado_new.Text = "";
+        }
+
     }
 }

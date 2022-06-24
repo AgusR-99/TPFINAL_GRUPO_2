@@ -141,6 +141,8 @@ namespace Vistas
             else
             {
                 //Mensaje exitoso
+                lblMsg.Text = $"Se agregó correctamente la tienda {txtNombre_new.Text}";
+                LimpiarControlesAgregar();
                 CargarTiendas();
             }
         }
@@ -150,6 +152,13 @@ namespace Vistas
             GridViewStores.EditIndex = -1;
             GridViewStores.PageIndex = e.NewPageIndex;
             CargarTiendas();
+        }
+
+        protected void LimpiarControlesAgregar()
+        {
+            txtNombre_new.Text = "";
+            txtImagen_new.Text = "";
+            txtURL_new.Text = "";
         }
     }
 }
