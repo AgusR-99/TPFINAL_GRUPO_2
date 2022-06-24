@@ -49,7 +49,10 @@ namespace Entidades
 
         public void setID(int id) { ID=id; }
         public void setNombre(string nombre) {Nombre=nombre; }
-        public void setIDDesarrollador(int ID_desarrollador) { Desarrollador.setID_Desarrollador(ID_desarrollador); }
+        public void setIDDesarrollador(int ID_desarrollador) {
+            if (Desarrollador == null) Desarrollador = new Desarrollador();
+            Desarrollador.setID_Desarrollador(ID_desarrollador); 
+        }
         public void getDescripcion(string descripcion) { Descripcion=descripcion; }
         public void getActivo(bool activo) {Activo=activo; }
 
