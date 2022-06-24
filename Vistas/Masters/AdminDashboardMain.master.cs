@@ -13,11 +13,12 @@ namespace Vistas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!NegocioUsuario.IsLoggedInAsAdmin(Session)) Response.Redirect("~/Home.aspx");
             GetStats();
             if (!IsPostBack) { }
         }
 
-        // IMPORTANTE: LLAMAR A ESTE METODO CADA VEZ QUE AGREGUEN FILAS A LAS GRIDVIEWS DE USUARIO O JUEGO
+        // TODO -> LLAMAR A ESTE METODO CADA VEZ QUE AGREGUEN FILAS A LAS GRIDVIEWS DE USUARIO O JUEGO
         public void GetStats()
         {
             var ds = NegocioUsuario.ObtenerCantidadUsuarios();
