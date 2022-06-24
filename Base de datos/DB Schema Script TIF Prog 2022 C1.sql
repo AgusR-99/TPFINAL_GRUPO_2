@@ -655,3 +655,25 @@ BEGIN
 	WHERE JP.IdJuego=@IdJuego
 END
 GO
+
+CREATE PROC SP_Tiendas_ObtenerPorJuego
+@IdJuego int
+AS
+BEGIN
+	SELECT T.IdTienda, T.Nombre, T.SitioWeb, T.RutaImagen, T.Activo
+	FROM Tiendas AS T
+		INNER JOIN JuegosXTiendas JT ON T.IdTienda=JT.IdTienda
+	WHERE JT.IdJuego=@IdJuego
+END
+GO
+
+
+CREATE PROC SP_JuegosXTiendas_ObtenerPorJuego
+@IdJuego int
+AS
+BEGIN
+	SELECT JT.IdJuego, JT.IdTienda, JT.Precio, JT.PrecioRebajado, JT.Activo
+	FROM JuegosXTiendas JT
+	WHERE JT.IdJuego=@IdJuego
+END
+GO
