@@ -95,19 +95,19 @@ namespace DAO
 
         public static DataTable ObtenerTabla(String NombreTabla, String Sql, List<SqlParameter> parameters = null, bool isSP = false)
         {
-            try
-            {
+            /*try
+            {*/
                 DataSet ds = new DataSet();
                 SqlCommand cmd = GetCommand(Sql, parameters, isSP);
                 SqlDataAdapter adp = GetAdapter(cmd);
                 adp.Fill(ds, NombreTabla);
                 cmd.Connection.Close();
                 return ds.Tables[NombreTabla];
-            }
+            /*}
             catch
             {
                 return null;
-            }
+            }*/
         }
     }
 }

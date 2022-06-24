@@ -49,6 +49,11 @@ namespace Negocio
             return DAOUsuario.ListarUsuarios();
         }
 
+        public static DataTable ListarUsuariosPorNombre(string Nombre)
+        {
+            return DAOUsuario.ListarUsuariosPorNombre(Nombre);
+        }
+
         public static List<string> ActualizarUsuario(Usuario usuario)
         {
             var errorReasons = ActualizarValidarUsuario(usuario);

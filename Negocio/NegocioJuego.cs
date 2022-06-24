@@ -17,6 +17,11 @@ namespace Negocio
             return DAOJuego.ListarJuegos();
         }
 
+        public static DataTable ListarJuegosPorNombre(string Nombre)
+        {
+            return DAOJuego.ListarJuegosPorNombre(Nombre);
+        }
+
         public static List<string> ActualizarJuego(Juego juego)
         {
             var errorReasons = ActualizarValidarJuego(juego);

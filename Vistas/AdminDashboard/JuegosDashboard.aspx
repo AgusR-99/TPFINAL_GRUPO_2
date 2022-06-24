@@ -3,11 +3,14 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="adminDashboardContent" runat="server">
     <%-- Aca van mensajes --%>
     <asp:Label ID="lblMsg" runat="server"></asp:Label>
-    <div class="form-floating ctrl-game">
-        <input type="text" class="form-control bg-dark text-light no-borders" id="txtSearchGame" placeholder="Buscar juego">
-        <label for="floatingSearchGame" class="text-light">Buscar datos de juego</label>
+    <div class="input-group ctrl-category input-cat">
+        <div class="form-outline">
+            <asp:TextBox runat="server" class="form-control bg-dark text-light no-borders" ID="txtSearchGame" placeholder="Buscar juegos"></asp:TextBox>
+        </div>
+        <asp:Button runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="BtnSearch_Click"></asp:Button>
     </div>
-    <asp:GridView ID="GridViewGames"
+    <asp:GridView 
+        ID="GridViewGames"
         runat="server"
         CssClass="grd grd-user w-100 bg-dark-carbon ctrl-game"
         PagerStyle-CssClass="grd-pager"

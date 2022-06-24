@@ -51,6 +51,11 @@ namespace DAO
             return DB.ObtenerTabla("Usuarios", "[SP_Usuarios_Obtener]", isSP: true);
         }
 
+        public static DataTable ListarUsuariosPorNombre(string nombre)
+        {
+            return DB.ObtenerTabla("Usuarios", $"[SP_Usuarios_Obtener_Por_Nombre] N'{nombre}'");
+        }
+
         public static int? ActualizarUsuario(Usuario usuario)
         {
             return DB.NonQuery("[SP_Usuarios_Actualizar]", getParametrosUsuario(usuario), true);

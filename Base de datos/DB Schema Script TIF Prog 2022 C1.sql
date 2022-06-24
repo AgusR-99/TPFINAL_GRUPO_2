@@ -239,6 +239,15 @@ BEGIN
 END
 GO
 
+CREATE PROC SP_Juegos_Obtener_Por_Nombre
+	@Nombre varchar(50)
+AS
+BEGIN
+	SELECT * FROM Juegos
+	WHERE Nombre like '%' + @Nombre + '%'
+END
+GO
+
 
 CREATE PROCEDURE SP_Juegos_Actualizar
 @IdJuego int,
@@ -272,11 +281,21 @@ AS
 DELETE FROM Juegos WHERE IdJuego = @IdJuego
 GO
 
+
 CREATE PROC SP_Usuarios_Obtener
 AS
 BEGIN
 	SELECT Username , Contrasena as [Password], Descripcion, Email, Administrador, Activo
 	FROM Usuarios
+END
+GO
+
+CREATE PROC SP_Usuarios_Obtener_Por_Nombre
+	@Nombre varchar(30)
+AS
+BEGIN
+	SELECT * FROM Usuarios
+	WHERE Username like '%' + @Nombre + '%'
 END
 GO
 

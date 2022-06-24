@@ -16,6 +16,11 @@ namespace DAO
             return DB.ObtenerTabla("Juegos", "[SP_Juegos_Obtener]", isSP: true);
         }
 
+        public static DataTable ListarJuegosPorNombre(string nombre)
+        {
+            return DB.ObtenerTabla("Juegos", $"[SP_Juegos_Obtener_Por_Nombre] N'{nombre}'");
+        }
+
         public static int? ActualizarJuego(Juego juego)
         {
             return DB.NonQuery("[SP_Juegos_Actualizar]", getParametrosJuego(juego,true), true);
