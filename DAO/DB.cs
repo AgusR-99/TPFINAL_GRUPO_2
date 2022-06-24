@@ -79,18 +79,18 @@ namespace DAO
         /// <returns>Cantidad de filas afectadas o null si falla la operación</returns>
         public static int? NonQuery(string query, List<SqlParameter> parameters = null, bool isSP = false)
         {
-            /*try
-            {*/
+            try
+            {
                 var cmd = GetCommand(query, parameters, isSP);
                 cmd.Connection.Open();
                 int affected = cmd.ExecuteNonQuery();
                 cmd.Connection.Close();
                 return affected;
-            /*}
+            }
             catch(Exception ex)
             {
                 return null;
-            }*/
+            }
         }
 
         public static DataTable ObtenerTabla(String NombreTabla, String Sql, List<SqlParameter> parameters = null, bool isSP = false)
