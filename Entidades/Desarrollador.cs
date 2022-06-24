@@ -22,7 +22,7 @@ namespace Entidades
         public string getHistoria() { return Historia; }
 
 
-        public void getID_Desarrollador(int id_desarrollador) { ID_Desarrollador=id_desarrollador; }
+        public void setID_Desarrollador(int id_desarrollador) { ID_Desarrollador=id_desarrollador; }
         public void setNombre(string nombre) { Nombre=nombre; }
         public void setURL_web(string url_web) { URL_web=url_web; }
         public void setUbicacion_sede(string ubicacion) { Ubicacion_sede=ubicacion; }
