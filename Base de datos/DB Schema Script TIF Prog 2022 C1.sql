@@ -455,17 +455,6 @@ BEGIN
 END
 GO
 
-
-CREATE PROCEDURE SP_Desarrolladores_Obtener
-@idDesarrollador int = NULL
-AS
-BEGIN
-SELECT IdDesarrollador, NombreDesarrollador, SitioWeb, UbicacionSede, Historia FROM Desarrolladores
-WHERE (@idDesarrollador IS NULL OR IdDesarrollador=@idDesarrollador)
-END
-GO
-
-
 CREATE PROCEDURE SP_JuegosXTiendas_Obtener
 @filtro varchar(100) = null
 AS
@@ -532,7 +521,7 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Desarolladores_Actualizar
+CREATE PROC SP_Desarrolladores_Actualizar
 	@IdDesarrollador int,
 	@Nombre varchar(50),
 	@SitioWeb varchar(100),
@@ -552,7 +541,7 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Desarolladores_Agregar
+CREATE PROC SP_Desarrolladores_Agregar
 	@Nombre varchar(50),
 	@SitioWeb varchar(100),
 	@UbicacionSede varchar(100),
@@ -564,7 +553,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE SP_Desarolladores_Obtener
+CREATE PROCEDURE SP_Desarrolladores_Obtener
 AS
 BEGIN
 	SELECT IdDesarrollador, NombreDesarrollador,  SitioWeb, UbicacionSede, Historia

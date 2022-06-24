@@ -46,7 +46,7 @@ namespace Vistas.AdminDashboard
 
             var editedRow = GridViewDevs.Rows[e.RowIndex];
             Desarrollador desarrollador = new Desarrollador(
-                    Convert.ToInt32((((Label)editedRow.FindControl("lblGVDevsID")).Text)),
+                    Convert.ToInt32((((Label)editedRow.FindControl("lblGVDevsIDDesarrollador")).Text)),
                     ((TextBox)editedRow.FindControl("txtGVDevsNombre")).Text,
                     ((TextBox)editedRow.FindControl("txtGVDevsSitioWeb")).Text,
                     ((TextBox)editedRow.FindControl("txtGVDevsUbicacionSede")).Text,

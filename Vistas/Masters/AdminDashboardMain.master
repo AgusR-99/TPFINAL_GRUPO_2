@@ -50,6 +50,12 @@
 						</a>
 					</div>
 					<div class="search-selection">
+						<a class="btn-dev" href="../AdminDashboard/DesarrolladoresDashboard.aspx">
+							<i class="fa-solid fa-code big"></i>
+							<p>Desarrolladores</p>
+						</a>
+					</div>
+					<div class="search-selection">
 						<a class="btn-store" href="../AdminDashboard/TiendasDashboard.aspx">
 							<i class="fa-solid fa-shop big"></i>
 							<p>Tiendas</p>
