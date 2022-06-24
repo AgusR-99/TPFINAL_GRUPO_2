@@ -61,5 +61,10 @@ namespace Negocio
         {
             return DAOJuego.ObtenerCantidadJuegos();
         }
+
+        public static List<Juego> ObtenerJuegosComoLista()
+        {
+            return DAOJuego.ObtenerJuegosComoLista();
+        }
     }
 }

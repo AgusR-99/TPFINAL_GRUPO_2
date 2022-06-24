@@ -32,5 +32,10 @@ namespace Entidades
         public void setID_Plataforma(int id_plataforma) { ID_Plataforma = id_plataforma; }
         public void setNombre(string nombre) { Nombre = nombre; }
         public void setActivo(bool activo) { Activo = activo; }
+
+        public override string ToString()
+        {
+            return Nombre;
+        }
     }
 }

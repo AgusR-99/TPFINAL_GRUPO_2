@@ -31,7 +31,6 @@ CREATE TABLE Usuarios
 	CONSTRAINT C_Usuarios_Email UNIQUE (Email)
 )
 
-
 CREATE TABLE Plataformas
 (
 	IdPlataforma int IDENTITY(1,1) NOT NULL,
@@ -271,6 +270,7 @@ CREATE PROC SP_Juegos_Eliminar
 @IdJuego int
 AS
 DELETE FROM Juegos WHERE IdJuego = @IdJuego
+GO
 
 CREATE PROC SP_Usuarios_Obtener
 AS
@@ -304,6 +304,7 @@ CREATE PROC SP_Usuarios_Eliminar
 @Username varchar(30)
 AS
 DELETE FROM Usuarios WHERE Username = @Username
+GO
 
 CREATE PROC SP_Categorias_Actualizar
 	@IdCategoria int,
@@ -437,9 +438,11 @@ GO
 
 
 CREATE PROCEDURE SP_Desarrolladores_Obtener
+@idDesarrollador int = NULL
 AS
 BEGIN
 SELECT IdDesarrollador, NombreDesarrollador, SitioWeb, UbicacionSede, Historia FROM Desarrolladores
+WHERE (@idDesarrollador IS NULL OR IdDesarrollador=@idDesarrollador)
 END
 GO
 
@@ -581,10 +584,12 @@ END
 GO
 
 CREATE PROCEDURE SP_Imagenes_Obtener
+@idJuego int = NULL
 AS
 BEGIN
 	SELECT IdJuego, NombreArchivo,  Orden, activo
 	FROM JuegosImagenes
+	WHERE (@idJuego IS NULL OR IdJuego=@idJuego)
 END
 GO
 
@@ -608,4 +613,26 @@ GO
 CREATE PROC SP_Obtener_Cantidad_Opiniones
 AS
 SELECT COUNT(*) FROM Opiniones WHERE Activo = 1
+GO
+
+CREATE PROC SP_Categorias_ObtenerPorJuego
+@IdJuego int
+AS
+BEGIN
+	SELECT C.IdCategoria, C.Nombre, C.Activo
+	FROM Categorias AS C
+		INNER JOIN JuegosXCategorias JC ON C.IdCategoria = JC.IdCategoria
+	WHERE C.Activo=1 AND JC.IdJuego=@IdJuego
+END
+GO
+
+CREATE PROC SP_Plataformas_ObtenerPorJuego
+@IdJuego int
+AS
+BEGIN
+	SELECT P.IdPlataforma, P.Nombre, P.Activo
+	FROM Plataformas AS P
+		INNER JOIN JuegosXPlataformas JP ON P.IdPlataforma = JP.IdPlataforma
+	WHERE JP.IdJuego=@IdJuego
+END
 GO

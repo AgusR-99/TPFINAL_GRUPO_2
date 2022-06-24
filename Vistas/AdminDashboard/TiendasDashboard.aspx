@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/AdminDashboardMain.master" AutoEventWireup="true" CodeBehind="TiendasDashboard.aspx.cs" Inherits="Vistas.TiendasDashboard" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="adminDashboardContent" runat="server">
     <%-- Aca van mensajes --%>
     <asp:Label ID="lblMsg" runat="server"></asp:Label>
@@ -13,7 +14,6 @@
         ID="GridViewStores"
         runat="server"
         CssClass="grd grd-user w-100 bg-dark-carbon ctrl-store"
-        AutoGenerateEditButton="True"
         DataKeyNames="Id"
         AutoGenerateColumns="False"
         AllowPaging="true"
@@ -22,6 +22,15 @@
         OnRowUpdating="TiendaUpdate"
         OnPageIndexChanging="GridViewStores_PageIndexChanging">
         <Columns>
+            <asp:TemplateField>
+                <EditItemTemplate>
+                    <asp:LinkButton ID="btnUpdate" CssClass="btn btn-outline-success" runat="server" CommandName="Update" Text="Actualizar" OnClientClick="return confirm('¿Está seguro que desea actualizar la fila?')" />
+                    <asp:LinkButton ID="btnCancel" CssClass="btn btn-outline-warning" runat="server" CommandName="Cancel" Text="Cancelar" />
+                </EditItemTemplate>
+                <ItemTemplate>
+                    <asp:LinkButton ID="btnEdit" CssClass="btn btn-outline-primary" runat="server" CommandName="Edit" Text="Editar" />
+                </ItemTemplate>
+            </asp:TemplateField>
             <asp:TemplateField HeaderText="ID">
                 <EditItemTemplate>
                     <asp:Label ID="lblGVStoresID" runat="server" Text='<%# Eval("ID") %>'>
@@ -87,16 +96,16 @@
             <tbody>
                 <tr>
                     <td>
-                        <asp:TextBox ID="txtNombre_new" runat="server"></asp:TextBox><br />
+                        <asp:TextBox ID="txtNombre_new" CssClass="form-control bg-dark text-light" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtImagen_new" runat="server"></asp:TextBox><br />
+                        <asp:TextBox ID="txtImagen_new" CssClass="form-control bg-dark text-light" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:TextBox ID="txtURL_new" runat="server"></asp:TextBox><br />
+                        <asp:TextBox ID="txtURL_new" CssClass="form-control bg-dark text-light" runat="server"></asp:TextBox>
                     </td>
                     <td>
-                        <asp:Button ID="btnStoreAgregar"  CssClass="btn btn-outline-success"  runat="server" OnClick="btnStoreAgregar_Click" Text="Agregar" />
+                        <asp:Button ID="btnStoreAgregar" CssClass="btn btn-outline-success" runat="server" OnClick="btnStoreAgregar_Click" Text="Agregar" />
                     </td>
                 </tr>
             </tbody>

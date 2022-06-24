@@ -15,6 +15,14 @@ namespace Entidades
 
         public Imagenes() { }
 
+        public Imagenes(int idJuego, string nombreArchivo, int orden, bool activo)
+        {
+            ID_Juego = idJuego;
+            NombreArchivo = nombreArchivo;
+            Orden = orden;
+            Activo = activo;
+        }
+
         public int getID_Juego() { return ID_Juego; }
         public string getNombreArchivo() { return NombreArchivo; }
         public int getOrden() { return Orden; }

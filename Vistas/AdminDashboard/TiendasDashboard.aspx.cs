@@ -18,6 +18,7 @@ namespace Vistas
             {
                 CargarTiendas();
             }
+            Response.CacheControl = "no-cache";
         }
 
         protected void CargarTiendas()
@@ -50,7 +51,6 @@ namespace Vistas
             var editingId = ((Label)GridViewStores.Rows[e.NewEditIndex].FindControl("lblGVStoresID")).Text;
             BtnClearSearch_Click(null, null);
             SetEditingIndexById(editingId);
-            CargarTiendas();
         }
 
         protected void TiendaUpdate(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)

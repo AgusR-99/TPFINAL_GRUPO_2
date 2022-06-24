@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Entidades;
 using Negocio;
 
 namespace Vistas
@@ -16,6 +17,11 @@ namespace Vistas
         {
             LoggedIn = NegocioUsuario.IsLoggedIn(Session);
             LoggedInAsAdmin = NegocioUsuario.IsLoggedInAsAdmin(Session);
+            if (!IsPostBack)
+            {
+                rptCategorias.DataSource = NegocioCategorias.ObtenerCategoriasActivasComoLista();
+                rptCategorias.DataBind();
+            }
         }
 
         protected void GoToAdminDashboard(object sender, EventArgs e)

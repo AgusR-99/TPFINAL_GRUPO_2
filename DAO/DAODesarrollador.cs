@@ -17,6 +17,14 @@ namespace DAO
             return DB.ObtenerTabla("Desarrolladores", "[SP_Desarrolladores_Obtener]", isSP: true);
         }
 
+        public static Desarrollador ObtenerDesarrolladorPorId(int id)
+        {
+            var parametros = new List<SqlParameter>() { new SqlParameter("idDesarrollador", id) };
+            var datatable = DB.ObtenerTabla("Desarrollador", "[SP_Desarrollador_Obtener]", parametros, true);
+            if (datatable == null) return null;
+            return ArmarDesarrollador(datatable.Rows[0]);
+        }
+
         public static int? ActualizarDesarrollador(Desarrollador desarrollador)
         {
             return DB.NonQuery("[SP_Desarrolladores_Actualizar]", getParametrosDesarrollador(desarrollador, true), true);
@@ -38,6 +46,24 @@ namespace DAO
             };
             if (includeID) parametros.Add(new SqlParameter("IdDesarrollador", desarrollador.getID_Desarrollador()));
             return parametros;
+        }
+
+        private static Desarrollador ArmarDesarrollador(in DataRow datarow)
+        {
+            try
+            {
+                return new Desarrollador(
+                        (int)datarow["IdDesarrollador"],
+                        (string)datarow["Nombre"],
+                        (string)datarow["SitioWeb"],
+                        (string)datarow["UbicacionSede"],
+                        (string)datarow["Historia"]
+                    );
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }

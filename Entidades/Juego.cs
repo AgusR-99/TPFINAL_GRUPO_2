@@ -9,7 +9,7 @@ namespace Entidades
     public class Juego
     {
         private int ID;
-        private string Nombre;
+        public string Nombre { get; set; }
         private string Descripcion;
         private bool Activo;
 
@@ -18,6 +18,7 @@ namespace Entidades
         private List<Plataforma> Plataformas;
         private List<Categoria> Categorias;
         private List<Tienda> Tiendas;
+        private List<Juego_x_Tienda> JuegosXTiendas;
 
         public Juego(int idjuego, int iddesarrollador, string nombre, string descripcion, bool activo) 
         {
@@ -45,7 +46,9 @@ namespace Entidades
         public List<Categoria> GetCategorias() { return Categorias; }
         public List<Plataforma> GetPlataformas() { return Plataformas; }
         public List<Tienda> GetTiendas() { return Tiendas; }
+        public List<Juego_x_Tienda> GetJuegosXTiendas() { return JuegosXTiendas; }
         public Desarrollador GetDesarrollador() { return Desarrollador; }
+        public double? getPrecio() { return !JuegosXTiendas.Any() ? (double?)null  : JuegosXTiendas.AsQueryable().Min(x => x.getPrecioRebajado() ?? x.getPrecio()); }
 
         public void setID(int id) { ID=id; }
         public void setNombre(string nombre) {Nombre=nombre; }
@@ -53,13 +56,15 @@ namespace Entidades
             if (Desarrollador == null) Desarrollador = new Desarrollador();
             Desarrollador.setID_Desarrollador(ID_desarrollador); 
         }
-        public void getDescripcion(string descripcion) { Descripcion=descripcion; }
-        public void getActivo(bool activo) {Activo=activo; }
+        public void setDescripcion(string descripcion) { Descripcion=descripcion; }
+        public void setActivo(bool activo) {Activo=activo; }
+
 
         public void setImagenes(List<Imagenes> imagenes) { Imagenes = imagenes; }
         public void setCategorias(List<Categoria> categorias) {  Categorias = categorias; }
         public void setPlataformas(List<Plataforma> plataformas) {  Plataformas = plataformas; }
         public void setTiendas(List<Tienda> tiendas) {  Tiendas = tiendas; }
         public void setDesarrollador(Desarrollador desarrollador) { Desarrollador = desarrollador; }
+        public void setJuegosXTiendas(List<Juego_x_Tienda> juegosXTiendas) { JuegosXTiendas = juegosXTiendas; }
     }
 }
