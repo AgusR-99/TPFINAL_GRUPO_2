@@ -75,6 +75,7 @@
     <Content Include="Imagenes\welcome.png" />
     <Content Include="AdminDashboard\JuegosDashboard.aspx" />
     <Content Include="AdminDashboard\JuegosXTiendasDashboard.aspx" />
+    <Content Include="AdminDashboard\JuegosXCategorias.aspx" />
     <Content Include="Listado.aspx" />
     <Content Include="Logout.aspx" />
     <Content Include="normalize.css" />
@@ -91,12 +92,25 @@
     <Content Include="Articulo.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminDashboard\JuegosXCategorias.aspx.designer.cs">
+      <DependentUpon>JuegosXCategorias.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminDashboard\JuegosXTiendasDashboard.aspx.cs">
       <DependentUpon>JuegosXTiendasDashboard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="AdminDashboard\JuegosXTiendasDashboard.aspx.designer.cs">
       <DependentUpon>JuegosXTiendasDashboard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\JuegosXCategorias.aspx.cs">
+      <DependentUpon>JuegosXCategorias.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CategoriaHandler.ashx.cs">
+      <DependentUpon>CategoriaHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="JuegoHandler.ashx.cs">
+      <DependentUpon>JuegoHandler.ashx</DependentUpon>
     </Compile>
     <Compile Include="Masters\AdminDashboardMain.master.cs">
       <DependentUpon>AdminDashboardMain.master</DependentUpon>
@@ -223,6 +237,8 @@
     <Content Include="Masters\Navbar.Master" />
     <Content Include="Masters\NestedUserDashboard.master" />
     <Content Include="Masters\AdminDashboardMain.master" />
+    <Content Include="CategoriaHandler.ashx" />
+    <Content Include="JuegoHandler.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
