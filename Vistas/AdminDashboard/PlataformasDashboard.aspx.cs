@@ -11,7 +11,7 @@ namespace Vistas
 {
     public partial class PlataformasDashboard : System.Web.UI.Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        /*protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
@@ -20,7 +20,7 @@ namespace Vistas
         }
         protected void CargarPlataformas()
         {
-            var dt = NegocioPlataformas.ListarPlataformas();
+            var dt = NegocioPlataforma.ListarPlataformas();
             GVPlataform.DataSource = dt;
             Session["PlataformasSession"] = dt;
             GVPlataform.DataBind();
@@ -37,7 +37,7 @@ namespace Vistas
                 fooo
                 );
 
-            var erroresAgregar = NegocioPlataformas.AgregarCategoria(categoria);
+            var erroresAgregar = NegocioPlataforma.AgregarPlataforma(categoria);
             if (erroresAgregar != "") Msg(erroresAgregar);
             else
             {
@@ -101,6 +101,6 @@ namespace Vistas
         protected void Msg(string msg)
         {
             lblMsg.Text = msg;
-        }
+        }*/
     }
 }
