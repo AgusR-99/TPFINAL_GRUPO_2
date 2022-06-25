@@ -561,6 +561,15 @@ BEGIN
 END
 GO
 
+CREATE PROC SP_Desarrolladores_Obtener_Por_Nombre
+	@Nombre varchar(30)
+AS
+BEGIN
+	SELECT * FROM Desarrolladores
+	WHERE NombreDesarrollador like '%' + @Nombre + '%'
+END
+GO
+
 CREATE PROC SP_Imagenes_Actualizar
 	@IdJuego int,
 	@NombreArchivo varchar(50),
