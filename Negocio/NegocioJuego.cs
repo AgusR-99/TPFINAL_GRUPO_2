@@ -29,6 +29,12 @@ namespace Negocio
             return errorReasons;
         }
 
+        public static List<string> ObtenerListaNombres(string termino)
+        {
+            List<string> lista = new List<string>();
+            return DAOJuego.ObtenerListaNombres(lista, termino);
+        }
+
         public static List<string> AgregarJuego(Juego juego)
         {
             var errorReasons = Validar(juego);

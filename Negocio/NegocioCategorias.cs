@@ -24,15 +24,21 @@ namespace Negocio
             return DAOCategoria.ObtenerCategoriaSiguienteID();
         }
 
+        public static List<string> ObtenerListaNombres(string termino)
+        {
+            List<string> lista = new List<string>();
+            return DAOCategoria.ObtenerListaNombres(lista, termino);
+        }
+
         public static string ActualizarCategoria(Categoria categoria)
         {
             var error = Validar(categoria);
             if (error != "") return error;
 
             int? resultadoActualizar = DAOCategoria.ActualizarCategoria(categoria);
-            if (resultadoActualizar == null) error = ("Error al actualizar categoria: ocurrió un error al actualizar la base de datos");
-            if (resultadoActualizar == 0) error = ("Error al actualizar categoria: no se encontró el registro a actualizar");
-            if (resultadoActualizar == -1) error = ("Error al actualizar categoria: la categoria ya existe");
+            if (resultadoActualizar == null) error = "Error al actualizar categoria: ocurrió un error al actualizar la base de datos";
+            if (resultadoActualizar == 0) error = "Error al actualizar categoria: no se encontró el registro a actualizar";
+            if (resultadoActualizar == -1) error = "Error al actualizar categoria: la categoria ya existe";
             return error;
         }
 
@@ -43,8 +49,8 @@ namespace Negocio
 
             int? resultadoActualizar = DAOCategoria.AgregarCategoria(categoria);
             if (resultadoActualizar == null) error = ("Error al agregar categoria: ocurrió un error al actualizar la base de datos");
-            if (resultadoActualizar == 0) error = ("Error al agregar categoria: no se encontró el registro a actualizar");
-            if (resultadoActualizar == -1) error = ("Error al agregar categoria: la categoria ya existe");
+            if (resultadoActualizar == 0) error = ("Error al agregar categoria: no se ha insertado el registro");
+            if (resultadoActualizar == -1) error = ("Error al agregar categoria: la categoria ya existe en esta tabla");
             return error;
         }
 
