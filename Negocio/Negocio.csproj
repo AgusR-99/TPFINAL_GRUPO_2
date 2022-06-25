@@ -46,6 +46,7 @@
     <Compile Include="NegocioDesarrollador.cs" />
     <Compile Include="NegocioImagen.cs" />
     <Compile Include="NegocioJuego.cs" />
+    <Compile Include="NegocioJuegosXCategorias.cs" />
     <Compile Include="NegocioOpinion.cs" />
     <Compile Include="NegocioJuegoXTienda.cs" />
     <Compile Include="NegocioPlataforma.cs" />
