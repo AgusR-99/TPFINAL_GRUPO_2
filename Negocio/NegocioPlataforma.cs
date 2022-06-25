@@ -16,8 +16,16 @@ namespace Negocio
             return DAOPlataforma.ListarPlataformas();
         }
 
-        
-          public static List<string> ActualizarPlataforma(Plataforma plataforma)
+        public static DataSet ObtenerPlataformaSiguienteID()
+        {
+            return DAOPlataforma.ObtenerPlataformaSiguienteID();
+        }
+
+        public static DataTable ListarPlataformasPorNombre(string Nombre)
+        {
+            return DAOPlataforma.ListarPlataformasPorNombre(Nombre);
+        }
+        public static List<string> ActualizarPlataforma(Plataforma plataforma)
         {
             var errorReasons = Validar(plataforma);
             if (errorReasons.Any()) return errorReasons;
@@ -38,7 +46,7 @@ namespace Negocio
             int? resultadoActualizar = DAOPlataforma.AgregarPlataforma(plataforma);
             if (resultadoActualizar == null) errorReasons.Add("Ocurrió un error al actualizar la base de datos");
             if (resultadoActualizar == 0) errorReasons.Add("No se encontró el registro a actualizar");
-
+            if (resultadoActualizar == -1) errorReasons.Add("Error al agregar: la categoria ya existe");
             return errorReasons;
         }
 

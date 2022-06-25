@@ -31,14 +31,29 @@ CREATE TABLE Usuarios
 	CONSTRAINT C_Usuarios_Email UNIQUE (Email)
 )
 
-
 CREATE TABLE Plataformas
 (
 	IdPlataforma int IDENTITY(1,1) NOT NULL,
 	Nombre varchar(30) NOT NULL,
-	NombreImagen varchar(50) NULL,
+	Activo bit NOT NULL
 	CONSTRAINT PK_Plataformas PRIMARY KEY (IdPlataforma)
 )
+
+INSERT INTO Plataformas
+(
+Nombre,
+Activo
+)
+VALUES('Play Station',1)
+GO
+
+INSERT INTO Plataformas
+(
+Nombre,
+Activo
+)
+VALUES('XBOX',1)
+GO
 
 CREATE TABLE Categorias
 (
@@ -166,10 +181,16 @@ END
 GO
  
 CREATE PROC SP_Tiendas_Obtener
+@filtro varchar(100) = null
 AS
 BEGIN
-	SELECT IdTienda as [ID], Nombre as [Tienda], RutaImagen as Imagen, SitioWeb as [Sitio Web], Activo
-	FROM Tiendas
+	if @filtro is null
+		SELECT IdTienda as [ID], Nombre as [Tienda], RutaImagen as Imagen, SitioWeb as [Sitio Web], Activo
+		FROM Tiendas
+	else
+		SELECT IdTienda as [ID], Nombre as [Tienda], RutaImagen as Imagen, SitioWeb as [Sitio Web], Activo
+		FROM Tiendas
+		WHERE Nombre like '%'+@filtro+'%' or SitioWeb like '%'+@filtro+'%' 
 END
 GO
 
@@ -221,6 +242,15 @@ BEGIN
 END
 GO
 
+CREATE PROC SP_Juegos_Obtener_Por_Nombre
+	@Nombre varchar(50)
+AS
+BEGIN
+	SELECT * FROM Juegos
+	WHERE Nombre like '%' + @Nombre + '%'
+END
+GO
+
 
 CREATE PROCEDURE SP_Juegos_Actualizar
 @IdJuego int,
@@ -252,6 +282,8 @@ CREATE PROC SP_Juegos_Eliminar
 @IdJuego int
 AS
 DELETE FROM Juegos WHERE IdJuego = @IdJuego
+GO
+
 
 CREATE PROC SP_Usuarios_Obtener
 AS
@@ -279,6 +311,16 @@ BEGIN
 	SELECT Nombre FROM Juegos
 	WHERE Nombre like '%' + @Nombre + '%'
 END
+GO
+
+CREATE PROC SP_Usuarios_Obtener_Por_Nombre
+	@Nombre varchar(30)
+AS
+BEGIN
+	SELECT * FROM Usuarios
+	WHERE Username like '%' + @Nombre + '%'
+END
+GO
 
 CREATE PROC SP_Usuarios_Actualizar
 @Username varchar(30),
@@ -304,6 +346,7 @@ CREATE PROC SP_Usuarios_Eliminar
 @Username varchar(30)
 AS
 DELETE FROM Usuarios WHERE Username = @Username
+GO
 
 CREATE PROC SP_Categorias_Actualizar
 	@IdCategoria int,
@@ -391,41 +434,53 @@ GO
 
 CREATE PROCEDURE SP_Plataforma_Agregar
 @Nombre varchar(30),
-@NombreImagen varchar(50)
+@Activo bit
 AS
+BEGIN
+IF NOT EXISTS(SELECT * FROM Plataformas WHERE @Nombre like nombre)
 BEGIN
 INSERT INTO Plataformas
 (
 Nombre,
-NombreImagen
+Activo
 )
-VALUES(@Nombre, @NombreImagen)
+VALUES(@Nombre, @Activo)
+END
+ELSE RETURN -1
 END
 GO
 
 CREATE PROCEDURE SP_Plataformas_Actualizar
 @IdPlataforma int,
 @Nombre varchar(30),
-@NombreImagen varchar(50)
+@Activo bit
 AS
 BEGIN
+IF NOT EXISTS (SELECT * FROM PLATAFORMAS WHERE @Nombre LIKE Nombre) OR @Activo NOT LIKE (SELECT Activo FROM Plataformas WHERE IdPlataforma LIKE @IdPlataforma)
+BEGIN
 UPDATE Plataformas
-SET Nombre=@Nombre, NombreImagen=@NombreImagen
+SET Nombre=@Nombre, Activo=@Activo
 WHERE IdPlataforma=@IdPlataforma
+RETURN @@ROWCOUNT;
+END
+ELSE RETURN -1
 END
 GO
 
 CREATE PROCEDURE SP_Plataformas_Obtener
 AS
 BEGIN
-SELECT IdPlataforma AS [ID], Nombre AS [Plataforma], NombreImagen AS [Imagen] FROM Plataformas
+SELECT IdPlataforma, Nombre, Activo
+FROM Plataformas
 END
 GO
 
-CREATE PROCEDURE SP_Desarrolladores_Obtener
+CREATE PROCEDURE SP_Plataformas_Obtener_Por_Nombre
+	@Nombre varchar(30)
 AS
 BEGIN
-SELECT IdDesarrollador, NombreDesarrollador, SitioWeb, UbicacionSede, Historia FROM Desarrolladores
+	SELECT * FROM Plataformas
+	WHERE Nombre like '%' + @Nombre + '%'
 END
 GO
 
@@ -496,6 +551,19 @@ BEGIN
 	WHERE
 		IdLink = @IdLink
 	RETURN @@ROWCOUNT;
+END
+GO
+
+CREATE PROCEDURE SP_Plataformas_Obtener_Siguiente_Id
+AS
+BEGIN
+	SELECT
+  CASE
+    WHEN (SELECT
+        COUNT(1)
+      FROM Plataformas) = 0 THEN 1
+    ELSE IDENT_CURRENT('Plataformas') + 1
+  END AS Current_Identity;
 END
 GO
 
@@ -573,13 +641,25 @@ END
 GO
 
 CREATE PROCEDURE SP_JuegosXTiendas_Obtener
+@filtro varchar(100) = null
 AS
 BEGIN
-	SELECT Juegos.Nombre AS Juego, Tiendas.Nombre AS Tienda, Juegos.IdJuego, Tiendas.IdTienda,
-	JuegosXTiendas.SitioWeb [URL], Precio, PrecioRebajado [Precio rebajado], JuegosXTiendas.Activo
-	FROM JuegosXTiendas
-	INNER JOIN Juegos ON JuegosXTiendas.IdJuego=Juegos.IdJuego
-	INNER JOIN Tiendas ON JuegosXTiendas.IdTienda=Tiendas.IdTienda
+	IF @filtro IS NULL
+		SELECT Juegos.Nombre AS Juego, Tiendas.Nombre AS Tienda, Juegos.IdJuego, Tiendas.IdTienda,
+		JuegosXTiendas.SitioWeb [URL], Precio, PrecioRebajado [Precio rebajado], JuegosXTiendas.Activo
+		FROM JuegosXTiendas
+		INNER JOIN Juegos ON JuegosXTiendas.IdJuego=Juegos.IdJuego
+		INNER JOIN Tiendas ON JuegosXTiendas.IdTienda=Tiendas.IdTienda
+	ELSE
+		SELECT Juegos.Nombre AS Juego, Tiendas.Nombre AS Tienda, Juegos.IdJuego, Tiendas.IdTienda,
+		JuegosXTiendas.SitioWeb [URL], Precio, PrecioRebajado [Precio rebajado], JuegosXTiendas.Activo
+		FROM JuegosXTiendas
+		INNER JOIN Juegos ON JuegosXTiendas.IdJuego=Juegos.IdJuego
+		INNER JOIN Tiendas ON JuegosXTiendas.IdTienda=Tiendas.IdTienda
+		WHERE 
+			Juegos.Nombre LIKE '%'+@filtro+'%' OR
+			Tiendas.Nombre LIKE '%'+@filtro+'%' OR
+			JuegosXTiendas.SitioWeb LIKE '%'+@filtro+'%'
 END
 GO
 
@@ -635,7 +715,7 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Desarolladores_Actualizar
+CREATE PROC SP_Desarrolladores_Actualizar
 	@IdDesarrollador int,
 	@Nombre varchar(50),
 	@SitioWeb varchar(100),
@@ -655,7 +735,7 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Desarolladores_Agregar
+CREATE PROC SP_Desarrolladores_Agregar
 	@Nombre varchar(50),
 	@SitioWeb varchar(100),
 	@UbicacionSede varchar(100),
@@ -667,11 +747,20 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE SP_Desarolladores_Obtener
+CREATE PROCEDURE SP_Desarrolladores_Obtener
 AS
 BEGIN
 	SELECT IdDesarrollador, NombreDesarrollador,  SitioWeb, UbicacionSede, Historia
 	FROM Desarrolladores
+END
+GO
+
+CREATE PROC SP_Desarrolladores_Obtener_Por_Nombre
+	@Nombre varchar(30)
+AS
+BEGIN
+	SELECT * FROM Desarrolladores
+	WHERE NombreDesarrollador like '%' + @Nombre + '%'
 END
 GO
 
@@ -706,10 +795,12 @@ END
 GO
 
 CREATE PROCEDURE SP_Imagenes_Obtener
+@idJuego int = NULL
 AS
 BEGIN
 	SELECT IdJuego, NombreArchivo,  Orden, activo
 	FROM JuegosImagenes
+	WHERE (@idJuego IS NULL OR IdJuego=@idJuego)
 END
 GO
 
@@ -719,5 +810,62 @@ CREATE PROC SP_JuegosXTiendas_Existe
 AS
 BEGIN
 	SELECT COUNT(1) FROM JuegosXTiendas where IdJuego=@IdJuego and IdTienda=@IdTienda
+END
+GO
+
+CREATE PROC SP_Obtener_Cantidad_Usuarios
+AS
+SELECT COUNT(*) FROM Usuarios WHERE Activo = 1
+go
+CREATE PROC SP_Obtener_Cantidad_Juegos
+AS
+SELECT COUNT(*) FROM Juegos WHERE Activo = 1
+GO
+CREATE PROC SP_Obtener_Cantidad_Opiniones
+AS
+SELECT COUNT(*) FROM Opiniones WHERE Activo = 1
+GO
+
+CREATE PROC SP_Categorias_ObtenerPorJuego
+@IdJuego int
+AS
+BEGIN
+	SELECT C.IdCategoria, C.Nombre, C.Activo
+	FROM Categorias AS C
+		INNER JOIN JuegosXCategorias JC ON C.IdCategoria = JC.IdCategoria
+	WHERE C.Activo=1 AND JC.IdJuego=@IdJuego
+END
+GO
+
+CREATE PROC SP_Plataformas_ObtenerPorJuego
+@IdJuego int
+AS
+BEGIN
+	SELECT P.IdPlataforma, P.Nombre, P.Activo
+	FROM Plataformas AS P
+		INNER JOIN JuegosXPlataformas JP ON P.IdPlataforma = JP.IdPlataforma
+	WHERE JP.IdJuego=@IdJuego
+END
+GO
+
+CREATE PROC SP_Tiendas_ObtenerPorJuego
+@IdJuego int
+AS
+BEGIN
+	SELECT T.IdTienda, T.Nombre, T.SitioWeb, T.RutaImagen, T.Activo
+	FROM Tiendas AS T
+		INNER JOIN JuegosXTiendas JT ON T.IdTienda=JT.IdTienda
+	WHERE JT.IdJuego=@IdJuego
+END
+GO
+
+
+CREATE PROC SP_JuegosXTiendas_ObtenerPorJuego
+@IdJuego int
+AS
+BEGIN
+	SELECT JT.IdJuego, JT.IdTienda, JT.Precio, JT.PrecioRebajado, JT.Activo
+	FROM JuegosXTiendas JT
+	WHERE JT.IdJuego=@IdJuego
 END
 GO

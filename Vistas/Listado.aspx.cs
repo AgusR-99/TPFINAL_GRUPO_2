@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Negocio;
+using Entidades;
 
 namespace Vistas
 {
@@ -11,7 +13,10 @@ namespace Vistas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            var juegos = NegocioJuego.ObtenerJuegosComoLista();
+            lblCantResultados.Text = $"{juegos.Count} resultados";
+            rptResultados.DataSource = juegos;
+            rptResultados.DataBind();
         }
     }
 }

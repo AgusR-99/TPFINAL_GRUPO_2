@@ -22,9 +22,6 @@
         <Columns>
             <asp:TemplateField>
                 <%--Cosas del footer--%>
-                <FooterTemplate>
-                    <asp:LinkButton ID="btnInsert" CssClass="btn btn-primary" runat="server" CommandName="Insert" Text="Agregar" OnClick="BtnInsert_Click" />
-                </FooterTemplate>
                 <%--Cosas del edit--%>
                 <EditItemTemplate>
                     <asp:LinkButton ID="btnUpdate" CssClass="btn btn-outline-success" runat="server" CommandName="Update" Text="Actualizar" OnClientClick="return confirm('¿Esta seguro que desea actualizar la fila?')" />

@@ -13,6 +13,24 @@ namespace Entidades
         private string URL_web;
         private string Ubicacion_sede;
         private string Historia;
+        public Desarrollador(){}
+
+        public Desarrollador(int id_desarrollador, string nombre, string url_web, string ubicacion, string historia)
+        {
+            setID_Desarrollador(id_desarrollador);
+            setNombre(nombre);
+            setURL_web(url_web);
+            setUbicacion_sede(ubicacion);
+            setHistroia(historia);
+        }
+        public Desarrollador( string nombre, string url_web, string ubicacion, string historia)
+        {
+            setID_Desarrollador(0);
+            setNombre(nombre);
+            setURL_web(url_web);
+            setUbicacion_sede(ubicacion);
+            setHistroia(historia);
+        }
 
 
         public int getID_Desarrollador() { return ID_Desarrollador; }
@@ -22,7 +40,7 @@ namespace Entidades
         public string getHistoria() { return Historia; }
 
 
-        public void getID_Desarrollador(int id_desarrollador) { ID_Desarrollador=id_desarrollador; }
+        public void setID_Desarrollador(int id_desarrollador) { ID_Desarrollador=id_desarrollador; }
         public void setNombre(string nombre) { Nombre=nombre; }
         public void setURL_web(string url_web) { URL_web=url_web; }
         public void setUbicacion_sede(string ubicacion) { Ubicacion_sede=ubicacion; }

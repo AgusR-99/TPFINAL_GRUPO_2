@@ -24,10 +24,31 @@ namespace Vistas
 
         protected void CargarJuegosXTiendas()
         {
-            var tablaJuegosXTiendas = NegocioJuegoXTienda.ListarJuegosXTiendas();
+            var tablaJuegosXTiendas = NegocioJuegoXTienda.ListarJuegosXTiendas(txtSearchGamesxstores.Text);
             GridViewGamesXStores.DataSource = tablaJuegosXTiendas;
             GridViewGamesXStores.DataBind();
         }
+
+        protected void SetEditingIndexById(string editingIdJuego, string editingIdTienda)
+        {
+            var table = ((DataTable)GridViewGamesXStores.DataSource);
+            for (int i = 0; i < table.Rows.Count; i++)
+            {
+                string idJuego = table.Rows[i]["IdJuego"].ToString();
+                string idTienda = table.Rows[i]["IdTienda"].ToString();
+                if (idJuego == editingIdJuego && idTienda == editingIdTienda)
+                {
+                    GridViewGamesXStores.PageIndex = i / GridViewGamesXStores.PageSize;
+                    GridViewGamesXStores.EditIndex = i % GridViewGamesXStores.PageSize;
+                    GridViewGamesXStores.DataBind();
+                    return;
+                }
+            }
+            GridViewGamesXStores.EditIndex = -1;
+            GridViewGamesXStores.DataBind();
+        }
+
+
 
         protected void GridViewGamesXStores_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
@@ -38,8 +59,10 @@ namespace Vistas
 
         protected void GridViewGamesXStores_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            txtSearchGamesxstores.Text = "";
-            GridViewGamesXStores.EditIndex = e.NewEditIndex;
+            var editingIdJuego = ((HiddenField)GridViewGamesXStores.Rows[e.NewEditIndex].FindControl("hfGVGamesXStoresJuego")).Value;
+            var editingIdTienda = ((HiddenField)GridViewGamesXStores.Rows[e.NewEditIndex].FindControl("hfGVGamesXStoresTienda")).Value;
+            BtnClearSearch_Click(null, null);
+            SetEditingIndexById(editingIdJuego, editingIdTienda);
             CargarJuegosXTiendas();
         }
 
@@ -180,15 +203,44 @@ namespace Vistas
             }
             else
             {
+                lblMsg.Text = $"Se agregó correctamente el juego {ddlJuego_new.SelectedItem.Text} a la tienda {ddlTienda_new.SelectedItem.Text}";
                 txtSearchGamesxstores.Text = "";
+                LimpiarControlesAgregar();
                 CargarJuegosXTiendas();
             }
 
         }
 
-        protected void BtnSearch_Click(Object sender, EventArgs e)
+        protected void BtnSearch_Click(object sender, EventArgs e)
         {
             // Logica para buscar
+            GridViewGamesXStores.EditIndex = -1;
+            GridViewGamesXStores.PageIndex = 0;
+            CargarJuegosXTiendas();
         }
+
+        protected void BtnClearSearch_Click(object sender, EventArgs e)
+        {
+            GridViewGamesXStores.EditIndex = -1;
+            GridViewGamesXStores.PageIndex = 0;
+            txtSearchGamesxstores.Text = "";
+            CargarJuegosXTiendas();
+        }
+
+        protected void GridViewGamesXStores_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewGamesXStores.PageIndex = e.NewPageIndex;
+            CargarJuegosXTiendas();
+        }
+
+        protected void LimpiarControlesAgregar()
+        {
+            ddlJuego_new.SelectedIndex = 0;
+            ddlTienda_new.SelectedIndex = 0;
+            txtURL_new.Text = "";
+            txtPrecio_new.Text = "";
+            txtPrecioRebajado_new.Text = "";
+        }
+
     }
 }

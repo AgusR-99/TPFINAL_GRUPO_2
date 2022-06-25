@@ -55,24 +55,19 @@
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Categorias </a><%--Menu dropdown--%>
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                        <li>
-                                            <a class="dropdown-item" href="Listado.aspx">Accion</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="Listado.aspx">Aventura</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="Listado.aspx">RPG</a>
-                                        </li>
-                                        <li>
-                                            <a class="dropdown-item" href="Listado.aspx">Deportes</a>
-                                        </li>
+                                        <asp:Repeater ID="rptCategorias" runat="server">
+                                            <ItemTemplate>
+                                                <li>
+                                                    <a class="dropdown-item" href="/Listado.aspx?cat=<%# Eval("Id_Categoria")%>"><%#Eval("Nombre") %></a>
+                                                </li>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
                                     </ul>
                                 </li>
                                 <%if (LoggedInAsAdmin)
                                 {%> <%--AdminDashboard--%>
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="AdminDashboard.aspx">Admin Dashboard</a>
+                                    <asp:LinkButton runat="server" class="nav-link" aria-current="page" OnClick="GoToAdminDashboard">Admin Dashboard</asp:LinkButton>
                                 </li>
                                 <%} %> <%--Perfil--%>
                                 <li class="nav-item  <%if (!LoggedIn)
@@ -83,7 +78,7 @@
                                 <%if (LoggedIn)
                                 {%> <%--Logout--%>
                                 <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="Logout.aspx">Cerrar sesión</a>
+                                    <asp:LinkButton runat="server" class="nav-link" aria-current="page" OnClick="Logout">Cerrar sesión</asp:LinkButton>
                                 </li>
                                 <%} %>
                             </ul>

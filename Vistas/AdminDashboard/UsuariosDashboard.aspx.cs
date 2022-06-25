@@ -66,7 +66,10 @@ namespace Vistas
 
         protected void BtnSearch_Click(Object sender, EventArgs e)
         {
-            // Logica para buscar usuario
+            var dt = NegocioUsuario.ListarUsuariosPorNombre(txtSearchUser.Text);
+            GridViewUsers.DataSource = dt;
+            Session["UsuariosSession"] = dt;
+            GridViewUsers.DataBind();
         }
     }
 }

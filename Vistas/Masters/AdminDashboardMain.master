@@ -50,8 +50,14 @@
 						</a>
 					</div>
 					<div class="search-selection">
+						<a class="btn-dev" href="../AdminDashboard/DesarrolladoresDashboard.aspx">
+							<i class="fa-solid fa-code big"></i>
+							<p>Desarrolladores</p>
+						</a>
+					</div>
+					<div class="search-selection">
 						<a class="btn-store" href="../AdminDashboard/TiendasDashboard.aspx">
-							<i class="fa-solid fa-cart-arrow-down big"></i>
+							<i class="fa-solid fa-shop big"></i>
 							<p>Tiendas</p>
 						</a>
 					</div>
@@ -59,6 +65,18 @@
 						<a class="btn-category" href="../AdminDashboard/CategoriasDashboard.aspx">
 							<i class="fa-solid fa-list big"></i>
 							<p>Categorias</p>
+						</a>
+					</div>
+					<div class="search-selection">
+						<a class="btn-platform" href="../AdminDashboard/PlataformasDashboard.aspx">
+							<i class="fa-solid fa-computer big"></i>
+							<p>Plataformas</p>
+						</a>
+					</div>
+					<div class="search-selection">
+						<a class="btn-game-store" href="../AdminDashboard/JuegosXTiendasDashboard.aspx">
+							<i class="fa-solid fa-cart-arrow-down big"></i>
+							<p>Juegos-Tiendas</p>
 						</a>
 					</div>
 				</div>

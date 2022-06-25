@@ -119,7 +119,10 @@ namespace Vistas
 
         protected void BtnSearch_Click(Object sender, EventArgs e)
         {
-            // Logica para buscar usuario
+            var dt = NegocioJuego.ListarJuegosPorNombre(txtSearchGame.Text);
+            GridViewGames.DataSource = dt;
+            Session["JuegosSession"] = dt;
+            GridViewGames.DataBind();     
         }
     }
 }

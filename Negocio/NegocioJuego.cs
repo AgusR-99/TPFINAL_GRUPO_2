@@ -17,6 +17,11 @@ namespace Negocio
             return DAOJuego.ListarJuegos();
         }
 
+        public static DataTable ListarJuegosPorNombre(string Nombre)
+        {
+            return DAOJuego.ListarJuegosPorNombre(Nombre);
+        }
+
         public static List<string> ActualizarJuego(Juego juego)
         {
             var errorReasons = ActualizarValidarJuego(juego);
@@ -66,6 +71,11 @@ namespace Negocio
         public static DataSet ObtenerCantidadJuegos()
         {
             return DAOJuego.ObtenerCantidadJuegos();
+        }
+
+        public static List<Juego> ObtenerJuegosComoLista()
+        {
+            return DAOJuego.ObtenerJuegosComoLista();
         }
     }
 }

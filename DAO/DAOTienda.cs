@@ -8,9 +8,18 @@ namespace DAO
 {
     public static class DAOTienda
     {
-        public static DataTable ListarTiendas()
+        public static DataTable ListarTiendas(string filtro)
         {
-            return DB.ObtenerTabla("Tiendas","[SP_Tiendas_Obtener]", isSP: true);
+            var parametros = new List<SqlParameter>();
+            if (filtro!=null)
+                parametros.Add(new SqlParameter("filtro", filtro));
+
+            return DB.ObtenerTabla("Tiendas","[SP_Tiendas_Obtener]", parametros, true);
+        }
+
+        public static DataTable ListarTiendasPorJuego(int idJuego)
+        {
+            return DB.ObtenerTabla("Tiendas", $"[SP_Tiendas_ObtenerPorJuego] {idJuego}");
         }
 
         public static int? ActualizarTienda(Tienda tienda)
@@ -30,6 +39,11 @@ namespace DAO
             return DB.NonQuery("[SP_Tiendas_Eliminar]", getParametrosTiendaId(tienda), true);
         }
 
+        public static List<Tienda> ObtenerTiendasPorJuego(int idJuego)
+        {
+            return ArmarListaDeTiendas(ListarTiendasPorJuego(idJuego));
+        }
+
         private static List<SqlParameter> getParametrosTiendaId(in Tienda tienda)
         {
             return new List<SqlParameter>() { new SqlParameter("IdTienda", tienda.getID_Tienda()) };
@@ -44,6 +58,36 @@ namespace DAO
                 new SqlParameter("SitioWeb", tienda.getURL_web()),
                 new SqlParameter("Activo", tienda.getActivo())
             };
+        }
+
+        private static List<Tienda> ArmarListaDeTiendas(in DataTable datatable)
+        {
+            var tiendas = new List<Tienda>();
+            if (datatable == null) return tiendas;
+            foreach (DataRow row in datatable?.Rows)
+            {
+                var tienda = ArmarTienda(row);
+                if (tienda != null) tiendas.Add(tienda);
+            }
+            return tiendas;
+        }
+
+        private static Tienda ArmarTienda(in DataRow datarow)
+        {
+            try
+            {
+                return new Tienda(
+                        (int)datarow["IdTienda"],
+                        (string)datarow["Nombre"],
+                        (string)datarow["RutaImagen"],
+                        (string)datarow["SitioWeb"],
+                        (bool)datarow["Activo"]
+                    );
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }

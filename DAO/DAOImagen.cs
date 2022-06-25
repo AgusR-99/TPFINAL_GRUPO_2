@@ -16,6 +16,12 @@ namespace DAO
             return DB.ObtenerTabla("Imagenes", "[SP_Imagenes_Obtener]", isSP: true);
         }
 
+        public static DataTable ListarImagenesPorJuego(int idJuego)
+        {
+            var parametros = new List<SqlParameter>() { new SqlParameter("idJuego", idJuego) };
+            return DB.ObtenerTabla("Imagenes", "[SP_Imagenes_Obtener]", parametros, true);
+        }
+
         public static int? ActualizarImagen(Imagenes imagen)
         {
             return DB.NonQuery("[SP_Imagenes_Actualizar]", getParametrosImagen(imagen, true), true);
@@ -24,6 +30,11 @@ namespace DAO
         public static int? AgregarImagen(Imagenes imagen)
         {
             return DB.NonQuery("[SP_Imagenes_Agregar]", getParametrosImagen(imagen, false), true);
+        }
+
+        public static List<Imagenes> ObtenerImagenesPorJuegoComoLista(int idJuego)
+        {
+            return ArmarListaDeImagenes(ListarImagenesPorJuego(idJuego));
         }
 
         public static List<SqlParameter> getParametrosImagen(in Imagenes imagen, bool includeID)
@@ -36,6 +47,35 @@ namespace DAO
                 new SqlParameter("Activo", imagen.getActivo())
             };
             return parametros;
+        }
+
+        private static List<Imagenes> ArmarListaDeImagenes(in DataTable datatable)
+        {
+            var imagenes = new List<Imagenes>();
+            if (datatable == null) return imagenes;
+            foreach (DataRow row in datatable?.Rows)
+            {
+                var imagen = ArmarImagen(row);
+                if (imagen != null) imagenes.Add(imagen);
+            }
+            return imagenes;
+        }
+
+        private static Imagenes ArmarImagen(in DataRow datarow)
+        {
+            try
+            {
+                return new Imagenes(
+                        (int)datarow["IdJuego"],
+                        (string)datarow["NombreArchivo"],
+                        (int)datarow["Orden"],
+                        (bool)datarow["Activo"]
+                    );
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
     }
 }

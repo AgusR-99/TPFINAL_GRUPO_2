@@ -60,5 +60,10 @@ namespace Negocio
             if (String.IsNullOrWhiteSpace(categoria.Nombre)) str = ("Error: el campo Nombre no puede estar vacío");
             return str;
         }
+
+        public static List<Categoria> ObtenerCategoriasActivasComoLista()
+        {
+            return DAOCategoria.ObtenerCategoriasComoLista().FindAll(x=>x.Activo);
+        }
     }
 }
