@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Data;
 using System.Collections.Generic;
+using System.Web;
 using Entidades;
 
 namespace DAO
@@ -91,6 +92,48 @@ namespace DAO
             {
                 return null;
             }*/
+        }
+
+        public static int? NonQueryReturnParameter(string query, List<SqlParameter> parameters = null, bool isSP = false)
+        {
+            /*try
+            {*/
+            var cmd = GetCommand(query, parameters, isSP);
+            var returnParameter = cmd.Parameters.Add("@ReturnVal", SqlDbType.Int);
+            returnParameter.Direction = ParameterDirection.ReturnValue;
+            cmd.Connection.Open();
+            cmd.ExecuteNonQuery();
+            cmd.Connection.Close(); 
+            return Convert.ToInt32(returnParameter.Value);
+            /*}
+            catch(Exception ex)
+            {
+                return null;
+            }*/
+        }
+
+        public static List<string> ObtenerLista(string storedProcedure, string parametro, List<String> Lista, string termino, string campo)
+        {
+            using (SqlConnection con = GetConnection())
+            {
+                SqlCommand cmd = new SqlCommand(storedProcedure, con);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter parameter = new SqlParameter()
+                {
+                    ParameterName = parametro,
+                    Value = termino
+                };
+
+                cmd.Parameters.Add(parameter);
+                con.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    Lista.Add(rdr[campo].ToString());
+                }
+            }
+            return Lista;
         }
 
         public static DataTable ObtenerTabla(String NombreTabla, String Sql, List<SqlParameter> parameters = null, bool isSP = false)
