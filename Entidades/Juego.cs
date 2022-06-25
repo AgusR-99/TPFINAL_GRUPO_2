@@ -19,6 +19,7 @@ namespace Entidades
         private List<Categoria> Categorias;
         private List<Tienda> Tiendas;
         private List<Juego_x_Tienda> JuegosXTiendas;
+        private List<Opinion> Opiniones;
 
         public Juego(int idjuego, int iddesarrollador, string nombre, string descripcion, bool activo) 
         {
@@ -48,7 +49,9 @@ namespace Entidades
         public List<Tienda> GetTiendas() { return Tiendas; }
         public List<Juego_x_Tienda> GetJuegosXTiendas() { return JuegosXTiendas; }
         public Desarrollador GetDesarrollador() { return Desarrollador; }
-        public double? getPrecio() { return !JuegosXTiendas.Any() ? (double?)null  : JuegosXTiendas.AsQueryable().Min(x => x.getPrecioRebajado() ?? x.getPrecio()); }
+        public List<Opinion> GetOpiniones() { return Opiniones; }
+        public double? getPrecio() { return JuegosXTiendas?.FirstOrDefault() == null ? (double?)null  : JuegosXTiendas.AsQueryable().Min(x => x.getPrecioRebajado() ?? x.getPrecio()); }
+        public double? getRating() { return Opiniones?.FirstOrDefault() == null ? (double?)null : Math.Round(Opiniones.AsQueryable().Where(x => x.getActivo()).Average(x => x.getCalificacion()), 1); }
 
         public void setID(int id) { ID=id; }
         public void setNombre(string nombre) {Nombre=nombre; }
@@ -66,5 +69,7 @@ namespace Entidades
         public void setTiendas(List<Tienda> tiendas) {  Tiendas = tiendas; }
         public void setDesarrollador(Desarrollador desarrollador) { Desarrollador = desarrollador; }
         public void setJuegosXTiendas(List<Juego_x_Tienda> juegosXTiendas) { JuegosXTiendas = juegosXTiendas; }
+        public void setOpiniones(List<Opinion> opiniones) { Opiniones = opiniones; }
+
     }
 }

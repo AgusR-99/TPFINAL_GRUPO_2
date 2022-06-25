@@ -98,7 +98,7 @@ namespace DAO
                         (int)datarow["IDTienda"],
                         (string)datarow["SitioWeb"],
                         (double)datarow["Precio"],
-                        (double?)datarow["PrecioRebajado"],
+                        (double?)DB.ValueOrNull(datarow["PrecioRebajado"]),
                         (bool)datarow["Activo"]
                     );
             }

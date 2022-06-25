@@ -90,6 +90,7 @@ namespace DAO
                 juego.setTiendas(DAOTienda.ObtenerTiendasPorJuego(juego.getID()));
                 juego.setJuegosXTiendas(DAOJuegoXTienda.ObtenerJuegosXTiendasPorJuegoComoLista(juego.getID()));
                 juego.setImagenes(DAOImagen.ObtenerImagenesPorJuegoComoLista(juego.getID()));
+                juego.setOpiniones(DAOOpinion.ObtenerOpinionesPorJuegoComoLista(juego.getID()));
                 
                 return juego;
             }

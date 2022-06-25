@@ -18,5 +18,10 @@ namespace Vistas
             rptResultados.DataSource = juegos;
             rptResultados.DataBind();
         }
+
+        protected string ValueOrDefault(object value, string def)
+        {
+            return value == null ? def : value.ToString();
+        }
     }
 }

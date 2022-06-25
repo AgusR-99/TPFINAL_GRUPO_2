@@ -827,13 +827,14 @@ SELECT COUNT(*) FROM Opiniones WHERE Activo = 1
 GO
 
 CREATE PROC SP_Categorias_ObtenerPorJuego
-@IdJuego int
+@IdJuego int,
+@SoloActivo bit = 1
 AS
 BEGIN
 	SELECT C.IdCategoria, C.Nombre, C.Activo
 	FROM Categorias AS C
 		INNER JOIN JuegosXCategorias JC ON C.IdCategoria = JC.IdCategoria
-	WHERE C.Activo=1 AND JC.IdJuego=@IdJuego
+	WHERE (@SoloActivo=0 OR C.Activo=1) AND JC.IdJuego=@IdJuego
 END
 GO
 
@@ -849,23 +850,34 @@ END
 GO
 
 CREATE PROC SP_Tiendas_ObtenerPorJuego
-@IdJuego int
+@IdJuego int,
+@SoloActivo bit = 1
 AS
 BEGIN
 	SELECT T.IdTienda, T.Nombre, T.SitioWeb, T.RutaImagen, T.Activo
 	FROM Tiendas AS T
 		INNER JOIN JuegosXTiendas JT ON T.IdTienda=JT.IdTienda
-	WHERE JT.IdJuego=@IdJuego
+	WHERE (@SoloActivo = 0 OR (JT.Activo = 1 AND T.Activo=1)) AND JT.IdJuego=@IdJuego
 END
 GO
 
 
 CREATE PROC SP_JuegosXTiendas_ObtenerPorJuego
+@IdJuego int,
+@SoloActivo bit = 1
+AS
+BEGIN
+	SELECT JT.IdJuego, JT.IdTienda, JT.SitioWeb, JT.Precio, JT.PrecioRebajado, JT.Activo
+	FROM JuegosXTiendas JT
+	WHERE (@SoloActivo = 0 OR JT.Activo = 1) AND JT.IdJuego=@IdJuego
+END
+GO
+
+CREATE PROC SP_Opiniones_ObtenerPorJuego 15
 @IdJuego int
 AS
 BEGIN
-	SELECT JT.IdJuego, JT.IdTienda, JT.Precio, JT.PrecioRebajado, JT.Activo
-	FROM JuegosXTiendas JT
-	WHERE JT.IdJuego=@IdJuego
+	SELECT IdJuego, Username, Calificacion, Comentario, Activo
+	FROM Opiniones
+	WHERE IdJuego=@IdJuego
 END
-GO

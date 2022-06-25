@@ -80,18 +80,18 @@ namespace DAO
         /// <returns>Cantidad de filas afectadas o null si falla la operación</returns>
         public static int? NonQuery(string query, List<SqlParameter> parameters = null, bool isSP = false)
         {
-            /*try
-            {*/
+            try
+            {
                 var cmd = GetCommand(query, parameters, isSP);
                 cmd.Connection.Open();
                 int affected = cmd.ExecuteNonQuery();
                 cmd.Connection.Close();
                 return affected;
-            /*}
+            }
             catch(Exception ex)
             {
                 return null;
-            }*/
+            }
         }
 
         public static int? NonQueryReturnParameter(string query, List<SqlParameter> parameters = null, bool isSP = false)
@@ -147,10 +147,15 @@ namespace DAO
                 cmd.Connection.Close();
                 return ds.Tables[NombreTabla];
             }
-            catch
+            catch (Exception ex)
             {
                 return null;
             }
+        }
+
+        public static object ValueOrNull(object obj)
+        {
+            return obj == DBNull.Value ? null : obj;
         }
     }
 }

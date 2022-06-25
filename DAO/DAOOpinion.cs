@@ -15,5 +15,46 @@ namespace DAO
         {
             return DB.Query("[SP_Obtener_Cantidad_Opiniones]", isSP: true);
         }
+
+        public static DataTable ListarOpinionesPorJuego(int idJuego)
+        {
+            var parametros = new List<SqlParameter>() { new SqlParameter("IdJuego", idJuego) };
+            return DB.ObtenerTabla("Opiniones", $"[SP_Opiniones_ObtenerPorJuego]", parametros, true);
+        }
+
+        public static List<Opinion> ObtenerOpinionesPorJuegoComoLista(int idJuego)
+        {
+            return ArmarListaDeOpiniones(ListarOpinionesPorJuego(idJuego));
+        }
+
+        private static List<Opinion> ArmarListaDeOpiniones(in DataTable datatable)
+        {
+            var opiniones = new List<Opinion>();
+            if(datatable == null) return opiniones;
+            foreach (DataRow row in datatable?.Rows)
+            {
+                var opinion = ArmarOpinion(row);
+                if (opinion != null) opiniones.Add(opinion);
+            }
+            return opiniones;
+        }
+
+        private static Opinion ArmarOpinion(in DataRow datarow)
+        {
+            try
+            {
+                return new Opinion(
+                        (int)datarow["IdJuego"], 
+                        (string)datarow["Username"], 
+                        (byte)datarow["Calificacion"], 
+                        (string)DB.ValueOrNull(datarow["Comentario"]), 
+                        (bool)datarow["Activo"]
+                    );
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
+        }
     }
 }

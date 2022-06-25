@@ -21,8 +21,8 @@
                                     <p class="articulo-descripcion"><%# ((Entidades.Juego)GetDataItem()).getDescripcion() %></p>
                                 </div>
                                 <div class="articulo-under">
-                                    <p class="articulo-precio"><%# ((Entidades.Juego)GetDataItem()).getPrecio().ToString() %></p>
-                                    <p class="articulo-rating">9.5</p>
+                                    <p class="articulo-precio">Precio: <%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getPrecio(), "No disponible") %></p>
+                                    <p class="articulo-rating"><%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getRating(), " - ")  %></p>
                                 </div>
                             </article>
 
