@@ -123,14 +123,17 @@ CREATE TABLE JuegosXPlataformas
 
 CREATE TABLE JuegosXCategorias
 (
+	IdLink int IDENTITY(1,1) NOT NULL,
 	IdJuego int NOT NULL,
 	IdCategoria int NOT NULL,
-	CONSTRAINT PK_JuegosXCategorias PRIMARY KEY (IdJuego,IdCategoria), 
+	Activo bit NOT NULL,
+	CONSTRAINT PK_JuegosXCategorias PRIMARY KEY (IdLink), 
 	CONSTRAINT FK_JuegosXCategorias_Juegos
 		FOREIGN KEY (IdJuego) REFERENCES Juegos(IdJuego),
 	CONSTRAINT FK_JuegosXCategorias_Categorias
 		FOREIGN KEY (IdCategoria) REFERENCES Categorias(IdCategoria)
 )
+GO
 
 
 CREATE TABLE JuegosXTiendas
@@ -258,6 +261,25 @@ BEGIN
 END
 GO
 
+CREATE PROC SP_Juegos_Obtener_Id_Por_Nombre
+	@Nombre varchar(50),
+	@OutputValue int output
+AS
+BEGIN
+	SELECT @OutputValue = Juegos.IdJuego
+	FROM Juegos
+	WHERE Juegos.Nombre = @Nombre
+END
+GO
+
+CREATE PROC SP_Juegos_Obtener_Por_Nombre
+	@Nombre varchar(30)
+AS
+BEGIN
+	SELECT Nombre FROM Juegos
+	WHERE Nombre like '%' + @Nombre + '%'
+END
+
 CREATE PROC SP_Usuarios_Actualizar
 @Username varchar(30),
 @Descripcion Varchar(MAX),
@@ -326,6 +348,26 @@ BEGIN
 END
 GO
 
+CREATE PROC SP_Categorias_Obtener_Id_Por_Nombre
+	@Nombre varchar(50),
+	@OutputValue int output
+AS
+BEGIN
+	SELECT @OutputValue = Categorias.IdCategoria
+	FROM Categorias
+	WHERE Categorias.Nombre = @Nombre
+END
+GO
+
+CREATE PROC SP_Categorias_Obtener_Nombres_Por_Nombre
+	@Nombre varchar(30)
+AS
+BEGIN
+	SELECT Nombre FROM Categorias
+	WHERE Nombre like '%' + @Nombre + '%'
+END
+GO
+
 CREATE PROC SP_Categorias_Obtener_Siguiente_Id
 AS
 BEGIN
@@ -387,6 +429,148 @@ SELECT IdDesarrollador, NombreDesarrollador, SitioWeb, UbicacionSede, Historia F
 END
 GO
 
+CREATE PROC SP_JuegosXCategorias_Actualizar
+	@IdLink int,
+	@Juego varchar(50),
+	@Categoria varchar(30),
+	@Activo bit
+AS
+BEGIN
+	DECLARE 
+	@IdJuego int, @IdCategoria int
+	exec SP_Juegos_Obtener_Id_Por_Nombre @Juego, @IdJuego output
+	exec SP_Categorias_Obtener_Id_Por_Nombre @Categoria, @IdCategoria output
+	--Si el ID Categoria obtenido NO existe en las tabla correspondiente, devolver error
+	IF NOT EXISTS(
+			SELECT Categorias.IdCategoria
+			FROM Categorias WHERE Categorias.IdCategoria = @IdCategoria
+			)
+		BEGIN
+			RETURN -1; --ERROR -1: IdCategoria obtenido no existe en tabla Categoria
+		END
+	--Si el ID Juego obtenidos NO existe en las tabla correspondiente, devolver error
+	IF NOT EXISTS(
+			SELECT Juegos.IdJuego
+			FROM Juegos WHERE Juegos.IdJuego = @IdJuego
+			)
+		BEGIN
+			RETURN -2; --ERROR -2: IdJuego obtenido no existe en tabla Juego
+		END
+	--Si la combinacion de IDs obtenidos existe en la tabla actual, validar si la combinacion es del campo a actualizar
+	IF EXISTS(
+			SELECT * FROM JuegosXCategorias
+			WHERE IdCategoria = @IdCategoria AND
+				  IdJuego = @IdJuego
+	)
+	BEGIN
+		--Si es el campo a actualizar, validar si el campo activo fue modificado
+		IF EXISTS(
+				SELECT IdLink FROM JuegosXCategorias
+				WHERE (Idlink = @IdLink AND
+					   IdCategoria = @IdCategoria AND
+					   IdJuego = @IdJuego
+				)
+		)
+		BEGIN
+			--Si el campo Activo no fue modificado, retornar error
+			IF EXISTS(
+					SELECT Activo FROM JuegosXCategorias
+					WHERE (Activo = @Activo AND
+						   Idlink = @IdLink
+					)
+			)
+			BEGIN
+				RETURN -4; --ERROR -4: registro ya existe en la tabla
+			END
+		END
+		ELSE
+		BEGIN
+			RETURN -3; --ERROR -3: Ids obtenidos ya existen en la tabla
+		END
+	END
+	UPDATE JuegosXCategorias
+	SET
+		IdCategoria = @IdCategoria,
+		IdJuego = @IdJuego,
+		Activo = @Activo
+	WHERE
+		IdLink = @IdLink
+	RETURN @@ROWCOUNT;
+END
+GO
+
+CREATE PROC SP_JuegosXCategorias_Agregar
+	@Juego varchar(50),
+	@Categoria varchar(30),
+	@Activo bit
+AS
+BEGIN
+	DECLARE 
+	@IdJuego int, @IdCategoria int
+	exec SP_Juegos_Obtener_Id_Por_Nombre @Juego, @IdJuego output
+	exec SP_Categorias_Obtener_Id_Por_Nombre @Categoria, @IdCategoria output
+	--Si el ID Categoria obtenido NO existe en las tabla correspondiente, devolver error
+	IF @IdCategoria is null
+	BEGIN
+		RETURN -1;
+	END
+	--Si el ID Juego obtenido NO existe en las tabla correspondiente, devolver error
+	IF @IdJuego is null
+	BEGIN
+		RETURN -2;
+	END
+	--Si la combinacion de IDs ingresada existe en la tabla actual, devolver error
+	IF EXISTS(
+			SELECT * FROM JuegosXCategorias
+			WHERE IdCategoria = @IdCategoria AND
+				  IdJuego = @IdJuego
+	)
+	BEGIN
+		RETURN -3;
+	END
+	INSERT INTO JuegosXCategorias(IdCategoria, IdJuego, Activo)
+		VALUES (@IdCategoria, @IdJuego, @Activo)
+		RETURN 1;
+END
+GO
+
+CREATE PROC SP_JuegosXCategorias_Obtener
+AS
+BEGIN
+	SELECT JuegosXCategorias.IdLink, JuegosXCategorias.Activo,
+		   Juegos.Nombre as NombreJuego, Categorias.Nombre as NombreCategoria
+	FROM JuegosXCategorias
+	INNER JOIN Categorias ON Categorias.IdCategoria = JuegosXCategorias.IdCategoria
+	INNER JOIN Juegos ON Juegos.IdJuego = JuegosXCategorias.IdJuego
+END
+GO
+
+CREATE PROC .SP_JuegosXCategorias_Obtener_Por_Input
+	@Input varchar(80)
+AS
+BEGIN
+	SELECT JuegosXCategorias.IdLink, JuegosXCategorias.Activo,
+		   Juegos.Nombre as NombreJuego, Categorias.Nombre as NombreCategoria
+	FROM JuegosXCategorias
+	INNER JOIN Categorias ON Categorias.IdCategoria = JuegosXCategorias.IdCategoria
+	INNER JOIN Juegos ON Juegos.IdJuego = JuegosXCategorias.IdJuego
+	WHERE CONCAT(Juegos.Nombre,' ',Categorias.Nombre) like '%' + @Input + '%' OR 
+		  CONCAT(Categorias.Nombre,' ',Juegos.Nombre) like '%' + @Input + '%'
+END
+GO
+
+CREATE PROC SP_JuegosXCategorias_Obtener_Siguiente_Id
+AS
+BEGIN
+	SELECT
+  CASE
+    WHEN (SELECT
+        COUNT(1)
+      FROM JuegosXCategorias) = 0 THEN 1
+    ELSE IDENT_CURRENT('JuegosXCategorias') + 1
+  END AS Current_Identity;
+END
+GO
 
 CREATE PROCEDURE SP_JuegosXTiendas_Obtener
 AS
@@ -396,6 +580,15 @@ BEGIN
 	FROM JuegosXTiendas
 	INNER JOIN Juegos ON JuegosXTiendas.IdJuego=Juegos.IdJuego
 	INNER JOIN Tiendas ON JuegosXTiendas.IdTienda=Tiendas.IdTienda
+END
+GO
+
+CREATE PROC SP_Juegos_Obtener_Por_Nombre
+	@Nombre varchar(30)
+AS
+BEGIN
+	SELECT Nombre FROM Juegos
+	WHERE Nombre like '%' + @Nombre + '%'
 END
 GO
 
