@@ -21,6 +21,13 @@ namespace DAO
             return DB.NonQuery("[SP_Juegos_Actualizar]", getParametrosJuego(juego,true), true);
         }
 
+        public static List<string> ObtenerListaNombres(List<string> Lista, string termino)
+        {
+
+            return DB.ObtenerLista("[SP_Juegos_Obtener_Por_Nombre]", "@Nombre", Lista, termino, "Nombre");
+        }
+
+
         public static int? AgregarJuego(Juego juego)
         {
             return DB.NonQuery("[SP_Juegos_Agregar]", getParametrosJuego(juego, false), true);

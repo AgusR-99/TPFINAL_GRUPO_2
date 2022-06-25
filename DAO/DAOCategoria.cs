@@ -24,6 +24,12 @@ namespace DAO
             return DB.ObtenerTabla("Categorias", $"[SP_Categorias_Obtener_Por_Nombre] N'{nombre}'");
         }
 
+        public static List<string> ObtenerListaNombres(List<string> Lista, string termino)
+        {
+
+            return DB.ObtenerLista("[SP_Categorias_Obtener_Nombres_Por_Nombre]", "@Nombre", Lista, termino, "Nombre");
+        }
+
         public static int? ActualizarCategoria(Categoria categoria)
         {
             return DB.NonQuery("[SP_Categorias_Actualizar]", getParametrosCategoria(categoria, true), true);
