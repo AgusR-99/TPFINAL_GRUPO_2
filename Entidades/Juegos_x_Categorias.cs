@@ -6,20 +6,18 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    class Juegos_x_Categorias
+    public class Juegos_x_Categorias
     {
-        private int ID_Juego;
-        private int ID_Categoria;
-
-        public Juegos_x_Categorias()
-        { }
-
-
-        public int getID_Juego() { return ID_Juego; }
-        public int getID_Categoria() { return ID_Categoria; }
-
-
-        public void setID_Juego(int id_juego) { ID_Juego = id_juego; }
-        public void setID_Categoria(int id_categoria) { ID_Categoria = id_categoria; }
+        public Juegos_x_Categorias(int id_Link, string juego, string categoria, bool activo)
+        {
+            Categoria = categoria;
+            Juego = juego;
+            Activo = activo;
+            Id_Link = id_Link;
+        }
+        public int Id_Link { get; set; }
+        public string Categoria { get; set; }
+        public string Juego { get; set; }
+        public bool Activo { get; set; }
     }
 }
