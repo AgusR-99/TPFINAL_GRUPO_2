@@ -2,9 +2,11 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="adminDashboardContent" runat="server">
     <%-- Aca van mensajes --%>
     <asp:Label ID="lblMsg" runat="server"></asp:Label>
-    <div class="form-floating ctrl-devs">
-        <input type="text" class="form-control bg-dark text-light no-borders" id="txtSearchDev" placeholder="Buscar Desarrollador">
-        <label for="floatingSearchDev" class="text-light">Buscar datos de Desarrollador</label>
+    <div class="input-group ctrl-category input-cat">
+        <div class="form-outline">
+            <asp:TextBox runat="server" class="form-control bg-dark text-light no-borders" ID="txtSearchDevs" placeholder="Buscar desarrolladores"></asp:TextBox>
+        </div>
+        <asp:Button runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="BtnSearch_Click"></asp:Button>
     </div>
     <asp:GridView ID="GridViewDevs"
         runat="server"

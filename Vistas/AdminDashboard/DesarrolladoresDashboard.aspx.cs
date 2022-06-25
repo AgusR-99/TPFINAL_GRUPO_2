@@ -91,10 +91,13 @@ namespace Vistas.AdminDashboard
                 CargarDesarrolladores();
             }
         }
-        
+
         protected void BtnSearch_Click(Object sender, EventArgs e)
         {
-            // Logica para buscar usuario
+            var dt = NegocioDesarrollador.ListarDesarrolladoresPorNombre(txtSearchDevs.Text);
+            GridViewDevs.DataSource = dt;
+            Session["DesarrolladorSession"] = dt;
+            GridViewDevs.DataBind();
         }
     }
 }

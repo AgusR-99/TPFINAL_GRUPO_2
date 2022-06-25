@@ -16,6 +16,11 @@ namespace Negocio
             return DAODesarrollador.ListarDesarrolladores();
         }
 
+        public static DataTable ListarDesarrolladoresPorNombre(string Nombre)
+        {
+            return DAODesarrollador.ListarDesarrolladoresPorNombre(Nombre);
+        }
+
         public static List<string> ActualizarDesarrollador(Desarrollador desarrollador)
         {
             var errorReasons = Validar(desarrollador);

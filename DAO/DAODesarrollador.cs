@@ -17,6 +17,12 @@ namespace DAO
             return DB.ObtenerTabla("Desarrolladores", "[SP_Desarrolladores_Obtener]", isSP: true);
         }
 
+        public static DataTable ListarDesarrolladoresPorNombre(string nombre)
+        {
+            return DB.ObtenerTabla("Desarrolladores", $"[SP_Desarrolladores_Obtener_Por_Nombre] N'{nombre}'");
+        }
+
+
         public static Desarrollador ObtenerDesarrolladorPorId(int id)
         {
             var parametros = new List<SqlParameter>() { new SqlParameter("idDesarrollador", id) };

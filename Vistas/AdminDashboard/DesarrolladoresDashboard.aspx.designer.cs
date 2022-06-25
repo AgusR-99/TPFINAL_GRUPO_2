@@ -24,6 +24,15 @@ namespace Vistas.AdminDashboard
         protected global::System.Web.UI.WebControls.Label lblMsg;
 
         /// <summary>
+        /// Control txtSearchDevs.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtSearchDevs;
+
+        /// <summary>
         /// Control GridViewDevs.
         /// </summary>
         /// <remarks>
