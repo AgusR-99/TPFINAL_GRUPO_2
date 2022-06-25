@@ -801,6 +801,7 @@ BEGIN
 	SELECT IdJuego, NombreArchivo,  Orden, activo
 	FROM JuegosImagenes
 	WHERE (@idJuego IS NULL OR IdJuego=@idJuego)
+	ORDER BY IdJuego,Orden
 END
 GO
 
@@ -873,7 +874,7 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Opiniones_ObtenerPorJuego 15
+CREATE PROC SP_Opiniones_ObtenerPorJuego
 @IdJuego int
 AS
 BEGIN

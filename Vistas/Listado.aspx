@@ -11,21 +11,20 @@
                 <div class="articulos-wrapper">
                     <asp:Repeater ID="rptResultados" runat="server">
                         <ItemTemplate>
-                            <article class="articulos-unit">
-                                <img src="/Imagenes/placeholder-image.jpg" alt="portada" class="articulo-portada articulo-portada-w" />
-                                <div class="articulo-body">
-                                    <p class="articulo-nombre"><%# ((Entidades.Juego)GetDataItem()).getNombre() %></p>
-                                    <small><strong>Plataforma: </strong><%# String.Join(", ", ((Entidades.Juego)GetDataItem()).GetPlataformas()) %></small>
-                                    <br />
-                                    <small><strong>Categorías: </strong><%# String.Join(", ", ((Entidades.Juego)GetDataItem()).GetCategorias()) %></small>
-                                    <p class="articulo-descripcion"><%# ((Entidades.Juego)GetDataItem()).getDescripcion() %></p>
-                                </div>
-                                <div class="articulo-under">
-                                    <p class="articulo-precio">Precio: <%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getPrecio(), "No disponible") %></p>
-                                    <p class="articulo-rating"><%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getRating(), " - ")  %></p>
-                                </div>
-                            </article>
-
+                                <article class="articulos-unit" > 
+                                    <img src="<%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getPortada(), "/Imagenes/placeholder-image.jpg") %>" alt="portada" class="articulo-portada articulo-portada-w" />
+                                    <div class="articulo-body">
+                                        <p class="articulo-nombre"><%# ((Entidades.Juego)GetDataItem()).getNombre() %></p>
+                                        <small><strong>Plataforma: </strong><%# String.Join(", ", ((Entidades.Juego)GetDataItem()).GetPlataformas()) %></small>
+                                        <br />
+                                        <small><strong>Categorías: </strong><%# String.Join(", ", ((Entidades.Juego)GetDataItem()).GetCategorias()) %></small>
+                                        <p class="articulo-descripcion"><%# FitText(((Entidades.Juego)GetDataItem()).getDescripcion(), 125) %></p>
+                                    </div>
+                                    <div class="articulo-under">
+                                        <p class="articulo-precio">Precio: <%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getPrecio(), "No disponible") %></p>
+                                        <p class="articulo-rating"><%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getRating(), " - ")  %></p>
+                                    </div>
+                                </article>
                         </ItemTemplate>
                     </asp:Repeater>
                 </div>

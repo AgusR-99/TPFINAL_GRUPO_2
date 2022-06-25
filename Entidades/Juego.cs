@@ -52,6 +52,7 @@ namespace Entidades
         public List<Opinion> GetOpiniones() { return Opiniones; }
         public double? getPrecio() { return JuegosXTiendas?.FirstOrDefault() == null ? (double?)null  : JuegosXTiendas.AsQueryable().Min(x => x.getPrecioRebajado() ?? x.getPrecio()); }
         public double? getRating() { return Opiniones?.FirstOrDefault() == null ? (double?)null : Math.Round(Opiniones.AsQueryable().Where(x => x.getActivo()).Average(x => x.getCalificacion()), 1); }
+        public string getPortada() { return Imagenes?.FirstOrDefault()?.getNombreArchivo(); }
 
         public void setID(int id) { ID=id; }
         public void setNombre(string nombre) {Nombre=nombre; }

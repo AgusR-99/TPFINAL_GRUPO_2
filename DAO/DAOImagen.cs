@@ -18,7 +18,10 @@ namespace DAO
 
         public static DataTable ListarImagenesPorJuego(int idJuego)
         {
-            var parametros = new List<SqlParameter>() { new SqlParameter("idJuego", idJuego) };
+            var parametros = new List<SqlParameter>() { 
+                new SqlParameter("idJuego", idJuego),
+                new SqlParameter("SoloActivo", true),
+            };
             return DB.ObtenerTabla("Imagenes", "[SP_Imagenes_Obtener]", parametros, true);
         }
 
@@ -67,7 +70,7 @@ namespace DAO
             {
                 return new Imagenes(
                         (int)datarow["IdJuego"],
-                        (string)datarow["NombreArchivo"],
+                        RutaImagen((string)datarow["NombreArchivo"]),
                         (int)datarow["Orden"],
                         (bool)datarow["Activo"]
                     );
@@ -76,6 +79,11 @@ namespace DAO
             {
                 return null;
             }
+        }
+
+        private static string RutaImagen(string nombreArchivo)
+        {
+            return "/Imagenes/Juegos/" + nombreArchivo;
         }
     }
 }

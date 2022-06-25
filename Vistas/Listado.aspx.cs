@@ -23,5 +23,16 @@ namespace Vistas
         {
             return value == null ? def : value.ToString();
         }
+
+        protected string FitText(string text, int length)
+        {
+            string suffix = "[...]";
+            if(text.Length>length)
+            {
+                text = text.Substring(0, length - suffix.Length);
+                text += suffix;
+            }
+            return text;
+        }
     }
 }
