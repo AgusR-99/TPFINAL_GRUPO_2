@@ -127,4 +127,9 @@
             </tbody>
         </table>
     </div>
+    <script>
+        $(function () {
+            $(".selection-game-store").addClass("border-bottom-highlight")
+        })
+    </script>
 </asp:Content>

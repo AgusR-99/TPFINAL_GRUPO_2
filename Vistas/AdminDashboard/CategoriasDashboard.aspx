@@ -89,4 +89,9 @@
             <asp:CheckBox ID="chkGVCategoriesActivo" runat="server" checked="true"/>
         </div>
     </div>
+    <script>
+        $(function () {
+            $(".selection-cat").addClass("border-bottom-highlight")
+        })
+    </script>
 </asp:Content>

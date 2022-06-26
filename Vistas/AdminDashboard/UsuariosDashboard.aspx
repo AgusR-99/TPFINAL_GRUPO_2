@@ -80,4 +80,9 @@
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
+    <script>
+        $(function () {
+            $(".selection-user").addClass("border-bottom-highlight")
+        })
+    </script>
 </asp:Content>

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/AdminDashboardMain.master" AutoEventWireup="true" CodeBehind="JuegosDashboard.aspx.cs" Inherits="Vistas.JuegosDashboard" %>
+<%@ MasterType VirtualPath="~/Masters/AdminDashboardMain.master" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="adminDashboardContent" runat="server">
     <%-- Aca van mensajes --%>
@@ -101,4 +102,9 @@
         <FooterStyle CssClass="grd-footer"></FooterStyle>
         <PagerStyle CssClass="grd-pager"></PagerStyle>
     </asp:GridView>
+    <script>
+        $(function () {
+            $(".selection-game").addClass("border-bottom-highlight")
+        })
+    </script>
 </asp:Content>

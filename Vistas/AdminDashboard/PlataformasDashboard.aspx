@@ -91,4 +91,9 @@
             <asp:CheckBox ID="chkGVPlataformActivo" runat="server" checked="true"/>
         </div>
     </div>
+    <script>
+        $(function () {
+            $(".selection-plat").addClass("border-bottom-highlight")
+        })
+    </script>
 </asp:Content>

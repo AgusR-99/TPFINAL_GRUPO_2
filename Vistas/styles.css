@@ -53,6 +53,10 @@ main {
     top: 56px;
 }
 
+.border-bottom-highlight{
+    border-bottom: 3px solid var(--clr-neon-red) !important;
+}
+
 .top-margin {
     margin-top: 38px;
 }

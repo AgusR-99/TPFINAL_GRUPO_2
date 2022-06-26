@@ -95,4 +95,10 @@
 
 <PagerStyle CssClass="grd-pager"></PagerStyle>
     </asp:GridView>
+    
+    <script>
+        $(function () {
+            $(".selection-dev").addClass("border-bottom-highlight")
+        })
+    </script>
 </asp:Content>

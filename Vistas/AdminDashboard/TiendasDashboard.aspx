@@ -111,4 +111,9 @@
             </tbody>
         </table>
     </div>
+    <script>
+        $(function () {
+            $(".selection-store").addClass("border-bottom-highlight")
+        })
+    </script>
 </asp:Content>

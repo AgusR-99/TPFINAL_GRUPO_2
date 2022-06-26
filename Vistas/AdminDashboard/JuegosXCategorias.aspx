@@ -111,6 +111,8 @@
 
             //Inicializar funciones aca
             InitAutoCompl();
+
+            $(".selection-game-cat").addClass("border-bottom-highlight")
         });
 
         function InitializeRequest(sender, args) {
@@ -142,5 +144,5 @@
                 source: '/JuegoHandler.ashx'
             });
         }
-    </script>
+    </script>    
 </asp:Content>
