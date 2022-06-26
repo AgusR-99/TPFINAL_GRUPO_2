@@ -750,10 +750,12 @@ END
 GO
 
 CREATE PROCEDURE SP_Desarrolladores_Obtener
+@idDesarrollador int = NULL
 AS
 BEGIN
 	SELECT IdDesarrollador, NombreDesarrollador,  SitioWeb, UbicacionSede, Historia
 	FROM Desarrolladores
+	WHERE (@idDesarrollador IS NULL OR IdDesarrollador=@idDesarrollador)
 END
 GO
 

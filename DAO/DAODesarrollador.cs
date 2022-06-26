@@ -60,7 +60,7 @@ namespace DAO
             {
                 return new Desarrollador(
                         (int)datarow["IdDesarrollador"],
-                        (string)datarow["Nombre"],
+                        (string)datarow["NombreDesarrollador"],
                         (string)datarow["SitioWeb"],
                         (string)datarow["UbicacionSede"],
                         (string)datarow["Historia"]
