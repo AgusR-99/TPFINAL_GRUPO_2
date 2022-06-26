@@ -18,6 +18,16 @@ namespace Vistas
             if (!IsPostBack) { }
         }
 
+        public void SetUpdatePanelControlVisibility(bool visible)
+        {
+            updatepanelanalytics.Visible = visible;
+        }
+
+        public void UpdatePanelUpdate()
+        {
+            updatepanelanalytics.Update();
+        }
+
         // TODO -> LLAMAR A ESTE METODO CADA VEZ QUE AGREGUEN FILAS A LAS GRIDVIEWS DE USUARIO O JUEGO
         public void GetStats()
         {

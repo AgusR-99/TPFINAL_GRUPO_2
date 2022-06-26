@@ -4,7 +4,10 @@
 		<div class="dashboard-wrapper">
 			<div class="analytics-main-wrapper">
 				<h1>Dashboard administrador</h1>
-				<div class="analytics-main bg-dark-carbon">
+				<asp:ScriptManager ID="ScriptManager" runat="server" />
+				<asp:UpdatePanel ID="updatepanelanalytics" runat="server" UpdateMode="Conditional">
+					<ContentTemplate>
+						<div class="analytics-main bg-dark-carbon">
 					<div class="analytics-box">
 						<aside class="analytics-icon">
 							<i class="fa-solid fa-user big text-glow-pink"></i>
@@ -33,6 +36,8 @@
 						</div>
 					</div>
 				</div>
+					</ContentTemplate>
+				</asp:UpdatePanel>
 			</div>
 			<div class="selection bg-dark-carbon">
 				<h1 class="selection-heading">Administrar</h1>
@@ -40,47 +45,69 @@
 					<div class="search-selection">
 						<a class="btn-game" href="../AdminDashboard/JuegosDashboard.aspx">
 							<i class="fa-solid fa-gamepad big"></i>
-							<p>Juegos</p>
+							<p class="selection-game">Juegos</p>
 						</a>
 					</div>
 					<div class="search-selection">
 						<a class="btn-user" href="../AdminDashboard/UsuariosDashboard.aspx">
 							<i class="fa-solid fa-user big"></i>
-							<p>Usuarios</p>
+							<p class="selection-user">Usuarios</p>
 						</a>
 					</div>
 					<div class="search-selection">
 						<a class="btn-dev" href="../AdminDashboard/DesarrolladoresDashboard.aspx">
 							<i class="fa-solid fa-code big"></i>
-							<p>Desarrolladores</p>
+							<p class="selection-dev">Desarrolladores</p>
 						</a>
 					</div>
 					<div class="search-selection">
 						<a class="btn-store" href="../AdminDashboard/TiendasDashboard.aspx">
 							<i class="fa-solid fa-shop big"></i>
-							<p>Tiendas</p>
+							<p class="selection-store">Tiendas</p>
 						</a>
 					</div>
 					<div class="search-selection">
 						<a class="btn-category" href="../AdminDashboard/CategoriasDashboard.aspx">
 							<i class="fa-solid fa-list big"></i>
-							<p>Categorias</p>
+							<p class="selection-cat">Categorias</p>
 						</a>
 					</div>
 					<div class="search-selection">
 						<a class="btn-platform" href="../AdminDashboard/PlataformasDashboard.aspx">
 							<i class="fa-solid fa-computer big"></i>
-							<p>Plataformas</p>
+							<p class="selection-plat">Plataformas</p>
 						</a>
 					</div>
-					<div class="search-selection">
-						<a class="btn-game-store" href="../AdminDashboard/JuegosXTiendasDashboard.aspx">
-							<i class="fa-solid fa-cart-arrow-down big"></i>
-							<p>Juegos-Tiendas</p>
-						</a>
-					</div>
+                    <div class="search-selection">
+                        <div class="dropdown-center">
+                            <button class="btn btn-secondary dropdown-toggle bg-transparent border-0 p-0" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-link big"></i>
+                                <p>Enlazar</p>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                <li><a class="dropdown-header" href="#">Juegos</a></li>
+                                <li>
+                                    <a class="dropdown-item selection-game-cat" href="../AdminDashboard/JuegosXCategorias.aspx">
+                                        <i class="fa-solid fa-list"></i>
+                                        <span>Categorias</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item selection-game-store" href="../AdminDashboard/JuegosXTiendasDashboard.aspx">
+                                        <i class="fa-solid fa-shop"></i>
+                                        <span>Tiendas</span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item selection-game-plat disabled" href="../AdminDashboard/JuegosXPlataformasDashboard.aspx">
+                                        <i class="fa-solid fa-shapes"></i>
+                                        <span>Plataformas</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
 				</div>
-				<asp:ScriptManager ID="ScriptManager" runat="server" />
 				<asp:UpdatePanel ID="updatepanel" runat="server">
 					<ContentTemplate>
 						<asp:ContentPlaceHolder ID="adminDashboardContent" runat="server"></asp:ContentPlaceHolder>
