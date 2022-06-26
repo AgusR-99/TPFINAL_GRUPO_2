@@ -37,8 +37,8 @@ namespace Negocio
             return errorReasons;
         }
 
-        
-         public static List<string> AgregarPlataforma(Plataforma plataforma)
+
+        public static List<string> AgregarPlataforma(Plataforma plataforma)
         {
             var errorReasons = Validar(plataforma);
             if (errorReasons.Any()) return errorReasons;
@@ -50,13 +50,18 @@ namespace Negocio
             return errorReasons;
         }
 
-        
-         public static List<string> Validar(Plataforma plataforma)
+
+        public static List<string> Validar(Plataforma plataforma)
         {
             var errorReasons = new List<string>();
             if (String.IsNullOrWhiteSpace(plataforma.getNombre())) errorReasons.Add("El campo Nombre no puede estar vacío");
             return errorReasons;
         }
-         
+
+        public static List<Plataforma> ObtenerPlataformasActivasComoLista()
+        {
+            return DAOPlataforma.ObtenerPlataformasComoLista().FindAll(x => x.getActivo());
+        }
+
     }
 }

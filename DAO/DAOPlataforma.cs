@@ -58,16 +58,21 @@ namespace DAO
             return parametros;
         }
 
+        public static List<Plataforma> ObtenerPlataformasComoLista()
+        {
+            return ArmarListaDePlataformas(ListarPlataformas());
+        }
+
         private static List<Plataforma> ArmarListaDePlataformas(in DataTable datatable)
         {
-            var tiendas = new List<Plataforma>();
-            if (datatable == null) return tiendas;
+            var plataformas = new List<Plataforma>();
+            if (datatable == null) return plataformas;
             foreach (DataRow row in datatable?.Rows)
             {
-                var tienda = ArmarPlataforma(row);
-                if (tienda != null) tiendas.Add(tienda);
+                var plataforma = ArmarPlataforma(row);
+                if (plataforma != null) plataformas.Add(plataforma);
             }
-            return tiendas;
+            return plataformas;
         }
 
         private static Plataforma ArmarPlataforma(in DataRow dataRow)

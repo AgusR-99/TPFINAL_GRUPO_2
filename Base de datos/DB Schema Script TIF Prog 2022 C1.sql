@@ -468,10 +468,12 @@ END
 GO
 
 CREATE PROCEDURE SP_Plataformas_Obtener
+@SoloActivo bit = 1
 AS
 BEGIN
-SELECT IdPlataforma, Nombre, Activo
-FROM Plataformas
+	SELECT IdPlataforma, Nombre, Activo
+	FROM Plataformas
+	WHERE (@SoloActivo = 0 OR Activo=1)
 END
 GO
 
@@ -795,12 +797,14 @@ END
 GO
 
 CREATE PROCEDURE SP_Imagenes_Obtener
-@idJuego int = NULL
+@idJuego int = NULL,
+@SoloActivo bit = 0
 AS
 BEGIN
 	SELECT IdJuego, NombreArchivo,  Orden, activo
 	FROM JuegosImagenes
-	WHERE (@idJuego IS NULL OR IdJuego=@idJuego)
+	WHERE (@idJuego IS NULL OR IdJuego=@idJuego) AND
+		 (@SoloActivo = 0 OR Activo=1)
 	ORDER BY IdJuego,Orden
 END
 GO
@@ -839,14 +843,16 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Plataformas_ObtenerPorJuego
-@IdJuego int
+ALTER PROC SP_Plataformas_ObtenerPorJuego
+@IdJuego int,
+@SoloActivo bit = 1
 AS
 BEGIN
 	SELECT P.IdPlataforma, P.Nombre, P.Activo
 	FROM Plataformas AS P
 		INNER JOIN JuegosXPlataformas JP ON P.IdPlataforma = JP.IdPlataforma
-	WHERE JP.IdJuego=@IdJuego
+	WHERE JP.IdJuego=@IdJuego AND
+		(@SoloActivo = 0 OR P.Activo=1)
 END
 GO
 

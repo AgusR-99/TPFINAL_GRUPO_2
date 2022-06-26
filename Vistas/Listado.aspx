@@ -83,22 +83,15 @@
                             </h2>
                             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexCheckCategory" id="flexCheckCategory0" checked>
-                                        <label class="form-check-label" for="flexCheckCategory0">Accion </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexCheckCategory" id="flexCheckCategory1">
-                                        <label class="form-check-label" for="flexCheckCategory1">Aventura </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexCheckCategory" id="flexCheckCategory2">
-                                        <label class="form-check-label" for="flexCheckCategory2">RPG </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexCheckCategory" id="flexCheckCategory3">
-                                        <label class="form-check-label" for="flexCheckCategory3">Deportes </label>
-                                    </div>
+                                    <asp:Repeater ID="rptChecksCategoria" runat="server">
+                                        <ItemTemplate>
+                                            <div class="form-check">
+                                                <asp:HiddenField ID="hfCatId" Value="<%# ((Entidades.Categoria)GetDataItem()).Id_Categoria %>" runat="server" />
+                                                <input type="checkbox" class="form-check-input" name="flexCheckCategory" id="flexCheckCategory" checked runat="server"/>
+                                                <label class="form-check-label" for="flexCheckCategory"><%# ((Entidades.Categoria)GetDataItem()).Nombre %> </label>
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </div>
                             </div>
                         </div>
@@ -114,22 +107,15 @@
                             </h2>
                             <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexCheckCategory" id="flexCheckCategory4" checked>
-                                        <label class="form-check-label" for="flexCheckCategory4">Xbox </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexCheckCategory" id="flexCheckCategory5">
-                                        <label class="form-check-label" for="flexCheckCategory5">Playstation </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexCheckCategory" id="flexCheckCategory6">
-                                        <label class="form-check-label" for="flexCheckCategory6">PC </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" name="flexCheckCategory" id="flexCheckCategory7">
-                                        <label class="form-check-label" for="flexCheckCategory7">Nintendo Switch </label>
-                                    </div>
+                                    <asp:Repeater ID="rptChecksPlataforma" runat="server">
+                                        <ItemTemplate>
+                                            <div class="form-check">
+                                                <asp:HiddenField ID="hfPlatId" Value="<%# ((Entidades.Plataforma)GetDataItem()).getID_Plataforma() %>" runat="server" />
+                                                <input type="checkbox" class="form-check-input" name="flexCheckPlatform" id="flexCheckPlatform" checked runat="server"/>
+                                                <label class="form-check-label" for="flexCheckPlatform"><%# ((Entidades.Plataforma)GetDataItem()).getNombre() %> </label>
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </div>
                             </div>
                         </div>
@@ -152,6 +138,9 @@
         var x = window.matchMedia("(min-width: 992px)");
         myFunction(x);
         x.addListener(myFunction);
+        $(function () {
+            $("input[type=checkbox]").addClass("form-check-input");
+        });
     </script>
     <script>
     </script>
