@@ -45,7 +45,7 @@
                                     aria-controls="panelsStayOpen-collapseOne">
                                     <div>
                                         <p>Ordenar por:</p>
-                                        <p>Mas populares</p>
+                                        <p id="orderedByText">Mas populares</p>
                                     </div>
                                 </button>
                             </h2>
@@ -86,8 +86,7 @@
                                     <asp:Repeater ID="rptChecksCategoria" runat="server">
                                         <ItemTemplate>
                                             <div class="form-check">
-                                                <asp:HiddenField ID="hfCatId" Value="<%# ((Entidades.Categoria)GetDataItem()).Id_Categoria %>" runat="server" />
-                                                <input type="checkbox" class="form-check-input" name="flexCheckCategory" id="flexCheckCategory" checked runat="server"/>
+                                                <input type="checkbox" class="form-check-input category-check" name="flexCheckCategory" id="flexCheckCategory" value="<%# ((Entidades.Categoria)GetDataItem()).Id_Categoria %>" checked runat="server"/>
                                                 <label class="form-check-label" for="flexCheckCategory"><%# ((Entidades.Categoria)GetDataItem()).Nombre %> </label>
                                             </div>
                                         </ItemTemplate>
@@ -110,8 +109,7 @@
                                     <asp:Repeater ID="rptChecksPlataforma" runat="server">
                                         <ItemTemplate>
                                             <div class="form-check">
-                                                <asp:HiddenField ID="hfPlatId" Value="<%# ((Entidades.Plataforma)GetDataItem()).getID_Plataforma() %>" runat="server" />
-                                                <input type="checkbox" class="form-check-input" name="flexCheckPlatform" id="flexCheckPlatform" checked runat="server"/>
+                                                <input type="checkbox" class="form-check-input platform-check" name="flexCheckPlatform" id="flexCheckPlatform" value="<%# ((Entidades.Plataforma)GetDataItem()).getID_Plataforma() %>" checked runat="server"/>
                                                 <label class="form-check-label" for="flexCheckPlatform"><%# ((Entidades.Plataforma)GetDataItem()).getNombre() %> </label>
                                             </div>
                                         </ItemTemplate>
@@ -120,6 +118,7 @@
                             </div>
                         </div>
                     </div>
+                    <asp:Button ID="btnBuscar" OnClientClick="return search()" CssClass="btn btn-primary" Text="Buscar" runat="server"/>
                 </div>
             </div>
         </div>
@@ -141,6 +140,17 @@
         $(function () {
             $("input[type=checkbox]").addClass("form-check-input");
         });
+
+        function search() {
+            let platforms = [], categories = [];
+            if ($('.platform-check:not(:checked)').length!=0)
+                for (let e of $('.platform-check:checked')) platforms.push($(e).attr("value"));
+            if ($('.category-check:not(:checked)').length != 0)
+                for (let e of $('.category-check:checked')) categories.push($(e).attr("value"));
+
+            window.location.href = `Listado.aspx?cat=${categories.join(',')}&plat=${platforms.join(',')}`;
+            return false;
+        }
     </script>
     <script>
     </script>

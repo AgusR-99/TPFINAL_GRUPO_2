@@ -34,9 +34,8 @@ namespace Vistas
                 var requestedIDs = catQuery.Split(',').ToList().FindAll(id => int.TryParse(id, out int n));
                 foreach (RepeaterItem item in rptChecksCategoria.Items)
                 {
-                    var itemCat = (HiddenField)item.FindControl("hfCatId");
                     var checkbox = (HtmlInputCheckBox)item.FindControl($"flexCheckCategory");
-                    checkbox.Checked = requestedIDs.Contains(itemCat.Value);
+                    checkbox.Checked = requestedIDs.Contains(checkbox.Value);
                 }
                 return requestedIDs.Select(int.Parse).ToList();
             }
@@ -54,9 +53,8 @@ namespace Vistas
                 var requestedIDs = platQuery.Split(',').ToList().FindAll(id => int.TryParse(id, out int n));
                 foreach (RepeaterItem item in rptChecksPlataforma.Items)
                 {
-                    var itemPlat = (HiddenField)item.FindControl("hfPlatId");
                     var checkbox = (HtmlInputCheckBox)item.FindControl($"flexCheckPlatform");
-                    checkbox.Checked = requestedIDs.Contains(itemPlat.Value);
+                    checkbox.Checked = requestedIDs.Contains(checkbox.Value);
                 }
                 return requestedIDs.Select(int.Parse).ToList();
             }
