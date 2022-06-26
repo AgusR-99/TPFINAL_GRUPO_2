@@ -20,6 +20,7 @@ namespace Vistas
             }
 
         }
+
         protected void CargarJuegos()
         {
 
@@ -31,6 +32,11 @@ namespace Vistas
             ddl.DataTextField = "NombreDesarrollador";
             ddl.DataValueField = "IdDesarrollador";
             ddl.DataBind();
+
+            AdminDashboardMain masterPage = (AdminDashboardMain)this.Page.Master;
+            masterPage.SetUpdatePanelControlVisibility(true);
+            masterPage.GetStats();
+            masterPage.UpdatePanelUpdate();
         }
 
         protected void AgregarImagenes(ref DataTable tabla, string colURL)
