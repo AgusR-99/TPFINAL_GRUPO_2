@@ -14,48 +14,53 @@ namespace Vistas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var juegos = NegocioJuego.ObtenerJuegosComoLista();
+            var catIDs = SetCategoryChecks();
+            var platIDs = SetPlatformChecks();
+
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, catIDs, platIDs);
             lblCantResultados.Text = $"{juegos.Count} resultados";
             rptResultados.DataSource = juegos;
             rptResultados.DataBind();
-
-            SetCategoryChecks();
-            SetPlatformChecks();
         }
 
-        protected void SetCategoryChecks()
+        protected List<int> SetCategoryChecks()
         {
             rptChecksCategoria.DataSource = NegocioCategorias.ObtenerCategoriasActivasComoLista();
             rptChecksCategoria.DataBind();
             
             var catQuery = Request.QueryString["cat"];
-            if(!String.IsNullOrEmpty(catQuery) && int.TryParse(catQuery, out int catID))
+            if(!String.IsNullOrEmpty(catQuery))
             {
-                foreach(RepeaterItem item in rptChecksCategoria.Items)
+                var requestedIDs = catQuery.Split(',').ToList().FindAll(id => int.TryParse(id, out int n));
+                foreach (RepeaterItem item in rptChecksCategoria.Items)
                 {
                     var itemCat = (HiddenField)item.FindControl("hfCatId");
                     var checkbox = (HtmlInputCheckBox)item.FindControl($"flexCheckCategory");
-                    checkbox.Checked = (itemCat.Value == catQuery);
+                    checkbox.Checked = requestedIDs.Contains(itemCat.Value);
                 }
+                return requestedIDs.Select(int.Parse).ToList();
             }
+            return null;
         }
 
-        protected void SetPlatformChecks()
+        protected List<int> SetPlatformChecks()
         {
             rptChecksPlataforma.DataSource = NegocioPlataforma.ObtenerPlataformasActivasComoLista();
             rptChecksPlataforma.DataBind();
 
             var platQuery = Request.QueryString["plat"];
-            if (!String.IsNullOrEmpty(platQuery) && int.TryParse(platQuery, out int catID))
+            if (!string.IsNullOrEmpty(platQuery))
             {
+                var requestedIDs = platQuery.Split(',').ToList().FindAll(id => int.TryParse(id, out int n));
                 foreach (RepeaterItem item in rptChecksPlataforma.Items)
                 {
                     var itemPlat = (HiddenField)item.FindControl("hfPlatId");
                     var checkbox = (HtmlInputCheckBox)item.FindControl($"flexCheckPlatform");
-                    checkbox.Checked = (itemPlat.Value == platQuery);
+                    checkbox.Checked = requestedIDs.Contains(itemPlat.Value);
                 }
+                return requestedIDs.Select(int.Parse).ToList();
             }
-
+            return null;
         }
 
         protected string ValueOrDefault(object value, string def)

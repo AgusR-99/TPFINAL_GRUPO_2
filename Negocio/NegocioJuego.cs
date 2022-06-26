@@ -73,9 +73,40 @@ namespace Negocio
             return DAOJuego.ObtenerCantidadJuegos();
         }
 
-        public static List<Juego> ObtenerJuegosComoLista()
+        public static List<Juego> ObtenerJuegosComoLista(bool soloActivo = true, List<int> categorias = null, List<int> plataformas = null)
         {
-            return DAOJuego.ObtenerJuegosComoLista();
+            var juegos = DAOJuego.ObtenerJuegosComoLista();
+            if (soloActivo) 
+                juegos.RemoveAll(j => !j.getActivo());
+            if (categorias != null)
+                juegos.RemoveAll(j => 
+                    !(j.GetCategorias().Any(c => categorias.Contains(c.Id_Categoria))));
+            if(plataformas!=null)
+                juegos.RemoveAll(j =>
+                    !(j.GetPlataformas().Any(p => plataformas.Contains(p.getID_Plataforma()))));
+            return juegos;
+        }
+
+        public static List<Juego> FiltrarJuegosPorCategoria(List<Juego> juegos, List<int> categorias)
+        {
+            return juegos.FindAll(j =>
+                    j.GetCategorias().Any(c => categorias.Contains(c.Id_Categoria)));
+        }
+
+        public static List<Juego> FiltrarJuegosPorPlataformas(List<Juego> juegos, List<int> plataformas)
+        {
+            return juegos.FindAll(j =>
+                    j.GetPlataformas().Any(p => plataformas.Contains(p.getID_Plataforma())));
+        }
+
+        public static void draft(List<Juego> juegos, List<int> plataformas)
+        {
+            juegos.RemoveAll(j =>
+                    !(j.GetPlataformas().Any(p => plataformas.Contains(p.getID_Plataforma()))));
+            foreach (Juego juego in juegos)
+            {
+
+            }
         }
     }
 }
