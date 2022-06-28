@@ -17,7 +17,7 @@ namespace Vistas
             var catIDs = SetCategoryChecks();
             var platIDs = SetPlatformChecks();
 
-            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, catIDs, platIDs);
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, catIDs, platIDs, SelectedOrder());
             lblCantResultados.Text = $"{juegos.Count} resultados";
             rptResultados.DataSource = juegos;
             rptResultados.DataBind();
@@ -75,6 +75,15 @@ namespace Vistas
                 text += suffix;
             }
             return text;
+        }
+
+        protected NegocioJuego.Orden SelectedOrder()
+        {
+            if (Enum.TryParse(Request.QueryString["ord"], out NegocioJuego.Orden orden)
+                && Enum.IsDefined(orden.GetType(), orden))
+                return orden;
+            else
+                return NegocioJuego.Orden.MasPopular;
         }
     }
 }

@@ -45,27 +45,27 @@
                                     aria-controls="panelsStayOpen-collapseOne">
                                     <div>
                                         <p>Ordenar por:</p>
-                                        <p id="orderedByText">Mas populares</p>
+                                        <p id="orderedByText">Más populares</p>
                                     </div>
                                 </button>
                             </h2>
                             <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
                                 <div class="accordion-body">
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioOrder" id="flexRadioOrder1" checked>
-                                        <label class="form-check-label" for="flexRadioOrder1">Mas populares </label>
+                                        <input class="form-check-input order-radio" type="radio" name="flexRadioOrder" id="flexRadioOrder1" value="<%= (int)Negocio.NegocioJuego.Orden.MasPopular %>" <% if (Negocio.NegocioJuego.Orden.MasPopular == SelectedOrder()) {%>checked<%} %> />
+                                        <label class="form-check-label" for="flexRadioOrder1">Más populares</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioOrder" id="flexRadioOrder2">
-                                        <label class="form-check-label" for="flexRadioOrder2">Menos populares </label>
+                                        <input class="form-check-input order-radio" type="radio" name="flexRadioOrder" id="flexRadioOrder2" value="<%= (int)Negocio.NegocioJuego.Orden.MenosPopular %>" <% if (Negocio.NegocioJuego.Orden.MenosPopular == SelectedOrder()) { %>checked<%} %> />
+                                        <label class="form-check-label" for="flexRadioOrder2">Menos populares</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioOrder" id="flexRadioOrder3">
-                                        <label class="form-check-label" for="flexRadioOrder3">Mayor precio </label>
+                                        <input class="form-check-input order-radio" type="radio" name="flexRadioOrder" id="flexRadioOrder3" value="<%= (int)Negocio.NegocioJuego.Orden.MayorPrecio %>" <% if(Negocio.NegocioJuego.Orden.MayorPrecio==SelectedOrder()) {%>checked<%} %> />
+                                        <label class="form-check-label" for="flexRadioOrder3">Mayor precio</label>
                                     </div>
                                     <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="flexRadioOrder" id="flexRadioOrder4">
-                                        <label class="form-check-label" for="flexRadioOrder4">Menor precio </label>
+                                        <input class="form-check-input order-radio" type="radio" name="flexRadioOrder" id="flexRadioOrder4" value="<%= (int)Negocio.NegocioJuego.Orden.MenorPrecio %>" <% if(Negocio.NegocioJuego.Orden.MenorPrecio==SelectedOrder()) {%>checked<%} %> />
+                                        <label class="form-check-label" for="flexRadioOrder4">Menor precio</label>
                                     </div>
                                 </div>
                             </div>
@@ -139,6 +139,8 @@
         x.addListener(myFunction);
         $(function () {
             $("input[type=checkbox]").addClass("form-check-input");
+            setOrderedBy();
+            $('.order-radio').click(setOrderedBy);
         });
 
         function search() {
@@ -147,9 +149,15 @@
                 for (let e of $('.platform-check:checked')) platforms.push($(e).attr("value"));
             if ($('.category-check:not(:checked)').length != 0)
                 for (let e of $('.category-check:checked')) categories.push($(e).attr("value"));
+            let order = $('.order-radio:checked').attr("value")
 
-            window.location.href = `Listado.aspx?cat=${categories.join(',')}&plat=${platforms.join(',')}`;
+            window.location.href = `Listado.aspx?cat=${categories.join(',')}&plat=${platforms.join(',')}&ord=${order}`;
             return false;
+        }
+
+        function setOrderedBy() {
+            var chkID = $('.order-radio:checked').attr("id");
+            $('#orderedByText').text($(`.form-check-label[for=${chkID}]`).text());
         }
     </script>
     <script>

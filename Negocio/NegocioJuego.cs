@@ -11,6 +11,14 @@ namespace Negocio
 {
     public static class NegocioJuego
     {
+        public enum Orden
+        {
+            MasPopular,
+            MenosPopular,
+            MayorPrecio,
+            MenorPrecio,
+            Default
+        }
 
         public static DataTable ListarJuegos()
         {
@@ -73,7 +81,7 @@ namespace Negocio
             return DAOJuego.ObtenerCantidadJuegos();
         }
 
-        public static List<Juego> ObtenerJuegosComoLista(bool soloActivo = true, List<int> categorias = null, List<int> plataformas = null)
+        public static List<Juego> ObtenerJuegosComoLista(bool soloActivo = true, List<int> categorias = null, List<int> plataformas = null, Orden orden = Orden.Default)
         {
             var juegos = DAOJuego.ObtenerJuegosComoLista();
             if (soloActivo) 
@@ -84,29 +92,32 @@ namespace Negocio
             if(plataformas!=null)
                 juegos.RemoveAll(j =>
                     !(j.GetPlataformas().Any(p => plataformas.Contains(p.getID_Plataforma()))));
-            return juegos;
-        }
 
-        public static List<Juego> FiltrarJuegosPorCategoria(List<Juego> juegos, List<int> categorias)
-        {
-            return juegos.FindAll(j =>
-                    j.GetCategorias().Any(c => categorias.Contains(c.Id_Categoria)));
-        }
-
-        public static List<Juego> FiltrarJuegosPorPlataformas(List<Juego> juegos, List<int> plataformas)
-        {
-            return juegos.FindAll(j =>
-                    j.GetPlataformas().Any(p => plataformas.Contains(p.getID_Plataforma())));
-        }
-
-        public static void draft(List<Juego> juegos, List<int> plataformas)
-        {
-            juegos.RemoveAll(j =>
-                    !(j.GetPlataformas().Any(p => plataformas.Contains(p.getID_Plataforma()))));
-            foreach (Juego juego in juegos)
+            switch (orden)
             {
-
+                case Orden.MenosPopular:
+                    return juegos
+                        .OrderBy(j => j.GetOpiniones().Count)
+                        .ThenBy(j => j.getRating())
+                        .ToList();
+                case Orden.MasPopular:
+                    return juegos
+                        .OrderByDescending(j => j.GetOpiniones().Count)
+                        .ThenByDescending(j => j.getRating())
+                        .ToList();
+                case Orden.MenorPrecio:
+                    return juegos
+                        .OrderBy(j => j.getPrecio() == null)
+                        .ThenBy(j => j.getPrecio())
+                        .ToList();
+                case Orden.MayorPrecio:
+                    return juegos
+                        .OrderByDescending(j => j.getPrecio())
+                        .ToList();
+                default:
+                    return juegos;
             }
         }
+
     }
 }
