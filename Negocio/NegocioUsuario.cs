@@ -78,5 +78,40 @@ namespace Negocio
         {
             return DAOUsuario.ObtenerCantidadUsuarios();
         }
+
+        
+        public static string AgregarUsuario(Usuario usuario)
+        {
+            string errorReasons = ValidarUsuarioRegistro(usuario);
+            if (errorReasons!="") return errorReasons;
+            var resultadoActualizar = DAOUsuario.AgregarUsuario(usuario);
+            if (resultadoActualizar == null)
+                errorReasons = "Ocurrió un error al actualizar la base de datos";
+            // if (resultadoActualizar == 0) errorReasons="No se encontró el registro a actualizar";
+             if (resultadoActualizar == -1) errorReasons = "Error. Ya existe el Username o el Email";
+            return errorReasons;
+        }
+
+        public static string ValidarUsuarioRegistro(in Usuario usuario)
+        {
+            string errorReasons="";
+            if (String.IsNullOrWhiteSpace(usuario.getUsername()))
+            {
+                errorReasons = "El campo Username no puede estar vacío";
+                return errorReasons;
+            }
+            if (String.IsNullOrWhiteSpace(usuario.getEmail()))
+            {
+                errorReasons = "El campo Email no puede estar vacío";
+                return errorReasons;
+            }
+            if (String.IsNullOrWhiteSpace(usuario.getContraseña()))
+            {
+                errorReasons = "El campo Contraseña no puede estar vacío";
+                return errorReasons;
+            }
+            return errorReasons;
+        }
+         
     }
 }
