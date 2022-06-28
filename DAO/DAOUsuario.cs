@@ -76,5 +76,22 @@ namespace DAO
         {
             return DB.Query("[SP_Obtener_Cantidad_Usuarios]", isSP: true);
         }
+
+        public static int? AgregarUsuario(Usuario usuario)
+        {
+            return DB.NonQuery("[SP_SignUp]", getParametrosUsuario2(usuario), true);
+        }
+
+        public static List<SqlParameter> getParametrosUsuario2(in Usuario usuario)
+        {
+            return new List<SqlParameter>()
+            {
+                new SqlParameter("Username", usuario.getUsername()),
+                new SqlParameter("Contrasena", usuario.getContraseña()),
+                new SqlParameter("Email", usuario.getEmail()),
+                new SqlParameter("Administrador", usuario.getAdministrador()),
+                new SqlParameter("Activo", usuario.getActivo())
+            };
+        }
     }
 }
