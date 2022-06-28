@@ -28,6 +28,14 @@ namespace Entidades
             Activo = activo;
         }
 
+        public Usuario(string username, string contrasena, string email, bool admin, bool activo)
+        {
+            Username = username;
+            Contraseña = contrasena;
+            Email = email;
+            Administrador = admin;
+            Activo = activo;
+        }
         public string getUsername() { return Username; }
         public string getContraseña() { return Contraseña; }
         public string getEmail() { return Email; }
