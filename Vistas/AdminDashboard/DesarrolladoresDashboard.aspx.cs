@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
+using System.Data;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Entidades;
@@ -22,8 +22,9 @@ namespace Vistas.AdminDashboard
         protected void CargarDesarrolladores()
         {
 
-            var tablaJuegos = NegocioDesarrollador.ListarDesarrolladores();
-            GridViewDevs.DataSource = tablaJuegos;
+            var tablaDesarrolladores = NegocioDesarrollador.ListarDesarrolladores();
+            Session["DesarrolladoresSession"] = tablaDesarrolladores;
+            GridViewDevs.DataSource = tablaDesarrolladores;
             GridViewDevs.DataBind();
         }
         
@@ -31,14 +32,18 @@ namespace Vistas.AdminDashboard
 
         protected void GridViewDevs_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            txtSearchDevs.Text = "";
             GridViewDevs.EditIndex = e.NewEditIndex;
-            CargarDesarrolladores();
+            GridViewDevs.DataSource = (DataTable)Session["DesarrolladoresSession"];
+            GridViewDevs.DataBind();
         }
 
         protected void GridViewDevs_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
+            txtSearchDevs.Text = "";
+            GridViewDevs.DataSource = (DataTable)Session["DesarrolladoresSession"];
             GridViewDevs.EditIndex = -1;
-            CargarDesarrolladores();
+            GridViewDevs.DataBind();
         }
         
         protected void GridViewDevs_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -96,7 +101,7 @@ namespace Vistas.AdminDashboard
         {
             var dt = NegocioDesarrollador.ListarDesarrolladoresPorNombre(txtSearchDevs.Text);
             GridViewDevs.DataSource = dt;
-            Session["DesarrolladorSession"] = dt;
+            Session["DesarrolladoresSession"] = dt;
             GridViewDevs.DataBind();
         }
     }
