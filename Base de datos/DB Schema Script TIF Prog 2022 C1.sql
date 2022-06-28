@@ -890,3 +890,34 @@ BEGIN
 	FROM Opiniones
 	WHERE IdJuego=@IdJuego
 END
+
+
+CREATE PROCEDURE SP_SignUp
+(
+@Username varchar(30),
+@Contrasena varchar(50),
+@Email varchar(50),
+@Administrador bit,
+@Activo bit
+)
+AS
+IF EXISTS(SELECT * FROM Usuarios WHERE @Username LIKE Username)
+BEGIN
+RETURN -1;
+END
+ELSE IF EXISTS(SELECT * FROM Usuarios WHERE @Email LIKE Email)
+BEGIN
+RETURN 0;
+END
+ELSE
+BEGIN
+INSERT INTO Usuarios
+(
+Username,
+Contrasena,
+Email,
+Administrador,
+Activo
+)
+VALUES(@Username,@Contrasena,@Email,@Administrador,@Activo)
+END
