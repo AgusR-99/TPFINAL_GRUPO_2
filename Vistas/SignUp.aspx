@@ -3,7 +3,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
 	<main class="ingresar-wrapper text-center">
-                <div class="form-signin w-100 m-auto neon-backlight backlight-cyan" style="height: 550px; margin-top: 94px">
+                <div class="form-signin w-100 m-auto neon-backlight backlight-cyan" style="height: 580px; margin-top: 94px">
                         <%--<div class="checkbox mb-3">
                             <label>
                                 <input type="checkbox" value="remember-me"> Remember me

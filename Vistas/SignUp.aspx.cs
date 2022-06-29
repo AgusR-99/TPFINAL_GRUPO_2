@@ -13,7 +13,7 @@ namespace Vistas
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            
         }
 
         protected void btnRegistrar_Click(object sender, EventArgs e)
@@ -31,20 +31,28 @@ namespace Vistas
                  );
             if (txtPassword.Text == txtPassword2.Text)
             {
-                var erroresAgregar = NegocioUsuario.AgregarUsuario(usuario);
-                if (erroresAgregar == "")
+                if (txtPassword.Text.Length >= 8)
                 {
-                    lblMsg.ForeColor = System.Drawing.Color.GreenYellow;
-                    lblMsg.Text = "Registro agregado con exito";
-                    txtUsername.Text = "";
-                    txtEmail.Text = "";
-                    txtPassword.Text = "";
-                    txtPassword2.Text = "";
+                    var erroresAgregar = NegocioUsuario.AgregarUsuario(usuario);
+                    if (erroresAgregar == "")
+                    {
+                        lblMsg.ForeColor = System.Drawing.Color.GreenYellow;
+                        lblMsg.Text = "Registro agregado con exito";
+                        txtUsername.Text = "";
+                        txtEmail.Text = "";
+                        txtPassword.Text = "";
+                        txtPassword2.Text = "";
+                    }
+                    else
+                    {
+                        lblMsg.ForeColor = System.Drawing.Color.Red;
+                        lblMsg.Text = erroresAgregar;
+                    }
                 }
                 else
                 {
                     lblMsg.ForeColor = System.Drawing.Color.Red;
-                    lblMsg.Text = erroresAgregar;
+                    lblMsg.Text = "Error. La Contraseña debe tener más de 8 caracteres";
                 }
             }
             else
