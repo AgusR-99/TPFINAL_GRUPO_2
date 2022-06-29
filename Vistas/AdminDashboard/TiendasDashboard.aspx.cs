@@ -23,34 +23,18 @@ namespace Vistas
 
         protected void CargarTiendas()
         {
-            var tablaTiendas = NegocioTienda.ListarTiendas(txtSearchStores.Text);
+            var tablaTiendas = NegocioTienda.ListarTiendas();
+            Session["TiendasSession"] = tablaTiendas;
             GridViewStores.DataSource = tablaTiendas;
             GridViewStores.DataBind();
         }
 
-        protected void SetEditingIndexById(string editingId)
-        {
-            var table = ((DataTable)GridViewStores.DataSource);
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                string id = table.Rows[i]["ID"].ToString();
-                if (id == editingId)
-                {
-                    GridViewStores.PageIndex = i / GridViewStores.PageSize;
-                    GridViewStores.EditIndex = i % GridViewStores.PageSize;
-                    GridViewStores.DataBind();
-                    return;
-                }
-            }
-            GridViewStores.EditIndex = -1;
-            GridViewStores.DataBind();
-        }
 
         protected void TiendaEdit(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
-            var editingId = ((Label)GridViewStores.Rows[e.NewEditIndex].FindControl("lblGVStoresID")).Text;
-            BtnClearSearch_Click(null, null);
-            SetEditingIndexById(editingId);
+            GridViewStores.DataSource = Session["TiendasSession"];
+            GridViewStores.EditIndex = e.NewEditIndex;
+            GridViewStores.DataBind();
         }
 
         protected void TiendaUpdate(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
@@ -72,6 +56,8 @@ namespace Vistas
             }
             else
             {
+                lblMsg.Text = "Tienda actualizada correctamente";
+                lblMsg.Visible = true;
                 GridViewStores.EditIndex = -1;
                 CargarTiendas();
             }
@@ -79,7 +65,8 @@ namespace Vistas
         protected void TiendaCancelEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {
             GridViewStores.EditIndex = -1;
-            CargarTiendas();
+            GridViewStores.DataSource = (DataTable)Session["TiendasSession"];
+            GridViewStores.DataBind();
         }
 
         protected void TiendaDelete(object sender, GridViewDeleteEventArgs e)
@@ -89,8 +76,7 @@ namespace Vistas
             var erroresEliminar = NegocioTienda.EliminarTienda(new Tienda(idTienda));
             if (erroresEliminar.Any())
             {
-                foreach (string msg in erroresEliminar)
-                    lblMsg.Text += msg + "<br>";
+                lblMsg.Text = string.Join("<br>", erroresEliminar);
             }
             else
             {
@@ -113,10 +99,10 @@ namespace Vistas
 
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
-            // Logica para buscar
-            GridViewStores.EditIndex = -1;
-            GridViewStores.PageIndex = 0;
-            CargarTiendas();
+            var dt = NegocioTienda.ListarTiendas(txtSearchStores.Text);
+            GridViewStores.DataSource = dt;
+            Session["TiendasSession"] = dt;
+            GridViewStores.DataBind();
         }
 
         protected void BtnClearSearch_Click(object sender, EventArgs e)
@@ -134,9 +120,7 @@ namespace Vistas
                                     new Tienda(txtNombre_new.Text, txtImagen_new.Text, txtURL_new.Text));
             if (erroresAgregar.Any())
             {
-                foreach (string msg in erroresAgregar)
-                    lblMsg.Text += msg + "<div>";
-                lblMsg.Visible = true;
+                lblMsg.Text += string.Join("<div>", erroresAgregar);
             }
             else
             {
@@ -145,13 +129,15 @@ namespace Vistas
                 LimpiarControlesAgregar();
                 CargarTiendas();
             }
+            lblMsg.Visible = true;
         }
 
         protected void GridViewStores_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
             GridViewStores.EditIndex = -1;
             GridViewStores.PageIndex = e.NewPageIndex;
-            CargarTiendas();
+            GridViewStores.DataSource = (DataTable)Session["TiendasSession"];
+            GridViewStores.DataBind();
         }
 
         protected void LimpiarControlesAgregar()
