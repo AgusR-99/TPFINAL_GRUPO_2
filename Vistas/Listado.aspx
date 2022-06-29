@@ -83,6 +83,10 @@
                             </h2>
                             <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body">
+                                    <div>
+                                        <asp:button runat="server" class="btn btn-secondary" OnClientClick="checkAll('category'); return false;" Text="Seleccionar todos"/>
+                                        <asp:button runat="server" class="btn btn-secondary" OnClientClick="uncheckAll('category'); return false;" Text="Deseleccionar todos"/>
+                                    </div>
                                     <asp:Repeater ID="rptChecksCategoria" runat="server">
                                         <ItemTemplate>
                                             <div class="form-check">
@@ -106,6 +110,10 @@
                             </h2>
                             <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
                                 <div class="accordion-body">
+                                    <div>
+                                        <asp:button runat="server" class="btn btn-secondary" OnClientClick="checkAll('platform'); return false;" Text="Seleccionar todos"/>
+                                        <asp:button runat="server" class="btn btn-secondary" OnClientClick="uncheckAll('platform'); return false;" Text="Deseleccionar todos"/>
+                                    </div>
                                     <asp:Repeater ID="rptChecksPlataforma" runat="server">
                                         <ItemTemplate>
                                             <div class="form-check">
@@ -159,6 +167,14 @@
             var chkID = $('.order-radio:checked').attr("id");
             $('#orderedByText').text($(`.form-check-label[for=${chkID}]`).text());
         }
+
+        function checkAll(type) {
+            $(`.${type}-check`).prop('checked', true);
+        }
+        function uncheckAll(type) {
+            $(`.${type}-check`).prop('checked', false);
+        }
+
     </script>
     <script>
     </script>
