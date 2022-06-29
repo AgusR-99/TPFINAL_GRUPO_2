@@ -14,22 +14,21 @@
                         <div class="form-floating">
                             </div>
                     <label for="floatingUsername" class="text-light">Username</label>
-                    <asp:Textbox ID="txtUsername" runat="server" class="form-control bg-dark text-light no-borders"> 
-                        </asp:Textbox>
+                    <asp:Textbox ID="txtUsername" runat="server" class="form-control bg-dark text-light no-borders"></asp:Textbox>
                     <br />
                     <label for="floatingEmail" class="text-light">Email</label>
                     <asp:TextBox ID="txtEmail" runat="server" class="form-control bg-dark text-light no-borders"></asp:TextBox>
                     <br />
                     <label for="floatingPassword" class="text-light">Password</label>
-                    <asp:TextBox ID="txtPassword" runat="server" class="form-control bg-dark text-light no-borders"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" class="form-control bg-dark text-light no-borders" TextMode="Password"></asp:TextBox>
                     <br />
                      <label for="floatingPassword2" class="text-light">Confirme password</label>
-                    <asp:TextBox ID="txtPassword2" runat="server" class="form-control bg-dark text-light no-borders"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword2" runat="server" class="form-control bg-dark text-light no-borders" TextMode="Password"></asp:TextBox>
                     <br />
                     <asp:Button ID="btnRegistrar" runat="server" class="neon-button neon-cyan" OnClick="btnRegistrar_Click" Text="Registrar" />
                     <br />
-                    <asp:Label ID="lblMsg" runat="server" ForeColor="White"></asp:Label>
                     <br />
+                    <asp:Label ID="lblMsg" runat="server" ForeColor="White"></asp:Label>
                     <br />
                     <br />
                     <br />

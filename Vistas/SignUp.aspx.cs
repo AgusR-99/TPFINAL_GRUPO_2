@@ -34,6 +34,7 @@ namespace Vistas
                 var erroresAgregar = NegocioUsuario.AgregarUsuario(usuario);
                 if (erroresAgregar == "")
                 {
+                    lblMsg.ForeColor = System.Drawing.Color.GreenYellow;
                     lblMsg.Text = "Registro agregado con exito";
                     txtUsername.Text = "";
                     txtEmail.Text = "";
@@ -42,11 +43,13 @@ namespace Vistas
                 }
                 else
                 {
+                    lblMsg.ForeColor = System.Drawing.Color.Red;
                     lblMsg.Text = erroresAgregar;
                 }
             }
             else
             {
+                lblMsg.ForeColor = System.Drawing.Color.Red;
                 lblMsg.Text = "Error. No se repitió la contraseña";
             }
              
