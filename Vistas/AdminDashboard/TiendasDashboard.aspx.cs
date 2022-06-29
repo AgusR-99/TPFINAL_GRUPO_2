@@ -50,17 +50,15 @@ namespace Vistas
             var erroresActualizar = NegocioTienda.ActualizarTienda(tienda);
             if (erroresActualizar.Any())
             {
-                foreach (string msg in erroresActualizar)
-                    lblMsg.Text += msg + "<br>";
-                lblMsg.Visible = true;
+                string.Join("<br>", erroresActualizar);
             }
             else
             {
                 lblMsg.Text = "Tienda actualizada correctamente";
-                lblMsg.Visible = true;
                 GridViewStores.EditIndex = -1;
                 CargarTiendas();
             }
+            lblMsg.Visible = true;
         }
         protected void TiendaCancelEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {

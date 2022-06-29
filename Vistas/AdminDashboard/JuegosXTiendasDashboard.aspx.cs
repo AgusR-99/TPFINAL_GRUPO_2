@@ -25,45 +25,23 @@ namespace Vistas
         protected void CargarJuegosXTiendas()
         {
             var tablaJuegosXTiendas = NegocioJuegoXTienda.ListarJuegosXTiendas(txtSearchGamesxstores.Text);
+            Session["JuegosXTiendasSession"] = tablaJuegosXTiendas;
             GridViewGamesXStores.DataSource = tablaJuegosXTiendas;
             GridViewGamesXStores.DataBind();
         }
 
-        protected void SetEditingIndexById(string editingIdJuego, string editingIdTienda)
-        {
-            var table = ((DataTable)GridViewGamesXStores.DataSource);
-            for (int i = 0; i < table.Rows.Count; i++)
-            {
-                string idJuego = table.Rows[i]["IdJuego"].ToString();
-                string idTienda = table.Rows[i]["IdTienda"].ToString();
-                if (idJuego == editingIdJuego && idTienda == editingIdTienda)
-                {
-                    GridViewGamesXStores.PageIndex = i / GridViewGamesXStores.PageSize;
-                    GridViewGamesXStores.EditIndex = i % GridViewGamesXStores.PageSize;
-                    GridViewGamesXStores.DataBind();
-                    return;
-                }
-            }
-            GridViewGamesXStores.EditIndex = -1;
-            GridViewGamesXStores.DataBind();
-        }
-
-
-
         protected void GridViewGamesXStores_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
-            txtSearchGamesxstores.Text = "";
             GridViewGamesXStores.EditIndex = -1;
-            CargarJuegosXTiendas();
+            GridViewGamesXStores.DataSource = (DataTable)Session["JuegosXTiendasSession"];
+            GridViewGamesXStores.DataBind();
         }
 
         protected void GridViewGamesXStores_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            var editingIdJuego = ((HiddenField)GridViewGamesXStores.Rows[e.NewEditIndex].FindControl("hfGVGamesXStoresJuego")).Value;
-            var editingIdTienda = ((HiddenField)GridViewGamesXStores.Rows[e.NewEditIndex].FindControl("hfGVGamesXStoresTienda")).Value;
-            BtnClearSearch_Click(null, null);
-            SetEditingIndexById(editingIdJuego, editingIdTienda);
-            CargarJuegosXTiendas();
+            GridViewGamesXStores.DataSource = Session["JuegosXTiendasSession"];
+            GridViewGamesXStores.EditIndex = e.NewEditIndex;
+            GridViewGamesXStores.DataBind();
         }
 
         protected void GridViewGamesXStores_RowUpdating(object sender, GridViewUpdateEventArgs e)
@@ -105,17 +83,16 @@ namespace Vistas
             var erroresActualizar = NegocioJuegoXTienda.ActualizarJuegoXTienda(jxt);
             if (erroresActualizar.Any())
             {
-                foreach (string msg in erroresActualizar)
-                    lblMsg.Text += msg + "<div>";
-                lblMsg.Visible = true;
+                lblMsg.Text = string.Join("<div>", erroresActualizar);
             }
             else
             {
+                lblMsg.Text = "Se actualizó correctamente";
                 txtSearchGamesxstores.Text = "";
                 GridViewGamesXStores.EditIndex = -1;
+                CargarJuegosXTiendas();
             }
-            CargarJuegosXTiendas();
-
+            lblMsg.Visible = true;
         }
 
         protected void GridViewGamesXStores_RowDeleting(object sender, GridViewDeleteEventArgs e)
@@ -129,16 +106,15 @@ namespace Vistas
                 List<string> erroresEliminar = NegocioJuegoXTienda.EliminarJuegoXTienda(jxtKey);
                 if (erroresEliminar.Any())
                 {
-                    foreach (string msg in erroresEliminar)
-                        lblMsg.Text += msg + "<div>";
-                    lblMsg.Visible = true;
+                    lblMsg.Text = string.Join("<div>", erroresEliminar);
                 }
                 else
                 {
-                    txtSearchGamesxstores.Text = "";
+                    lblMsg.Text = "Se eliminó correctamente";
                     GridViewGamesXStores.EditIndex = -1;
+                    CargarJuegosXTiendas();
                 }
-                CargarJuegosXTiendas();
+                lblMsg.Visible = true;
             }
             catch
             {
@@ -197,9 +173,7 @@ namespace Vistas
             var erroresAgregar = NegocioJuegoXTienda.AgregarJuegoXTienda(jxt);
             if (erroresAgregar.Any())
             {
-                foreach (string msg in erroresAgregar)
-                    lblMsg.Text += msg + "<div>";
-                lblMsg.Visible = true;
+                lblMsg.Text = string.Join("<div>", erroresAgregar);
             }
             else
             {
@@ -209,14 +183,18 @@ namespace Vistas
                 CargarJuegosXTiendas();
             }
 
+            lblMsg.Visible = true;
         }
 
         protected void BtnSearch_Click(object sender, EventArgs e)
         {
             // Logica para buscar
+            var dt = NegocioJuegoXTienda.ListarJuegosXTiendas(txtSearchGamesxstores.Text);
+            Session["JuegosXTiendasSession"] = dt;
+            GridViewGamesXStores.DataSource = dt;
             GridViewGamesXStores.EditIndex = -1;
             GridViewGamesXStores.PageIndex = 0;
-            CargarJuegosXTiendas();
+            GridViewGamesXStores.DataBind();
         }
 
         protected void BtnClearSearch_Click(object sender, EventArgs e)
@@ -229,8 +207,10 @@ namespace Vistas
 
         protected void GridViewGamesXStores_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            GridViewGamesXStores.DataSource = (DataTable)Session["JuegosXTiendasSession"];
             GridViewGamesXStores.PageIndex = e.NewPageIndex;
-            CargarJuegosXTiendas();
+            GridViewGamesXStores.EditIndex = -1;
+            GridViewGamesXStores.DataBind();
         }
 
         protected void LimpiarControlesAgregar()
