@@ -87,7 +87,6 @@ namespace Negocio
             var resultadoActualizar = DAOUsuario.AgregarUsuario(usuario);
             if (resultadoActualizar == null)
                 errorReasons = "Ocurrió un error al actualizar la base de datos";
-            // if (resultadoActualizar == 0) errorReasons="No se encontró el registro a actualizar";
              if (resultadoActualizar == -1) errorReasons = "Error. Ya existe el Username o el Email";
             return errorReasons;
         }
