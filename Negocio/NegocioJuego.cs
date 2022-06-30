@@ -17,6 +17,8 @@ namespace Negocio
             MenosPopular,
             MayorPrecio,
             MenorPrecio,
+            SoloMenorPrecio,
+            Rebaja,
             Default
         }
 
@@ -113,6 +115,14 @@ namespace Negocio
                 case Orden.MayorPrecio:
                     return juegos
                         .OrderByDescending(j => j.getPrecio())
+                        .ToList();
+                case Orden.SoloMenorPrecio:
+                    return juegos
+                        .OrderBy(j => j.getSoloPrecio())
+                        .ToList();
+                case Orden.Rebaja:
+                    return juegos
+                        .OrderBy(j => j.getPrecioRebajado())
                         .ToList();
                 default:
                     return juegos;
