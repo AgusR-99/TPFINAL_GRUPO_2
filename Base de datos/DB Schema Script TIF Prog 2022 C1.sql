@@ -176,7 +176,9 @@ AS
 BEGIN
 	SELECT Username, Email, Descripcion, Administrador
 	FROM Usuarios
-	WHERE Email = @Email AND Contrasena = @Contrasena AND Activo=1
+	WHERE Email = @Email 
+		AND Contrasena = @Contrasena COLLATE SQL_Latin1_General_CP1_CS_AS
+		AND Activo=1
 END
 GO
  
@@ -921,3 +923,4 @@ Activo
 )
 VALUES(@Username,@Contrasena,@Email,@Administrador,@Activo)
 END
+
