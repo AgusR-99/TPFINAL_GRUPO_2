@@ -68,6 +68,7 @@
     <Content Include="AdminDashboard\CategoriasDashboard.aspx" />
     <Content Include="AdminDashboard\DesarrolladoresDashboard.aspx" />
     <Content Include="Home.aspx" />
+    <Content Include="AdminDashboard\ImagenesDashboard.aspx" />
     <Content Include="Imagenes\nuevos.jpg" />
     <Content Include="Imagenes\placeholder-image.jpg" />
     <Content Include="Imagenes\populares.jpg" />
@@ -116,6 +117,13 @@
     </Compile>
     <Compile Include="CategoriaHandler.ashx.cs">
       <DependentUpon>CategoriaHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\ImagenesDashboard.aspx.cs">
+      <DependentUpon>ImagenesDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\ImagenesDashboard.aspx.designer.cs">
+      <DependentUpon>ImagenesDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="JuegoHandler.ashx.cs">
       <DependentUpon>JuegoHandler.ashx</DependentUpon>
