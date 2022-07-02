@@ -72,7 +72,7 @@ namespace Vistas
             Imagenes imagen = new Imagenes(
                     Convert.ToInt32((((DropDownList)editedRow.FindControl("ddlGVImagesIDJuego")).SelectedValue)),
                     ((TextBox)editedRow.FindControl("txtGVImagesNombre")).Text,
-                    Convert.ToInt32(((TextBox)editedRow.FindControl("txtGVImagesOrden"))),
+                    Convert.ToInt32(((TextBox)editedRow.FindControl("txtGVImagesOrden")).Text),
                     ((CheckBox)editedRow.FindControl("chkGVImagesActivo")).Checked
                    );
             var erroresActualizar = NegocioImagen.ActualizarImagen(imagen);
@@ -94,7 +94,7 @@ namespace Vistas
             Imagenes imagen = new Imagenes(
                 Convert.ToInt32(((DropDownList)GridViewImages.FooterRow.FindControl("ddlGVImagesIDJuego")).Text),
                 ((TextBox)GridViewImages.FooterRow.FindControl("txtGVImagesNombre")).Text,
-                Convert.ToInt32(((TextBox)GridViewImages.FooterRow.FindControl("txtGVImagesOrden"))),
+                Convert.ToInt32(((TextBox)GridViewImages.FooterRow.FindControl("txtGVImagesOrden")).Text),
                 ((CheckBox)GridViewImages.FooterRow.FindControl("chkGVImagesActivo")).Checked
                 );
 
@@ -121,5 +121,4 @@ namespace Vistas
         }
     }
 }
-
 
