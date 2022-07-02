@@ -792,14 +792,14 @@ END
 GO
 
 CREATE PROC SP_Imagenes_Agregar
-	@Nombre varchar(50),
-	@SitioWeb varchar(100),
-	@UbicacionSede varchar(100),
-	@Historia varchar(100)
+	@idJuego int,
+	@NombreArchivo varchar(50),
+	@Orden int,
+	@activo BIT
 AS
 BEGIN
-	INSERT INTO Desarrolladores(NombreDesarrollador, SitioWeb, UbicacionSede, Historia)
-	VALUES (@Nombre, @SitioWeb, @UbicacionSede, @Historia)
+	INSERT INTO JuegosImagenes(IdJuego, NombreArchivo, Orden, activo)
+	VALUES (@idJuego, @NombreArchivo, @Orden, @activo)
 END
 GO
 
