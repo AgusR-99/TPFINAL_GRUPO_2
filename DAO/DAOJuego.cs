@@ -45,6 +45,7 @@ namespace DAO
                 new SqlParameter("IDDesarrollador", juego.getIDDesarrollador()),
                 new SqlParameter("Nombre", juego.getNombre()),
                 new SqlParameter("Descripcion", juego.getDescripcion()),
+                new SqlParameter("Fecha", juego.getFecha()),
                 new SqlParameter("Activo", juego.getActivo())
             };
             if (includeID) parametros.Add(new SqlParameter("IdJuego", juego.getID()));

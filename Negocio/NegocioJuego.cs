@@ -19,6 +19,8 @@ namespace Negocio
             MenorPrecio,
             SoloMenorPrecio,
             Rebaja,
+            Nuevos,
+            Proximos,
             Default
         }
 
@@ -85,6 +87,8 @@ namespace Negocio
 
         public static List<Juego> ObtenerJuegosComoLista(bool soloActivo = true, List<int> categorias = null, List<int> plataformas = null, Orden orden = Orden.Default)
         {
+            DateTime FechaActual = DateTime.Today;
+            
             var juegos = DAOJuego.ObtenerJuegosComoLista();
             if (soloActivo) 
                 juegos.RemoveAll(j => !j.getActivo());
@@ -118,11 +122,23 @@ namespace Negocio
                         .ToList();
                 case Orden.SoloMenorPrecio:
                     return juegos
+                        .Where(j => j.getPrecioRebajado() == null)
                         .OrderBy(j => j.getSoloPrecio())
                         .ToList();
                 case Orden.Rebaja:
                     return juegos
+                        .Where(j => j.getPrecioRebajado() != null)
                         .OrderBy(j => j.getPrecioRebajado())
+                        .ToList();
+                case Orden.Nuevos:
+                    return juegos
+                        .Where(j => j.getFecha() < FechaActual)
+                        .OrderByDescending(j => j.getFecha())
+                        .ToList();
+                case Orden.Proximos:
+                    return juegos
+                        .Where(j => j.getFecha()>FechaActual)
+                        .OrderBy(j => j.getFecha())
                         .ToList();
                 default:
                     return juegos;

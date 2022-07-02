@@ -21,7 +21,7 @@
         OnRowCancelingEdit="GridViewGames_RowCancelingEdit"
         OnRowEditing="GridViewGames_RowEditing"
         OnRowUpdating="GridViewGames_RowUpdating"
-        ShowFooter="true">
+        ShowFooter="True">
         <Columns>
             <asp:TemplateField>
                 <%--Cosas del footer--%>
@@ -85,6 +85,21 @@
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesDescripcion" runat="server" Text='<%# Bind("Descripcion") %>'>
                     </asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+            <asp:TemplateField HeaderText="FechaLanzamiento">
+                <EditItemTemplate>
+                    <asp:TextBox ID="txtGVGamesDia" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>/
+                    <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>/
+                    <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px"></asp:TextBox>
+                </EditItemTemplate>
+                <FooterTemplate>
+                    <asp:TextBox ID="txtGVGamesDia" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>/
+                    <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>/
+                    <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px"></asp:TextBox>
+                </FooterTemplate>
+                <ItemTemplate>
+                    <asp:Label ID="lblGVGamesFechaLanzamiento" Text='<%# Eval("FechaLanzamiento", "{0:dd/MM/yyyy}") %>' runat="server"></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Activo">

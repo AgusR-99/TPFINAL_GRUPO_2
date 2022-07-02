@@ -83,6 +83,9 @@ namespace Vistas
                     ((TextBox)editedRow.FindControl("txtGVGamesDescripcion")).Text,
                     ((CheckBox)editedRow.FindControl("chkGVGamesActivo")).Checked
                    );
+            juego.setFecha(Convert.ToInt32((((TextBox)editedRow.FindControl("txtGVGamesDia")).Text)),
+                Convert.ToInt32((((TextBox)editedRow.FindControl("txtGVGamesMes")).Text)),
+                Convert.ToInt32((((TextBox)editedRow.FindControl("txtGVGamesAño")).Text)));
             var erroresActualizar = NegocioJuego.ActualizarJuego(juego);
             if (erroresActualizar.Any())
             {
@@ -105,6 +108,9 @@ namespace Vistas
                 ((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesDescripcion")).Text,
                 ((CheckBox)GridViewGames.FooterRow.FindControl("chkGVGamesActivo")).Checked
                 );
+            juego.setFecha(Convert.ToInt32((((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesDia")).Text)),
+               Convert.ToInt32((((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesMes")).Text)),
+               Convert.ToInt32((((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesAño")).Text)));
 
             var erroresAgregar = NegocioJuego.AgregarJuego(juego);
             if (erroresAgregar.Any())

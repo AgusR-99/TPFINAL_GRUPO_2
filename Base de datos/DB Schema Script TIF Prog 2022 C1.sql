@@ -89,6 +89,7 @@ CREATE TABLE Juegos
 	IdDesarrollador int NOT NULL,
 	Nombre varchar(50) NOT NULL,
 	Descripcion varchar(MAX) NOT NULL,
+	FechaLanzamiento Date,
 	Activo bit NOT NULL DEFAULT 1,
 	CONSTRAINT PK_Juegos PRIMARY KEY (IdJuego),
 	CONSTRAINT FK_Juegos_Desarrolladores 
@@ -236,10 +237,10 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Juegos_Obtener
+create PROC SP_Juegos_Obtener
 AS
 BEGIN
-	SELECT Juegos.IdJuego, IdDesarrollador, Nombre, Descripcion, Juegos.Activo 
+	SELECT Juegos.IdJuego, IdDesarrollador, Nombre, Descripcion, FechaLanzamiento, Juegos.Activo 
 	FROM Juegos
 END
 GO
@@ -254,29 +255,31 @@ END
 GO
 
 
-CREATE PROCEDURE SP_Juegos_Actualizar
+alter PROCEDURE SP_Juegos_Actualizar
 @IdJuego int,
 @IdDesarrollador int,
 @Nombre varchar(50),
 @Descripcion varchar(MAX),
+@Fecha Date,
 @Activo bit
 AS
 BEGIN
 UPDATE Juegos
-SET IdDesarrollador = @IdDesarrollador, Nombre = @Nombre, Descripcion = @Descripcion, Activo = @Activo
+SET IdDesarrollador = @IdDesarrollador, Nombre = @Nombre, Descripcion = @Descripcion, FechaLanzamiento = @Fecha, Activo = @Activo
 WHERE IdJuego=@IdJuego
 END
 GO
 
-CREATE PROC SP_Juegos_Agregar
+create PROC SP_Juegos_Agregar
 @IdDesarrollador int,
 @Nombre varchar(50),
 @Descripcion varchar(MAX),
+@Fecha date,
 @Activo bit
 AS
 BEGIN
-INSERT INTO Juegos(IdDesarrollador,Nombre,Descripcion,Activo)
-SELECT @IdDesarrollador,@Nombre,@Descripcion,@Activo
+INSERT INTO Juegos(IdDesarrollador,Nombre,Descripcion, FechaLanzamiento, Activo)
+SELECT @IdDesarrollador,@Nombre,@Descripcion, @Fecha, @Activo
 END
 GO
 

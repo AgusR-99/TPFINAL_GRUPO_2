@@ -29,7 +29,7 @@ namespace Vistas
 
         public void CargarProximos()
         {
-            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, null, null, NegocioJuego.Orden.MasPopular);
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, null, null, NegocioJuego.Orden.Proximos);
             rptProximos.DataSource = juegos;
             rptProximos.DataBind();
         }
@@ -37,7 +37,6 @@ namespace Vistas
         public void CargarRebaja()
         {
             var juegos = NegocioJuego.ObtenerJuegosComoLista(true, null, null, NegocioJuego.Orden.Rebaja);
-            juegos.RemoveAll(j => j.getPrecioRebajado() == null);
             rptRebaja.DataSource = juegos;
             rptRebaja.DataBind();
         }
@@ -45,7 +44,6 @@ namespace Vistas
         public void CargarBaratos()
         {
             var juegos = NegocioJuego.ObtenerJuegosComoLista(true, null, null, NegocioJuego.Orden.SoloMenorPrecio);
-            juegos.RemoveAll(j => j.getPrecioRebajado() != null);
             rptBaratos.DataSource = juegos;
             rptBaratos.DataBind();
         }
