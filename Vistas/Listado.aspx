@@ -11,8 +11,8 @@
                 <div class="articulos-wrapper">
                     <asp:Repeater ID="rptResultados" runat="server">
                         <ItemTemplate>
-                                <article class="articulos-unit" > 
-                                    <img src="<%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getPortada(), "/Imagenes/placeholder-image.jpg") %>" alt="portada" class="articulo-portada articulo-portada-w" />
+                                <article class="articulos-unit" onclick="goToGame(<%# ((Entidades.Juego)GetDataItem()).getID() %>)"> 
+                                    <img src="<%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getPortada(), "/Imagenes/placeholder-image.jpg") %>" onclick="" alt="portada" class="articulo-portada articulo-portada-w" />
                                     <div class="articulo-body">
                                         <p class="articulo-nombre"><%# ((Entidades.Juego)GetDataItem()).getNombre() %></p>
                                         <small><strong>Plataforma: </strong><%# String.Join(", ", ((Entidades.Juego)GetDataItem()).GetPlataformas()) %></small>
@@ -66,6 +66,14 @@
                                     <div class="form-check">
                                         <input class="form-check-input order-radio" type="radio" name="flexRadioOrder" id="flexRadioOrder4" value="<%= (int)Negocio.NegocioJuego.Orden.MenorPrecio %>" <% if(Negocio.NegocioJuego.Orden.MenorPrecio==SelectedOrder()) {%>checked<%} %> />
                                         <label class="form-check-label" for="flexRadioOrder4">Menor precio</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input order-radio" type="radio" name="flexRadioOrder" id="flexRadioOrder5" value="<%= (int)Negocio.NegocioJuego.Orden.Nuevos %>" <% if(Negocio.NegocioJuego.Orden.Nuevos==SelectedOrder()) {%>checked<%} %> />
+                                        <label class="form-check-label" for="flexRadioOrder5">Nuevos</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input order-radio" type="radio" name="flexRadioOrder" id="flexRadioOrder6" value="<%= (int)Negocio.NegocioJuego.Orden.Proximos %>" <% if(Negocio.NegocioJuego.Orden.Proximos==SelectedOrder()) {%>checked<%} %> />
+                                        <label class="form-check-label" for="flexRadioOrder6">Próximos</label>
                                     </div>
                                 </div>
                             </div>
@@ -173,6 +181,10 @@
         }
         function uncheckAll(type) {
             $(`.${type}-check`).prop('checked', false);
+        }
+
+        function goToGame(id) {
+            window.location.href = "Articulo.aspx?id=" + id;
         }
 
     </script>

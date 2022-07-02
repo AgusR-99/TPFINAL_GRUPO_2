@@ -17,7 +17,11 @@ namespace Vistas
             var catIDs = SetCategoryChecks();
             var platIDs = SetPlatformChecks();
 
-            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, catIDs, platIDs, SelectedOrder());
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true,
+                                                            categorias: catIDs,
+                                                            plataformas: platIDs,
+                                                            texto: Request.QueryString["txt"],
+                                                            orden: SelectedOrder()); ;
             lblCantResultados.Text = $"{juegos.Count} resultados";
             rptResultados.DataSource = juegos;
             rptResultados.DataBind();

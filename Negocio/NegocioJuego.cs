@@ -85,7 +85,7 @@ namespace Negocio
             return DAOJuego.ObtenerCantidadJuegos();
         }
 
-        public static List<Juego> ObtenerJuegosComoLista(bool soloActivo = true, List<int> categorias = null, List<int> plataformas = null, Orden orden = Orden.Default)
+        public static List<Juego> ObtenerJuegosComoLista(bool soloActivo = true, List<int> categorias = null, List<int> plataformas = null, string texto = null, Orden orden = Orden.Default)
         {
             DateTime FechaActual = DateTime.Today;
             
@@ -98,6 +98,10 @@ namespace Negocio
             if(plataformas!=null)
                 juegos.RemoveAll(j =>
                     !(j.GetPlataformas().Any(p => plataformas.Contains(p.getID_Plataforma()))));
+            if (texto != null)
+                juegos.RemoveAll(j =>
+                    !(j.getNombre().ToLower().Contains(texto.ToLower()) 
+                        || j.getDescripcion().ToLower().Contains(texto.ToLower())));
 
             switch (orden)
             {
@@ -132,12 +136,12 @@ namespace Negocio
                         .ToList();
                 case Orden.Nuevos:
                     return juegos
-                        .Where(j => j.getFecha() < FechaActual)
+                        .Where(j => j.getFecha() <= FechaActual)
                         .OrderByDescending(j => j.getFecha())
                         .ToList();
                 case Orden.Proximos:
                     return juegos
-                        .Where(j => j.getFecha()>FechaActual)
+                        .Where(j => j.getFecha() > FechaActual)
                         .OrderBy(j => j.getFecha())
                         .ToList();
                 default:
