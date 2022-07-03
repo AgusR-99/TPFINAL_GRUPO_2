@@ -111,6 +111,11 @@ namespace Negocio
             }
             return errorReasons;
         }
-         
+
+        public static Usuario ObtenerUsuarioEnUso(in HttpSessionState Session)
+        {
+            return (Usuario)Session["LoggedUser"];
+        }
+
     }
 }

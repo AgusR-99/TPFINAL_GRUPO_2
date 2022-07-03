@@ -183,12 +183,7 @@
             $(`.${type}-check`).prop('checked', false);
         }
 
-        function goToGame(id) {
-            window.location.href = "Articulo.aspx?id=" + id;
-        }
 
-    </script>
-    <script>
     </script>
 
 </asp:Content>

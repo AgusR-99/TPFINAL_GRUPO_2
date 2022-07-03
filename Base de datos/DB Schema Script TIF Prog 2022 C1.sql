@@ -167,6 +167,17 @@ CREATE TABLE JuegosXTiendas
 		FOREIGN KEY (IdTienda) REFERENCES Tiendas(IdTienda)
 )
 
+CREATE TABLE Deseados
+(
+	Username varchar(30) NOT NULL,
+	IdJuego int NOT NULL,
+	CONSTRAINT PK_Deseados PRIMARY KEY (IdJuego,Username),
+	CONSTRAINT FK_Deseados_Usuarios
+		FOREIGN KEY (Username) REFERENCES Usuarios(Username),
+	CONSTRAINT FK_Deseados_Juegos
+		FOREIGN KEY (IdJuego) REFERENCES Juegos(IdJuego)
+)
+
 GO
 
  --------------- PROCEDIMIENTOS ALMACENADOS ---------------
@@ -926,4 +937,16 @@ Activo
 )
 VALUES(@Username,@Contrasena,@Email,@Administrador,@Activo)
 END
+GO
 
+CREATE PROC SP_Deseados_ObtenerPorUsuario
+@Username varchar(30)
+AS
+BEGIN
+	SELECT d.Username, d.IdJuego
+	FROM Deseados d
+		INNER JOIN Juegos j ON j.IdJuego=d.IdJuego
+	WHERE d.Username=@Username 
+		AND j.Activo=1
+END
+GO

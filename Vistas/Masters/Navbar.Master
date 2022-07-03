@@ -99,4 +99,10 @@
         </div>
     </form>
 </body>
+    
+<script>
+    function goToGame(id) {
+        window.location.href = "Articulo.aspx?id=" + id;
+    }
+</script>
 </html>

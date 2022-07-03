@@ -27,6 +27,11 @@ namespace DAO
             return ArmarListaDeOpiniones(ListarOpinionesPorJuego(idJuego));
         }
 
+        public static List<Opinion> ObtenerOpinionesPorUsuarioComoLista(string username)
+        {
+            return ArmarListaDeOpiniones(null); //TODO -> Implementar
+        }
+
         private static List<Opinion> ArmarListaDeOpiniones(in DataTable datatable)
         {
             var opiniones = new List<Opinion>();

@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Categoria.cs" />
     <Compile Include="Desarrollador.cs" />
+    <Compile Include="Deseado.cs" />
     <Compile Include="Imagenes.cs" />
     <Compile Include="Juegos_x_Categorias.cs" />
     <Compile Include="Juegos_x_Plataformas.cs" />

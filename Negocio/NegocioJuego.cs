@@ -149,5 +149,15 @@ namespace Negocio
             }
         }
 
+        public static List<Juego> ObtenerJuegosDeseados(in List<Deseado> deseados)
+        {
+            var juegos = DAOJuego.ObtenerJuegosComoLista();
+            var juegosDeseados = deseados.Select(d => d.ID_Juego);
+            
+            juegos.RemoveAll(j => !juegosDeseados.Contains(j.getID()));
+            
+            return juegos;
+        }
+
     }
 }

@@ -16,6 +16,7 @@ namespace Entidades
         private bool Activo;
 
         private List<Opinion> Opinion;
+        private List<Deseado> Deseados;
 
         public Usuario(string email, string contraseña) { 
             Email = email;
@@ -45,6 +46,7 @@ namespace Entidades
         public bool getAdministrador() { return Administrador; }
         public bool getActivo() { return Activo; }
         public List<Opinion> getOpinion() { return Opinion; }
+        public List<Deseado> getDeseados() { return Deseados; }
 
         public void setUsername(string username) { Username = username; }
         public void setContraseña(string contraseña) { Contraseña = contraseña; }
@@ -53,5 +55,6 @@ namespace Entidades
         public void setAdiministrador(bool administrador) { Administrador = administrador; }
         public void setActivo(bool activo) { Activo = activo; }
         public void setOpinion(List<Opinion> opinion) { Opinion = opinion; }
+        public void setDeseados(List<Deseado> deseados) { Deseados = deseados; }
     }
 }
