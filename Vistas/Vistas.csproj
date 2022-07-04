@@ -125,6 +125,7 @@
     <Compile Include="AdminDashboard\ImagenesDashboard.aspx.designer.cs">
       <DependentUpon>ImagenesDashboard.aspx</DependentUpon>
     </Compile>
+    <Compile Include="VistasAux.cs" />
     <Compile Include="JuegoHandler.ashx.cs">
       <DependentUpon>JuegoHandler.ashx</DependentUpon>
     </Compile>
