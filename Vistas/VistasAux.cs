@@ -22,5 +22,11 @@ namespace Vistas
             }
             return text;
         }
+
+        public static string ReturnIf(bool condition, string returnText)
+        {
+            if (condition) return returnText;
+            return "";
+        }
     }
 }
