@@ -15,14 +15,12 @@ namespace DAO
         {
             return DB.ObtenerTabla("Imagenes", "[SP_Imagenes_Obtener]", isSP: true);
         }
-
         public static DataTable ListarImagenesPorJuego(int idJuego)
         {
             var parametros = new List<SqlParameter>() { 
-                new SqlParameter("idJuego", idJuego),
-                new SqlParameter("SoloActivo", true),
+                new SqlParameter("idJuego", idJuego)
             };
-            return DB.ObtenerTabla("Imagenes", "[SP_Imagenes_Obtener]", parametros, true);
+            return DB.ObtenerTabla("Imagenes", "[SP_Imagenes_ObtenerXJuego]", parametros, true);
         }
 
         public static int? ActualizarImagen(Imagenes imagen)

@@ -25,12 +25,22 @@ namespace Vistas
 
             var tablaImagenes = NegocioImagen.ListarImagenes();
             GridViewImages.DataSource = tablaImagenes;
+            Session["ImagenesSession"] = tablaImagenes;
             GridViewImages.DataBind();
             DropDownList ddl = (DropDownList)GridViewImages.FooterRow.FindControl("ddlGVImagesIDJuego");
             ddl.DataSource = NegocioJuego.ListarJuegos();
             ddl.DataTextField = "Nombre";
             ddl.DataValueField = "IDJuego";
             ddl.DataBind();
+
+            DropDownList ddl_ = (DropDownList)ddlSearchImage;
+            if (ddl_ != null)
+            {
+                ddl_.DataSource = NegocioJuego.ListarJuegos();
+                ddl_.DataTextField = "Nombre";
+                ddl_.DataValueField = "IDJuego";
+                ddl_.DataBind();
+            }
 
             AdminDashboardMain masterPage = (AdminDashboardMain)this.Page.Master;
             masterPage.SetUpdatePanelControlVisibility(true);
@@ -56,7 +66,8 @@ namespace Vistas
         protected void GridViewImages_RowEditing(object sender, GridViewEditEventArgs e)
         {
             GridViewImages.EditIndex = e.NewEditIndex;
-            CargarImagenes();
+            GridViewImages.DataSource = Session["ImagenesSession"];
+            GridViewImages.DataBind();
         }
 
         protected void GridViewImages_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -117,7 +128,10 @@ namespace Vistas
 
         protected void BtnSearch_Click(Object sender, EventArgs e)
         {
-            ///
+            var dt = NegocioImagen.ListarImagenesPorJuego(Convert.ToInt32(ddlSearchImage.SelectedValue));
+            GridViewImages.DataSource = dt;
+            Session["ImagenesSession"] = dt;
+            GridViewImages.DataBind();
         }
     }
 }
