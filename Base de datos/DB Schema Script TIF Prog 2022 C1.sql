@@ -827,6 +827,17 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE SP_Imagenes_ObtenerPorJuego
+@idJuego int = NULL
+AS
+BEGIN
+	SELECT IdJuego, NombreArchivo,  Orden, activo
+	FROM JuegosImagenes
+	WHERE @idJuego IS NULL OR IdJuego=@idJuego
+	ORDER BY IdJuego,Orden
+END
+GO
+
 CREATE PROC SP_JuegosXTiendas_Existe
 @IdJuego int,
 @IdTienda int
