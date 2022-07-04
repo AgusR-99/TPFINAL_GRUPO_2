@@ -159,5 +159,19 @@ namespace Negocio
             return juegos;
         }
 
+        public static Dictionary<Juego,Opinion> ObtenerDiccionarioJuegosOpiniones(in List<Opinion> opiniones)
+        {
+            var juegos = DAOJuego.ObtenerJuegosComoLista();
+            var juegosOpiniones = new Dictionary<Juego, Opinion>();
+            foreach(var opinion in opiniones)
+            {
+                juegosOpiniones.Add(
+                    juegos.First(j => j.getID() == opinion.getID_Juego()),
+                    opinion
+                );
+            }
+            return juegosOpiniones;
+        }
+
     }
 }

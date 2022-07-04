@@ -39,7 +39,7 @@
                         </aside>
                         <div class="analytics-description user-analytics-description">
                             <p class="analytics-name user-analytic-name">Puntuacion media</p>
-                            <p class="analytics-number user-analytic-number">9.5</p>
+                            <p ID="lblPuntuacionMedia" class="analytics-number user-analytic-number" runat="server"></p>
                         </div>
                     </div>
                 </div>

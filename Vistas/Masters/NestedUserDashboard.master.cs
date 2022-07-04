@@ -27,6 +27,7 @@ namespace Vistas
             lblDescripcion.InnerText = usuario.getDescripcion();
             lblCantJuegos.InnerText = usuario.getDeseados().Count.ToString();
             lblCantOpiniones.InnerText = usuario.getOpinion().Count.ToString();
+            lblPuntuacionMedia.InnerText = usuario.getOpinion().Average(o => o.getCalificacion()).ToString();
         }
     }
 }

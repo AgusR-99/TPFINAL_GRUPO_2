@@ -950,3 +950,13 @@ BEGIN
 		AND j.Activo=1
 END
 GO
+
+CREATE PROC SP_Opiniones_ObtenerPorUsuario
+@username varchar(30)
+AS
+BEGIN
+	SELECT IdJuego, Username, Calificacion, Comentario, Activo
+	FROM Opiniones
+	WHERE Username=@username
+END
+GO
