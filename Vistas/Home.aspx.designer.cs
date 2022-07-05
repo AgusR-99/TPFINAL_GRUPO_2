@@ -15,6 +15,24 @@ namespace Vistas
     {
 
         /// <summary>
+        /// Control sctNuevos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sctNuevos;
+
+        /// <summary>
+        /// Control sctPopulares.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sctPopulares;
+
+        /// <summary>
         /// Control rptPopulares.
         /// </summary>
         /// <remarks>
@@ -22,6 +40,15 @@ namespace Vistas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptPopulares;
+
+        /// <summary>
+        /// Control sctProximos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sctProximos;
 
         /// <summary>
         /// Control rptProximos.
@@ -33,6 +60,15 @@ namespace Vistas
         protected global::System.Web.UI.WebControls.Repeater rptProximos;
 
         /// <summary>
+        /// Control sctRebaja.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sctRebaja;
+
+        /// <summary>
         /// Control rptRebaja.
         /// </summary>
         /// <remarks>
@@ -40,6 +76,15 @@ namespace Vistas
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater rptRebaja;
+
+        /// <summary>
+        /// Control sctBaratos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl sctBaratos;
 
         /// <summary>
         /// Control rptBaratos.

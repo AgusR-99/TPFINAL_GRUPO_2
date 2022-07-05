@@ -23,28 +23,32 @@ namespace Vistas
         public void CargarPopulares()
         {
             var juegos = NegocioJuego.ObtenerJuegosComoLista(true, orden:NegocioJuego.Orden.MasPopular);
-            rptPopulares.DataSource = juegos;
+            sctPopulares.Visible = juegos.Any();
+            rptPopulares.DataSource = juegos.Take(4);
             rptPopulares.DataBind();
         }
 
         public void CargarProximos()
         {
             var juegos = NegocioJuego.ObtenerJuegosComoLista(true, orden:NegocioJuego.Orden.Proximos);
-            rptProximos.DataSource = juegos;
+            sctProximos.Visible = juegos.Any();
+            rptProximos.DataSource = juegos.Take(4);
             rptProximos.DataBind();
         }
 
         public void CargarRebaja()
         {
             var juegos = NegocioJuego.ObtenerJuegosComoLista(true, orden:NegocioJuego.Orden.Rebaja);
-            rptRebaja.DataSource = juegos;
+            sctRebaja.Visible = juegos.Any();
+            rptRebaja.DataSource = juegos.Take(4);
             rptRebaja.DataBind();
         }
 
         public void CargarBaratos()
         {
             var juegos = NegocioJuego.ObtenerJuegosComoLista(true, orden:NegocioJuego.Orden.SoloMenorPrecio);
-            rptBaratos.DataSource = juegos;
+            sctBaratos.Visible = juegos.Any();
+            rptBaratos.DataSource = juegos.Take(4);
             rptBaratos.DataBind();
         }
 

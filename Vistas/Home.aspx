@@ -1,5 +1,8 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Masters/Navbar.Master" AutoEventWireup="true" CodeBehind="Home.aspx.cs" Inherits="Vistas.Home" %>
 
+<%@ Import Namespace="Entidades" %>
+<%@ Import Namespace="Vistas" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
@@ -16,7 +19,7 @@
         </div>
         <div class="galeria-wrapper">
             <%--Carousel--%>
-            <div class="section-wrapper">
+            <div class="section-wrapper" id="sctNuevos" runat="server">
                 <section class="galeria">
                     <h1 class="neon-sign">Nuevos</h1>
                     <div class="glass carousel-data-wrapper">
@@ -57,17 +60,17 @@
                 </section>
             </div>
             <%--Populares--%>
-            <div class="section-wrapper">
+            <div class="section-wrapper" id="sctPopulares" runat="server">
                 <section class="galeria">
                     <h1 class="neon-sign">Populares</h1>
                     <div class="producto-wrapper glass">
                         <asp:Repeater ID="rptPopulares" runat="server">
                             <ItemTemplate>
-                                <article class="producto-unit neon-backlight backlight-cyan">
-                                    <img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
+                                <article class="producto-unit neon-backlight backlight-cyan" onclick="goToGame(<%# ((Juego)GetDataItem()).getID() %>)">
+                                    <img class="producto-portada" src="<%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getPortada(), "/Imagenes/placeholder-image.jpg") %>" alt="Portada producto" />
                                     <div class="producto-descripcion inset-glow-cyan">
-                                        <p class="producto-rating text-glow-cyan"><%# ((Entidades.Juego)GetDataItem()).getRating() + "★"%></p>
-                                        <p class="producto-precio text-glow-cyan"><%# "$" + ((Entidades.Juego)GetDataItem()).getPrecio() %></p>
+                                        <p class="producto-rating text-glow-cyan"><%# ((Juego)GetDataItem()).getRating() + "★"%></p>
+                                        <p class="producto-precio text-glow-cyan"><%# "$" + ((Juego)GetDataItem()).getPrecio() %></p>
                                     </div>
                                 </article>
                             </ItemTemplate>
@@ -76,17 +79,17 @@
                 </section>
             </div>
             <%--Proximos--%>
-            <div class="section-wrapper">
+            <div class="section-wrapper" id="sctProximos" runat="server">
                 <section class="galeria">
                     <h1 class="neon-sign">Proximos</h1>
                     <div class="producto-wrapper glass">
                         <asp:Repeater ID="rptProximos" runat="server">
                             <ItemTemplate>
-                                <article class="producto-unit neon-backlight backlight-cyan">
-                                    <img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
+                                <article class="producto-unit neon-backlight backlight-cyan" onclick="goToGame(<%# ((Juego)GetDataItem()).getID() %>)">
+                                    <img class="producto-portada" src="<%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getPortada(), "/Imagenes/placeholder-image.jpg") %>" alt="Portada producto" />
                                     <div class="producto-descripcion inset-glow-cyan">
-                                        <p class="producto-rating text-glow-cyan"><%# ((Entidades.Juego)GetDataItem()).getRating() + "★"%></p>
-                                        <p class="producto-precio text-glow-cyan"><%# "$" + ((Entidades.Juego)GetDataItem()).getPrecio() %></p>
+                                        <p class="producto-rating text-glow-cyan"><%# ((Juego)GetDataItem()).getRating() + "★"%></p>
+                                        <p class="producto-precio text-glow-cyan"><%# "$" + ((Juego)GetDataItem()).getPrecio() %></p>
                                     </div>
                                 </article>
                             </ItemTemplate>
@@ -95,17 +98,17 @@
                 </section>
             </div>
             <%--En rebaja--%>
-            <div class="section-wrapper">
+            <div class="section-wrapper" id="sctRebaja" runat="server">
                 <section class="galeria">
                     <h1 class="neon-sign">En rebaja</h1>
                     <div class="producto-wrapper glass">
                         <asp:Repeater ID="rptRebaja" runat="server">
                             <ItemTemplate>
-                                <article class="producto-unit neon-backlight backlight-cyan">
-                                    <img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
+                                <article class="producto-unit neon-backlight backlight-cyan" onclick="goToGame(<%# ((Juego)GetDataItem()).getID() %>)">
+                                    <img class="producto-portada" src="<%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getPortada(), "/Imagenes/placeholder-image.jpg") %>" alt="Portada producto" />
                                     <div class="producto-descripcion inset-glow-cyan">
-                                        <p class="producto-rating text-glow-cyan"><%# ((Entidades.Juego)GetDataItem()).getRating() + "★"%></p>
-                                        <p class="producto-precio text-glow-cyan"><%# "$" + ((Entidades.Juego)GetDataItem()).getPrecioRebajado() %></p>
+                                        <p class="producto-rating text-glow-cyan"><%# ((Juego)GetDataItem()).getRating() + "★"%></p>
+                                        <p class="producto-precio text-glow-cyan"><%# "$" + ((Juego)GetDataItem()).getPrecioRebajado() %></p>
                                     </div>
                                 </article>
                             </ItemTemplate>
@@ -114,21 +117,21 @@
                 </section>
             </div>
             <%--Baratos--%>
-            <div class="section-wrapper">
+            <div class="section-wrapper" id="sctBaratos" runat="server">
                 <section class="galeria">
                     <h1 class="neon-sign">Baratos</h1>
                     <div class="producto-wrapper glass">
                         <asp:Repeater ID="rptBaratos" runat="server">
-							<ItemTemplate>
-                        <article class="producto-unit neon-backlight backlight-cyan">
-                            <img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-                            <div class="producto-descripcion inset-glow-cyan">
-                                <p class="producto-rating text-glow-cyan"><%# ((Entidades.Juego)GetDataItem()).getRating() + "★"%></p>
-                                <p class="producto-precio text-glow-cyan"><%# "$" + ((Entidades.Juego)GetDataItem()).getSoloPrecio() %></p>
-                            </div>
-                        </article>
-                        </ItemTemplate>
-						</asp:Repeater>
+                            <ItemTemplate>
+                                <article class="producto-unit neon-backlight backlight-cyan" onclick="goToGame(<%# ((Juego)GetDataItem()).getID() %>)">
+                                    <img class="producto-portada" src="<%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getPortada(), "/Imagenes/placeholder-image.jpg") %>" alt="Portada producto" />
+                                    <div class="producto-descripcion inset-glow-cyan">
+                                        <p class="producto-rating text-glow-cyan"><%# ((Juego)GetDataItem()).getRating() + "★"%></p>
+                                        <p class="producto-precio text-glow-cyan"><%# "$" + ((Juego)GetDataItem()).getSoloPrecio() %></p>
+                                    </div>
+                                </article>
+                            </ItemTemplate>
+                        </asp:Repeater>
                     </div>
                 </section>
             </div>
@@ -142,20 +145,4 @@
         })
     </script>
 
-    <script>
-        /*Poner numero de articulos a generar*/
-        /*$(function () {
-            for (var i = 0; i < 8; i++) {
-                $('.producto-wrapper').append(
-                    `<article class="producto-unit neon-backlight backlight-cyan">
-                            <img class="producto-portada" src="Imagenes/placeholder-image.jpg" alt="Portada producto" />
-                            <div class="producto-descripcion inset-glow-cyan">
-                                <p class="producto-rating text-glow-cyan">Rating</p>
-                                <p class="producto-precio text-glow-cyan">$1234</p>
-                            </div>
-                        </article>`
-                );
-            }
-        })*/
-    </script>
 </asp:Content>
