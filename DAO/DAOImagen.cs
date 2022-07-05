@@ -15,12 +15,13 @@ namespace DAO
         {
             return DB.ObtenerTabla("Imagenes", "[SP_Imagenes_Obtener]", isSP: true);
         }
-        public static DataTable ListarImagenesPorJuego(int idJuego)
+        public static DataTable ListarImagenesPorJuego(int idJuego, bool soloActivo)
         {
             var parametros = new List<SqlParameter>() { 
-                new SqlParameter("idJuego", idJuego)
+                new SqlParameter("idJuego", idJuego),
+                new SqlParameter("SoloActivo", soloActivo)
             };
-            return DB.ObtenerTabla("Imagenes", "[SP_Imagenes_ObtenerXJuego]", parametros, true);
+            return DB.ObtenerTabla("Imagenes", "[SP_Imagenes_Obtener]", parametros, soloActivo);
         }
 
         public static int? ActualizarImagen(Imagenes imagen)
@@ -35,7 +36,7 @@ namespace DAO
 
         public static List<Imagenes> ObtenerImagenesPorJuegoComoLista(int idJuego)
         {
-            return ArmarListaDeImagenes(ListarImagenesPorJuego(idJuego));
+            return ArmarListaDeImagenes(ListarImagenesPorJuego(idJuego, true));
         }
 
         public static List<SqlParameter> getParametrosImagen(in Imagenes imagen, bool includeID)
