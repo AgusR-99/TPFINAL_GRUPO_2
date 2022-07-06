@@ -98,5 +98,35 @@ namespace DAO
             };
         }
 
+        public static int? ActualizarDatosUsuario(Usuario usuario)
+        {
+            return DB.NonQuery("[SP_Usuarios_ActualizarDatos]", getParametrosUsuario3(usuario), true);
+        }
+
+        public static List<SqlParameter> getParametrosUsuario3(in Usuario usuario)
+        {
+            return new List<SqlParameter>()
+            {
+                new SqlParameter("usuariocomparacion", usuario.getUsernameComp()),
+                new SqlParameter("usuario", usuario.getUsername()),
+                new SqlParameter("contrasena", usuario.getContraseña()),
+                new SqlParameter("descripcion", usuario.getDescripcion()),
+                new SqlParameter("email", usuario.getEmail())
+            };
+        }
+
+        public static int? EliminarUsuario(Usuario usuario)
+        {
+            return DB.NonQuery("[SP_Usuarios_Eliminar]", getParametrosUsuario4(usuario), true);
+        }
+
+        public static List<SqlParameter> getParametrosUsuario4(in Usuario usuario)
+        {
+            return new List<SqlParameter>()
+            {
+                new SqlParameter("Username", usuario.getUsername())
+            };
+        }
+
     }
 }
