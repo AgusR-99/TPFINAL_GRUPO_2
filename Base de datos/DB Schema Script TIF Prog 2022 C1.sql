@@ -970,6 +970,10 @@ CREATE PROCEDURE SP_Usuarios_ActualizarDatos
 @email varchar(50)
 )
 AS
+IF EXISTS(SELECT * FROM Usuarios WHERE @usuariocomparacion LIKE Username)
+BEGIN
+RETURN -1;
+END
 BEGIN
 UPDATE Usuarios
 SET
