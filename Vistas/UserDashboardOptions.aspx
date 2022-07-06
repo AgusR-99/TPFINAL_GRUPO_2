@@ -6,7 +6,7 @@
             <div class="options-content">
                 <p>Cambiar el nombre de usuario, el cual se mostrara junto con las reviews.</p>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control bg-dark text-light" id="floatingInput" placeholder="Username">
+                    <asp:TextBox ID="txtUsername" runat="server"  class="form-control bg-dark text-light"  placeholder="Username"></asp:TextBox>
                     <label for="floatingInput">Username</label>
                 </div>
             </div>
@@ -18,7 +18,7 @@
                 <p>Cambiar la descripcion que se muestra en tu perfil.</p>
                 <div class="form-floating mb-3">
                     <div class="form-group">
-                        <textarea class="form-control bg-dark text-light" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <asp:TextBox ID="txtDescripcion" runat="server" class="form-control bg-dark text-light" rows="3"></asp:TextBox>
                     </div>
                 </div>
             </div>
@@ -29,7 +29,7 @@
             <div class="options-content">
                 <p>Cambiar el email utilizado para ingresar al sitio.</p>
                 <div class="form-floating mb-3">
-                    <input type="email" class="form-control bg-dark text-light" id="floatingInput" placeholder="name@example.com">
+                    <asp:TextBox ID="txtEmail" runat="server" class="form-control bg-dark text-light"  placeholder="name@example.com"></asp:TextBox>
                     <label for="floatingInput">Direccion email</label>
                 </div>
             </div>
@@ -39,23 +39,27 @@
             <div class="options-content">
                 <p>Cambiar el password utilizado para ingresar al sitio.</p>
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control bg-dark text-light" id="floatingPassword" placeholder="Password">
+                    <asp:TextBox ID="txtPassword" runat="server" class="form-control bg-dark text-light"  placeholder="Password"></asp:TextBox>
                     <label for="floatingPassword">Password</label>
                 </div>
                 <p>Confirmar password</p>
                 <div class="form-floating mb-3">
-                    <input type="password" class="form-control bg-dark text-light" id="floatingPassword" placeholder="Password">
+                    <asp:TextBox ID="txtPassword2" runat="server" class="form-control bg-dark text-light"  placeholder="Password"></asp:TextBox>
                     <label for="floatingPassword">Password</label>
                 </div>
             </div>
         </section>
         <hr class="bg-light border-2 border-top border-light">
-        <button type="button" class="btn btn-success">Actualizar</button><hr class="bg-light border-2 border-top border-light">
+        <asp:Button ID="btnActualizar" runat="server" Text="Actualizar" class="btn btn-success" OnClick="btnActualizar_Click"></asp:Button>&nbsp;&nbsp;
+        <asp:Label ID="lblMsg" runat="server"></asp:Label>
+&nbsp;<hr class="bg-light border-2 border-top border-light">
         <section class="options-section">
             <h2 class="text-danger">Eliminar cuenta</h2>
             <div class="options-content">
                 <p>Una vez eliminada la cuenta, no hay marcha atras. Por favor tenga certeza.</p>
-                <button type="button" class="btn btn-danger">Elimina tu cuenta</button>
+                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar Cuenta" class="btn btn-danger" OnClick="btnEliminar_Click"></asp:Button>
+            &nbsp;
+                <asp:Label ID="lblMsg2" runat="server"></asp:Label>
             </div>
         </section>
     </div>
