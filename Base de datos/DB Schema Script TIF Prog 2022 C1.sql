@@ -960,3 +960,22 @@ BEGIN
 	WHERE Username=@username
 END
 GO
+
+CREATE PROCEDURE SP_Usuarios_ActualizarDatos
+(
+@usuariocomparacion varchar(30),
+@usuario varchar(30),
+@contrasena varchar(50),
+@descripcion varchar(MAX),
+@email varchar(50)
+)
+AS
+BEGIN
+UPDATE Usuarios
+SET
+Username=@usuario,
+Contrasena=@contrasena,
+Descripcion=@descripcion,
+Email=@email
+WHERE Username=@usuariocomparacion
+END
