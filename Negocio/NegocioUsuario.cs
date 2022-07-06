@@ -129,9 +129,9 @@ namespace Negocio
             {
                 ErrorReasons = "Error en la base de datos";
             }
-            if (Actualizacion == 0)
+            if (Actualizacion == -1)
             {
-                ErrorReasons = "Error. No existe el usuario";
+                ErrorReasons = "Error. Ya existe el usuario";
             }
             return ErrorReasons;
         }
