@@ -39,12 +39,12 @@
             <div class="options-content">
                 <p>Cambiar el password utilizado para ingresar al sitio.</p>
                 <div class="form-floating mb-3">
-                    <asp:TextBox ID="txtPassword" runat="server" class="form-control bg-dark text-light"  placeholder="Password"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword" runat="server" class="form-control bg-dark text-light"  placeholder="Password" TextMode="Password"></asp:TextBox>
                     <label for="floatingPassword">Password</label>
                 </div>
                 <p>Confirmar password</p>
                 <div class="form-floating mb-3">
-                    <asp:TextBox ID="txtPassword2" runat="server" class="form-control bg-dark text-light"  placeholder="Password"></asp:TextBox>
+                    <asp:TextBox ID="txtPassword2" runat="server" class="form-control bg-dark text-light"  placeholder="Password" TextMode="Password"></asp:TextBox>
                     <label for="floatingPassword">Password</label>
                 </div>
             </div>
