@@ -11,70 +11,70 @@ namespace Vistas
 {
 
 
-    public partial class AdminDashboardMain
+    public partial class JuegosXPlataformasDashboard
     {
 
         /// <summary>
-        /// Control ScriptManager.
+        /// Control lblMsg.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager ScriptManager;
+        protected global::System.Web.UI.WebControls.Label lblMsg;
 
         /// <summary>
-        /// Control updatepanelanalytics.
+        /// Control ddlJuegosBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatepanelanalytics;
+        protected global::System.Web.UI.WebControls.DropDownList ddlJuegosBuscar;
 
         /// <summary>
-        /// Control lblUsuariosStat.
+        /// Control ddlPlataformasBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblUsuariosStat;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPlataformasBuscar;
 
         /// <summary>
-        /// Control lblJuegosStat.
+        /// Control GridViewGamesXPlatforms.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblJuegosStat;
+        protected global::System.Web.UI.WebControls.GridView GridViewGamesXPlatforms;
 
         /// <summary>
-        /// Control lblOpinionesStat.
+        /// Control ddlJuego_new.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblOpinionesStat;
+        protected global::System.Web.UI.WebControls.DropDownList ddlJuego_new;
 
         /// <summary>
-        /// Control updatepanel.
+        /// Control ddlPlataforma_new.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel updatepanel;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPlataforma_new;
 
         /// <summary>
-        /// Control adminDashboardContent.
+        /// Control btnGameXPlatformAgregar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder adminDashboardContent;
+        protected global::System.Web.UI.WebControls.Button btnGameXPlatformAgregar;
     }
 }

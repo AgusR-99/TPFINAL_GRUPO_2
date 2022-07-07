@@ -99,7 +99,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item selection-game-plat disabled" href="../AdminDashboard/JuegosXPlataformasDashboard.aspx">
+                                    <a class="dropdown-item selection-game-plat" href="../AdminDashboard/JuegosXPlataformasDashboard.aspx">
                                         <i class="fa-solid fa-shapes"></i>
                                         <span>Plataformas</span>
                                     </a>

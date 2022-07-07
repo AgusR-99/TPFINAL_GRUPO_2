@@ -266,7 +266,7 @@ END
 GO
 
 
-alter PROCEDURE SP_Juegos_Actualizar
+CREATE PROCEDURE SP_Juegos_Actualizar
 @IdJuego int,
 @IdDesarrollador int,
 @Nombre varchar(50),
@@ -317,15 +317,6 @@ BEGIN
 	SELECT @OutputValue = Juegos.IdJuego
 	FROM Juegos
 	WHERE Juegos.Nombre = @Nombre
-END
-GO
-
-CREATE PROC SP_Juegos_Obtener_Por_Nombre
-	@Nombre varchar(30)
-AS
-BEGIN
-	SELECT Nombre FROM Juegos
-	WHERE Nombre like '%' + @Nombre + '%'
 END
 GO
 
@@ -681,15 +672,6 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Juegos_Obtener_Por_Nombre
-	@Nombre varchar(30)
-AS
-BEGIN
-	SELECT Nombre FROM Juegos
-	WHERE Nombre like '%' + @Nombre + '%'
-END
-GO
-
 CREATE PROCEDURE SP_JuegosXTiendas_Actualizar
 @IdJuego int,
 @IdTienda int,
@@ -861,7 +843,7 @@ BEGIN
 END
 GO
 
-ALTER PROC SP_Plataformas_ObtenerPorJuego
+CREATE PROC SP_Plataformas_ObtenerPorJuego
 @IdJuego int,
 @SoloActivo bit = 1
 AS
@@ -906,7 +888,7 @@ BEGIN
 	FROM Opiniones
 	WHERE IdJuego=@IdJuego
 END
-
+GO
 
 CREATE PROCEDURE SP_SignUp
 (
@@ -983,3 +965,50 @@ Descripcion=@descripcion,
 Email=@email
 WHERE Username=@usuariocomparacion
 END
+GO
+
+CREATE PROCEDURE SP_JuegosXPlataformas_Obtener
+@IdJuego int,
+@IdPlataforma int
+AS
+BEGIN
+	SELECT j.Nombre AS Juego, j.IdJuego, p.Nombre AS Plataforma, p.IdPlataforma
+	FROM JuegosXPlataformas jp
+		INNER JOIN Juegos j ON j.idJuego = jp.IdJuego
+		INNER JOIN Plataformas p ON p.IdPlataforma = jp.IdPlataforma
+	WHERE 
+		(@IdJuego=-1 OR @IdJuego=jp.IdJuego) AND
+		(@IdPlataforma=-1 OR @IdPlataforma=jp.IdPlataforma)
+END
+GO
+
+CREATE PROC SP_JuegosXPlataformas_Existe
+@IdJuego int,
+@IdPlataforma int
+AS
+BEGIN
+	SELECT COUNT(IdJuego)
+	FROM JuegosXPlataformas
+	WHERE IdJuego=@IdJuego AND IdPlataforma=@IdPlataforma
+END
+GO
+
+CREATE PROC SP_JuegosXPlataformas_Agregar
+@IdJuego int,
+@IdPlataforma int
+AS
+BEGIN
+	INSERT INTO JuegosXPlataformas (IdJuego,IdPlataforma)
+		VALUES(@IdJuego,@IdPlataforma)
+END
+GO
+
+CREATE PROC SP_JuegosXPlataformas_Eliminar
+@IdJuego int,
+@IdPlataforma int
+AS
+BEGIN
+	DELETE FROM JuegosXPlataformas
+	WHERE IdJuego=@IdJuego AND IdPlataforma=@IdPlataforma
+END
+GO

@@ -67,6 +67,7 @@
   <ItemGroup>
     <Content Include="AdminDashboard\CategoriasDashboard.aspx" />
     <Content Include="AdminDashboard\DesarrolladoresDashboard.aspx" />
+    <Content Include="AdminDashboard\JuegosXPlataformasDashboard.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="AdminDashboard\ImagenesDashboard.aspx" />
     <Content Include="Imagenes\nuevos.jpg" />
@@ -96,6 +97,13 @@
   <ItemGroup>
     <Compile Include="AdminDashboard\JuegosXCategorias.aspx.designer.cs">
       <DependentUpon>JuegosXCategorias.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminDashboard\JuegosXPlataformasDashboard.aspx.cs">
+      <DependentUpon>JuegosXPlataformasDashboard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminDashboard\JuegosXPlataformasDashboard.aspx.designer.cs">
+      <DependentUpon>JuegosXPlataformasDashboard.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminDashboard\JuegosXTiendasDashboard.aspx.cs">
       <DependentUpon>JuegosXTiendasDashboard.aspx</DependentUpon>
