@@ -952,7 +952,7 @@ CREATE PROCEDURE SP_Usuarios_ActualizarDatos
 @email varchar(50)
 )
 AS
-IF EXISTS(SELECT * FROM Usuarios WHERE @usuariocomparacion LIKE Username)
+IF EXISTS(SELECT * FROM Usuarios WHERE @usuario LIKE Username)
 BEGIN
 RETURN -1;
 END
