@@ -13,6 +13,7 @@ namespace Vistas
     {
         public bool LoggedIn { get; private set; }
         public bool LoggedInAsAdmin { get; private set; }
+        public string Username { get; private set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             LoggedIn = NegocioUsuario.IsLoggedIn(Session);
@@ -21,6 +22,8 @@ namespace Vistas
             {
                 rptCategorias.DataSource = NegocioCategorias.ObtenerCategoriasActivasComoLista();
                 rptCategorias.DataBind();
+                if(LoggedIn)
+                    Username = NegocioUsuario.ObtenerUsuarioEnUso(Session).getUsername();
             }
         }
 

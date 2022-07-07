@@ -28,5 +28,10 @@ namespace Vistas
             if (condition) return returnText;
             return "";
         }
+
+        public static string SetDisabled(bool condition)
+        {
+            return ReturnIf(condition, " disabled ");
+        }
     }
 }
