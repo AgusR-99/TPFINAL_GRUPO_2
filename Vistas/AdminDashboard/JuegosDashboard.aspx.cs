@@ -18,7 +18,7 @@ namespace Vistas
             {
                 CargarJuegos();
             }
-
+            lblMsg.Text = "";
         }
 
         protected void CargarJuegos()
@@ -27,7 +27,7 @@ namespace Vistas
             var tablaJuegos = NegocioJuego.ListarJuegos();
             GridViewGames.DataSource = tablaJuegos;
             GridViewGames.DataBind();
-            DropDownList ddl = (DropDownList)GridViewGames.FooterRow.FindControl("ddlGVGamesIDDesarrollador");
+            DropDownList ddl = ddlGVGamesIDDesarrollador;
             ddl.DataSource = NegocioDesarrollador.ListarDesarrolladores();
             ddl.DataTextField = "NombreDesarrollador";
             ddl.DataValueField = "IdDesarrollador";
@@ -103,20 +103,29 @@ namespace Vistas
         protected void BtnInsert_Click(Object sender, EventArgs e)
         {
             Juego juego = new Juego(
-                Convert.ToInt32(((DropDownList)GridViewGames.FooterRow.FindControl("ddlGVGamesIDDesarrollador")).Text),
-                ((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesNombre")).Text,
-                ((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesDescripcion")).Text,
-                ((CheckBox)GridViewGames.FooterRow.FindControl("chkGVGamesActivo")).Checked
+                    Convert.ToInt32(ddlGVGamesIDDesarrollador.Text),
+                    txtGVGamesNombre.Text,
+                    txtGVGamesDescripcion.Text,
+                    chkGVGamesActivo.Checked
                 );
-            juego.setFecha(Convert.ToInt32((((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesDia")).Text)),
-               Convert.ToInt32((((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesMes")).Text)),
-               Convert.ToInt32((((TextBox)GridViewGames.FooterRow.FindControl("txtGVGamesAño")).Text)));
+
+            if(!(
+                    int.TryParse(txtGVGamesDia.Text, out int dia) &&
+                    int.TryParse(txtGVGamesMes.Text, out int mes) &&
+                    int.TryParse(txtGVGamesAño.Text, out int año)
+                ))
+            {
+                lblMsg.Text = "Por favor, complete el campo fecha con datos válidos.";
+                lblMsg.Visible = true;
+                return;
+            }
+
+            juego.setFecha(dia, mes, año);
 
             var erroresAgregar = NegocioJuego.AgregarJuego(juego);
             if (erroresAgregar.Any())
             {
-                foreach (string msg in erroresAgregar)
-                    lblMsg.Text += msg + "<div>";
+                lblMsg.Text = string.Join("<br>", erroresAgregar);
                 lblMsg.Visible = true;
             }
             else
@@ -135,6 +144,17 @@ namespace Vistas
             GridViewGames.DataSource = dt;
             Session["JuegosSession"] = dt;
             GridViewGames.DataBind();     
+        }
+
+        protected void LimpiarControles()
+        {
+            ddlGVGamesIDDesarrollador.SelectedIndex = 0;
+            txtGVGamesNombre.Text = "";
+            txtGVGamesDescripcion.Text = "";
+            txtGVGamesNombre.Text = "";
+            txtGVGamesAño.Text = "";
+            txtGVGamesMes.Text = "";
+            txtGVGamesDia.Text = "";
         }
     }
 }

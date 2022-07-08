@@ -74,10 +74,10 @@ namespace Vistas.AdminDashboard
         protected void BtnInsert_Click(Object sender, EventArgs e)
         {
             Desarrollador desarrollador = new Desarrollador(
-                ((TextBox)GridViewDevs.FooterRow.FindControl("txtGVDevsNombre")).Text,
-                ((TextBox)GridViewDevs.FooterRow.FindControl("txtGVDevsSitioWeb")).Text,
-                ((TextBox)GridViewDevs.FooterRow.FindControl("txtGVDevsUbicacionSede")).Text,
-                ((TextBox)GridViewDevs.FooterRow.FindControl("txtGVDevsHistoria")).Text
+                    txtGVDevsNombre.Text,
+                    txtGVDevsSitioWeb.Text,
+                    txtGVDevsUbicacionSede.Text,
+                    txtGVDevsHistoria.Text
                 );
 
             var erroresAgregar = NegocioDesarrollador.AgregarDesarrollador(desarrollador);
@@ -93,6 +93,7 @@ namespace Vistas.AdminDashboard
                 lblMsg.Visible = true;
                 ///txtSearchCategory.Text = "";
                 GridViewDevs.EditIndex = -1;
+                LimpiarControlesDeCarga();
                 CargarDesarrolladores();
             }
         }
@@ -103,6 +104,14 @@ namespace Vistas.AdminDashboard
             GridViewDevs.DataSource = dt;
             Session["DesarrolladoresSession"] = dt;
             GridViewDevs.DataBind();
+        }
+
+        protected void LimpiarControlesDeCarga()
+        {
+            txtGVDevsNombre.Text = "";
+            txtGVDevsSitioWeb.Text = "";
+            txtGVDevsUbicacionSede.Text = "";
+            txtGVDevsHistoria.Text = "";
         }
     }
 }
