@@ -126,7 +126,7 @@ namespace Negocio
                         .ToList();
                 case Orden.SoloMenorPrecio:
                     return juegos
-                        .Where(j => j.getPrecioRebajado() == null)
+                        .Where(j => j.getPrecioRebajado() == null && j.getSoloPrecio()!=null)
                         .OrderBy(j => j.getSoloPrecio())
                         .ToList();
                 case Orden.Rebaja:

@@ -17,6 +17,7 @@ namespace Vistas
             CargarProximos();
             CargarRebaja();
             CargarBaratos();
+            CargarCarousel();
 
         }
 
@@ -50,6 +51,16 @@ namespace Vistas
             sctBaratos.Visible = juegos.Any();
             rptBaratos.DataSource = juegos.Take(4);
             rptBaratos.DataBind();
+        }
+
+        public void CargarCarousel()
+        {
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, orden: NegocioJuego.Orden.Nuevos);
+            //sctBaratos.Visible = juegos.Any();
+            rptImages.DataSource = juegos.Take(3);
+            rptImages.DataBind();
+            rptNames.DataSource = juegos.Take(3);
+            rptNames.DataBind();
         }
 
     }

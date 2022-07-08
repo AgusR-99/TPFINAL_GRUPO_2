@@ -31,15 +31,13 @@
                                     <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="2" aria-label="Slide 3"></button>
                                 </div>
                                 <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="/Imagenes/placeholder-image.jpg" class="d-block w-50" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="/Imagenes/placeholder-image.jpg" class="d-block w-50" alt="...">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="/Imagenes/placeholder-image.jpg" class="d-block w-50" alt="...">
-                                    </div>
+                                    <asp:Repeater ID="rptImages" runat="server">
+                                        <ItemTemplate>
+                                            <div class="carousel-item active">
+                                                <img src="<%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getPortada(), "/Imagenes/placeholder-image.jpg") %>" class="d-block w-50" alt="...">
+                                            </div>
+                                        </ItemTemplate>
+                                    </asp:Repeater>
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselMain" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -52,9 +50,11 @@
                             </div>
                         </div>
                         <div class="data-slide">
-                            <p data-bs-target="#carouselMain" data-bs-slide-to="0" class="glow-red">Nombre juego 1</p>
-                            <p data-bs-target="#carouselMain" data-bs-slide-to="1">Nombre juego 2</p>
-                            <p data-bs-target="#carouselMain" data-bs-slide-to="2">Nombre juego 3</p>
+                            <asp:Repeater ID="rptNames" runat="server">
+                                <ItemTemplate>
+                                    <p data-bs-target="#carouselMain" data-bs-slide-to="<%# Container.ItemIndex %>" ><%# ((Juego)GetDataItem()).getNombre() %></p>
+                                </ItemTemplate>
+                            </asp:Repeater>
                         </div>
                     </div>
                 </section>
@@ -138,6 +138,10 @@
         </div>
     </main>
     <script>
+        window.onload = function ()
+        {
+            $('.data-slide :first-child').addClass('glow-red');
+        }
         $("#carouselMain").on('slide.bs.carousel', function (e) {
             var slideTo = $(e.relatedTarget).index();
             console.log(slideTo);
