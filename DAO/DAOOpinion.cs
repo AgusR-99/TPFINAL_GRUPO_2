@@ -22,6 +22,16 @@ namespace DAO
             return DB.ObtenerTabla("Opiniones", $"[SP_Opiniones_ObtenerPorJuego]", parametros, true);
         }
 
+        public static int? AgregarOpinion(Opinion opinion)
+        {
+            return DB.NonQuery("[SP_Opiniones_Agregar]", getParametros(opinion), true);
+        }
+
+        public static int? ActualizarOpinion(Opinion opinion)
+        {
+            return DB.NonQuery("[SP_Opiniones_Actualizar]", getParametros(opinion), true);
+        }
+
         public static List<Opinion> ObtenerOpinionesPorJuegoComoLista(int idJuego)
         {
             return ArmarListaDeOpiniones(ListarOpinionesPorJuego(idJuego));
@@ -55,6 +65,18 @@ namespace DAO
             {
                 return null;
             }
+        }
+
+        private static List<SqlParameter> getParametros(in Opinion opinion)
+        {
+            var parametros = new List<SqlParameter>()
+            {
+                new SqlParameter("IdJuego", opinion.getID_Juego()),
+                new SqlParameter("Username", opinion.getUsername()),
+                new SqlParameter("Calificacion", opinion.getCalificacion()),
+                new SqlParameter("Comentario", opinion.getComentario()),
+            };
+            return parametros;
         }
     }
 }

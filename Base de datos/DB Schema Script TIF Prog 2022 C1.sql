@@ -895,6 +895,35 @@ BEGIN
 	FROM Opiniones
 	WHERE IdJuego=@IdJuego
 END
+GO
+
+CREATE PROC SP_Opiniones_Agregar
+	@IdJuego int,
+	@Username varchar(30),
+	@Calificacion tinyint,
+	@Comentario varchar(1500)
+AS
+BEGIN
+	INSERT INTO Opiniones VALUES (@IdJuego, @Username, @Calificacion, @Comentario, 1);
+END
+GO
+
+CREATE PROC SP_Opiniones_Actualizar
+	@IdJuego int,
+	@Username varchar(30),
+	@Calificacion tinyint,
+	@Comentario varchar(1500)
+AS
+BEGIN
+	UPDATE Opiniones
+	SET
+		Calificacion = @Calificacion,
+		Comentario = @Comentario
+	WHERE
+		IdJuego = @IdJuego AND Username = @Username;
+END
+GO
+
 
 
 CREATE PROCEDURE SP_SignUp

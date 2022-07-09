@@ -6,7 +6,7 @@
     <div class="articulo-main-wrapper">
         <div class="articulo-main">
             <div class="articulo-top">
-                <h2>Nombre de juego</h2>
+                <h2><asp:Label runat="server" ID="lblNombreJuego"></asp:Label></h2>
             </div>
             <div class="articulo-content-wrapper">
                 <div class="articulo-portada">
@@ -14,84 +14,97 @@
                 </div>
                 <div class="articulo-score-wrapper">
                     <div class="articulo-score">
-                        <aside class="articulo-score-left">
-                            <h1>9.5</h1>
+                        <aside class="articulo-score-left-wrapper">
+                            <asp:Label runat="server" ID="lblRatingJuego"></asp:Label>
                         </aside>
                         <div class="articulo-score-right">
                             <p><strong><small>Puntuacion de usuarios</small></strong></p>
-                            <p><small>Basado en <strong>6 criticas</strong></small></p>
+                            <p><small><asp:Label runat="server" ID="lblOpinionesPrefix"></asp:Label><strong><asp:Label runat="server" ID="lblOpinionesCantidad"></asp:Label></strong></small></p>
                         </div>
                     </div>
                 </div>
                 <div class="articulo-data">
-                    <p><small><strong>Desarrollador: Rockstar North</strong></small></p>
-                    <p><small><strong>Plataformas: </strong>Playstation, Xbox, PC</small></p>
-                    <p><small><strong>Sitio web: </strong> <a href="#">https://www.rockstargames.com/</a></small></p>
-                    <p><small><strong>Precio: </strong> 1234</small></p>
+                    <p><small><strong>Desarrollador: <asp:Label runat="server" ID="lblDesarrollador"></asp:Label></strong></small></p>
+                    <p><small><strong>Categoria: <asp:Label runat="server" ID="lblCategoria"></asp:Label></strong></small></p>
+                    <p><small><strong>Plataformas: </strong><asp:Label runat="server" ID="lblPlataforma"></asp:Label></small></p>
+                    <p><small><strong>Sitio web: </strong> <asp:HyperLink runat="server" ID="linkSitioWeb"></asp:HyperLink></small></p>
+                    <p><small><strong>Precio: </strong><asp:Label runat="server" ID="lblPrecio"></asp:Label></small></p>
                 </div>
             </div>
             <div class="articulo-summary">
-                <small><strong>Resumen: </strong> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</small>
+                <small><strong>Resumen: </strong> <asp:Label runat="server" ID="lblDescripcion"></asp:Label></small>
             </div>
         </div>
         <div class="articulo-review-wrapper">
             <div class="articulo-review-heading">
                 <h2>Reviews de usuarios</h2>
             </div>
-            <div class="review-prompt-wrapper">
-                <div class="review-prompt-heading">
-                    <h5>Escribe una review para ::Nombre de juego::</h5>
-                </div>
-                <div class="review-prompt-textarea">
-                    <div class="review-prompt-icon-wrapper">
-                        <div class="dashboard-element dashboard-username">
-                            <i class="fa-regular fa-user big"></i>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control bg-dark text-light" id="exampleFormControlTextarea1" rows="3"></textarea>
-                        <div class="review-bottom">
-                            <div class="rating-wrapper">
-                                <div class="input-group input-group-lg">
-                                    <span class="input-group-text text-light glow-cyan"><small>Tu rating</small></span>
-                                    <input type="text" class="form-control bg-dark text-light" maxlength="2" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
-                                </div>
-                            </div>
-                            <div class="btn-wrapper">
-                                <button class="btn glow-cyan text-light" type="button">Enviar</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                </div>
-            </div>
+            <% if (LoggedIn)
+               {%>
+                 <div class="review-prompt-wrapper">
+                     <div class="review-prompt-heading">
+                         <h5><asp:Label runat="server" ID="lblHeadingOpinion"></asp:Label>
+                             <asp:Label runat="server" ID="lblNombreJuegoOpinion"></asp:Label></h5>
+                         <asp:Label ID="lblMsg" runat="server"></asp:Label>
+                     </div>
+                     <div class="review-prompt-textarea">
+                         <div class="review-prompt-icon-wrapper">
+                             <div class="dashboard-element dashboard-username">
+                                 <i class="fa-regular fa-user big"></i>
+                             </div>
+                         </div>
+                 
+                         <div class="form-group">
+                             <asp:TextBox runat="server" CssClass="form-control bg-dark text-light" ID="txtUserReview" TextMode="MultiLine"></asp:TextBox>
+                             <div class="review-bottom">
+                                 <div class="rating-wrapper">
+                                     <div class="input-group input-group-lg">
+                                         <span class="input-group-text text-light glow-cyan"><small>Tu rating</small></span>
+                                         <asp:TextBox runat="server" ID="txtUserRating" CssClass="form-control bg-dark text-light" MaxLength="1" onkeypress="return NumberFloatAndOneDOTSign(this)"></asp:TextBox>
+                                     </div>
+                                 </div>
+                                 <div class="btn-wrapper">
+                                     <asp:Button runat="server" CssClass="btn glow-cyan text-light" ID="btnSend" OnClick="btnSend_Click" Text="Enviar" />
+                                 </div>
+                             </div>
+                         </div>
+                 
+                     </div>
+                 </div>
+            <%}%>
             <div class="articulo-review-categories">
-                <p><small>Positivas: </small><strong>6</strong></p>
-                <p><small>Variadas: </small><strong>0</strong></p>
-                <p><small>Negativas: </small><strong>0</strong></p>
+                <p><small>Positivas: </small><strong><asp:Label ID="lblReviewPositivas" runat="server"></asp:Label></strong></p>
+                <p><small>Variadas: </small><strong><asp:Label ID="lblReviewVariadas" runat="server"></asp:Label></strong></p>
+                <p><small>Negativas: </small><strong><asp:Label ID="lblReviewNegativas" runat="server"></asp:Label></strong></p>
             </div>
             <div class="review-wrapper">
+                <asp:Repeater ID="repReviews" runat="server" onitemdatabound="repReviews_ItemDataBound">
+                    <ItemTemplate>
+                        <article class="articulos-unit articulo-review">
+                            <div class="articulo-under articulo-rating-wrapper">
+                                <asp:Label ID="lblCalificacion" runat="server" Text='<%# Eval("Calificacion") %>'></asp:Label>
+                            </div>
+                            <div class="articulo-body">
+                                <strong><p> <asp:Label ID="lblUsername" runat="server" CssClass="articulo-puntuacion-media" Text='<%# Eval("Username") %>'></asp:Label></p></strong>
+                                <asp:Label ID="lblComentario" runat="server" CssClass="articulo-descripcion" Text='<%# Eval("Comentario") %>'></asp:Label>
+                            </div>
+                        </article>
+                    </ItemTemplate>
+                </asp:Repeater>
             </div>
         </div>
     </div>
     </main>
     <script>
-        /*Poner numero de articulos a generar*/
-        $(function() {
-            for (var i = 0; i < 15; i++) {
-                $('.review-wrapper').append(
-                    `<article class="articulos-unit articulo-review">
-                    <div class= "articulo-under articulo-rating-wrapper" >
-                    <p class="articulo-rating">9.5</p>
-                    </div >
-                    <div class="articulo-body">
-                    <strong class="articulo-puntuacion-media">someUserName</strong>
-                    <p class="articulo-descripcion"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum </p>
-                    </div>
-                    </article >`
-                );
-            }
-        })
+
+        function NumberFloatAndOneDOTSign(CurrentElement) {
+            var charCode = (event.which) ? event.which : event.keyCode;
+
+            console.log(CurrentElement.value.indexOf(String.fromCharCode(charCode)))
+
+            if (charCode < 49 || charCode > 53)
+                return false;
+
+        }
     </script>
 </asp:Content>

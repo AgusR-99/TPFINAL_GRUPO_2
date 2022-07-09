@@ -23,10 +23,14 @@
     --clr-neon-green-l: hsl(180, 100%, 74%);
     --clr-neon-green-d: hsl(180, 100%, 24%);
     --clr-home-page-bg: #07040E;
+    --clr-rating-5: hsl(120, 73%, 46%);
+    --clr-rating-4: hsl(90, 73%, 46%);
+    --clr-rating-3: hsl(60, 73%, 46%);
+    --clr-rating-2: hsl(30, 73%, 46%);
+    --clr-rating-1: hsl(0, 73%, 46%);
 }
 
 html, body {
-    background-color: var(--clr-dark-carbon);
     color: white;
     font-family: 'Roboto', sans-serif;
     height: 100%;
@@ -42,6 +46,26 @@ html, body {
 
 .bg-home-page {
     background-color: var(--clr-home-page-bg);
+}
+
+.bg-rating-5 {
+    background-color: var(--clr-rating-5) !important;
+}
+
+.bg-rating-4 {
+    background-color: var(--clr-rating-4) !important;
+}
+
+.bg-rating-3 {
+    background-color: var(--clr-rating-3) !important;
+}
+
+.bg-rating-2 {
+    background-color: var(--clr-rating-2) !important;
+}
+
+.bg-rating-1 {
+    background-color: var(--clr-rating-1) !important;
 }
 
 main {
@@ -689,6 +713,7 @@ main {
     }
 
     .articulos-unit {
+        padding: 15px;
         background-color: var(--clr-dark-carbon);
         color: white;
         display: flex;
@@ -701,7 +726,6 @@ main {
 
 .articulos-unit > * {
     margin: 0;
-    padding: 20px;
 }
 
 .articulos-unit > img {
@@ -715,7 +739,6 @@ main {
 }
 
 .articulo-under {
-    margin-left: auto;
     display: flex;
     flex-direction: column;
 }
@@ -729,13 +752,16 @@ main {
 }
 
     .articulo-under > .articulo-rating {
-        margin-top: auto;
         font-size: 1.5rem;
         font-weight: 900;
         text-shadow: 1px 1px black;
-        background-color: var(--bs-teal);
-        padding: 15px;
-        clip-path: polygon(30% 0%, 70% 0%, 100% 30%, 100% 70%, 70% 100%, 30% 100%, 0% 70%, 0% 30%);
+        background-color: lightgrey;
+        padding: 15px !important;
+        width: 50px;
+        height: 50px;
+        border-radius: 100%;
+        text-align: center;
+        line-height: 17px;
     }
 
 .box-flex {
@@ -939,13 +965,11 @@ main {
 
 /*Mantener icono de rating en inicio de parent*/
 .articulo-rating-wrapper {
-    display: block;
-    padding: 20px 0;
+    padding-right: 15px;
 }
 
 .articulo-rating-wrapper > .articulo-rating{
     font-size: 1rem;
-    padding: 10px;
 }
 
 .articulo-main-wrapper {
@@ -983,12 +1007,16 @@ main {
     display: flex;
 }
 
-.articulo-score-left > h1 {
-        padding: 10px;
-        border: 1px solid var(--bs-teal);
-        border-radius: 10px;
-        margin: 0;
-    }
+.articulo-score-left-wrapper{
+    display: flex;
+}
+
+.articulo-score-left {
+    padding: 5px 20px;
+    margin: 0;
+    font-size: 2.5rem;
+    border-radius: 10px;
+}
 
 .articulo-score-right {
     margin-left: 10px;
