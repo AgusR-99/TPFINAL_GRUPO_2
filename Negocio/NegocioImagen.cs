@@ -16,6 +16,11 @@ namespace Negocio
             return DAOImagen.ListarImagenes();
         }
 
+        public static DataTable ListarImagenesPorJuego(int idJuego, bool soloActivo=true)
+        {
+            return DAOImagen.ListarImagenesPorJuego(idJuego, soloActivo);
+        }
+
         public static List<string> ActualizarImagen(Imagenes imagen)
         {
             var errorReasons = Validar(imagen);

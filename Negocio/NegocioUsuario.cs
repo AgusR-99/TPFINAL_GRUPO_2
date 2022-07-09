@@ -111,6 +111,67 @@ namespace Negocio
             }
             return errorReasons;
         }
-         
+
+        public static Usuario ObtenerUsuarioEnUso(in HttpSessionState Session)
+        {
+            return (Usuario)Session["LoggedUser"];
+        }
+
+        public static string ActualizarDatosUsuario(Usuario usuario)
+        {
+            var ErrorReasons = ValidarActualizacionUsuario(usuario);
+            if (ErrorReasons != "")
+            {
+                return ErrorReasons;
+            }
+            int? Actualizacion = DAOUsuario.ActualizarDatosUsuario(usuario);
+            if (Actualizacion == null)
+            {
+                ErrorReasons = "Error en la base de datos";
+            }
+            if (Actualizacion == -1)
+            {
+                ErrorReasons = "Error. Ya existe el usuario";
+            }
+            return ErrorReasons;
+        }
+
+        public static string ValidarActualizacionUsuario(Usuario usuario)
+        {
+            string errorReasons = "";
+            if (String.IsNullOrWhiteSpace(usuario.getUsername()))
+            {
+                errorReasons = "El campo Username no puede estar vacío";
+                return errorReasons;
+            }
+            if (String.IsNullOrWhiteSpace(usuario.getEmail()))
+            {
+                errorReasons = "El campo Email no puede estar vacío";
+                return errorReasons;
+            }
+            if (String.IsNullOrWhiteSpace(usuario.getContraseña()))
+            {
+                errorReasons = "El campo Contraseña no puede estar vacío";
+                return errorReasons;
+            }
+
+            if (String.IsNullOrWhiteSpace(usuario.getDescripcion()))
+            {
+                errorReasons = "El campo Descripcion no puede estar vacío";
+                return errorReasons;
+            }
+
+            return errorReasons;
+        }
+
+        public static string EliminarUsuario(Usuario usuario)
+        {
+            string errorReasons = "";
+            var resultadoEliminar = DAOUsuario.EliminarUsuario(usuario);
+            if (resultadoEliminar == null)
+                errorReasons = "Ocurrió un error al eliminar en la base de datos";
+            return errorReasons;
+        }
+
     }
 }

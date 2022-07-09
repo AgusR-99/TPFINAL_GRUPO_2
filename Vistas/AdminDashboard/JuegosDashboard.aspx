@@ -20,14 +20,9 @@
         OnRowDataBound="GridViewGames_RowDataBound"
         OnRowCancelingEdit="GridViewGames_RowCancelingEdit"
         OnRowEditing="GridViewGames_RowEditing"
-        OnRowUpdating="GridViewGames_RowUpdating"
-        ShowFooter="True">
+        OnRowUpdating="GridViewGames_RowUpdating">
         <Columns>
             <asp:TemplateField>
-                <%--Cosas del footer--%>
-                <FooterTemplate>
-                    <asp:LinkButton ID="btnInsert" CssClass="btn btn-primary" runat="server" CommandName="Insert" Text="Agregar" OnClick="BtnInsert_Click" />
-                </FooterTemplate>
                 <%--Cosas del edit--%>
                 <EditItemTemplate>
                     <asp:LinkButton ID="btnUpdate" CssClass="btn btn-outline-success" runat="server" CommandName="Update" Text="Actualizar" OnClientClick="return confirm('¿Esta seguro que desea actualizar la fila?')" />
@@ -42,9 +37,6 @@
                 <EditItemTemplate>
                     <asp:Label ID="lblGVGamesIDJuego" runat="server" Text='<%# Bind("IdJuego")%>'></asp:Label>
                 </EditItemTemplate>
-                <FooterTemplate>
-                    <asp:Label ID="lblGVGamesID" runat="server"></asp:Label>
-                </FooterTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesIDJuego" runat="server" Text='<%# Bind("IdJuego") %>'></asp:Label>
                 </ItemTemplate>
@@ -54,10 +46,6 @@
                     <asp:DropDownList ID="ddlGVGamesIDDesarrollador" runat="server">
                     </asp:DropDownList>
                 </EditItemTemplate>
-                <FooterTemplate>
-                    <asp:DropDownList ID="ddlGVGamesIDDesarrollador" runat="server">
-                    </asp:DropDownList>
-                </FooterTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesIDDesarrollador" runat="server" Text='<%# Bind("IdDesarrollador") %>'>
                     </asp:Label>
@@ -67,9 +55,6 @@
                 <EditItemTemplate>
                     <asp:TextBox ID="txtGVGamesNombre" runat="server" Text='<%# Bind("Nombre") %>'></asp:TextBox>
                 </EditItemTemplate>
-                <FooterTemplate>
-                    <asp:TextBox ID="txtGVGamesNombre" runat="server"></asp:TextBox>
-                </FooterTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesNombre" runat="server" Text='<%# Bind("Nombre") %>'>
                     </asp:Label>
@@ -79,9 +64,6 @@
                 <EditItemTemplate>
                     <asp:TextBox ID="txtGVGamesDescripcion" runat="server" Text='<%# Bind("Descripcion") %>'></asp:TextBox>
                 </EditItemTemplate>
-                <FooterTemplate>
-                    <asp:TextBox ID="txtGVGamesDescripcion" runat="server"></asp:TextBox>
-                </FooterTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesDescripcion" runat="server" Text='<%# Bind("Descripcion") %>'>
                     </asp:Label>
@@ -93,11 +75,6 @@
                     <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>/
                     <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px"></asp:TextBox>
                 </EditItemTemplate>
-                <FooterTemplate>
-                    <asp:TextBox ID="txtGVGamesDia" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>/
-                    <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>/
-                    <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px"></asp:TextBox>
-                </FooterTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesFechaLanzamiento" Text='<%# Eval("FechaLanzamiento", "{0:dd/MM/yyyy}") %>' runat="server"></asp:Label>
                 </ItemTemplate>
@@ -106,17 +83,46 @@
                 <EditItemTemplate>
                     <asp:CheckBox ID="chkGVGamesActivo" runat="server" Checked='<%# Bind("Activo") %>' />
                 </EditItemTemplate>
-                <FooterTemplate>
-                    <asp:CheckBox ID="chkGVGamesActivo" runat="server" />
-                </FooterTemplate>
                 <ItemTemplate>
                     <asp:CheckBox ID="chkGVGamesImagen" runat="server" Checked='<%# Bind("Activo") %>' Enabled="False" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
-        <FooterStyle CssClass="grd-footer"></FooterStyle>
-        <PagerStyle CssClass="grd-pager"></PagerStyle>
     </asp:GridView>
+
+    <div class="grd-control-wrapper d-flex justify-content-evenly">
+        <div class="grd-control">
+            <span><strong>Desarrollador</strong></span>
+            <asp:DropDownList ID="ddlGVGamesIDDesarrollador" runat="server"></asp:DropDownList>
+        </div> 
+        <div class="grd-control">
+            <span><strong>Nombre</strong></span>
+            <asp:TextBox ID="txtGVGamesNombre" runat="server"></asp:TextBox>
+        </div>
+        <div class="grd-control">
+            <span><strong>Descripción</strong></span>
+            <asp:TextBox ID="txtGVGamesDescripcion" runat="server"></asp:TextBox>
+        </div>
+        <div class="grd-control">
+            <span><strong>Fecha</strong></span>
+            <div>
+                <asp:TextBox ID="txtGVGamesDia" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>
+                <label>/</label>
+                <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>
+                <label>/</label>
+                <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px"></asp:TextBox>
+            </div>
+        </div>
+        <div class="grd-control">
+            <span><strong>Activo</strong></span>
+            <asp:CheckBox ID="chkGVGamesActivo" runat="server" />
+        </div>
+        <div class="grd-control">
+            <asp:LinkButton ID="btnInsert" CssClass="btn btn-primary" runat="server" CommandName="Insert" Text="Agregar" OnClick="BtnInsert_Click" />
+        </div>
+    </div>
+
+
     <script>
         $(function () {
             $(".selection-game").addClass("border-bottom-highlight")

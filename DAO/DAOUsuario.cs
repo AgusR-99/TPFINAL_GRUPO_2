@@ -18,7 +18,7 @@ namespace DAO
                 if (resultado == null) return -1;
                 if (resultado.Rows.Count == 0) return 0;
 
-                usuario = GetUsuarioFromDataRow(resultado.Rows[0]);
+                usuario = ArmarUsuario(resultado.Rows[0]);
                 return 1;
             }
             catch
@@ -37,13 +37,17 @@ namespace DAO
             };
         }
 
-        private static Usuario GetUsuarioFromDataRow(in DataRow row)
+        private static Usuario ArmarUsuario(in DataRow row)
         {
-            return new Usuario(
+            var usuario = new Usuario(
                 (string)row["Username"],
                 (string)row["Email"],
                 (bool)row["Administrador"],
-                row["Descripcion"] == DBNull.Value ? null : (string)row["Descripcion"]);
+                (string)DB.ValueOrNull(row["Descripcion"])
+            );
+            usuario.setOpinion(DAOOpinion.ObtenerOpinionesPorUsuarioComoLista(usuario.getUsername()));
+            usuario.setDeseados(DAODeseado.ObtenerDeseadosPorUsuarioComoLista(usuario.getUsername()));
+            return usuario;
         }
 
         public static DataTable ListarUsuarios()
@@ -93,5 +97,36 @@ namespace DAO
                 new SqlParameter("Activo", usuario.getActivo())
             };
         }
+
+        public static int? ActualizarDatosUsuario(Usuario usuario)
+        {
+            return DB.NonQuery("[SP_Usuarios_ActualizarDatos]", getParametrosUsuario3(usuario), true);
+        }
+
+        public static List<SqlParameter> getParametrosUsuario3(in Usuario usuario)
+        {
+            return new List<SqlParameter>()
+            {
+                new SqlParameter("usuariocomparacion", usuario.getUsernameComp()),
+                new SqlParameter("usuario", usuario.getUsername()),
+                new SqlParameter("contrasena", usuario.getContraseña()),
+                new SqlParameter("descripcion", usuario.getDescripcion()),
+                new SqlParameter("email", usuario.getEmail())
+            };
+        }
+
+        public static int? EliminarUsuario(Usuario usuario)
+        {
+            return DB.NonQuery("[SP_Usuarios_Eliminar]", getParametrosUsuario4(usuario), true);
+        }
+
+        public static List<SqlParameter> getParametrosUsuario4(in Usuario usuario)
+        {
+            return new List<SqlParameter>()
+            {
+                new SqlParameter("Username", usuario.getUsername())
+            };
+        }
+
     }
 }

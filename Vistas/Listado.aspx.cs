@@ -17,7 +17,11 @@ namespace Vistas
             var catIDs = SetCategoryChecks();
             var platIDs = SetPlatformChecks();
 
-            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, catIDs, platIDs, SelectedOrder());
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true,
+                                                            categorias: catIDs,
+                                                            plataformas: platIDs,
+                                                            texto: Request.QueryString["txt"],
+                                                            orden: SelectedOrder()); ;
             lblCantResultados.Text = $"{juegos.Count} resultados";
             rptResultados.DataSource = juegos;
             rptResultados.DataBind();
@@ -59,22 +63,6 @@ namespace Vistas
                 return requestedIDs.Select(int.Parse).ToList();
             }
             return null;
-        }
-
-        protected string ValueOrDefault(object value, string def)
-        {
-            return value == null ? def : value.ToString();
-        }
-
-        protected string FitText(string text, int length)
-        {
-            string suffix = "[...]";
-            if(text.Length>length)
-            {
-                text = text.Substring(0, length - suffix.Length);
-                text += suffix;
-            }
-            return text;
         }
 
         protected NegocioJuego.Orden SelectedOrder()

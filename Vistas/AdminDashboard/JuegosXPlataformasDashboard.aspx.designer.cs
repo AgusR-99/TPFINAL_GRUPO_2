@@ -11,70 +11,70 @@ namespace Vistas
 {
 
 
-    public partial class NestedUserDashboard
+    public partial class JuegosXPlataformasDashboard
     {
 
         /// <summary>
-        /// Control lblUsername.
+        /// Control lblMsg.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblUsername;
+        protected global::System.Web.UI.WebControls.Label lblMsg;
 
         /// <summary>
-        /// Control lblEmail.
+        /// Control ddlJuegosBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblEmail;
+        protected global::System.Web.UI.WebControls.DropDownList ddlJuegosBuscar;
 
         /// <summary>
-        /// Control lblDescripcion.
+        /// Control ddlPlataformasBuscar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblDescripcion;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPlataformasBuscar;
 
         /// <summary>
-        /// Control lblCantJuegos.
+        /// Control GridViewGamesXPlatforms.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCantJuegos;
+        protected global::System.Web.UI.WebControls.GridView GridViewGamesXPlatforms;
 
         /// <summary>
-        /// Control lblCantOpiniones.
+        /// Control ddlJuego_new.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblCantOpiniones;
+        protected global::System.Web.UI.WebControls.DropDownList ddlJuego_new;
 
         /// <summary>
-        /// Control lblPuntuacionMedia.
+        /// Control ddlPlataforma_new.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl lblPuntuacionMedia;
+        protected global::System.Web.UI.WebControls.DropDownList ddlPlataforma_new;
 
         /// <summary>
-        /// Control panelContent.
+        /// Control btnGameXPlatformAgregar.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder panelContent;
+        protected global::System.Web.UI.WebControls.Button btnGameXPlatformAgregar;
     }
 }

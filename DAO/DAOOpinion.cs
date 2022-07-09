@@ -32,9 +32,20 @@ namespace DAO
             return DB.NonQuery("[SP_Opiniones_Actualizar]", getParametros(opinion), true);
         }
 
+        public static DataTable ListarOpinionesPorUsuario(string username)
+        {
+            var parametros = new List<SqlParameter>() { new SqlParameter("username", username) };
+            return DB.ObtenerTabla("Opiniones", $"[SP_Opiniones_ObtenerPorUsuario]", parametros, true);
+        }
+
         public static List<Opinion> ObtenerOpinionesPorJuegoComoLista(int idJuego)
         {
             return ArmarListaDeOpiniones(ListarOpinionesPorJuego(idJuego));
+        }
+
+        public static List<Opinion> ObtenerOpinionesPorUsuarioComoLista(string username)
+        {
+            return ArmarListaDeOpiniones(ListarOpinionesPorUsuario(username));
         }
 
         private static List<Opinion> ArmarListaDeOpiniones(in DataTable datatable)

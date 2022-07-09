@@ -43,9 +43,10 @@
   <ItemGroup>
     <Compile Include="Categoria.cs" />
     <Compile Include="Desarrollador.cs" />
+    <Compile Include="Deseado.cs" />
     <Compile Include="Imagenes.cs" />
     <Compile Include="Juegos_x_Categorias.cs" />
-    <Compile Include="Juegos_x_Plataformas.cs" />
+    <Compile Include="Juego_x_Plataforma.cs" />
     <Compile Include="Opinion.cs" />
     <Compile Include="Juego.cs" />
     <Compile Include="Plataforma.cs" />

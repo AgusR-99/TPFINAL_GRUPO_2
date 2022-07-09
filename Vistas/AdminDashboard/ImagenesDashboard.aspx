@@ -6,7 +6,7 @@
     <asp:Label ID="lblMsg" runat="server"></asp:Label>
     <div class="input-group ctrl-category input-cat">
         <div class="form-outline">
-            <asp:TextBox runat="server" class="form-control bg-dark text-light no-borders" ID="txtSearchImage" placeholder="Buscar imagenes"></asp:TextBox>
+            <asp:DropDownList runat="server" ID="ddlSearchImage" placeholder="Buscar imagenes"></asp:DropDownList>
         </div>
         <asp:Button runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="BtnSearch_Click"></asp:Button>
     </div>

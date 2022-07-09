@@ -83,7 +83,7 @@
         </Columns>
     </asp:GridView>
     <div>
-        <h2>Agregar Juego-Tienda</h2>
+        <h2>Agregar Tienda</h2>
         <table>
             <thead>
                 <tr>

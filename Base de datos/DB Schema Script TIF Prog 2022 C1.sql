@@ -167,6 +167,17 @@ CREATE TABLE JuegosXTiendas
 		FOREIGN KEY (IdTienda) REFERENCES Tiendas(IdTienda)
 )
 
+CREATE TABLE Deseados
+(
+	Username varchar(30) NOT NULL,
+	IdJuego int NOT NULL,
+	CONSTRAINT PK_Deseados PRIMARY KEY (IdJuego,Username),
+	CONSTRAINT FK_Deseados_Usuarios
+		FOREIGN KEY (Username) REFERENCES Usuarios(Username),
+	CONSTRAINT FK_Deseados_Juegos
+		FOREIGN KEY (IdJuego) REFERENCES Juegos(IdJuego)
+)
+
 GO
 
  --------------- PROCEDIMIENTOS ALMACENADOS ---------------
@@ -255,7 +266,7 @@ END
 GO
 
 
-alter PROCEDURE SP_Juegos_Actualizar
+CREATE PROCEDURE SP_Juegos_Actualizar
 @IdJuego int,
 @IdDesarrollador int,
 @Nombre varchar(50),
@@ -306,15 +317,6 @@ BEGIN
 	SELECT @OutputValue = Juegos.IdJuego
 	FROM Juegos
 	WHERE Juegos.Nombre = @Nombre
-END
-GO
-
-CREATE PROC SP_Juegos_Obtener_Por_Nombre
-	@Nombre varchar(30)
-AS
-BEGIN
-	SELECT Nombre FROM Juegos
-	WHERE Nombre like '%' + @Nombre + '%'
 END
 GO
 
@@ -670,15 +672,6 @@ BEGIN
 END
 GO
 
-CREATE PROC SP_Juegos_Obtener_Por_Nombre
-	@Nombre varchar(30)
-AS
-BEGIN
-	SELECT Nombre FROM Juegos
-	WHERE Nombre like '%' + @Nombre + '%'
-END
-GO
-
 CREATE PROCEDURE SP_JuegosXTiendas_Actualizar
 @IdJuego int,
 @IdTienda int,
@@ -792,14 +785,14 @@ END
 GO
 
 CREATE PROC SP_Imagenes_Agregar
-	@Nombre varchar(50),
-	@SitioWeb varchar(100),
-	@UbicacionSede varchar(100),
-	@Historia varchar(100)
+	@idJuego int,
+	@NombreArchivo varchar(50),
+	@Orden int,
+	@activo BIT
 AS
 BEGIN
-	INSERT INTO Desarrolladores(NombreDesarrollador, SitioWeb, UbicacionSede, Historia)
-	VALUES (@Nombre, @SitioWeb, @UbicacionSede, @Historia)
+	INSERT INTO JuegosImagenes(IdJuego, NombreArchivo, Orden, activo)
+	VALUES (@idJuego, @NombreArchivo, @Orden, @activo)
 END
 GO
 
@@ -850,7 +843,7 @@ BEGIN
 END
 GO
 
-ALTER PROC SP_Plataformas_ObtenerPorJuego
+CREATE PROC SP_Plataformas_ObtenerPorJuego
 @IdJuego int,
 @SoloActivo bit = 1
 AS
@@ -924,8 +917,6 @@ BEGIN
 END
 GO
 
-
-
 CREATE PROCEDURE SP_SignUp
 (
 @Username varchar(30),
@@ -955,4 +946,96 @@ Activo
 )
 VALUES(@Username,@Contrasena,@Email,@Administrador,@Activo)
 END
+GO
 
+CREATE PROC SP_Deseados_ObtenerPorUsuario
+@Username varchar(30)
+AS
+BEGIN
+	SELECT d.Username, d.IdJuego
+	FROM Deseados d
+		INNER JOIN Juegos j ON j.IdJuego=d.IdJuego
+	WHERE d.Username=@Username 
+		AND j.Activo=1
+END
+GO
+
+CREATE PROC SP_Opiniones_ObtenerPorUsuario
+@username varchar(30)
+AS
+BEGIN
+	SELECT IdJuego, Username, Calificacion, Comentario, Activo
+	FROM Opiniones
+	WHERE Username=@username
+END
+GO
+
+CREATE PROCEDURE SP_Usuarios_ActualizarDatos
+(
+@usuariocomparacion varchar(30),
+@usuario varchar(30),
+@contrasena varchar(50),
+@descripcion varchar(MAX),
+@email varchar(50)
+)
+AS
+IF EXISTS(SELECT * FROM Usuarios WHERE @usuario LIKE Username)
+BEGIN
+RETURN -1;
+END
+BEGIN
+UPDATE Usuarios
+SET
+Username=@usuario,
+Contrasena=@contrasena,
+Descripcion=@descripcion,
+Email=@email
+WHERE Username=@usuariocomparacion
+END
+GO
+
+CREATE PROCEDURE SP_JuegosXPlataformas_Obtener
+@IdJuego int,
+@IdPlataforma int
+AS
+BEGIN
+	SELECT j.Nombre AS Juego, j.IdJuego, p.Nombre AS Plataforma, p.IdPlataforma
+	FROM JuegosXPlataformas jp
+		INNER JOIN Juegos j ON j.idJuego = jp.IdJuego
+		INNER JOIN Plataformas p ON p.IdPlataforma = jp.IdPlataforma
+	WHERE 
+		(@IdJuego=-1 OR @IdJuego=jp.IdJuego) AND
+		(@IdPlataforma=-1 OR @IdPlataforma=jp.IdPlataforma)
+END
+GO
+
+CREATE PROC SP_JuegosXPlataformas_Existe
+@IdJuego int,
+@IdPlataforma int
+AS
+BEGIN
+	SELECT COUNT(IdJuego)
+	FROM JuegosXPlataformas
+	WHERE IdJuego=@IdJuego AND IdPlataforma=@IdPlataforma
+END
+GO
+
+CREATE PROC SP_JuegosXPlataformas_Agregar
+@IdJuego int,
+@IdPlataforma int
+AS
+BEGIN
+	INSERT INTO JuegosXPlataformas (IdJuego,IdPlataforma)
+		VALUES(@IdJuego,@IdPlataforma)
+END
+GO
+
+CREATE PROC SP_JuegosXPlataformas_Eliminar
+@IdJuego int,
+@IdPlataforma int
+AS
+BEGIN
+	DELETE FROM JuegosXPlataformas
+	WHERE IdJuego=@IdJuego AND IdPlataforma=@IdPlataforma
+END
+GO

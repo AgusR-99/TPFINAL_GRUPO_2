@@ -85,7 +85,7 @@ namespace Negocio
             return DAOJuego.ObtenerCantidadJuegos();
         }
 
-        public static List<Juego> ObtenerJuegosComoLista(bool soloActivo = true, List<int> categorias = null, List<int> plataformas = null, Orden orden = Orden.Default)
+        public static List<Juego> ObtenerJuegosComoLista(bool soloActivo = true, List<int> categorias = null, List<int> plataformas = null, string texto = null, Orden orden = Orden.Default)
         {
             DateTime FechaActual = DateTime.Today;
             
@@ -98,6 +98,10 @@ namespace Negocio
             if(plataformas!=null)
                 juegos.RemoveAll(j =>
                     !(j.GetPlataformas().Any(p => plataformas.Contains(p.getID_Plataforma()))));
+            if (texto != null)
+                juegos.RemoveAll(j =>
+                    !(j.getNombre().ToLower().Contains(texto.ToLower()) 
+                        || j.getDescripcion().ToLower().Contains(texto.ToLower())));
 
             switch (orden)
             {
@@ -122,7 +126,7 @@ namespace Negocio
                         .ToList();
                 case Orden.SoloMenorPrecio:
                     return juegos
-                        .Where(j => j.getPrecioRebajado() == null)
+                        .Where(j => j.getPrecioRebajado() == null && j.getSoloPrecio()!=null)
                         .OrderBy(j => j.getSoloPrecio())
                         .ToList();
                 case Orden.Rebaja:
@@ -132,17 +136,41 @@ namespace Negocio
                         .ToList();
                 case Orden.Nuevos:
                     return juegos
-                        .Where(j => j.getFecha() < FechaActual)
+                        .Where(j => j.getFecha() <= FechaActual)
                         .OrderByDescending(j => j.getFecha())
                         .ToList();
                 case Orden.Proximos:
                     return juegos
-                        .Where(j => j.getFecha()>FechaActual)
+                        .Where(j => j.getFecha() > FechaActual)
                         .OrderBy(j => j.getFecha())
                         .ToList();
                 default:
                     return juegos;
             }
+        }
+
+        public static List<Juego> ObtenerJuegosDeseados(in List<Deseado> deseados)
+        {
+            var juegos = DAOJuego.ObtenerJuegosComoLista();
+            var juegosDeseados = deseados.Select(d => d.ID_Juego);
+            
+            juegos.RemoveAll(j => !juegosDeseados.Contains(j.getID()));
+            
+            return juegos;
+        }
+
+        public static Dictionary<Juego,Opinion> ObtenerDiccionarioJuegosOpiniones(in List<Opinion> opiniones)
+        {
+            var juegos = DAOJuego.ObtenerJuegosComoLista();
+            var juegosOpiniones = new Dictionary<Juego, Opinion>();
+            foreach(var opinion in opiniones)
+            {
+                juegosOpiniones.Add(
+                    juegos.First(j => j.getID() == opinion.getID_Juego()),
+                    opinion
+                );
+            }
+            return juegosOpiniones;
         }
 
     }

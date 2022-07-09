@@ -1,4 +1,7 @@
 ﻿<%@ Page Title="Listado" Language="C#" MasterPageFile="~/Masters/Navbar.Master" AutoEventWireup="true" CodeBehind="Listado.aspx.cs" Inherits="Vistas.Listado" %>
+<%@ Import Namespace="Entidades" %>
+<%@ Import Namespace="Vistas" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"></asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
     <main class="main bg-dark-carbon">
@@ -11,18 +14,18 @@
                 <div class="articulos-wrapper">
                     <asp:Repeater ID="rptResultados" runat="server">
                         <ItemTemplate>
-                                <article class="articulos-unit" > 
-                                    <img src="<%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getPortada(), "/Imagenes/placeholder-image.jpg") %>" alt="portada" class="articulo-portada articulo-portada-w" />
+                                <article class="articulos-unit" onclick="goToGame(<%# ((Juego)GetDataItem()).getID() %>)"> 
+                                    <img src="<%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getPortada(), "/Imagenes/placeholder-image.jpg") %>" onclick="" alt="portada" class="articulo-portada articulo-portada-w" />
                                     <div class="articulo-body">
-                                        <p class="articulo-nombre"><%# ((Entidades.Juego)GetDataItem()).getNombre() %></p>
-                                        <small><strong>Plataforma: </strong><%# String.Join(", ", ((Entidades.Juego)GetDataItem()).GetPlataformas()) %></small>
+                                        <p class="articulo-nombre"><%# ((Juego)GetDataItem()).getNombre() %></p>
+                                        <small><strong>Plataforma: </strong><%# String.Join(", ", ((Juego)GetDataItem()).GetPlataformas()) %></small>
                                         <br />
-                                        <small><strong>Categorías: </strong><%# String.Join(", ", ((Entidades.Juego)GetDataItem()).GetCategorias()) %></small>
-                                        <p class="articulo-descripcion"><%# FitText(((Entidades.Juego)GetDataItem()).getDescripcion(), 125) %></p>
+                                        <small><strong>Categorías: </strong><%# String.Join(", ", ((Juego)GetDataItem()).GetCategorias()) %></small>
+                                        <p class="articulo-descripcion"><%# VistasAux.FitText(((Juego)GetDataItem()).getDescripcion(), 125) %></p>
                                     </div>
                                     <div class="articulo-under">
-                                        <p class="articulo-precio">Precio: <%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getPrecio(), "No disponible") %></p>
-                                        <p class="articulo-rating"><%# ValueOrDefault(((Entidades.Juego)GetDataItem()).getRating(), " - ")  %></p>
+                                        <p class="articulo-precio">Precio: <%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getPrecio(), "No disponible") %></p>
+                                        <p class="articulo-rating"><%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getRating(), " - ")  %></p>
                                     </div>
                                 </article>
                         </ItemTemplate>
@@ -67,6 +70,14 @@
                                         <input class="form-check-input order-radio" type="radio" name="flexRadioOrder" id="flexRadioOrder4" value="<%= (int)Negocio.NegocioJuego.Orden.MenorPrecio %>" <% if(Negocio.NegocioJuego.Orden.MenorPrecio==SelectedOrder()) {%>checked<%} %> />
                                         <label class="form-check-label" for="flexRadioOrder4">Menor precio</label>
                                     </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input order-radio" type="radio" name="flexRadioOrder" id="flexRadioOrder5" value="<%= (int)Negocio.NegocioJuego.Orden.Nuevos %>" <% if(Negocio.NegocioJuego.Orden.Nuevos==SelectedOrder()) {%>checked<%} %> />
+                                        <label class="form-check-label" for="flexRadioOrder5">Nuevos</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input order-radio" type="radio" name="flexRadioOrder" id="flexRadioOrder6" value="<%= (int)Negocio.NegocioJuego.Orden.Proximos %>" <% if(Negocio.NegocioJuego.Orden.Proximos==SelectedOrder()) {%>checked<%} %> />
+                                        <label class="form-check-label" for="flexRadioOrder6">Próximos</label>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -90,8 +101,8 @@
                                     <asp:Repeater ID="rptChecksCategoria" runat="server">
                                         <ItemTemplate>
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input category-check" name="flexCheckCategory" id="flexCheckCategory" value="<%# ((Entidades.Categoria)GetDataItem()).Id_Categoria %>" checked runat="server"/>
-                                                <label class="form-check-label" for="flexCheckCategory"><%# ((Entidades.Categoria)GetDataItem()).Nombre %> </label>
+                                                <input type="checkbox" class="form-check-input category-check" name="flexCheckCategory" id="flexCheckCategory" value="<%# ((Categoria)GetDataItem()).Id_Categoria %>" checked runat="server"/>
+                                                <label class="form-check-label" for="flexCheckCategory"><%# ((Categoria)GetDataItem()).Nombre %> </label>
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -117,8 +128,8 @@
                                     <asp:Repeater ID="rptChecksPlataforma" runat="server">
                                         <ItemTemplate>
                                             <div class="form-check">
-                                                <input type="checkbox" class="form-check-input platform-check" name="flexCheckPlatform" id="flexCheckPlatform" value="<%# ((Entidades.Plataforma)GetDataItem()).getID_Plataforma() %>" checked runat="server"/>
-                                                <label class="form-check-label" for="flexCheckPlatform"><%# ((Entidades.Plataforma)GetDataItem()).getNombre() %> </label>
+                                                <input type="checkbox" class="form-check-input platform-check" name="flexCheckPlatform" id="flexCheckPlatform" value="<%# ((Plataforma)GetDataItem()).getID_Plataforma() %>" checked runat="server"/>
+                                                <label class="form-check-label" for="flexCheckPlatform"><%# ((Plataforma)GetDataItem()).getNombre() %> </label>
                                             </div>
                                         </ItemTemplate>
                                     </asp:Repeater>
@@ -175,8 +186,7 @@
             $(`.${type}-check`).prop('checked', false);
         }
 
-    </script>
-    <script>
+
     </script>
 
 </asp:Content>

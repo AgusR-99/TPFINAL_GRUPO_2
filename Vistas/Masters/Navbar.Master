@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="/Masters/Navbar.Master.cs" Inherits="Vistas.MasterPage" %>
+<%@ Import Namespace="Vistas" %>
 
 <!DOCTYPE html>
 <html>
@@ -70,10 +71,10 @@
                                     <asp:LinkButton runat="server" class="nav-link" aria-current="page" OnClick="GoToAdminDashboard">Admin Dashboard</asp:LinkButton>
                                 </li>
                                 <%} %> <%--Perfil--%>
-                                <li class="nav-item  <%if (!LoggedIn)
-                                    {%>disabled<%} %>">
-                                    <a href="UserDashboardWatchlist.aspx" class="nav-link <%if (!LoggedIn)
-                                        {%>disabled<%} %>">Perfil</a>
+                                <li class="nav-item  <%= VistasAux.SetDisabled(!LoggedIn) %>">
+                                    <a ID="btnPerfil" href="UserDashboardWatchlist.aspx" class="nav-link <%= VistasAux.SetDisabled(!LoggedIn) %>">
+                                        <i class="fa-regular fa-user"></i> <%= VistasAux.ValueOrDefault(Username,"Perfil") %>
+                                    </a>
                                 </li>
                                 <%if (LoggedIn)
                                 {%> <%--Logout--%>
@@ -99,4 +100,10 @@
         </div>
     </form>
 </body>
+    
+<script>
+    function goToGame(id) {
+        window.location.href = "Articulo.aspx?id=" + id;
+    }
+</script>
 </html>

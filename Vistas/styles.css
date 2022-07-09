@@ -722,6 +722,7 @@ main {
         -o-flex-wrap: nowrap;
         -webkit-flex-wrap: nowrap;
         flex-wrap: nowrap;
+        cursor: pointer;
     }
 
 .articulos-unit > * {

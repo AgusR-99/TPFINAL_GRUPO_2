@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    class Juegos_x_Plataformas
+    public class Juego_x_Plataforma
     {
         private int ID_Juego;
         private int ID_Plataforma;
 
-        public Juegos_x_Plataformas()
-        { }
+        public Juego_x_Plataforma(int idJuego, int idPlataforma)
+        {
+            ID_Juego = idJuego;
+            ID_Plataforma = idPlataforma;
+        }
 
 
         public int getID_Juego() { return ID_Juego; }

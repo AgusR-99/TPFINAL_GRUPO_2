@@ -73,3 +73,34 @@ VALUES ('Bloodborne',6,'',1)
 GO
 INSERT [dbo].[Juegos]([Nombre],[IdDesarrollador],[Descripcion],[Activo])
 VALUES ('Sekiro: Shadows Die Twice',6,'',1)
+GO
+INSERT JuegosXCategorias(IdJuego,IdCategoria)
+VALUES(15,5)
+GO
+INSERT JuegosXCategorias(IdJuego,IdCategoria)
+VALUES(15,4)
+GO
+INSERT JuegosXCategorias(IdJuego,IdCategoria)
+VALUES(6,1)
+GO
+
+insert into Plataformas values('PC',1)
+insert into Plataformas values('XBox',1)
+insert into Plataformas values('PlayStation',1)
+insert into Plataformas values('Android',1)
+insert into Plataformas values('IOs',1)
+
+
+insert into JuegosXPlataformas values (15,4,1)
+insert into JuegosXPlataformas values (15,5,1)
+insert into JuegosXPlataformas values (14,1,1)
+insert into JuegosXPlataformas values (14,2,1)
+insert into JuegosXPlataformas values (14,3,1)
+
+
+select * from Categorias
+select * from JuegosXTiendas
+select * from Usuarios
+
+
+

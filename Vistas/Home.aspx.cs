@@ -17,35 +17,50 @@ namespace Vistas
             CargarProximos();
             CargarRebaja();
             CargarBaratos();
+            CargarCarousel();
 
         }
 
         public void CargarPopulares()
         {
-            var juegos = NegocioJuego.ObtenerJuegosComoLista(true,null,null,NegocioJuego.Orden.MasPopular);
-            rptPopulares.DataSource = juegos;
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, orden:NegocioJuego.Orden.MasPopular);
+            sctPopulares.Visible = juegos.Any();
+            rptPopulares.DataSource = juegos.Take(4);
             rptPopulares.DataBind();
         }
 
         public void CargarProximos()
         {
-            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, null, null, NegocioJuego.Orden.Proximos);
-            rptProximos.DataSource = juegos;
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, orden:NegocioJuego.Orden.Proximos);
+            sctProximos.Visible = juegos.Any();
+            rptProximos.DataSource = juegos.Take(4);
             rptProximos.DataBind();
         }
 
         public void CargarRebaja()
         {
-            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, null, null, NegocioJuego.Orden.Rebaja);
-            rptRebaja.DataSource = juegos;
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, orden:NegocioJuego.Orden.Rebaja);
+            sctRebaja.Visible = juegos.Any();
+            rptRebaja.DataSource = juegos.Take(4);
             rptRebaja.DataBind();
         }
 
         public void CargarBaratos()
         {
-            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, null, null, NegocioJuego.Orden.SoloMenorPrecio);
-            rptBaratos.DataSource = juegos;
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, orden:NegocioJuego.Orden.SoloMenorPrecio);
+            sctBaratos.Visible = juegos.Any();
+            rptBaratos.DataSource = juegos.Take(4);
             rptBaratos.DataBind();
+        }
+
+        public void CargarCarousel()
+        {
+            var juegos = NegocioJuego.ObtenerJuegosComoLista(true, orden: NegocioJuego.Orden.Nuevos);
+            //sctBaratos.Visible = juegos.Any();
+            rptImages.DataSource = juegos.Take(3);
+            rptImages.DataBind();
+            rptNames.DataSource = juegos.Take(3);
+            rptNames.DataBind();
         }
 
     }

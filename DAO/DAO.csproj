@@ -43,9 +43,11 @@
   <ItemGroup>
     <Compile Include="DAOCategoria.cs" />
     <Compile Include="DAODesarrollador.cs" />
+    <Compile Include="DAODeseado.cs" />
     <Compile Include="DAOImagen.cs" />
     <Compile Include="DAOJuego.cs" />
     <Compile Include="DAOJuegosXCategorias.cs" />
+    <Compile Include="DAOJuegosXPlataformas.cs" />
     <Compile Include="DAOJuegoXTienda.cs" />
     <Compile Include="DAOOpinion.cs" />
     <Compile Include="DAOPlataforma.cs" />
