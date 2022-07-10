@@ -39,10 +39,6 @@
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="IDJuego">
-                <EditItemTemplate>
-                    <asp:DropDownList ID="ddlGVImagesIDJuego" runat="server">
-                    </asp:DropDownList>
-                </EditItemTemplate>
                 <FooterTemplate>
                     <asp:DropDownList ID="ddlGVImagesIDJuego" runat="server">
                     </asp:DropDownList>

@@ -769,6 +769,7 @@ GO
 CREATE PROC SP_Imagenes_Actualizar
 	@IdJuego int,
 	@NombreArchivo varchar(50),
+	@NombreAnterior varchar(50),
 	@Orden int,
 	@activo bit
 AS
@@ -780,7 +781,8 @@ BEGIN
 		activo = @activo
 
 	WHERE
-		IdJuego = @IdJuego
+		IdJuego = @IdJuego and
+		NombreArchivo = @NombreAnterior
 END
 GO
 
