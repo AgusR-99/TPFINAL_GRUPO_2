@@ -37,6 +37,37 @@ namespace DAO
             };
         }
 
+        public static DataTable ListarUsuariosActivos(bool Activo_NoActivo)
+        {
+            return DB.ObtenerTabla("Usuarios", "[SP_Usuarios_Activos]", getParametrosUsuarioActivo(Activo_NoActivo), isSP: true);
+        }
+
+
+        public static List<SqlParameter> getParametrosUsuarioActivo(bool ChequeoActivo)
+        {
+            var parametros = new List<SqlParameter>()
+            {
+                new SqlParameter("Activos", ChequeoActivo)
+            };
+            return parametros;
+        }
+
+
+        public static DataTable ListarUsuariosAdministradores(bool AdminNoAdmin)
+        {
+            return DB.ObtenerTabla("Usuarios", "[SP_Usuarios_Administrador]", getParametrosUsuarioAdministrador(AdminNoAdmin), isSP: true);
+        }
+
+
+        public static List<SqlParameter> getParametrosUsuarioAdministrador(bool ChequeoAdministrador)
+        {
+            var parametros = new List<SqlParameter>()
+            {
+                new SqlParameter("Administrador", ChequeoAdministrador)
+            };
+            return parametros;
+        }
+
         private static Usuario ArmarUsuario(in DataRow row)
         {
             var usuario = new Usuario(

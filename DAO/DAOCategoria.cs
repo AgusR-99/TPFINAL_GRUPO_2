@@ -19,6 +19,21 @@ namespace DAO
             return DB.Query("[SP_Categorias_Obtener_Siguiente_Id]", isSP: true);
         }
 
+        public static DataTable ListarCategoriasActivos(bool Activo_NoActivo)
+        {
+            return DB.ObtenerTabla("Categorias", "[SP_Categorias_Activos]", getParametrosCategoriaActivo(Activo_NoActivo), isSP: true);
+        }
+
+
+        public static List<SqlParameter> getParametrosCategoriaActivo(bool ChequeoActivo)
+        {
+            var parametros = new List<SqlParameter>()
+            {
+                new SqlParameter("Activo", ChequeoActivo)
+            };
+            return parametros;
+        }
+
         public static DataTable ListarCategoriasPorNombre(string nombre)
         {
             return DB.ObtenerTabla("Categorias", $"[SP_Categorias_Obtener_Por_Nombre] N'{nombre}'");
