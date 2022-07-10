@@ -36,6 +36,11 @@ namespace Vistas
         {
             Response.Redirect("~/Logout.aspx");
         }
+
+        protected void Unnamed_Click(object sender, EventArgs e)
+        {
+            Response.Redirect($"~/Listado.aspx?txt={txtBuscarGeneral.Value}");
+        }
     }
 
 

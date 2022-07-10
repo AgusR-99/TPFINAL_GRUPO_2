@@ -85,12 +85,9 @@
                             </ul>
                             <%--Searchbar--%>
                             <div class="searchbar">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">
-                                    <button class="btn btn-outline-red btn-outline-success" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </form>
+                                <input id="txtBuscarGeneral" class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search" runat="server">
+                                <asp:button ID="btnBuscarGeneral" class="btn btn-outline-red btn-outline-success" type="submit" runat="server" Text="Buscar" OnClick="Unnamed_Click">
+                                </asp:button>
                             </div>
                         </div>
                     </div>
