@@ -45,8 +45,11 @@ namespace Negocio
         {
             var minRating = 1;
             var maxRating = 5;
+            var maxLength = 2000;
             if (opinion.getCalificacion() < minRating || opinion.getCalificacion() > maxRating)
                 return $"Error: la calificacion debe ser entre {minRating} y {maxRating}";
+            if (opinion.getComentario().Length > maxLength)
+                return $"Error: limite de {maxLength} caracteres alcanzado";
             return "";
         }
     }
