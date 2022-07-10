@@ -12,7 +12,7 @@ namespace Entidades
         public string Nombre { get; set; }
         private string Descripcion;
         private bool Activo;
-        public DateTime FechaLanzamiento;
+        public DateTime? FechaLanzamiento;
 
         private Desarrollador Desarrollador;
         private List<Imagenes> Imagenes;
@@ -44,7 +44,7 @@ namespace Entidades
         public int getIDDesarrollador() { return Desarrollador.getID_Desarrollador(); }
         public string getDescripcion() { return Descripcion; }
         public bool getActivo() { return Activo; }
-        public DateTime getFecha() { return FechaLanzamiento; }
+        public DateTime? getFecha() { return FechaLanzamiento; }
         public List<Imagenes> getImagenes() { return Imagenes; }
         public List<Categoria> GetCategorias() { return Categorias; }
         public List<Plataforma> GetPlataformas() { return Plataformas; }
@@ -69,6 +69,10 @@ namespace Entidades
         {
             DateTime Fecha = new DateTime(Año, Mes, Dia);
             FechaLanzamiento = Fecha;
+        }
+        public void setFecha(DateTime? fecha)
+        {
+            FechaLanzamiento = fecha;
         }
         public void setActivo(bool activo) {Activo=activo; }
 

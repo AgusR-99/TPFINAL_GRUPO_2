@@ -85,7 +85,7 @@ namespace DAO
                         (string)datarow["Descripcion"],
                         (bool)datarow["Activo"]
                     );
-                juego.setFecha(((DateTime)datarow["FechaLanzamiento"]).Day, ((DateTime)datarow["FechaLanzamiento"]).Month, ((DateTime)datarow["FechaLanzamiento"]).Year);
+                juego.setFecha((DateTime?)DB.ValueOrNull(datarow["FechaLanzamiento"]));
                 juego.setDesarrollador(DAODesarrollador.ObtenerDesarrolladorPorId(juego.getIDDesarrollador()));
                 juego.setCategorias(DAOCategoria.ObtenerCategoriasPorJuegoComoLista(juego.getID()));
                 juego.setPlataformas(DAOPlataforma.ObtenerPlataformasPorJuegoComoLista(juego.getID()));

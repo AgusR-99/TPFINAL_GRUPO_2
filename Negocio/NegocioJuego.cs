@@ -165,10 +165,9 @@ namespace Negocio
             var juegosOpiniones = new Dictionary<Juego, Opinion>();
             foreach(var opinion in opiniones)
             {
-                juegosOpiniones.Add(
-                    juegos.First(j => j.getID() == opinion.getID_Juego()),
-                    opinion
-                );
+                var juego = juegos.First(j => j.getID() == opinion.getID_Juego());
+                if(juego.getActivo())
+                    juegosOpiniones.Add(juego,opinion);
             }
             return juegosOpiniones;
         }
