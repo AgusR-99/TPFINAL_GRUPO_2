@@ -71,9 +71,9 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="FechaLanzamiento">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtGVGamesDia" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>/
-                    <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>/
-                    <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px"></asp:TextBox>
+                    <asp:TextBox ID="txtGVGamesDia" runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
+                    <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
+                    <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesFechaLanzamiento" Text='<%# Eval("FechaLanzamiento", "{0:dd/MM/yyyy}") %>' runat="server"></asp:Label>
@@ -88,6 +88,10 @@
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
+
+<FooterStyle CssClass="grd-footer"></FooterStyle>
+
+<PagerStyle CssClass="grd-pager"></PagerStyle>
     </asp:GridView>
 
     <div class="grd-control-wrapper d-flex justify-content-evenly">
@@ -105,13 +109,9 @@
         </div>
         <div class="grd-control">
             <span><strong>Fecha</strong></span>
-            <div>
-                <asp:TextBox ID="txtGVGamesDia" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>
-                <label>/</label>
-                <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px"></asp:TextBox>
-                <label>/</label>
-                <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px"></asp:TextBox>
-            </div>
+                <asp:TextBox ID="txtGVGamesDia" runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
+                <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
+                <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>
         </div>
         <div class="grd-control">
             <span><strong>Activo</strong></span>

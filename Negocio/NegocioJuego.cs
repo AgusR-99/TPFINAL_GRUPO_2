@@ -34,11 +34,11 @@ namespace Negocio
             return DAOJuego.ListarJuegosPorNombre(Nombre);
         }
 
-        public static List<string> ActualizarJuego(Juego juego)
+        public static List<string> ActualizarJuego(Juego juego, bool ValidDate)
         {
-            var errorReasons = ActualizarValidarJuego(juego);
-            DAOJuego.ActualizarJuego(juego);
+            var errorReasons = ActualizarValidarJuego(juego, ValidDate);
             if (errorReasons.Any()) return errorReasons;
+
             int? resultadoActualizar = DAOJuego.ActualizarJuego(juego);
             if (resultadoActualizar == null) errorReasons.Add("Ocurrió un error al actualizar la base de datos");
             if (resultadoActualizar == 0) errorReasons.Add("No se encontró el registro a actualizar");
@@ -52,9 +52,9 @@ namespace Negocio
             return DAOJuego.ObtenerListaNombres(lista, termino);
         }
 
-        public static List<string> AgregarJuego(Juego juego)
+        public static List<string> AgregarJuego(Juego juego, bool ValidDate)
         {
-            var errorReasons = Validar(juego);
+            var errorReasons = Validar(juego , ValidDate);
             if (errorReasons.Any()) return errorReasons;
 
             int? resultadoActualizar = DAOJuego.AgregarJuego(juego);
@@ -64,19 +64,21 @@ namespace Negocio
             return errorReasons;
         }
 
-        public static List<string> ActualizarValidarJuego(in Juego juego)
+        public static List<string> ActualizarValidarJuego(in Juego juego,bool ValidDate)
         {
             var errorReasons = new List<string>();
             if (String.IsNullOrWhiteSpace(juego.getNombre())) errorReasons.Add("El campo Nombre no puede estar vacío");
             if (String.IsNullOrWhiteSpace(juego.getDescripcion())) errorReasons.Add("El campo Descripcion no puede estar vacío");
+            if(ValidDate == false) errorReasons.Add("Fecha Invalida");
             return errorReasons;
         }
 
-        public static List<string> Validar(Juego juego)
+        public static List<string> Validar(Juego juego, bool ValidDate)
         {
             var errorReasons = new List<string>();
             if (String.IsNullOrWhiteSpace(juego.getNombre())) errorReasons.Add("Error: el campo Nombre no puede estar vacío");
             if (String.IsNullOrWhiteSpace(juego.getDescripcion())) errorReasons.Add("Error: el campo Descripcion no puede estar vacío");
+            if(!ValidDate) errorReasons.Add("Fecha Invalida");
             return errorReasons;
         }
 

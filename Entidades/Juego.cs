@@ -65,10 +65,19 @@ namespace Entidades
             Desarrollador.setID_Desarrollador(ID_desarrollador); 
         }
         public void setDescripcion(string descripcion) { Descripcion=descripcion; }
-        public void setFecha(int Dia=1, int Mes=1, int Año=1)
+        public bool setFecha(int Dia=1, int Mes=1, int Año=1)
         {
-            DateTime Fecha = new DateTime(Año, Mes, Dia);
-            FechaLanzamiento = Fecha;
+            try
+            {
+                DateTime Fecha = new DateTime(Año, Mes, Dia);
+                FechaLanzamiento = Fecha;
+                return true;
+            }
+
+            catch
+            {
+                return false;
+            }
         }
         public void setFecha(DateTime? fecha)
         {

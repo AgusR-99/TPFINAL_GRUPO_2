@@ -83,10 +83,18 @@ namespace Vistas
                     ((TextBox)editedRow.FindControl("txtGVGamesDescripcion")).Text,
                     ((CheckBox)editedRow.FindControl("chkGVGamesActivo")).Checked
                    );
-            juego.setFecha(Convert.ToInt32((((TextBox)editedRow.FindControl("txtGVGamesDia")).Text)),
-                Convert.ToInt32((((TextBox)editedRow.FindControl("txtGVGamesMes")).Text)),
-                Convert.ToInt32((((TextBox)editedRow.FindControl("txtGVGamesAño")).Text)));
-            var erroresActualizar = NegocioJuego.ActualizarJuego(juego);
+            bool ValidDate;
+            if (((TextBox)editedRow.FindControl("txtGVGamesDia")).Text == "" || ((TextBox)editedRow.FindControl("txtGVGamesMes")).Text == "" || ((TextBox)editedRow.FindControl("txtGVGamesAño")).Text == "")
+            {
+                ValidDate = false;
+            }
+            else
+            {
+                ValidDate = juego.setFecha(Convert.ToInt32((((TextBox)editedRow.FindControl("txtGVGamesDia")).Text)),
+                    Convert.ToInt32((((TextBox)editedRow.FindControl("txtGVGamesMes")).Text)),
+                    Convert.ToInt32((((TextBox)editedRow.FindControl("txtGVGamesAño")).Text)));
+            }
+            var erroresActualizar = NegocioJuego.ActualizarJuego(juego , ValidDate);
             if (erroresActualizar.Any())
             {
                 foreach (string msg in erroresActualizar)
@@ -109,20 +117,17 @@ namespace Vistas
                     chkGVGamesActivo.Checked
                 );
 
-            if(!(
-                    int.TryParse(txtGVGamesDia.Text, out int dia) &&
-                    int.TryParse(txtGVGamesMes.Text, out int mes) &&
-                    int.TryParse(txtGVGamesAño.Text, out int año)
-                ))
+            bool ValidDate;
+            if (txtGVGamesDia.Text == ""|| txtGVGamesMes.Text == ""|| txtGVGamesAño.Text == "")
             {
-                lblMsg.Text = "Por favor, complete el campo fecha con datos válidos.";
-                lblMsg.Visible = true;
-                return;
+                ValidDate = false;
+            }
+            else
+            {
+                ValidDate = juego.setFecha(Convert.ToInt32(txtGVGamesDia.Text), Convert.ToInt32(txtGVGamesMes.Text), Convert.ToInt32(txtGVGamesAño.Text));
             }
 
-            juego.setFecha(dia, mes, año);
-
-            var erroresAgregar = NegocioJuego.AgregarJuego(juego);
+            var erroresAgregar = NegocioJuego.AgregarJuego(juego , ValidDate);
             if (erroresAgregar.Any())
             {
                 lblMsg.Text = string.Join("<br>", erroresAgregar);
@@ -135,6 +140,12 @@ namespace Vistas
                 /*txtSearchCategory.Text = "";*/
                 GridViewGames.EditIndex = -1;
                 CargarJuegos();
+                txtGVGamesNombre.Text = "";
+                txtGVGamesDescripcion.Text = "";
+                chkGVGamesActivo.Checked = false;
+                txtGVGamesDia.Text = ""; 
+                txtGVGamesMes.Text = "";
+                txtGVGamesAño.Text = "";
             }
         }
 
