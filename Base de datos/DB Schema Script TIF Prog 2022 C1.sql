@@ -102,7 +102,7 @@ CREATE TABLE Opiniones
 	IdJuego int NOT NULL,
 	Username varchar(30) NOT NULL,
 	Calificacion tinyint NOT NULL CHECK (Calificacion BETWEEN 1 AND 5),
-	Comentario varchar(300) NULL,
+	Comentario varchar(2000) NULL,
 	Activo bit NOT NULL DEFAULT 1,
 	CONSTRAINT PK_Opiniones PRIMARY KEY (IdJuego,Username),
 	CONSTRAINT FK_Opiniones_Juegos
