@@ -19,6 +19,11 @@ namespace Negocio
             return DAOCategoria.ListarCategoriasPorNombre(Nombre);
         }
 
+        public static DataTable ListarCategoriasActivo(bool ActivoNoActivo)
+        {
+            return DAOCategoria.ListarCategoriasActivos(ActivoNoActivo);
+        }
+
         public static DataSet ObtenerCategoriaSiguienteID()
         {
             return DAOCategoria.ObtenerCategoriaSiguienteID();

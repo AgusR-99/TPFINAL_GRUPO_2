@@ -54,6 +54,16 @@ namespace Negocio
             return DAOUsuario.ListarUsuariosPorNombre(Nombre);
         }
 
+        public static DataTable ListarUsuariosActivos(bool Activo_NoActivo)
+        {
+            return DAOUsuario.ListarUsuariosActivos(Activo_NoActivo);
+        }
+
+        public static DataTable ListarUsuariosAdmin(bool AdminNoAdmin)
+        {
+            return DAOUsuario.ListarUsuariosAdministradores(AdminNoAdmin);
+        }
+
         public static List<string> ActualizarUsuario(Usuario usuario)
         {
             var errorReasons = ActualizarValidarUsuario(usuario);

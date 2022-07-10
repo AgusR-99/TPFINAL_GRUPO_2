@@ -29,6 +29,16 @@ namespace Negocio
             return DAOJuego.ListarJuegos();
         }
 
+        public static DataTable ListarJuegosActivos(bool Activo_NoActivo)
+        {
+            return DAOJuego.ListarJuegosActivos(Activo_NoActivo);
+        }
+
+
+        public static DataTable ListarJuegosRecientes()
+        {
+            return DAOJuego.ListarJuegosRecientes();
+        }
         public static DataTable ListarJuegosPorNombre(string Nombre)
         {
             return DAOJuego.ListarJuegosPorNombre(Nombre);
