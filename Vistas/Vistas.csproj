@@ -15,7 +15,7 @@
     <AssemblyName>Vistas</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>true</Use64BitIISExpress>
     <IISExpressSSLPort>44300</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -70,6 +70,39 @@
     <Content Include="AdminDashboard\JuegosXPlataformasDashboard.aspx" />
     <Content Include="Home.aspx" />
     <Content Include="AdminDashboard\ImagenesDashboard.aspx" />
+    <Content Include="Imagenes\Juegos\battlefield2042.png" />
+    <Content Include="Imagenes\Juegos\battlefield2042_2.png" />
+    <Content Include="Imagenes\Juegos\battlefield2042_3.png" />
+    <Content Include="Imagenes\Juegos\bloodborne.png" />
+    <Content Include="Imagenes\Juegos\bloodborne_2.jpg" />
+    <Content Include="Imagenes\Juegos\bloodborne_3.jpg" />
+    <Content Include="Imagenes\Juegos\eldenring.jpg" />
+    <Content Include="Imagenes\Juegos\eldenring_2.jpg" />
+    <Content Include="Imagenes\Juegos\eldenring_3.png" />
+    <Content Include="Imagenes\Juegos\farcry6.jpg" />
+    <Content Include="Imagenes\Juegos\farcry6_2.jpeg" />
+    <Content Include="Imagenes\Juegos\farcry6_3.jpg" />
+    <Content Include="Imagenes\Juegos\fifa22.jpeg" />
+    <Content Include="Imagenes\Juegos\fifa22_2.jpg" />
+    <Content Include="Imagenes\Juegos\fifa_22_3.jpg" />
+    <Content Include="Imagenes\Juegos\finalfantasyXV.jpg" />
+    <Content Include="Imagenes\Juegos\finalfantasyXV_2.jpg" />
+    <Content Include="Imagenes\Juegos\finalfantasyXV_3.png" />
+    <Content Include="Imagenes\Juegos\gtaV.png" />
+    <Content Include="Imagenes\Juegos\gtaV_2.png" />
+    <Content Include="Imagenes\Juegos\gtaV_3.png" />
+    <Content Include="Imagenes\Juegos\Hitmanabs.jpg" />
+    <Content Include="Imagenes\Juegos\Hitmanabs_2.png" />
+    <Content Include="Imagenes\Juegos\Hitmanabs_3.jpg" />
+    <Content Include="Imagenes\Juegos\reddead2.jpg" />
+    <Content Include="Imagenes\Juegos\reddead2_2.jpg" />
+    <Content Include="Imagenes\Juegos\reddead2_3.png" />
+    <Content Include="Imagenes\Juegos\sekiro.jpg" />
+    <Content Include="Imagenes\Juegos\sekiro_2.jpg" />
+    <Content Include="Imagenes\Juegos\sekiro_3.jpg" />
+    <Content Include="Imagenes\Juegos\warzone.jpg" />
+    <Content Include="Imagenes\Juegos\warzone_2.jpeg" />
+    <Content Include="Imagenes\Juegos\warzone_3.jpg" />
     <Content Include="Imagenes\nuevos.jpg" />
     <Content Include="Imagenes\placeholder-image.jpg" />
     <Content Include="Imagenes\populares.jpg" />
