@@ -16,6 +16,11 @@ namespace Negocio
             return DAOPlataforma.ListarPlataformas();
         }
 
+        public static DataTable ListarPlataformasActivo(bool ActivoNoActivo)
+        {
+            return DAOPlataforma.ListarPlataformasActivos(ActivoNoActivo);
+        }
+
         public static DataSet ObtenerPlataformaSiguienteID()
         {
             return DAOPlataforma.ObtenerPlataformaSiguienteID();
