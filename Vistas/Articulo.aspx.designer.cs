@@ -69,6 +69,15 @@ namespace Vistas
         protected global::System.Web.UI.WebControls.Label lblCategoria;
 
         /// <summary>
+        /// lblFechaLanzamiento control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFechaLanzamiento;
+
+        /// <summary>
         /// lblPlataforma control.
         /// </summary>
         /// <remarks>
@@ -94,6 +103,15 @@ namespace Vistas
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblPrecio;
+
+        /// <summary>
+        /// listTiendas control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.BulletedList listTiendas;
 
         /// <summary>
         /// lblDescripcion control.
@@ -141,13 +159,13 @@ namespace Vistas
         protected global::System.Web.UI.WebControls.TextBox txtUserReview;
 
         /// <summary>
-        /// txtUserRating control.
+        /// ddlUserRating control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtUserRating;
+        protected global::System.Web.UI.WebControls.DropDownList ddlUserRating;
 
         /// <summary>
         /// btnSend control.

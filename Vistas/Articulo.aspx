@@ -26,9 +26,12 @@
                 <div class="articulo-data">
                     <p><small><strong>Desarrollador: <asp:Label runat="server" ID="lblDesarrollador"></asp:Label></strong></small></p>
                     <p><small><strong>Categoria: <asp:Label runat="server" ID="lblCategoria"></asp:Label></strong></small></p>
+                    <p><small><strong>Fecha de lanzamiento: <asp:Label runat="server" ID="lblFechaLanzamiento"></asp:Label></strong></small></p>
                     <p><small><strong>Plataformas: </strong><asp:Label runat="server" ID="lblPlataforma"></asp:Label></small></p>
                     <p><small><strong>Sitio web: </strong> <asp:HyperLink runat="server" ID="linkSitioWeb"></asp:HyperLink></small></p>
                     <p><small><strong>Precio: </strong><asp:Label runat="server" ID="lblPrecio"></asp:Label></small></p>
+                    <p><small><strong>Tiendas:</strong></small></p>
+                    <p><small><asp:BulletedList runat="server" ID="listTiendas" DisplayMode="HyperLink"></asp:BulletedList></small></p>
                 </div>
             </div>
             <div class="articulo-summary">
@@ -39,7 +42,7 @@
             <div class="articulo-review-heading">
                 <h2>Reviews de usuarios</h2>
             </div>
-            <% if (LoggedIn)
+             <%if (LoggedIn)
                {%>
                  <div class="review-prompt-wrapper">
                      <div class="review-prompt-heading">
@@ -53,14 +56,13 @@
                                  <i class="fa-regular fa-user big"></i>
                              </div>
                          </div>
-                 
                          <div class="form-group">
                              <asp:TextBox runat="server" CssClass="form-control bg-dark text-light" ID="txtUserReview" TextMode="MultiLine"></asp:TextBox>
                              <div class="review-bottom">
                                  <div class="rating-wrapper">
                                      <div class="input-group input-group-lg">
                                          <span class="input-group-text text-light glow-cyan"><small>Tu rating</small></span>
-                                         <asp:TextBox runat="server" ID="txtUserRating" CssClass="form-control bg-dark text-light" MaxLength="1" onkeypress="return NumberFloatAndOneDOTSign(this)"></asp:TextBox>
+                                         <asp:DropDownList runat="server" ID="ddlUserRating" CssClass="bg-dark text-light form-control"></asp:DropDownList>
                                      </div>
                                  </div>
                                  <div class="btn-wrapper">
@@ -68,10 +70,9 @@
                                  </div>
                              </div>
                          </div>
-                 
                      </div>
                  </div>
-            <%}%>
+             <%}%>
             <div class="articulo-review-categories">
                 <p><small>Positivas: </small><strong><asp:Label ID="lblReviewPositivas" runat="server"></asp:Label></strong></p>
                 <p><small>Variadas: </small><strong><asp:Label ID="lblReviewVariadas" runat="server"></asp:Label></strong></p>
@@ -95,16 +96,4 @@
         </div>
     </div>
     </main>
-    <script>
-
-        function NumberFloatAndOneDOTSign(CurrentElement) {
-            var charCode = (event.which) ? event.which : event.keyCode;
-
-            console.log(CurrentElement.value.indexOf(String.fromCharCode(charCode)))
-
-            if (charCode < 49 || charCode > 53)
-                return false;
-
-        }
-    </script>
 </asp:Content>

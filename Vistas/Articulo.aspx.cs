@@ -15,9 +15,9 @@ namespace Vistas
         public bool LoggedIn { get; private set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            LoggedIn = NegocioUsuario.IsLoggedIn(Session);
             if (!IsPostBack)
             {
-                LoggedIn = NegocioUsuario.IsLoggedIn(Session);
                 CargarArticulo();
             }
         }
@@ -61,40 +61,56 @@ namespace Vistas
                     dt.Rows.Add(calificacion, username, comentario);
                     // Si el usuario obtenido es el mismo que el usuario logueado, modificar DOM para mostrar un UPDATE
                     // de opinion en vez de AGREGAR una opinion
+                    CargarValoresRatings();
                     try
                     {
                         if (username == ((Usuario)Session["LoggedUser"]).getUsername())
                         {
                             lblHeadingOpinion.Text = "Modificar opinion para el juego ";
                             txtUserReview.Text = comentario.ToString();
-                            txtUserRating.Text = calificacion.ToString();
+                            ddlUserRating.SelectedIndex = calificacion - 1;
+                            ddlUserRating.DataBind();
                             Session["IsUpdate"] = true;
                         }
                     }
-                    catch (Exception)
-                    {
-                        
-                    }
+                    catch (Exception){}
                 }
                 float opinionesCantidad = Opiniones.Count();
                 float prom = sum / opinionesCantidad;
                 prom = (float)Math.Round(prom, 1);
+                if (double.IsNaN(prom))
+                {
+                    lblRatingJuego.Text = "NR";
+                }
+                else lblRatingJuego.Text = prom.ToString();
                 lblOpinionesPrefix.Text = "Basado en ";
                 lblOpinionesCantidad.Text = opinionesCantidad.ToString() + " criticas";
-                lblRatingJuego.Text = prom.ToString();
-                var value = Convert.ToDouble(lblRatingJuego.Text);
+                
+                var value = Convert.ToDouble(prom);
                 string rating = "";
                 for (int i = 1; i <= 5; i++) if (value >= i && value <= i + 1) rating = $"bg-rating-{i}";
                 lblRatingJuego.Attributes.Add("class", $"articulo-score-left {rating}");
                 lblReviewPositivas.Text = cantidadPositivas.ToString();
                 lblReviewVariadas.Text = cantidadVariadas.ToString();
                 lblReviewNegativas.Text = cantidadNegativas.ToString();
+                
                 repReviews.DataSource = dt;
                 repReviews.DataBind();
 
                 // Cargar desarrollador en label
                 var dev = item.item.GetDesarrollador();
                 lblDesarrollador.Text = dev.getNombre();
+
+                // Cargar fecha de lanzamiento en label
+                try
+                {
+                    DateTime fecha = (DateTime)item.item.getFecha();
+                    lblFechaLanzamiento.Text = fecha.ToShortDateString();
+                }
+                catch (Exception)
+                {
+                    lblFechaLanzamiento.Text = "Desconocida";
+                }
 
                 // Cargar lista de categorias en label
                 var listaCategoria = item.item.GetCategorias();
@@ -112,6 +128,18 @@ namespace Vistas
                 if (precio == null) lblPrecio.Text = "Desconocido";
                 else lblPrecio.Text = "$" + precio.ToString();
 
+                var Tiendas = item.item.GetJuegosXTiendas();
+
+                foreach (var tienda in Tiendas)
+                {
+                    listTiendas.Items.Add(new ListItem(ObtenerNombreTienda(
+                        tienda.getID_Tienda(), item.item.GetTiendas()),
+                        tienda.getURL()));
+                }
+                if (Tiendas.Count() == 0) { 
+                    listTiendas.Items.Add(new ListItem("Sin datos"));
+                    listTiendas.DisplayMode = 0;
+                }
                 // Cargar descripcion del juego
                 lblDescripcion.Text = item.item.getDescripcion();
             }
@@ -145,13 +173,21 @@ namespace Vistas
 
         protected void btnSend_Click(object sender, EventArgs e)
         {
-            var id = Request.QueryString["id"];
-
+            int id;
+            try
+            {
+                id = Convert.ToInt32(Request.QueryString["id"]);
+            }
+            catch (Exception)
+            {
+                lblMsg.Text = "Error: ID de articulo en formato invalido";
+                return;
+            }
             // Llenar el obj opinion con ID de articulo, puntuaje elegido por el usuario y su opinion escrita
             Opinion opinion = new Opinion(
-                Convert.ToInt32(id),
+                id,
                 ((Usuario)Session["LoggedUser"]).getUsername(),
-                Convert.ToByte(txtUserRating.Text),
+                Convert.ToByte(ddlUserRating.Text),
                 txtUserReview.Text,
                 true
             );
@@ -182,6 +218,23 @@ namespace Vistas
                 string rating = "bg-rating-";
                 for (int i = 1; i <= 5; i++) if (value == i) rating += i.ToString();
                 calificacion.Attributes.Add("class", $"articulo-rating {rating}");
+            }
+        }
+
+        private string ObtenerNombreTienda(int id, List<Tienda> Tiendas)
+        {
+            foreach (var tienda in Tiendas)
+            {
+                if (id == tienda.getID_Tienda()) return tienda.getNombre();
+            }
+            return null;
+        }
+        // Cargar ratings del 1 al 5 en dropdownlist
+        private void CargarValoresRatings()
+        {
+            for (int i = 1; i <= 5; i++)
+            {
+                ddlUserRating.Items.Add(new ListItem($"{i}", $"{i}"));
             }
         }
     }
