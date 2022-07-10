@@ -58,6 +58,7 @@
                          </div>
                          <div class="form-group">
                              <asp:TextBox runat="server" CssClass="form-control bg-dark text-light" ID="txtUserReview" TextMode="MultiLine"></asp:TextBox>
+                             <p><small>Limite de 2000 caracteres por opinion</small></p>
                              <div class="review-bottom">
                                  <div class="rating-wrapper">
                                      <div class="input-group input-group-lg">

@@ -48,6 +48,7 @@ namespace Vistas
                 AgregarColumnas(dt);
                 int cantidadPositivas = 0, cantidadVariadas = 0, cantidadNegativas = 0;
                 Session["IsUpdate"] = false;
+                CargarValoresRatings();
                 foreach (var opinion in Opiniones)
                 {
                     var calificacion = opinion.getCalificacion();
@@ -61,7 +62,6 @@ namespace Vistas
                     dt.Rows.Add(calificacion, username, comentario);
                     // Si el usuario obtenido es el mismo que el usuario logueado, modificar DOM para mostrar un UPDATE
                     // de opinion en vez de AGREGAR una opinion
-                    CargarValoresRatings();
                     try
                     {
                         if (username == ((Usuario)Session["LoggedUser"]).getUsername())
