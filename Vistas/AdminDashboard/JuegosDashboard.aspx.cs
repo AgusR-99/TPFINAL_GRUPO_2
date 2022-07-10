@@ -76,10 +76,9 @@ namespace Vistas
         protected void GridViewGames_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             var editedRow = GridViewGames.Rows[e.RowIndex];
-            DateTime fecha = Convert.ToDateTime((((Label)editedRow.FindControl("lblGVGamesFechaLanzamiento")).Text));
-            txtGVGamesDia.Text = fecha.Day.ToString();
-            txtGVGamesMes.Text = fecha.Month.ToString();
-            txtGVGamesAño.Text = fecha.Year.ToString();
+            txtGVGamesDia.Text = txtGVGamesDia.Text;
+            txtGVGamesMes.Text = txtGVGamesMes.Text;
+            txtGVGamesAño.Text = txtGVGamesAño.Text;
 
             Juego juego = new Juego(
                     Convert.ToInt32((((Label)editedRow.FindControl("lblGVGamesIDJuego")).Text)),
