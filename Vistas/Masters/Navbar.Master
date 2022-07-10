@@ -85,12 +85,10 @@
                             </ul>
                             <%--Searchbar--%>
                             <div class="searchbar">
-                                <form class="d-flex" role="search">
-                                    <input class="form-control me-2" type="search" placeholder="Buscar juegos" aria-label="Search">
-                                    <button class="btn btn-outline-red btn-outline-success" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </form>
+                                <asp:TextBox runat="server" ID="txtsearchbar" CssClass="form-control me-2 bg-dark text-light" placeholder="Buscar juegos"></asp:TextBox>
+                                <asp:LinkButton runat="server" ID="btnSend" OnClick="btnSend_Click" CssClass="btn btn-dark">
+                                <i class="fa-solid fa-magnifying-glass"></i>
+                                </asp:LinkButton>
                             </div>
                         </div>
                     </div>
@@ -100,10 +98,15 @@
         </div>
     </form>
 </body>
-    
 <script>
-    function goToGame(id) {
-        window.location.href = "Articulo.aspx?id=" + id;
+    $(document).ready(function () {
+        InitAutoCompl();
+    })
+    function InitAutoCompl() {
+        // Autocomplete de textbox de agregar categoria
+        $("#<%= txtsearchbar.ClientID %>").autocomplete({
+            source: '../JuegoHandler.ashx'
+        });
     }
 </script>
 </html>

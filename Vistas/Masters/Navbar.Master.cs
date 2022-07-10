@@ -4,8 +4,9 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Entidades;
+using System.Data;
 using Negocio;
+using Entidades;
 
 namespace Vistas
 {
@@ -27,6 +28,8 @@ namespace Vistas
             }
         }
 
+
+
         protected void GoToAdminDashboard(object sender, EventArgs e)
         {
             Response.Redirect("~/AdminDashboard/JuegosDashboard.aspx");
@@ -35,6 +38,18 @@ namespace Vistas
         protected void Logout(object sender, EventArgs e)
         {
             Response.Redirect("~/Logout.aspx");
+        }
+
+        protected void btnSend_Click(object sender, EventArgs e)
+        {
+            List<Juego> list = NegocioJuego.ObtenerJuegosComoLista();
+            foreach (var item in from item in list
+                                 where item.getNombre().ToString() == txtsearchbar.Text
+                                 select new { item })
+            {
+                Response.Redirect($"~/Articulo.aspx?id={item.item.getID()}");
+            }
+            Response.Redirect($"~/Listado.aspx?txt={txtsearchbar.Text}");
         }
     }
 
