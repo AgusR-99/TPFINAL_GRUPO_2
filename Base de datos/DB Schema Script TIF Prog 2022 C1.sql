@@ -1041,3 +1041,70 @@ BEGIN
 	WHERE IdJuego=@IdJuego AND IdPlataforma=@IdPlataforma
 END
 GO
+
+CREATE PROCEDURE SP_Categorias_Activos
+(
+@Activo bit
+)
+AS
+BEGIN
+SELECT IdCategoria, Nombre, Activo FROM Categorias
+WHERE Activo=@Activo
+END
+GO
+
+CREATE PROCEDURE SP_Juegos_Activos
+(
+@Activo bit
+)
+AS
+BEGIN
+SELECT IdJuego, IdDesarrollador, Nombre, Descripcion, FechaLanzamiento, Activo
+FROM Juegos
+WHERE Activo=@Activo
+END
+GO
+
+CREATE PROCEDURE SP_Juegos_ObtenerRecientes
+AS
+BEGIN
+SELECT IdJuego, IdDesarrollador, Nombre, Descripcion, FechaLanzamiento, Activo
+FROM Juegos
+ORDER BY FechaLanzamiento DESC
+END
+GO
+
+CREATE PROCEDURE SP_Plataformas_Activos
+(
+@Activo bit
+)
+AS
+BEGIN
+SELECT IdPlataforma, Nombre, Activo FROM Plataformas
+WHERE Activo=@Activo
+END
+GO
+
+CREATE PROCEDURE SP_Usuarios_Activos
+(
+@Activos bit
+)
+AS
+BEGIN
+	SELECT Username , Contrasena, Descripcion, Email, Administrador, Activo
+	FROM Usuarios
+WHERE Activo=@Activos
+END
+GO
+
+CREATE PROCEDURE SP_Usuarios_Administrador
+(
+@Administrador bit
+)
+AS
+BEGIN
+	SELECT Username , Contrasena, Descripcion, Email, Administrador, Activo
+	FROM Usuarios
+	WHERE Administrador=@Administrador
+END
+GO
