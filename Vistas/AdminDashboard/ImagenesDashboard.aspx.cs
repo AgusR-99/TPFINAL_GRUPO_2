@@ -68,6 +68,7 @@ namespace Vistas
             GridViewImages.EditIndex = e.NewEditIndex;
             GridViewImages.DataSource = Session["ImagenesSession"];
             GridViewImages.DataBind();
+            Session["NombreAnteriorSession"] = ((TextBox)GridViewImages.Rows[e.NewEditIndex].FindControl("txtGVImagesNombre")).Text;
         }
 
         protected void GridViewImages_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -81,12 +82,13 @@ namespace Vistas
 
             var editedRow = GridViewImages.Rows[e.RowIndex];
             Imagenes imagen = new Imagenes(
-                    Convert.ToInt32((((DropDownList)editedRow.FindControl("ddlGVImagesIDJuego")).SelectedValue)),
+                    Convert.ToInt32(((Label)editedRow.FindControl("lblGVImagesIDJuego")).Text),
                     ((TextBox)editedRow.FindControl("txtGVImagesNombre")).Text,
                     Convert.ToInt32(((TextBox)editedRow.FindControl("txtGVImagesOrden")).Text),
                     ((CheckBox)editedRow.FindControl("chkGVImagesActivo")).Checked
                    );
-            var erroresActualizar = NegocioImagen.ActualizarImagen(imagen);
+            string nombreAnterior = Convert.ToString(Session["NombreAnteriorSession"]);
+            var erroresActualizar = NegocioImagen.ActualizarImagen(imagen, nombreAnterior);
             if (erroresActualizar.Any())
             {
                 foreach (string msg in erroresActualizar)

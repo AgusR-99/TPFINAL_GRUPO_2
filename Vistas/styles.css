@@ -581,6 +581,8 @@ main {
     -ms-opacity: 1;
     opacity: 1;
     width: 200px;
+    height: 200px;
+    object-fit: cover;
     -ms-transition: opacity 250ms ease-in;
     -o-transition: opacity 250ms ease-in;
     -webkit-transition: opacity 250ms ease-in;

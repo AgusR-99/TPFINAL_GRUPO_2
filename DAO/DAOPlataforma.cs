@@ -16,6 +16,21 @@ namespace DAO
             return DB.ObtenerTabla("Plataformas", "[SP_Plataformas_Obtener]", isSP: true);
         }
 
+        public static DataTable ListarPlataformasActivos(bool Activo_NoActivo)
+        {
+            return DB.ObtenerTabla("Plataformas", "[SP_Plataformas_Activos]", getParametrosPlataformaActivo(Activo_NoActivo), isSP: true);
+        }
+
+
+        public static List<SqlParameter> getParametrosPlataformaActivo(bool ChequeoActivo)
+        {
+            var parametros = new List<SqlParameter>()
+            {
+                new SqlParameter("Activo", ChequeoActivo)
+            };
+            return parametros;
+        }
+
         public static DataSet ObtenerPlataformaSiguienteID()
         {
             var foo = DB.Query("[SP_Plataformas_Obtener_Siguiente_Id]", isSP: true);

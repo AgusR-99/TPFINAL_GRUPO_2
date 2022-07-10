@@ -55,6 +55,7 @@ namespace Vistas
                     ddl.DataTextField = "NombreDesarrollador";
                     ddl.DataValueField = "IdDesarrollador";
                     ddl.DataBind();
+                    ddl.SelectedValue = ((Label)e.Row.FindControl("lblGVGamesIDDesarrollador")).Text;
                 }
             }
 
@@ -74,8 +75,11 @@ namespace Vistas
 
         protected void GridViewGames_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
-
             var editedRow = GridViewGames.Rows[e.RowIndex];
+            txtGVGamesDia.Text = txtGVGamesDia.Text;
+            txtGVGamesMes.Text = txtGVGamesMes.Text;
+            txtGVGamesAño.Text = txtGVGamesAño.Text;
+
             Juego juego = new Juego(
                     Convert.ToInt32((((Label)editedRow.FindControl("lblGVGamesIDJuego")).Text)),
                     Convert.ToInt32((((DropDownList)editedRow.FindControl("ddlGVGamesIDDesarrollador")).SelectedValue)),
@@ -140,12 +144,7 @@ namespace Vistas
                 /*txtSearchCategory.Text = "";*/
                 GridViewGames.EditIndex = -1;
                 CargarJuegos();
-                txtGVGamesNombre.Text = "";
-                txtGVGamesDescripcion.Text = "";
-                chkGVGamesActivo.Checked = false;
-                txtGVGamesDia.Text = ""; 
-                txtGVGamesMes.Text = "";
-                txtGVGamesAño.Text = "";
+                LimpiarControles();
             }
         }
 
@@ -162,7 +161,7 @@ namespace Vistas
             ddlGVGamesIDDesarrollador.SelectedIndex = 0;
             txtGVGamesNombre.Text = "";
             txtGVGamesDescripcion.Text = "";
-            txtGVGamesNombre.Text = "";
+            chkGVGamesActivo.Checked = false;
             txtGVGamesAño.Text = "";
             txtGVGamesMes.Text = "";
             txtGVGamesDia.Text = "";

@@ -21,12 +21,12 @@ namespace Negocio
             return DAOImagen.ListarImagenesPorJuego(idJuego, soloActivo);
         }
 
-        public static List<string> ActualizarImagen(Imagenes imagen)
+        public static List<string> ActualizarImagen(Imagenes imagen, string nombreAnterior)
         {
             var errorReasons = Validar(imagen);
             if (errorReasons.Any()) return errorReasons;
 
-            int? resultadoActualizar = DAOImagen.ActualizarImagen(imagen);
+            int? resultadoActualizar = DAOImagen.ActualizarImagen(imagen, nombreAnterior);
             if (resultadoActualizar == null) errorReasons.Add("Ocurrió un error al actualizar la base de datos");
             if (resultadoActualizar == 0) errorReasons.Add("No se encontró el registro a actualizar");
 

@@ -80,36 +80,36 @@ namespace DAO
         /// <returns>Cantidad de filas afectadas o null si falla la operación</returns>
         public static int? NonQuery(string query, List<SqlParameter> parameters = null, bool isSP = false)
         {
-            //try
-            //{
+            try
+            {
                 var cmd = GetCommand(query, parameters, isSP);
                 cmd.Connection.Open();
                 int affected = cmd.ExecuteNonQuery();
                 cmd.Connection.Close();
                 return affected;
-            //}
-            //catch(Exception ex)
-            //{
-            //    return null;
-            //}
+            }
+            catch(Exception ex)
+            {
+                return null;
+            }
         }
 
         public static int? NonQueryReturnParameter(string query, List<SqlParameter> parameters = null, bool isSP = false)
         {
-            /*try
-            {*/
-            var cmd = GetCommand(query, parameters, isSP);
-            var returnParameter = cmd.Parameters.Add("@ReturnVal", SqlDbType.Int);
-            returnParameter.Direction = ParameterDirection.ReturnValue;
-            cmd.Connection.Open();
-            cmd.ExecuteNonQuery();
-            cmd.Connection.Close(); 
-            return Convert.ToInt32(returnParameter.Value);
-            /*}
+            try
+            {
+                var cmd = GetCommand(query, parameters, isSP);
+                var returnParameter = cmd.Parameters.Add("@ReturnVal", SqlDbType.Int);
+                returnParameter.Direction = ParameterDirection.ReturnValue;
+                cmd.Connection.Open();
+                cmd.ExecuteNonQuery();
+                cmd.Connection.Close(); 
+                return Convert.ToInt32(returnParameter.Value);
+            }
             catch(Exception ex)
             {
                 return null;
-            }*/
+            }
         }
 
         public static List<string> ObtenerLista(string storedProcedure, string parametro, List<String> Lista, string termino, string campo)

@@ -32,6 +32,26 @@ namespace DAO
             return DB.ObtenerLista("[SP_Juegos_Obtener_Por_Nombre]", "@Nombre", Lista, termino, "Nombre");
         }
 
+        public static DataTable ListarJuegosActivos(bool Activo_NoActivo)
+        {
+            return DB.ObtenerTabla("Juegos", "[SP_Juegos_Activos]", getParametrosJuegoActivo(Activo_NoActivo), isSP: true);
+        }
+
+
+        public static List<SqlParameter> getParametrosJuegoActivo(bool ChequeoActivo)
+        {
+            var parametros = new List<SqlParameter>()
+            {
+                new SqlParameter("Activo", ChequeoActivo)
+            };
+            return parametros;
+        }
+
+
+        public static DataTable ListarJuegosRecientes()
+        {
+            return DB.ObtenerTabla("Juegos", "[SP_Juegos_ObtenerRecientes]", isSP: true);
+        }
 
         public static int? AgregarJuego(Juego juego)
         {

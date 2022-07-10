@@ -104,6 +104,12 @@
                                         <span>Plataformas</span>
                                     </a>
                                 </li>
+								<li>
+                                    <a class="dropdown-item selection-game-plat" href="../AdminDashboard/ImagenesDashboard.aspx">
+                                        <i class="fa-solid fa-images"></i>
+                                        <span>Imágenes</span>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                     </div>

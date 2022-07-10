@@ -45,10 +45,11 @@
                 <EditItemTemplate>
                     <asp:DropDownList ID="ddlGVGamesIDDesarrollador" runat="server">
                     </asp:DropDownList>
+                    <br />
+                    <asp:Label ID="lblGVGamesIDDesarrollador" runat="server" Enabled="False" Text='<%# Bind("IdDesarrollador") %>' Visible="False"></asp:Label>
                 </EditItemTemplate>
                 <ItemTemplate>
-                    <asp:Label ID="lblGVGamesIDDesarrollador" runat="server" Text='<%# Bind("IdDesarrollador") %>'>
-                    </asp:Label>
+                    <asp:Label ID="lblGVGamesIDDesarrollador" runat="server" Text='<%# Bind("IdDesarrollador") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Nombre">
@@ -71,12 +72,14 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="FechaLanzamiento">
                 <EditItemTemplate>
-                    <asp:TextBox ID="txtGVGamesDia" runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
-                    <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
-                    <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>
+                    <asp:TextBox ID="txtGVGamesDia" Text=<%# Eval("FechaLanzamiento").ToString()!="" ? Convert.ToDateTime(Eval("FechaLanzamiento")).Day.ToString() : "" %> runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
+                    <asp:TextBox ID="txtGVGamesMes" Text=<%# Eval("FechaLanzamiento").ToString()!="" ? Convert.ToDateTime(Eval("FechaLanzamiento")).Month.ToString() : "" %> runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
+                    <asp:TextBox ID="txtGVGamesAño" Text=<%# Eval("FechaLanzamiento").ToString()!="" ? Convert.ToDateTime(Eval("FechaLanzamiento")).Year.ToString() : "" %> runat="server" MaxLength="4" Width="45px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>
+                    <asp:Label ID="lblGVGamesFechaLanzamiento" runat="server" Enabled="False" Text='<%# Eval("FechaLanzamiento", "{0:dd/MM/yyyy}") %>' Visible="False"></asp:Label>
                 </EditItemTemplate>
                 <ItemTemplate>
                     <asp:Label ID="lblGVGamesFechaLanzamiento" Text='<%# Eval("FechaLanzamiento", "{0:dd/MM/yyyy}") %>' runat="server"></asp:Label>
+                    <br />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Activo">
@@ -109,7 +112,7 @@
         </div>
         <div class="grd-control">
             <span><strong>Fecha</strong></span>
-                <asp:TextBox ID="txtGVGamesDia" runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
+                <asp:TextBox ID="txtGVGamesDia"  runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
                 <asp:TextBox ID="txtGVGamesMes" runat="server" MaxLength="2" Width="30px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>/
                 <asp:TextBox ID="txtGVGamesAño" runat="server" MaxLength="4" Width="45px" Height="20px" onkeydown = "return (!(event.keyCode>=65) && event.keyCode!=32);"></asp:TextBox>
         </div>

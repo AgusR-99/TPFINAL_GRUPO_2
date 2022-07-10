@@ -24,9 +24,9 @@ namespace DAO
             return DB.ObtenerTabla("Imagenes", "[SP_Imagenes_Obtener]", parametros, soloActivo);
         }
 
-        public static int? ActualizarImagen(Imagenes imagen)
+        public static int? ActualizarImagen(Imagenes imagen, string nombreAnterior)
         {
-            return DB.NonQuery("[SP_Imagenes_Actualizar]", getParametrosImagen(imagen, true), true);
+            return DB.NonQuery("[SP_Imagenes_Actualizar]", getParametrosImagen(imagen, true, nombreAnterior), true);
         }
 
         public static int? AgregarImagen(Imagenes imagen)
@@ -39,7 +39,7 @@ namespace DAO
             return ArmarListaDeImagenes(ListarImagenesPorJuego(idJuego, true));
         }
 
-        public static List<SqlParameter> getParametrosImagen(in Imagenes imagen, bool includeID)
+        public static List<SqlParameter> getParametrosImagen(in Imagenes imagen, bool includeID, string nombreAnterior=null)
         {
             var parametros = new List<SqlParameter>()
             {
@@ -48,6 +48,9 @@ namespace DAO
                 new SqlParameter("Orden", imagen.getOrden()),
                 new SqlParameter("Activo", imagen.getActivo())
             };
+
+            if (nombreAnterior != null)
+                parametros.Add(new SqlParameter("NombreAnterior", nombreAnterior));
             return parametros;
         }
 
