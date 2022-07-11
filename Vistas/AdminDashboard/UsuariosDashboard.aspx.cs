@@ -71,5 +71,56 @@ namespace Vistas
             Session["UsuariosSession"] = dt;
             GridViewUsers.DataBind();
         }
+
+        protected void ddlusuarios_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlusuarios.SelectedIndex == 0)
+            {
+                var tablaUsuarios = NegocioUsuario.ListarUsuarios();
+                GridViewUsers.DataSource = tablaUsuarios;
+                GridViewUsers.DataBind();
+            }
+            else
+            {
+                if (ddlusuarios.SelectedIndex == 1)
+                {
+                    var tablausuario = NegocioUsuario.ListarUsuariosActivos(true);
+                    GridViewUsers.DataSource = tablausuario;
+                    GridViewUsers.DataBind();
+                }
+                else
+                {
+                    if (ddlusuarios.SelectedIndex == 2)
+                    {
+                        var tablaUsuarios = NegocioUsuario.ListarUsuariosActivos(false);
+                        GridViewUsers.DataSource = tablaUsuarios;
+                        GridViewUsers.DataBind();
+                    }
+                    else
+                    {
+                        if (ddlusuarios.SelectedIndex == 3)
+                        {
+                            var tablaUsuarios = NegocioUsuario.ListarUsuariosAdmin(true);
+                            GridViewUsers.DataSource = tablaUsuarios;
+                            GridViewUsers.DataBind();
+                        }
+                        else
+                        {
+                            if (ddlusuarios.SelectedIndex == 4)
+                            {
+                                var tablaUsuarios = NegocioUsuario.ListarUsuariosAdmin(false);
+                                GridViewUsers.DataSource = tablaUsuarios;
+                                GridViewUsers.DataBind();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void btnfiltrarusuario_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

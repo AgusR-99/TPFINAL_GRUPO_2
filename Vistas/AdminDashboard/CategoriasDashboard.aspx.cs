@@ -107,5 +107,40 @@ namespace Vistas
         {
             lblMsg.Text = msg;
         }
+
+        protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlCategoria.SelectedIndex == 0)
+            {
+                var dt = NegocioCategorias.ListarCategorias();
+                GVCategories.DataSource = dt;
+                Session["CategoriasSession"] = dt;
+                GVCategories.DataBind();
+                ObtenerId();
+            }
+            else
+            {
+                if (ddlCategoria.SelectedIndex == 1)
+                {
+                    var tabla = NegocioCategorias.ListarCategoriasActivo(true);
+                    GVCategories.DataSource = tabla;
+                    GVCategories.DataBind();
+                }
+                else
+                {
+                    if (ddlCategoria.SelectedIndex == 2)
+                    {
+                        var tabla = NegocioCategorias.ListarCategoriasActivo(false);
+                        GVCategories.DataSource = tabla;
+                        GVCategories.DataBind();
+                    }
+                }
+            }
+        }
+
+        protected void btnCategoria_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

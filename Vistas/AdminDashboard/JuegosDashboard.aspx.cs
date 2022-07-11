@@ -166,5 +166,47 @@ namespace Vistas
             txtGVGamesMes.Text = "";
             txtGVGamesDia.Text = "";
         }
+
+        protected void ddlJuegosFiltrar_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlJuegosFiltrar.SelectedIndex == 0)
+            {
+                var tablaJuegos = NegocioJuego.ListarJuegos();
+                GridViewGames.DataSource = tablaJuegos;
+                GridViewGames.DataBind();
+            }
+            else
+            {
+                if (ddlJuegosFiltrar.SelectedIndex == 1)
+                {
+                    var tabla = NegocioJuego.ListarJuegosActivos(true);
+                    GridViewGames.DataSource = tabla;
+                    GridViewGames.DataBind();
+                }
+                else
+                {
+                    if (ddlJuegosFiltrar.SelectedIndex == 2)
+                    {
+                        var tabla = NegocioJuego.ListarJuegosActivos(false);
+                        GridViewGames.DataSource = tabla;
+                        GridViewGames.DataBind();
+                    }
+                    else
+                    {
+                        if (ddlJuegosFiltrar.SelectedIndex == 3)
+                        {
+                            var tabla = NegocioJuego.ListarJuegosRecientes();
+                            GridViewGames.DataSource = tabla;
+                            GridViewGames.DataBind();
+                        }
+                    }
+                }
+            }
+        }
+
+        protected void btnfiltrajuegos_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
