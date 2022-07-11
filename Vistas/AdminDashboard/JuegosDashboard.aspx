@@ -9,6 +9,16 @@
             <asp:TextBox runat="server" class="form-control bg-dark text-light no-borders" ID="txtSearchGame" placeholder="Buscar juegos"></asp:TextBox>
         </div>
         <asp:Button runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="BtnSearch_Click"></asp:Button>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:DropDownList ID="ddlJuegosFiltrar" runat="server" OnSelectedIndexChanged="ddlJuegosFiltrar_SelectedIndexChanged">
+            <asp:ListItem Selected="True">All</asp:ListItem>
+            <asp:ListItem>Activo</asp:ListItem>
+            <asp:ListItem>No Activo</asp:ListItem>
+            <asp:ListItem>Recently</asp:ListItem>
+        </asp:DropDownList>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <asp:Button ID="btnfiltrajuegos" runat="server" OnClick="btnfiltrajuegos_Click" Text="Busqueda por filtro" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     </div>
     <asp:GridView 
         ID="GridViewGames"
