@@ -99,10 +99,15 @@
     </form>
 </body>
 <script>
-    $(document).ready(function () {
-        InitAutoCompl();
+    $(function () {
+        InitAutoCompl2();
     })
-    function InitAutoCompl() {
+
+    function goToGame(id) {
+        window.location.href = "Articulo.aspx?id=" + id;
+    }
+
+    function InitAutoCompl2() {
         // Autocomplete de textbox de agregar categoria
         $("#<%= txtsearchbar.ClientID %>").autocomplete({
             source: '../JuegoHandler.ashx'

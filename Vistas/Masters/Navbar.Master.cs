@@ -52,6 +52,4 @@ namespace Vistas
             Response.Redirect($"~/Listado.aspx?txt={txtsearchbar.Text}");
         }
     }
-
-
 }
