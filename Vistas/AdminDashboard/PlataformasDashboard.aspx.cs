@@ -112,5 +112,40 @@ namespace Vistas
         {
             lblMsg.Text = msg.ToString();
         }
+
+        protected void ddlPlataform_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (ddlPlataform.SelectedIndex == 0)
+            {
+                var dt = NegocioPlataforma.ListarPlataformas();
+                GVPlataform.DataSource = dt;
+                Session["PlataformasSession"] = dt;
+                GVPlataform.DataBind();
+                ObtenerIdPlataforma();
+            }
+            else
+            {
+                if (ddlPlataform.SelectedIndex == 1)
+                {
+                    var tabla = NegocioPlataforma.ListarPlataformasActivo(true);
+                    GVPlataform.DataSource = tabla;
+                    GVPlataform.DataBind();
+                }
+                else
+                {
+                    if (ddlPlataform.SelectedIndex == 2)
+                    {
+                        var tabla = NegocioPlataforma.ListarPlataformasActivo(false);
+                        GVPlataform.DataSource = tabla;
+                        GVPlataform.DataBind();
+                    }
+                }
+            }
+        }
+
+        protected void btnFiltrarPlataforma_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
