@@ -605,9 +605,6 @@ main {
 .top-nav {
     padding-left: 10px;
     background-color: var(--clr-dark-carbon);
-    display: flex;
-    justify-content: center;
-    width: 100%;
     color: white;
     position: relative;
 }
@@ -782,6 +779,10 @@ main {
     border: none;
     margin: 0 auto;
     justify-content:space-between;
+}
+
+.listado-wrapper{
+    flex: 1 1 auto;
 }
 
 .box-flex > #offcanvasRight {
