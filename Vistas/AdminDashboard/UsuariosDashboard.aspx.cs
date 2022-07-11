@@ -21,6 +21,7 @@ namespace Vistas
         protected void CargarUsuarios()
         {
             var tablaUsuarios = NegocioUsuario.ListarUsuarios();
+            Session["UsuariosSession"] = tablaUsuarios;
             GridViewUsers.DataSource = tablaUsuarios;
             GridViewUsers.DataBind();
         }
