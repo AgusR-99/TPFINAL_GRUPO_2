@@ -106,6 +106,7 @@ namespace Vistas
         protected void Msg(string msg)
         {
             lblMsg.Text = msg;
+            lblMsg.Visible = true;
         }
 
         protected void ddlCategoria_SelectedIndexChanged(object sender, EventArgs e)

@@ -8,7 +8,7 @@
         </div>
         <asp:Button runat="server" CssClass="btn btn-primary" Text="Buscar" OnClick="BtnSearch_Click"></asp:Button>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <asp:DropDownList ID="ddlusuarios" runat="server" OnSelectedIndexChanged="ddlusuarios_SelectedIndexChanged">
+        <asp:DropDownList ID="ddlusuarios" runat="server">
             <asp:ListItem Selected="True">All</asp:ListItem>
             <asp:ListItem>Activo</asp:ListItem>
             <asp:ListItem>No Activo</asp:ListItem>
