@@ -25,6 +25,7 @@ namespace Vistas
         {
 
             var tablaJuegos = NegocioJuego.ListarJuegos();
+            Session["JuegosSession"] = tablaJuegos;
             GridViewGames.DataSource = tablaJuegos;
             GridViewGames.DataBind();
             DropDownList ddl = ddlGVGamesIDDesarrollador;
@@ -64,7 +65,8 @@ namespace Vistas
         protected void GridViewGames_RowEditing(object sender, GridViewEditEventArgs e)
         {
             GridViewGames.EditIndex = e.NewEditIndex;
-            CargarJuegos();
+            GridViewGames.DataSource = Session["JuegosSession"];
+            GridViewGames.DataBind();
         }
 
         protected void GridViewGames_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
