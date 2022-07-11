@@ -86,6 +86,7 @@ namespace Vistas
                 lblOpinionesPrefix.Text = "Basado en ";
                 lblOpinionesCantidad.Text = opinionesCantidad.ToString() + " criticas";
                 
+                // Agregar colores dependiendo del rating
                 var value = Convert.ToDouble(prom);
                 string rating = "";
                 for (int i = 1; i <= 5; i++) if (value >= i && value <= i + 1) rating = $"bg-rating-{i}";

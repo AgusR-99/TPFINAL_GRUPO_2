@@ -82,8 +82,8 @@
             <div class="review-wrapper">
                 <asp:Repeater ID="repReviews" runat="server" onitemdatabound="repReviews_ItemDataBound">
                     <ItemTemplate>
-                        <article class="articulos-unit articulo-review">
-                            <div class="articulo-under articulo-rating-wrapper">
+                        <article class="articulo-review">
+                            <div class="articulo-rating-wrapper">
                                 <asp:Label ID="lblCalificacion" runat="server" Text='<%# Eval("Calificacion") %>'></asp:Label>
                             </div>
                             <div class="articulo-body">

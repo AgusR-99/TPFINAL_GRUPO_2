@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="articulo-under">
                                         <p class="articulo-precio">Precio: <%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getPrecio(), "No disponible") %></p>
-                                        <p class="articulo-rating"><%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getRating(), " - ")  %></p>
+                                        <p class="articulo-rating circle-white"><%# VistasAux.ValueOrDefault(((Juego)GetDataItem()).getRating(), " - ")  %></p>
                                     </div>
                                 </article>
                         </ItemTemplate>
