@@ -64,7 +64,7 @@ namespace Vistas
                     // de opinion en vez de AGREGAR una opinion
                     try
                     {
-                        if (username == ((Usuario)Session["LoggedUser"]).getUsername())
+                        if (username == ((Usuario)Session["LoggedUser"])?.getUsername())
                         {
                             lblHeadingOpinion.Text = "Modificar opinion para el juego ";
                             txtUserReview.Text = comentario.ToString();
@@ -142,6 +142,13 @@ namespace Vistas
                 }
                 // Cargar descripcion del juego
                 lblDescripcion.Text = item.item.getDescripcion();
+
+                //Cargar imágenes
+                var urlPortada = item.item.getPortada();
+                if (urlPortada != null)
+                    portada.Src = urlPortada;
+                rptImagenes.DataSource = item.item.getImagenes();
+                rptImagenes.DataBind();
             }
         }
 

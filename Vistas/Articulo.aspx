@@ -1,4 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masters/Navbar.Master" AutoEventWireup="true" CodeBehind="Articulo.aspx.cs" Inherits="Vistas.WebForm1" %>
+<%@ Import Namespace="Vistas" %>
+<%@ Import Namespace="Entidades" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main" runat="server">
@@ -10,7 +13,7 @@
             </div>
             <div class="articulo-content-wrapper">
                 <div class="articulo-portada">
-                    <img src="/Imagenes/placeholder-image.jpg" alt="portada" />
+                    <img id="portada" src="/Imagenes/placeholder-image.jpg" alt="portada" runat="server"/>
                 </div>
                 <div class="articulo-score-wrapper">
                     <div class="articulo-score">
@@ -37,6 +40,13 @@
             <div class="articulo-summary">
                 <small><strong>Resumen: </strong> <asp:Label runat="server" ID="lblDescripcion"></asp:Label></small>
             </div>
+        </div>
+        <div>
+            <asp:Repeater ID="rptImagenes" runat="server">
+                <ItemTemplate>
+                    <img src="<%# VistasAux.ValueOrDefault(((Imagenes)GetDataItem()).getNombreArchivo(), "/Imagenes/placeholder-image.jpg") %>" />
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
         <div class="articulo-review-wrapper">
             <div class="articulo-review-heading">
