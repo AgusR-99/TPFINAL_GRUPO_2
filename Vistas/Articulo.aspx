@@ -41,7 +41,7 @@
                 <small><strong>Resumen: </strong> <asp:Label runat="server" ID="lblDescripcion"></asp:Label></small>
             </div>
         </div>
-        <div>
+        <div class="articulo-img-wrapper">
             <asp:Repeater ID="rptImagenes" runat="server">
                 <ItemTemplate>
                     <img src="<%# VistasAux.ValueOrDefault(((Imagenes)GetDataItem()).getNombreArchivo(), "/Imagenes/placeholder-image.jpg") %>" />

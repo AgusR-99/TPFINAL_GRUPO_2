@@ -724,6 +724,23 @@ main {
     cursor: pointer;
 }
 
+.articulo-img-wrapper{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.articulo-img-wrapper > img {
+    width: 200px;
+    object-fit: contain;
+    border: 1px solid grey;
+    transition: transform .2s, border .2s;
+}
+
+.articulo-img-wrapper > img:hover {
+    transform: scale(1.5);
+    border-color: transparent;
+}
+
 .articulos-unit > * {
     margin: 0;
 }
@@ -969,6 +986,10 @@ main {
 
 .user-analytic-number {
     font-size: 1.2rem;
+}
+
+.articulo-review-wrapper{
+    margin-top: 40px;
 }
 
 .articulo-review {
