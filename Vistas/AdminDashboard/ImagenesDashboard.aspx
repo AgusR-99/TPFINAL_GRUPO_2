@@ -21,7 +21,7 @@
         OnRowCancelingEdit="GridViewImages_RowCancelingEdit"
         OnRowEditing="GridViewImages_RowEditing"
         OnRowUpdating="GridViewImages_RowUpdating"
-        ShowFooter="True">
+        ShowFooter="True" AllowPaging="True" PageSize="5" OnPageIndexChanging="GridViewImages_PageIndexChanging">
         <Columns>
             <asp:TemplateField>
                 <%--Cosas del footer--%>

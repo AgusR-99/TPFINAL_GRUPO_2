@@ -14,7 +14,7 @@ CREATE TABLE Desarrolladores
 	NombreDesarrollador varchar(50) NOT NULL,
 	SitioWeb varchar(100) NOT NULL,
 	UbicacionSede varchar(100) NOT NULL,
-	Historia varchar(100) NOT NULL,
+	Historia varchar(MAX) NOT NULL,
 	CONSTRAINT PK_Desarrolladores PRIMARY KEY (IdDesarrollador)
 )
 
@@ -157,7 +157,7 @@ CREATE TABLE JuegosXTiendas
 	IdJuego int NOT NULL,
 	IdTienda int NOT NULL,
 	SitioWeb varchar(100) NOT NULL,
-	Precio float NOT NULL CHECK (Precio>0),
+	Precio float NOT NULL CHECK (Precio>=0),
 	PrecioRebajado float NULL CHECK (ISNULL(PrecioRebajado,0)>=0),
 	Activo bit NOT NULL DEFAULT 1,
 	CONSTRAINT PK_JuegosXTiendas PRIMARY KEY (IdJuego,IdTienda),
@@ -720,7 +720,7 @@ CREATE PROC SP_Desarrolladores_Actualizar
 	@Nombre varchar(50),
 	@SitioWeb varchar(100),
 	@UbicacionSede varchar(100),
-	@Historia varchar(100)
+	@Historia varchar(MAX)
 AS
 BEGIN
 	UPDATE Desarrolladores

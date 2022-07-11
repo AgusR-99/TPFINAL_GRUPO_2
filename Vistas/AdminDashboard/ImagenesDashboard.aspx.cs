@@ -135,6 +135,12 @@ namespace Vistas
             Session["ImagenesSession"] = dt;
             GridViewImages.DataBind();
         }
+
+        protected void GridViewImages_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            GridViewImages.PageIndex = e.NewPageIndex;
+            CargarImagenes();
+        }
     }
 }
 
